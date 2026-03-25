@@ -1,6 +1,6 @@
 export const homeSplash = {
   headline: "Ditch Paper.",
-  lede: "Modernize Your Practice With Clean and Defensible Records.",
+  lede: "Modernize Your Practice With Clean and Defensible Anesthesia Records.",
   subheadline:
     "A clean, mobile-first anesthesia record app built to replace messy paper workflows with a faster and more defensible standard",
   typography: {
