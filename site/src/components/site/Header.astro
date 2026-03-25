@@ -1,5 +1,9 @@
 ---
+import { Image } from "astro:assets";
+
 import { getPageById, headerNavigation, siteMetadata } from "../../config/site-manifest";
+import bolusMark from "../../assets/logos/bolus-mark.png";
+import bolusText from "../../assets/logos/bolus-text.png";
 
 interface Props {
   currentPath: string;
@@ -10,12 +14,31 @@ const { currentPath } = Astro.props;
 
 <header class="site-header">
   <div class="nav-pill">
-    <a class="brand-mark" href="/" aria-label="Bolus home">
-      <span class="brand-mark__dot"></span>
-      <span>Bolus</span>
+    <a
+      class="brand-lockup"
+      href="/"
+      aria-label="Bolus home"
+      style={`--brand-mark-size:${siteMetadata.headerBrand.markSize}px;--brand-wordmark-height:${siteMetadata.headerBrand.wordmarkHeight}px;`}
+    >
+      <span class="brand-lockup__mark" aria-hidden="true">
+        <Image
+          src={bolusMark}
+          alt="Bolus logo mark"
+          widths={[84, 126]}
+          sizes={`${siteMetadata.headerBrand.markSize}px`}
+        />
+      </span>
+      <span class="brand-lockup__text" data-scroll-label aria-hidden="true">
+        <Image
+          src={bolusText}
+          alt="Bolus wordmark"
+          widths={[187, 280]}
+          sizes="124px"
+        />
+      </span>
     </a>
 
-    <nav aria-label="Primary">
+    <nav class="header-nav" aria-label="Primary">
       <ul class="nav-list">
         {headerNavigation.map((item) => {
           const page = getPageById(item.pageId);
@@ -36,7 +59,7 @@ const { currentPath } = Astro.props;
       </ul>
     </nav>
 
-    <a class="button button--primary" href={siteMetadata.headerCta.href}>
+    <a class="header-action" href={siteMetadata.headerCta.href}>
       {siteMetadata.headerCta.label}
     </a>
   </div>

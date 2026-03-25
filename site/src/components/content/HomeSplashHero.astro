@@ -1,52 +1,74 @@
 ---
-import { Image } from "astro:assets";
-
-import ipadBlank from "../../assets/hero/ipad-blank.jpg";
-import iphoneBlank from "../../assets/hero/iphone-blank.jpg";
 import { homeSplash } from "../../config/home-splash";
 ---
 
 <section class="splash" aria-labelledby="home-splash-title">
-  <div class="splash__grid">
-    <div class="splash__media" aria-hidden="true">
+  <div class="splash__stack">
+    <div class="splash__copy splash__copy--centered">
+      <h1
+        id="home-splash-title"
+        class="splash__title"
+        style={`letter-spacing:${homeSplash.typography.headlineLetterSpacing};line-height:${homeSplash.typography.headlineLineHeight};font-family:${homeSplash.typography.fontStack};color:${homeSplash.theme.headlineColor};`}
+      >
+        {homeSplash.headline}
+      </h1>
+      <h2
+        class="splash__lede"
+        style={`font-family:${homeSplash.typography.fontStack};color:${homeSplash.theme.headlineColor};`}
+      >
+        {homeSplash.lede}
+      </h2>
+      <p
+        class="splash__body splash__body--centered"
+        style={`font-family:${homeSplash.typography.fontStack};color:${homeSplash.theme.bodyColor};`}
+      >
+        {homeSplash.subheadline}
+      </p>
+    </div>
+
+    <div class="splash__media splash__media--stacked" aria-hidden="true">
       <div class="splash__glow splash__glow--large"></div>
       <div class="splash__glow splash__glow--small"></div>
 
-      <div class="splash__device splash__device--ipad">
-        <Image
-          src={ipadBlank}
-          alt={homeSplash.devices[0].alt}
-          widths={[780, 1100]}
-          sizes="(max-width: 768px) 92vw, 56vw"
-        />
+      <div class="splash__placeholder splash__placeholder--workspace">
+        <div class="placeholder-frame placeholder-frame--wide">
+          <div class="placeholder-bar">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="placeholder-screen">
+            <div class="placeholder-sidebar">
+              <div class="placeholder-chip placeholder-chip--dark"></div>
+              <div class="placeholder-chip"></div>
+              <div class="placeholder-chip"></div>
+            </div>
+            <div class="placeholder-canvas">
+              <div class="placeholder-header"></div>
+              <div class="placeholder-row placeholder-row--strong"></div>
+              <div class="placeholder-row"></div>
+              <div class="placeholder-row"></div>
+              <div class="placeholder-grid">
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="splash__device splash__device--iphone">
-        <Image
-          src={iphoneBlank}
-          alt={homeSplash.devices[1].alt}
-          widths={[280, 380, 480]}
-          sizes="(max-width: 768px) 42vw, 19vw"
-        />
-      </div>
-    </div>
-
-    <div class="splash__copy">
-      <h1 id="home-splash-title" class="splash__title">{homeSplash.headline}</h1>
-      <p class="splash__body">{homeSplash.subheadline}</p>
-
-      <div class="button-row splash__actions">
-        {homeSplash.actions.map((action) => (
-          <a
-            class:list={[
-              "button",
-              action.variant === "primary" ? "button--dark" : "button--soft",
-            ]}
-            href={action.href}
-          >
-            {action.label}
-          </a>
-        ))}
+      <div class="splash__placeholder splash__placeholder--record">
+        <div class="placeholder-frame placeholder-frame--tall">
+          <div class="placeholder-notch"></div>
+          <div class="placeholder-phone-screen">
+            <div class="placeholder-phone-header"></div>
+            <div class="placeholder-phone-card placeholder-phone-card--accent"></div>
+            <div class="placeholder-phone-card"></div>
+            <div class="placeholder-phone-card"></div>
+            <div class="placeholder-phone-footer"></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

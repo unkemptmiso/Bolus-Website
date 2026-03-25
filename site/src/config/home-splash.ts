@@ -1,31 +1,34 @@
 export const homeSplash = {
-  headline: "Ditch Paper, Modernize Your Practice with Clean and Defensible Records",
+  headline: "Ditch Paper.",
+  lede: "Modernize Your Practice With Clean and Defensible Records.",
   subheadline:
     "A clean, mobile-first anesthesia record app built to replace messy paper workflows with a faster and more defensible standard",
-  actions: [
-    {
-      label: "Download on the App Store",
-      href: "#download",
-      variant: "primary" as const,
-    },
-    {
-      label: "See How It Works",
-      href: "/simulator",
-      variant: "secondary" as const,
-    },
-  ],
+  typography: {
+    headlineLetterSpacing: "-1px",
+    headlineLineHeight: "1",
+    fontStack:
+      '"SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif',
+  },
+  actions: [],
   layout: {
-    desktop: "split" as const,
+    desktop: "stacked" as const,
     mobile: "stacked" as const,
   },
-  devices: [
+  theme: {
+    background: "#FFFFFF",
+    headlineColor: "#000000",
+    bodyColor: "#6B6B6B",
+  },
+  placeholders: [
     {
-      key: "ipad",
-      alt: "Blank iPad device frame",
+      key: "workspace",
+      label: "Clinical workspace preview",
+      description: "Procedure timeline, medication entries, and clean case structure.",
     },
     {
-      key: "iphone",
-      alt: "Blank iPhone device frame",
+      key: "record",
+      label: "Defensible record preview",
+      description: "Legible entries, precise timestamps, and calm mobile-first charting.",
     },
   ],
 } as const;

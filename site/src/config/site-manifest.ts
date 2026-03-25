@@ -68,6 +68,12 @@ export const siteMetadata = {
   description:
     "Bolus helps office-based anesthesia and sedation practices replace paper charting with cleaner, faster, and more defensible records.",
   accentColor: "#4d93ff",
+  headerBrand: {
+    markSrc: "/src/assets/logos/bolus-mark.png",
+    textSrc: "/src/assets/logos/bolus-text.png",
+    markSize: 34,
+    wordmarkHeight: 22,
+  },
   headerCta: {
     label: "Get the App",
     href: "#download",

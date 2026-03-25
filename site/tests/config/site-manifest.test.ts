@@ -4,6 +4,7 @@ import {
   footerNavigation,
   headerNavigation,
   pageRegistry,
+  siteMetadata,
 } from "../../src/config/site-manifest";
 
 describe("site manifest", () => {
@@ -29,5 +30,13 @@ describe("site manifest", () => {
       "Company",
       "Legal",
     ]);
+  });
+
+  it("keeps the header CTA and brand assets available for the splash navbar", () => {
+    expect(siteMetadata.headerCta.label).toBe("Get the App");
+    expect(siteMetadata.headerBrand.markSrc).toBe("/src/assets/logos/bolus-mark.png");
+    expect(siteMetadata.headerBrand.textSrc).toBe("/src/assets/logos/bolus-text.png");
+    expect(siteMetadata.headerBrand.markSize).toBe(34);
+    expect(siteMetadata.headerBrand.wordmarkHeight).toBe(22);
   });
 });

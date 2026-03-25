@@ -8,12 +8,16 @@ import "../styles/global.css";
 interface Props {
   page: SitePage;
   showChrome?: boolean;
+  showHeader?: boolean;
+  showFooter?: boolean;
   mainClass?: string;
 }
 
 const {
   page,
   showChrome = true,
+  showHeader = showChrome,
+  showFooter = showChrome,
   mainClass = "site-main",
 } = Astro.props;
 ---
@@ -30,10 +34,10 @@ const {
   </head>
   <body>
     <a class="skip-link" href="#content">Skip to content</a>
-    {showChrome && <Header currentPath={page.path} />}
+    {showHeader && <Header currentPath={page.path} />}
     <main id="content" class={mainClass}>
       <slot />
     </main>
-    {showChrome && <Footer />}
+    {showFooter && <Footer />}
   </body>
 </html>
