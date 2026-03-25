@@ -1,0 +1,40 @@
+---
+import type { SitePage } from "../../config/site-manifest";
+import { siteMetadata } from "../../config/site-manifest";
+
+interface Props {
+  page: SitePage;
+}
+
+const { page } = Astro.props;
+const canonical = Astro.site ? new URL(page.path, Astro.site).toString() : page.path;
+
+const schema =
+  page.id === "home"
+    ? {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        name: siteMetadata.name,
+        applicationCategory: "MedicalBusiness",
+        operatingSystem: "iOS, iPadOS",
+        description: page.seoDescription,
+        url: canonical,
+      }
+    : null;
+---
+
+<title>{page.seoTitle}</title>
+<meta name="description" content={page.seoDescription} />
+<meta name="theme-color" content={siteMetadata.accentColor} />
+<meta property="og:title" content={page.seoTitle} />
+<meta property="og:description" content={page.seoDescription} />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={siteMetadata.name} />
+<meta property="og:url" content={canonical} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={page.seoTitle} />
+<meta name="twitter:description" content={page.seoDescription} />
+<link rel="canonical" href={canonical} />
+{schema && (
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+)}

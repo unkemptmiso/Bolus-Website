@@ -1,0 +1,39 @@
+---
+import type { SitePage } from "../config/site-manifest";
+import SeoHead from "../components/seo/SeoHead.astro";
+import Footer from "../components/site/Footer.astro";
+import Header from "../components/site/Header.astro";
+import "../styles/global.css";
+
+interface Props {
+  page: SitePage;
+  showChrome?: boolean;
+  mainClass?: string;
+}
+
+const {
+  page,
+  showChrome = true,
+  mainClass = "site-main",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" data-font-mode="apple">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <SeoHead page={page} />
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+    {showChrome && <Header currentPath={page.path} />}
+    <main id="content" class={mainClass}>
+      <slot />
+    </main>
+    {showChrome && <Footer />}
+  </body>
+</html>

@@ -1,0 +1,43 @@
+---
+import { getPageById, headerNavigation, siteMetadata } from "../../config/site-manifest";
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+---
+
+<header class="site-header">
+  <div class="nav-pill">
+    <a class="brand-mark" href="/" aria-label="Bolus home">
+      <span class="brand-mark__dot"></span>
+      <span>Bolus</span>
+    </a>
+
+    <nav aria-label="Primary">
+      <ul class="nav-list">
+        {headerNavigation.map((item) => {
+          const page = getPageById(item.pageId);
+
+          if (!page) {
+            return null;
+          }
+
+          const isCurrent = page.path === currentPath;
+          return (
+            <li>
+              <a class:list={["nav-link", { "is-current": isCurrent }]} href={page.path}>
+                {item.label}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+
+    <a class="button button--primary" href={siteMetadata.headerCta.href}>
+      {siteMetadata.headerCta.label}
+    </a>
+  </div>
+</header>

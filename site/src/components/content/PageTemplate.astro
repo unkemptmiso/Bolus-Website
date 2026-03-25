@@ -1,0 +1,60 @@
+---
+import type { SitePage } from "../../config/site-manifest";
+import PageSections from "./PageSections.astro";
+
+interface Props {
+  page: SitePage;
+}
+
+const { page } = Astro.props;
+const heroHeadingId = `${page.id}-hero-title`;
+---
+
+<article class="page-shell">
+  <section class="hero">
+    <div class="hero__copy">
+      {page.hiddenPrimaryHeading && <h1 class="sr-only">{page.hiddenPrimaryHeading}</h1>}
+      {page.hero.eyebrow && <p class="eyebrow">{page.hero.eyebrow}</p>}
+
+      {page.hiddenPrimaryHeading ? (
+        <h2 class="hero__title" id={heroHeadingId}>
+          {page.hero.title}
+        </h2>
+      ) : (
+        <h1 class="hero__title" id={heroHeadingId}>
+          {page.hero.title}
+        </h1>
+      )}
+
+      <p class="hero__body">{page.hero.body}</p>
+
+      {(page.hero.primaryCta || page.hero.secondaryCta) && (
+        <div class="button-row">
+          {page.hero.primaryCta && (
+            <a class="button button--primary" href={page.hero.primaryCta.href}>
+              {page.hero.primaryCta.label}
+            </a>
+          )}
+          {page.hero.secondaryCta && (
+            <a class="button button--secondary" href={page.hero.secondaryCta.href}>
+              {page.hero.secondaryCta.label}
+            </a>
+          )}
+        </div>
+      )}
+    </div>
+
+    <aside class="surface hero__panel" aria-labelledby={heroHeadingId}>
+      <p class="eyebrow">Framework</p>
+      <h2>{page.title}</h2>
+      <p>{page.description}</p>
+      <ul class="mini-list">
+        <li>Typed route metadata</li>
+        <li>SEO-ready page scaffolding</li>
+        <li>Cloudflare-friendly server boundary</li>
+      </ul>
+    </aside>
+  </section>
+
+  <PageSections sections={page.sections} />
+</article>

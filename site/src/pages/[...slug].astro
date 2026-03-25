@@ -1,0 +1,26 @@
+---
+import PageTemplate from "../components/content/PageTemplate.astro";
+import {
+  getStaticSlug,
+  secondaryPages,
+  type SitePage,
+} from "../config/site-manifest";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+export function getStaticPaths() {
+  return secondaryPages.map((page) => ({
+    params: { slug: getStaticSlug(page.path) },
+    props: { page },
+  }));
+}
+
+interface Props {
+  page: SitePage;
+}
+
+const { page } = Astro.props;
+---
+
+<BaseLayout page={page}>
+  <PageTemplate page={page} />
+</BaseLayout>

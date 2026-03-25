@@ -1,0 +1,53 @@
+---
+import { Image } from "astro:assets";
+
+import ipadBlank from "../../assets/hero/ipad-blank.jpg";
+import iphoneBlank from "../../assets/hero/iphone-blank.jpg";
+import { homeSplash } from "../../config/home-splash";
+---
+
+<section class="splash" aria-labelledby="home-splash-title">
+  <div class="splash__grid">
+    <div class="splash__media" aria-hidden="true">
+      <div class="splash__glow splash__glow--large"></div>
+      <div class="splash__glow splash__glow--small"></div>
+
+      <div class="splash__device splash__device--ipad">
+        <Image
+          src={ipadBlank}
+          alt={homeSplash.devices[0].alt}
+          widths={[780, 1100]}
+          sizes="(max-width: 768px) 92vw, 56vw"
+        />
+      </div>
+
+      <div class="splash__device splash__device--iphone">
+        <Image
+          src={iphoneBlank}
+          alt={homeSplash.devices[1].alt}
+          widths={[280, 380, 480]}
+          sizes="(max-width: 768px) 42vw, 19vw"
+        />
+      </div>
+    </div>
+
+    <div class="splash__copy">
+      <h1 id="home-splash-title" class="splash__title">{homeSplash.headline}</h1>
+      <p class="splash__body">{homeSplash.subheadline}</p>
+
+      <div class="button-row splash__actions">
+        {homeSplash.actions.map((action) => (
+          <a
+            class:list={[
+              "button",
+              action.variant === "primary" ? "button--dark" : "button--soft",
+            ]}
+            href={action.href}
+          >
+            {action.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

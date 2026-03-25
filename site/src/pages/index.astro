@@ -1,0 +1,9 @@
+---
+import HomeSplashHero from "../components/content/HomeSplashHero.astro";
+import { homePage } from "../config/site-manifest";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout page={homePage} showChrome={false} mainClass="site-main site-main--splash">
+  <HomeSplashHero />
+</BaseLayout>

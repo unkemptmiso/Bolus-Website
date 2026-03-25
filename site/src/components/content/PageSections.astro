@@ -1,0 +1,56 @@
+---
+import type { ContentSection } from "../../config/site-manifest";
+
+interface Props {
+  sections: ContentSection[];
+}
+
+const { sections } = Astro.props;
+---
+
+{sections.map((section) => (
+  <section class="content-section" id={section.type === "cta" ? section.id : undefined}>
+    <div class="section-shell">
+      {section.eyebrow && <p class="eyebrow">{section.eyebrow}</p>}
+      <h2>{section.title}</h2>
+      {"description" in section && section.description && <p>{section.description}</p>}
+
+      {section.type === "feature-grid" && (
+        <div class:list={["feature-grid", `feature-grid--${section.columns ?? 3}`]}>
+          {section.items.map((item) => (
+            <article class="feature-card">
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))}
+        </div>
+      )}
+
+      {section.type === "checklist" && (
+        <ul class="checklist">
+          {section.items.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      )}
+
+      {section.type === "note" && <div class="surface surface--note">{section.body}</div>}
+
+      {section.type === "cta" && (
+        <div class="surface surface--cta">
+          <p>{section.body}</p>
+          <div class="button-row">
+            <a class="button button--primary" href={section.primaryCta.href}>
+              {section.primaryCta.label}
+            </a>
+            {section.secondaryCta && (
+              <a class="button button--secondary" href={section.secondaryCta.href}>
+                {section.secondaryCta.label}
+              </a>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+))}
