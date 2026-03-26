@@ -1,40 +1,67 @@
 ---
-import type { SitePage } from "../../config/site-manifest";
+import type { CollectionEntry } from "astro:content";
 import { siteMetadata } from "../../config/site-manifest";
+import { getImage } from "astro:assets";
 
 interface Props {
-  page: SitePage;
+  data: CollectionEntry<"pages">["data"];
 }
 
-const { page } = Astro.props;
-const canonical = Astro.site ? new URL(page.path, Astro.site).toString() : page.path;
+const { data } = Astro.props;
 
-const schema =
-  page.id === "home"
-    ? {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        name: siteMetadata.name,
-        applicationCategory: "MedicalBusiness",
-        operatingSystem: "iOS, iPadOS",
-        description: page.seoDescription,
-        url: canonical,
-      }
-    : null;
+// Process the OG Image using Astro's asset pipeline
+const optimizedOgImage = await getImage({
+  src: data.ogImage,
+  width: 1200,
+  height: 630,
+});
+
+const ogImageUrl = new URL(optimizedOgImage.src, Astro.url).toString();
+
+const schema = data.isHomePage
+  ? {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: siteMetadata.name,
+      applicationCategory: "MedicalBusiness",
+      operatingSystem: "iOS, iPadOS",
+      description: data.description,
+      url: data.canonicalURL,
+    }
+  : {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: data.title,
+      description: data.description,
+      url: data.canonicalURL,
+    };
 ---
 
-<title>{page.seoTitle}</title>
-<meta name="description" content={page.seoDescription} />
+<!-- Core Meta -->
+<title>{data.title}</title>
+<meta name="description" content={data.description} />
 <meta name="theme-color" content={siteMetadata.accentColor} />
-<meta property="og:title" content={page.seoTitle} />
-<meta property="og:description" content={page.seoDescription} />
+<link rel="canonical" href={data.canonicalURL} />
+
+<!-- Open Graph -->
+<meta property="og:title" content={data.title} />
+<meta property="og:description" content={data.description} />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content={siteMetadata.name} />
-<meta property="og:url" content={canonical} />
+<meta property="og:url" content={data.canonicalURL} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content={page.seoTitle} />
-<meta name="twitter:description" content={page.seoDescription} />
-<link rel="canonical" href={canonical} />
-{schema && (
-  <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
-)}
+<meta name="twitter:title" content={data.title} />
+<meta name="twitter:description" content={data.description} />
+<meta name="twitter:image" content={ogImageUrl} />
+
+<!-- Structured Data -->
+<script
+  is:inline
+  type="application/ld+json"
+  set:html={JSON.stringify(schema)}
+/>

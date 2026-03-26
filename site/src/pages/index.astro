@@ -1,11 +1,17 @@
 ---
+import { getEntry } from "astro:content";
 import HomeSplashHero from "../components/content/HomeSplashHero.astro";
 import { homePage } from "../config/site-manifest";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+// Optimized metadata from Content Collection (TSOP Enforcement)
+const homeSeo = await getEntry("pages", "home");
+if (!homeSeo) throw new Error("Could not find the 'home' page metadata.");
 ---
 
 <BaseLayout
   page={homePage}
+  seo={homeSeo.data}
   showChrome={false}
   showHeader={true}
   showFooter={false}

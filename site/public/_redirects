@@ -1,0 +1,4 @@
+# Bolus Edge Redirects
+# Optimized for Cloudflare Pages
+
+/old-path  /new-path  301

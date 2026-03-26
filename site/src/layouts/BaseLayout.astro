@@ -1,12 +1,14 @@
 ---
 import type { SitePage } from "../config/site-manifest";
+import type { CollectionEntry } from "astro:content";
 import SeoHead from "../components/seo/SeoHead.astro";
 import Footer from "../components/site/Footer.astro";
 import Header from "../components/site/Header.astro";
 import "../styles/global.css";
 
 interface Props {
-  page: SitePage;
+  page: SitePage; // Still used for header/labels
+  seo: CollectionEntry<"pages">["data"]; // Enforcement of TSOP metadata
   showChrome?: boolean;
   showHeader?: boolean;
   showFooter?: boolean;
@@ -15,6 +17,7 @@ interface Props {
 
 const {
   page,
+  seo,
   showChrome = true,
   showHeader = showChrome,
   showFooter = showChrome,
@@ -30,13 +33,15 @@ const {
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
-    <SeoHead page={page} />
+    <SeoHead data={seo} />
   </head>
   <body>
     <a class="skip-link" href="#content">Skip to content</a>
     {showHeader && <Header currentPath={page.path} />}
     <main id="content" class={mainClass}>
-      <slot />
+      <article itemscope itemtype="https://schema.org/Article">
+        <slot />
+      </article>
     </main>
     {showFooter && <Footer />}
   </body>
