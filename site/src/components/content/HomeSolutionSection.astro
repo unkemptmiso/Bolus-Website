@@ -12,8 +12,8 @@ const solutionCards = [
   },
   {
     key: "output",
-    title: "Cleaner when it matters later.",
-    body: "Export a clear PDF record that is legible, organized, and easy to stand behind.",
+    title: "Export with One-Click",
+    body: "Just one-tap will immediately export a clear PDF that is legible and organized",
   },
 ] as const;
 ---
@@ -39,7 +39,7 @@ const solutionCards = [
           class="solution-card"
           data-solution-card
           role="listitem"
-          style={`--solution-delay:${index * 90}ms;`}
+          style={`--solution-delay:${index * 160}ms;`}
         >
           <div class="solution-card__icon" aria-hidden="true">
             {card.key === "pace" && (
@@ -99,10 +99,10 @@ const solutionCards = [
       const observer = new IntersectionObserver(
         (entries) => {
           if (!entries.some((entry) => entry.isIntersecting)) return;
-          // Small delay before starting the sequence to let the user settle into the scroll
+          // Greater delay before starting the sequence to let the user settle into the scroll
           setTimeout(() => {
             revealCards(section);
-          }, 120);
+          }, 320);
           observer.disconnect();
         },
         {
