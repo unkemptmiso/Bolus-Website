@@ -729,6 +729,428 @@ ul {
   color: rgba(255, 255, 255, 0.8);
 }
 
+.solution-section {
+  position: relative;
+  overflow: clip;
+  background: #ffffff;
+}
+
+.solution-section__inner {
+  width: min(1120px, calc(100vw - 2.5rem));
+  margin: 0 auto;
+  padding: clamp(5rem, 9vw, 7.5rem) 0 clamp(6rem, 10vw, 8rem);
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: clamp(2rem, 4vw, 3rem);
+  align-items: center;
+}
+
+.solution-section__copy {
+  display: grid;
+  justify-items: center;
+  gap: 1.2rem;
+  text-align: center;
+}
+
+.solution-section__title {
+  max-width: 24ch;
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-size: 56px;
+  line-height: 1.05;
+  letter-spacing: -0.28px;
+  font-weight: 700;
+  color: #000000;
+  text-wrap: balance;
+}
+
+.solution-section__title-line {
+  display: block;
+}
+
+.solution-section__desc {
+  padding-top: 4px;
+}
+
+.solution-section__body {
+  max-width: 58rem;
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-size: 21px;
+  line-height: 1.5;
+  letter-spacing: 0px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.solution-section__body-line {
+  display: block;
+}
+
+.solution-section__stack {
+  display: grid;
+  gap: 1rem;
+  width: min(100%, 56rem);
+}
+
+.solution-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+  padding: 1.2rem 1.25rem 1.25rem;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 28px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(246, 249, 253, 0.95)),
+    rgba(255, 255, 255, 0.96);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 20px 44px rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(22px) saturate(165%);
+  -webkit-backdrop-filter: blur(22px) saturate(165%);
+  opacity: 0;
+  transform: translate3d(0, 32px, 0) scale(0.965);
+  filter: blur(8px);
+  transition:
+    opacity 520ms ease,
+    filter 620ms ease,
+    transform 880ms cubic-bezier(0.22, 1.18, 0.36, 1),
+    box-shadow 260ms ease,
+    border-color 260ms ease;
+  transition-delay: var(--solution-delay, 0ms);
+}
+
+.solution-card.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  filter: blur(0);
+}
+
+.solution-card__icon {
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 1.1rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background:
+    radial-gradient(circle at top left, rgba(77, 147, 255, 0.14), transparent 62%),
+    rgba(244, 247, 251, 0.94);
+  color: rgba(15, 23, 42, 0.92);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 14px 28px rgba(15, 23, 42, 0.08);
+}
+
+.solution-card__icon svg {
+  width: 1.55rem;
+  height: 1.55rem;
+  stroke: currentColor;
+  stroke-width: 1.85;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.solution-card__content {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.solution-card__content h3 {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-size: 1.18rem;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-weight: 650;
+  color: #0f172a;
+}
+
+.solution-card__content p {
+  margin: 0;
+  font-size: 1.01rem;
+  line-height: 1.5;
+  color: rgba(15, 23, 42, 0.68);
+}
+
+.workflow-section {
+  position: relative;
+  overflow: clip;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+}
+
+.workflow-section__inner {
+  width: min(1120px, calc(100vw - 2.5rem));
+  margin: 0 auto;
+  padding: clamp(5rem, 9vw, 7.5rem) 0 clamp(5.5rem, 9vw, 7.5rem);
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(300px, 0.85fr);
+  gap: clamp(2.5rem, 5vw, 5rem);
+  align-items: center;
+}
+
+.workflow-section__copy {
+  display: grid;
+  gap: 1.4rem;
+}
+
+.workflow-section__eyebrow {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(15, 23, 42, 0.48);
+}
+
+.workflow-section__title {
+  max-width: 11ch;
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-size: 56px;
+  line-height: 1;
+  letter-spacing: -0.28px;
+  font-weight: 700;
+  color: #000000;
+  text-wrap: pretty;
+}
+
+.workflow-section__lede,
+.workflow-section__phase-body {
+  max-width: 34rem;
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-size: 22px;
+  line-height: 1.5;
+  letter-spacing: 0px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.workflow-section__phase {
+  display: grid;
+  gap: 0.65rem;
+  padding-top: 0.35rem;
+}
+
+.workflow-section__phase-label {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(15, 23, 42, 0.48);
+}
+
+.workflow-section__phase-title {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-size: 1.85rem;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.workflow-section__points {
+  display: grid;
+  gap: 1rem;
+  padding-top: 0.65rem;
+}
+
+.workflow-point {
+  display: grid;
+  gap: 0.45rem;
+  padding: 1.15rem 1.2rem;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.76);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.82),
+    0 16px 38px rgba(15, 23, 42, 0.06);
+}
+
+.workflow-point h4 {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 650;
+  color: #0f172a;
+}
+
+.workflow-point p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgba(15, 23, 42, 0.68);
+}
+
+.workflow-section__device {
+  display: flex;
+  justify-content: center;
+}
+
+.workflow-phone {
+  position: relative;
+  width: min(100%, 22rem);
+  aspect-ratio: 0.49;
+  padding: 0.78rem;
+  border-radius: 3rem;
+  background: linear-gradient(180deg, #1e2430 0%, #090d15 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 34px 70px rgba(15, 23, 42, 0.18);
+}
+
+.workflow-phone__notch {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  width: 38%;
+  height: 1.45rem;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.78);
+  z-index: 2;
+}
+
+.workflow-phone__screen {
+  height: 100%;
+  border-radius: 2.4rem;
+  padding: 2.2rem 1rem 1rem;
+  display: grid;
+  gap: 0.85rem;
+  background:
+    radial-gradient(circle at top left, rgba(77, 147, 255, 0.14), transparent 35%),
+    linear-gradient(180deg, #f9fbff 0%, #edf3fb 100%);
+  overflow: hidden;
+}
+
+.workflow-phone__status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: rgba(15, 23, 42, 0.7);
+}
+
+.workflow-phone__hero-card,
+.workflow-phone__panel {
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 1.35rem;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 14px 28px rgba(15, 23, 42, 0.06);
+}
+
+.workflow-phone__hero-card {
+  display: grid;
+  gap: 0.55rem;
+  padding: 1rem;
+}
+
+.workflow-phone__hero-chip {
+  width: fit-content;
+  padding: 0.3rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #1855b8;
+  background: rgba(77, 147, 255, 0.14);
+}
+
+.workflow-phone__hero-title,
+.workflow-phone__panel-title,
+.workflow-phone__hero-line,
+.workflow-phone__row span,
+.workflow-phone__media div,
+.workflow-phone__footer-bar {
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.12);
+}
+
+.workflow-phone__hero-title {
+  width: 52%;
+  height: 1rem;
+  background: rgba(15, 23, 42, 0.18);
+}
+
+.workflow-phone__hero-line {
+  width: 100%;
+  height: 0.82rem;
+}
+
+.workflow-phone__hero-line--short {
+  width: 72%;
+}
+
+.workflow-phone__panel {
+  display: grid;
+  gap: 0.85rem;
+  padding: 0.95rem;
+}
+
+.workflow-phone__panel-title {
+  width: 38%;
+  height: 0.85rem;
+  background: rgba(15, 23, 42, 0.18);
+}
+
+.workflow-phone__row {
+  display: grid;
+  grid-template-columns: 1.1fr 0.72fr;
+  gap: 0.7rem;
+}
+
+.workflow-phone__row span {
+  height: 2.95rem;
+}
+
+.workflow-phone__media {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.workflow-phone__media div {
+  aspect-ratio: 1;
+  border-radius: 1rem;
+}
+
+.workflow-phone__footer-bar {
+  margin-top: auto;
+  justify-self: center;
+  width: 38%;
+  height: 0.34rem;
+  background: rgba(15, 23, 42, 0.2);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .solution-card:hover {
+    border-color: rgba(15, 23, 42, 0.12);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.96),
+      0 26px 52px rgba(15, 23, 42, 0.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .solution-card {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    transition: none;
+  }
+}
+
 .hero {
   display: grid;
   grid-template-columns: 1.6fr 1fr;
@@ -989,5 +1411,70 @@ ul {
     max-width: 34rem;
     font-size: 19px;
     line-height: 1.5;
+  }
+
+  .solution-section__inner {
+    width: min(1120px, calc(100vw - 2rem));
+    padding: 4.75rem 0 5rem;
+  }
+
+  .solution-section__title {
+    max-width: 12ch;
+    font-size: 42px;
+    line-height: 1.05;
+  }
+
+  .solution-section__title-line {
+    display: inline;
+  }
+
+  .solution-section__desc {
+    padding-top: 0;
+  }
+
+  .solution-section__body {
+    max-width: none;
+    font-size: 19px;
+  }
+
+  .solution-section__body-line {
+    display: inline;
+  }
+
+  .solution-card {
+    padding: 1rem;
+    border-radius: 24px;
+  }
+
+  .solution-card__icon {
+    width: 2.9rem;
+    height: 2.9rem;
+    border-radius: 1rem;
+  }
+
+  .workflow-section__inner {
+    width: min(1120px, calc(100vw - 2rem));
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 4.75rem 0 5rem;
+  }
+
+  .workflow-section__title {
+    max-width: none;
+    font-size: 42px;
+  }
+
+  .workflow-section__lede,
+  .workflow-section__phase-body {
+    max-width: none;
+    font-size: 19px;
+  }
+
+  .workflow-section__device {
+    order: 2;
+  }
+
+  .workflow-phone {
+    width: min(100%, 19rem);
   }
 }

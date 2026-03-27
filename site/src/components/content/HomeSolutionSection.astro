@@ -1,0 +1,117 @@
+---
+const solutionCards = [
+  {
+    key: "pace",
+    title: "Built for the pace of the case.",
+    body: "Chart directly on iPhone or iPad with a workflow that is quick, focused, and easy to use in real time.",
+  },
+  {
+    key: "record",
+    title: "One record from start to finish.",
+    body: "Pre-op, intra-op, and post-op stay connected in one place, so the record builds as the case moves.",
+  },
+  {
+    key: "output",
+    title: "Cleaner when it matters later.",
+    body: "Export a clear PDF record that is legible, organized, and easy to stand behind.",
+  },
+] as const;
+---
+
+<section class="solution-section" data-solution-section aria-labelledby="home-solution-title">
+  <div class="solution-section__inner">
+    <div class="solution-section__copy">
+      <h2 id="home-solution-title" class="solution-section__title">
+        <span class="solution-section__title-line">Charting built for speed.</span>
+        <span class="solution-section__title-line">Records made to last.</span>
+      </h2>
+      <div class="solution-section__desc">
+        <p class="solution-section__body">
+          <span class="solution-section__body-line">Bolus is a mobile anesthesia record app for office-based practice.</span>
+          <span class="solution-section__body-line">It replaces paper charting with a faster, cleaner documentation workflow and produces a record that is more legible, organized, and defensible.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="solution-section__stack" role="list" aria-label="Bolus workflow benefits">
+      {solutionCards.map((card, index) => (
+        <article
+          class="solution-card"
+          data-solution-card
+          role="listitem"
+          style={`--solution-delay:${index * 90}ms;`}
+        >
+          <div class="solution-card__icon" aria-hidden="true">
+            {card.key === "pace" && (
+              <svg viewBox="0 0 32 32" fill="none">
+                <rect x="8.5" y="4.5" width="15" height="23" rx="4.5"></rect>
+                <path d="M13 15.5h2.2l1.8-3 2.2 6 1.6-3H23"></path>
+                <path d="M14.5 8.5h3"></path>
+              </svg>
+            )}
+            {card.key === "record" && (
+              <svg viewBox="0 0 32 32" fill="none">
+                <rect x="5" y="8" width="9" height="16" rx="3"></rect>
+                <rect x="18" y="5" width="9" height="22" rx="3"></rect>
+                <path d="M14 16h4"></path>
+                <path d="M10 12.5h.01"></path>
+                <path d="M23 9.5h.01"></path>
+              </svg>
+            )}
+            {card.key === "output" && (
+              <svg viewBox="0 0 32 32" fill="none">
+                <path d="M10 4.5h8.8L24 9.7V25a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 8 25V7a2.5 2.5 0 0 1 2-2.5Z"></path>
+                <path d="M18.5 4.5V10H24"></path>
+                <path d="M12 15h8"></path>
+                <path d="M12 19h8"></path>
+                <path d="M12 23h5"></path>
+              </svg>
+            )}
+          </div>
+
+          <div class="solution-card__content">
+            <h3>{card.title}</h3>
+            <p>{card.body}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (() => {
+    const sections = Array.from(document.querySelectorAll("[data-solution-section]"));
+    if (!sections.length) return;
+
+    const revealCards = (section) => {
+      section.querySelectorAll("[data-solution-card]").forEach((card) => {
+        card.classList.add("is-visible");
+      });
+    };
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      sections.forEach(revealCards);
+      return;
+    }
+
+    sections.forEach((section) => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (!entries.some((entry) => entry.isIntersecting)) return;
+          // Small delay before starting the sequence to let the user settle into the scroll
+          setTimeout(() => {
+            revealCards(section);
+          }, 120);
+          observer.disconnect();
+        },
+        {
+          threshold: 0.42, // Much deeper entry for focused reveal
+          rootMargin: "0px 0px -5% 0px",
+        },
+      );
+
+      observer.observe(section);
+    });
+  })();
+</script>

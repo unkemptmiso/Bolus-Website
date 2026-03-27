@@ -2,6 +2,8 @@
 import { getEntry } from "astro:content";
 import HomeProblemSection from "../components/content/HomeProblemSection.astro";
 import HomeSplashHero from "../components/content/HomeSplashHero.astro";
+import HomeSolutionSection from "../components/content/HomeSolutionSection.astro";
+import HomeWorkflowSection from "../components/content/HomeWorkflowSection.astro";
 import { homePage } from "../config/site-manifest";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
@@ -20,4 +22,6 @@ if (!homeSeo) throw new Error("Could not find the 'home' page metadata.");
 >
   <HomeSplashHero />
   <HomeProblemSection />
+  <HomeSolutionSection />
+  <HomeWorkflowSection />
 </BaseLayout>

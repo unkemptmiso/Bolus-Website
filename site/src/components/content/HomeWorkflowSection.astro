@@ -1,0 +1,89 @@
+---
+const preOpPoints = [
+  {
+    title: "Built-in evaluation notes",
+    body: "Pre-op evaluation details are already part of the workflow, so you can document them quickly without separate forms or extra steps.",
+  },
+  {
+    title: "Consent captured in the record",
+    body: "Consent forms are timestamped, locked into the app, and attached to the case record automatically.",
+  },
+  {
+    title: "Media added on the spot",
+    body: "Use the camera or attachments to add supporting images and files without breaking the flow.",
+  },
+] as const;
+---
+
+<section class="workflow-section" aria-labelledby="home-workflow-title">
+  <div class="workflow-section__inner">
+    <div class="workflow-section__copy">
+      <p class="workflow-section__eyebrow">Workflow</p>
+      <h2 id="home-workflow-title" class="workflow-section__title">
+        One workflow from pre-op to post-op.
+      </h2>
+      <p class="workflow-section__lede">
+        Bolus is built to follow the case from start to finish, without sending you back to paper.
+      </p>
+
+      <div class="workflow-section__phase">
+        <p class="workflow-section__phase-label">Pre-Op</p>
+        <h3 class="workflow-section__phase-title">Pre-op without the paper shuffle.</h3>
+        <p class="workflow-section__phase-body">
+          Bolus helps you move through pre-op quickly by keeping the essential documentation in one
+          place from the start.
+        </p>
+      </div>
+
+      <div class="workflow-section__points">
+        {preOpPoints.map((point) => (
+          <article class="workflow-point">
+            <h4>{point.title}</h4>
+            <p>{point.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <div class="workflow-section__device" aria-hidden="true">
+      <div class="workflow-phone">
+        <div class="workflow-phone__notch"></div>
+        <div class="workflow-phone__screen">
+          <div class="workflow-phone__status">
+            <span>9:41</span>
+            <span>Pre-Op</span>
+          </div>
+
+          <div class="workflow-phone__hero-card">
+            <div class="workflow-phone__hero-chip">Case Ready</div>
+            <div class="workflow-phone__hero-title"></div>
+            <div class="workflow-phone__hero-line workflow-phone__hero-line--short"></div>
+            <div class="workflow-phone__hero-line"></div>
+          </div>
+
+          <div class="workflow-phone__panel">
+            <div class="workflow-phone__panel-title"></div>
+            <div class="workflow-phone__row">
+              <span></span>
+              <span></span>
+            </div>
+            <div class="workflow-phone__row">
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+
+          <div class="workflow-phone__panel">
+            <div class="workflow-phone__panel-title"></div>
+            <div class="workflow-phone__media">
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+
+          <div class="workflow-phone__footer-bar"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
