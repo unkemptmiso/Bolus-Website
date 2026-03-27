@@ -24,7 +24,7 @@ describe("header scroll motion", () => {
     expect(headerSource).toContain('class="nav-shell__edge nav-shell__edge--action"');
     expect(globalStyles).toContain(".site-header__inner {\n  width: fit-content;\n  max-width: calc(100vw - 2.4rem);");
     expect(globalStyles).toContain(".nav-shell {\n  --header-motion-duration: 320ms;");
-    expect(globalStyles).toContain(":root[data-header-state=\"condensed\"] .nav-shell {\n  padding: 0.18rem 0.38rem 0.18rem 0.38rem;");
+    expect(globalStyles).toContain(":root[data-header-state=\"condensed\"] .nav-shell {\n  padding: 0.44rem 0.88rem;");
     expect(globalStyles).toContain("grid-template-columns: max-content auto max-content;");
     expect(globalStyles).toContain(".header-nav {\n  grid-column: 2;");
     expect(globalStyles).toContain(
@@ -41,8 +41,8 @@ describe("header scroll motion", () => {
     );
     expect(globalStyles).toContain("transform: translate3d(-0.34rem, 0, 0) scale(0.96);");
     expect(globalStyles).toContain(".nav-shell__divider {\n  width: 1px;\n  height: 1.4rem;");
-    expect(globalStyles).toContain("opacity: 0.34;");
-    expect(globalStyles).toContain(":root[data-header-state=\"condensed\"] .header-action {\n  padding: 0.18rem 0.72rem 0.18rem 0.78rem;");
+    expect(globalStyles).toContain("opacity: 0.48;");
+    expect(globalStyles).toContain(":root[data-header-state=\"condensed\"] .header-action {\n  padding: 0.18rem 0.75rem;");
     expect(globalStyles).toContain(".header-action__icon {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;");
     expect(globalStyles).toContain(":root[data-header-state=\"condensed\"] .header-action__icon {\n  width: 1.16rem;\n  height: 1.16rem;\n  background: transparent;\n  box-shadow: none;");
   });
