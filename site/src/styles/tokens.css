@@ -3,8 +3,8 @@
   --font-ui: "Inter", var(--font-sans);
   --color-canvas: #fafafa;
   --color-canvas-strong: #ffffff;
-  --color-ink: #0f172a;
-  --color-muted: rgba(15, 23, 42, 0.68);
+  --color-ink: #000000;
+  --color-muted: rgba(0, 0, 0, 0.65);
   --color-line: rgba(15, 23, 42, 0.08);
   --color-accent: #4d93ff;
   --color-accent-ink: #ffffff;

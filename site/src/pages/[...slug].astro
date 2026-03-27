@@ -1,4 +1,5 @@
 ---
+import { getEntry } from "astro:content";
 import PageTemplate from "../components/content/PageTemplate.astro";
 import {
   getStaticSlug,
@@ -19,8 +20,13 @@ interface Props {
 }
 
 const { page } = Astro.props;
+const pageSeo = await getEntry("pages", page.id);
+
+if (!pageSeo) {
+  throw new Error(`Could not find the '${page.id}' page metadata.`);
+}
 ---
 
-<BaseLayout page={page}>
+<BaseLayout page={page} seo={pageSeo.data}>
   <PageTemplate page={page} />
 </BaseLayout>

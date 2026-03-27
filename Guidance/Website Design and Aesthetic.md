@@ -29,6 +29,15 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "
 *   **Line-Height**: `150%` (`1.5em` for highly breathable reading)
 *   **Color / Opacity**: `rgba(0, 0, 0, 0.65)` in light mode or `rgba(255, 255, 255, 0.8)` in dark mode. The alpha transparency allows subheadings to blend softly against their background, avoiding muddy grays and creating a stark contrast against the bold, solid headings above them.
 
+### Body Text (Functional Copy)
+*   **Font-Family**: System UI (SF Pro Text)
+*   **Font-Weight**: `400` (Regular) / `500` (Medium for emphasis)
+*   **Font-Size**: `19px` (Balanced, sophisticated typographic presence)
+*   **Line-Height**: `1.5` (`28.5px`)
+*   **Color**: `rgba(0, 0, 0, 0.65)` (Light) / `rgba(255, 255, 255, 0.75)` (Dark)
+*   **Alignment**: Center-aligned for hero descriptions to maintain symmetry.
+*   **Example Text**: *A mobile-first anesthesia record app built to replace messy paper workflows with a faster and more defensible standard.*
+
 ---
 
 ## 2. Color Palette: Structural Minimalism

@@ -14,8 +14,13 @@ describe("site manifest", () => {
     expect(paths.every((path) => path === path.toLowerCase())).toBe(true);
   });
 
-  it("keeps the header navigation within the four-link budget", () => {
-    expect(headerNavigation.length).toBeLessThanOrEqual(4);
+  it("keeps the desktop header navigation aligned to the four-link Flighty-style layout", () => {
+    expect(headerNavigation.map((item) => item.label)).toEqual([
+      "Pricing",
+      "Records",
+      "Security",
+      "Support",
+    ]);
     expect(
       headerNavigation.every((item) =>
         pageRegistry.some((page) => page.id === item.pageId),
@@ -33,7 +38,7 @@ describe("site manifest", () => {
   });
 
   it("keeps the header CTA and brand assets available for the splash navbar", () => {
-    expect(siteMetadata.headerCta.label).toBe("Get the App");
+    expect(siteMetadata.headerCta.label).toBe("Get the app");
     expect(siteMetadata.headerBrand.markSrc).toBe("/src/assets/logos/bolus-mark.png");
     expect(siteMetadata.headerBrand.textSrc).toBe("/src/assets/logos/bolus-text.png");
     expect(siteMetadata.headerBrand.markSize).toBe(34);

@@ -6,10 +6,10 @@ describe("home splash config", () => {
   it("uses the approved headline hierarchy", () => {
     expect(homeSplash.headline).toBe("Ditch Paper.");
     expect(homeSplash.lede).toBe(
-      "Modernize Your Practice With Clean and Defensible Records.",
+      "Modernize Your Practice With Clean and Defensible Anesthesia Records.",
     );
     expect(homeSplash.subheadline).toBe(
-      "A clean, mobile-first anesthesia record app built to replace messy paper workflows with a faster and more defensible standard",
+      "A mobile-first anesthesia record app built to replace messy paper workflows with a faster and more defensible standard.",
     );
   });
 

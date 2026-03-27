@@ -75,7 +75,7 @@ export const siteMetadata = {
     wordmarkHeight: 22,
   },
   headerCta: {
-    label: "Get the App",
+    label: "Get the app",
     href: "#download",
     variant: "primary" as const,
   },
@@ -555,8 +555,9 @@ export const pageRegistry: SitePage[] = [
 
 export const headerNavigation = [
   { label: "Pricing", pageId: "pricing" },
-  { label: "Simulator", pageId: "simulator" },
+  { label: "Records", pageId: "records" },
   { label: "Security", pageId: "security" },
+  { label: "Support", pageId: "support" },
 ] as const;
 
 export const footerNavigation = [

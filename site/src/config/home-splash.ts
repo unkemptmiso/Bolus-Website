@@ -2,7 +2,7 @@ export const homeSplash = {
   headline: "Ditch Paper.",
   lede: "Modernize Your Practice With Clean and Defensible Anesthesia Records.",
   subheadline:
-    "A clean, mobile-first anesthesia record app built to replace messy paper workflows with a faster and more defensible standard",
+    "A mobile-first anesthesia record app built to replace messy paper workflows with a faster and more defensible standard.",
   typography: {
     headlineLetterSpacing: "-1px",
     headlineLineHeight: "1",
@@ -17,7 +17,7 @@ export const homeSplash = {
   theme: {
     background: "#FFFFFF",
     headlineColor: "#000000",
-    bodyColor: "#6B6B6B",
+    bodyColor: "rgba(0, 0, 0, 0.65)",
   },
   placeholders: [
     {

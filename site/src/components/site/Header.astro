@@ -10,57 +10,120 @@ interface Props {
 }
 
 const { currentPath } = Astro.props;
+const resolvedNavigation = headerNavigation.reduce<Array<{ label: string; path: string }>>(
+  (items, item) => {
+    const page = getPageById(item.pageId);
+
+    if (page) {
+      items.push({ label: item.label, path: page.path });
+    }
+
+    return items;
+  },
+  [],
+);
 ---
 
-<header class="site-header">
-  <div class="nav-pill">
-    <a
-      class="brand-lockup"
-      href="/"
-      aria-label="Bolus home"
-      style={`--brand-mark-size:${siteMetadata.headerBrand.markSize}px;--brand-wordmark-height:${siteMetadata.headerBrand.wordmarkHeight}px;`}
-    >
-      <span class="brand-lockup__mark" aria-hidden="true">
-        <Image
-          src={bolusMark}
-          alt="Bolus logo mark"
-          widths={[84, 126]}
-          sizes={`${siteMetadata.headerBrand.markSize}px`}
-        />
-      </span>
-      <span class="brand-lockup__text" data-scroll-label aria-hidden="true">
-        <Image
-          src={bolusText}
-          alt="Bolus wordmark"
-          widths={[187, 280]}
-          sizes="124px"
-        />
-      </span>
-    </a>
+<header class="site-header" data-site-header>
+  <div class="site-header__inner">
+    <div class="nav-shell">
+      <div class="nav-shell__edge nav-shell__edge--brand">
+        <a
+          class="brand-lockup"
+          href="/"
+          aria-label="Bolus home"
+          style={`--brand-mark-size:${siteMetadata.headerBrand.markSize}px;--brand-wordmark-height:${siteMetadata.headerBrand.wordmarkHeight}px;`}
+        >
+          <span class="brand-lockup__mark" aria-hidden="true">
+            <Image
+              src={bolusMark}
+              alt="Bolus logo mark"
+              widths={[84, 126]}
+              sizes={`${siteMetadata.headerBrand.markSize}px`}
+            />
+          </span>
+          <span class="brand-lockup__text" data-scroll-label aria-hidden="true">
+            <Image src={bolusText} alt="" widths={[187, 280]} sizes="124px" />
+          </span>
+        </a>
 
-    <nav class="header-nav" aria-label="Primary">
-      <ul class="nav-list">
-        {headerNavigation.map((item) => {
-          const page = getPageById(item.pageId);
+        <span class="nav-shell__divider" aria-hidden="true"></span>
+      </div>
 
-          if (!page) {
-            return null;
-          }
+      <nav class="header-nav" aria-label="Primary">
+        <ul class="nav-list">
+          {resolvedNavigation.map((item) => {
+            const isCurrent = item.path === currentPath;
+            return (
+              <li>
+                <a class:list={["nav-link", { "is-current": isCurrent }]} href={item.path}>
+                  {item.label}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
 
-          const isCurrent = page.path === currentPath;
-          return (
-            <li>
-              <a class:list={["nav-link", { "is-current": isCurrent }]} href={page.path}>
-                {item.label}
-              </a>
-            </li>
-          );
-        })}
-      </ul>
-    </nav>
-
-    <a class="header-action" href={siteMetadata.headerCta.href}>
-      {siteMetadata.headerCta.label}
-    </a>
+      <div class="nav-shell__edge nav-shell__edge--action">
+        <a class="header-action" href={siteMetadata.headerCta.href}>
+          <span class="header-action__label">{siteMetadata.headerCta.label}</span>
+          <span class="header-action__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" role="presentation">
+              <rect x="7.25" y="2.75" width="9.5" height="18.5" rx="2.2" stroke-width="1.7"></rect>
+              <path d="M10.25 5.75H13.75" stroke-width="1.7" stroke-linecap="round"></path>
+              <path d="M11.2 17.9H12.8" stroke-width="1.7" stroke-linecap="round"></path>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
   </div>
 </header>
+
+<script is:inline>
+  (() => {
+    const root = document.documentElement;
+    const desktopQuery = window.matchMedia("(min-width: 901px)");
+    const condensedEnterThreshold = 18;
+    const condensedExitThreshold = 6;
+    let isTicking = false;
+    let headerState = root.dataset.headerState === "condensed" ? "condensed" : "top";
+
+    const updateHeaderState = () => {
+      let nextState = "top";
+
+      if (desktopQuery.matches) {
+        nextState =
+          headerState === "condensed"
+            ? window.scrollY <= condensedExitThreshold
+              ? "top"
+              : "condensed"
+            : window.scrollY >= condensedEnterThreshold
+              ? "condensed"
+              : "top";
+      }
+
+      if (nextState !== headerState) {
+        headerState = nextState;
+        root.dataset.headerState = nextState;
+      }
+
+      isTicking = false;
+    };
+
+    const onScroll = () => {
+      if (isTicking) {
+        return;
+      }
+
+      isTicking = true;
+      window.requestAnimationFrame(updateHeaderState);
+    };
+
+    updateHeaderState();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    desktopQuery.addEventListener("change", updateHeaderState);
+  })();
+</script>
