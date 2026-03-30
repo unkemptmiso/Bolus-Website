@@ -28,11 +28,12 @@ describe("site manifest", () => {
     ).toBe(true);
   });
 
-  it("retains the four footer pillars from the guidance docs", () => {
+  it("keeps the footer groups aligned to the current homepage/footer design", () => {
     expect(footerNavigation.map((group) => group.title)).toEqual([
       "Product",
       "Compare",
       "Company",
+      "Support",
       "Legal",
     ]);
   });

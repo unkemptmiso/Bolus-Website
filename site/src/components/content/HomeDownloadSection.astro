@@ -1,0 +1,77 @@
+---
+const appStoreUrl =
+  import.meta.env.PUBLIC_APP_STORE_URL ?? "https://apps.apple.com/us/app/id0000000000";
+---
+
+<section id="download" class="download-section" aria-labelledby="home-download-title">
+  <div class="download-section__inner">
+    <div class="download-section__copy">
+      <h2 id="home-download-title" class="download-section__title">Ready to leave paper behind?</h2>
+      <p class="download-section__body">
+        Bolus keeps your anesthesia record clear, quick, and connected from pre-op to
+        post-op on iPhone, iPad mini, and iPad Pro.
+      </p>
+      <a
+        class="download-section__button"
+        href={appStoreUrl}
+        aria-label="Download Bolus on the App Store"
+      >
+        <span class="download-section__button-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" role="presentation">
+            <rect x="7.25" y="2.75" width="9.5" height="18.5" rx="2.2" stroke-width="1.7"></rect>
+            <path d="M10.25 5.75H13.75" stroke-width="1.7" stroke-linecap="round"></path>
+            <path d="M11.2 17.9H12.8" stroke-width="1.7" stroke-linecap="round"></path>
+          </svg>
+        </span>
+        <span>Get Bolus</span>
+      </a>
+    </div>
+
+    <div class="download-section__devices" aria-hidden="true">
+      <figure class="download-section__device download-section__device--iphone">
+        <div class="download-section__screen">
+          <div class="download-section__screen-topbar"></div>
+          <div class="download-section__screen-stack">
+            <div class="download-section__screen-line download-section__screen-line--short"></div>
+            <div class="download-section__screen-card download-section__screen-card--accent"></div>
+            <div class="download-section__screen-card"></div>
+            <div class="download-section__screen-card"></div>
+          </div>
+        </div>
+        <figcaption>iPhone</figcaption>
+      </figure>
+
+      <figure class="download-section__device download-section__device--ipad-mini">
+        <div class="download-section__screen">
+          <div class="download-section__screen-topbar"></div>
+          <div class="download-section__screen-stack">
+            <div class="download-section__screen-line"></div>
+            <div class="download-section__screen-grid">
+              <div class="download-section__screen-card download-section__screen-card--accent"></div>
+              <div class="download-section__screen-card"></div>
+              <div class="download-section__screen-card"></div>
+            </div>
+            <div class="download-section__screen-panel"></div>
+            <div class="download-section__screen-panel"></div>
+          </div>
+        </div>
+        <figcaption>iPad mini</figcaption>
+      </figure>
+
+      <figure class="download-section__device download-section__device--ipad-pro">
+        <div class="download-section__screen">
+          <div class="download-section__screen-topbar"></div>
+          <div class="download-section__screen-stack">
+            <div class="download-section__screen-line"></div>
+            <div class="download-section__screen-grid download-section__screen-grid--split">
+              <div class="download-section__screen-card download-section__screen-card--accent"></div>
+              <div class="download-section__screen-card"></div>
+            </div>
+            <div class="download-section__screen-panel download-section__screen-panel--wide"></div>
+          </div>
+        </div>
+        <figcaption>iPad Pro</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>

@@ -131,9 +131,17 @@ This is the recommended homepage structure from this point forward. The order is
       * **Case events at your fingertips**
         * Mark important events and add quick comments as they happen, so the record stays thorough without turning into a distraction.
   * **Post-Op**
-    * recovery tracking
-    * discharge criteria
-    * final notes and case completion
+    * **Mini heading**:
+      * *Post-op that wraps up cleanly.*
+    * **Support Copy (P)**:
+      * Bolus makes closing out the record feel quick and organized.
+    * **Feature Blocks (H3 + P)**:
+      * **Fast discharge vitals**
+        * Enter discharge vitals quickly with a scrubber built for speed.
+      * **Automatic case summary**
+        * Review the case with total anesthesia time already calculated.
+      * **Controlled substance reconciliation**
+        * Complete reconciliation with a signature pad and totals pulled automatically from the record.
 * **Design Note**:
   * This section can be built as a three-panel sequence, sticky device walkthrough, or horizontal product story.
 

@@ -1,6 +1,10 @@
 ---
 import { getEntry } from "astro:content";
 import HomeProblemSection from "../components/content/HomeProblemSection.astro";
+import HomeExportSection from "../components/content/HomeExportSection.astro";
+import HomeFaqSection from "../components/content/HomeFaqSection.astro";
+import HomeDownloadSection from "../components/content/HomeDownloadSection.astro";
+import HomeSecuritySection from "../components/content/HomeSecuritySection.astro";
 import HomeSplashHero from "../components/content/HomeSplashHero.astro";
 import HomeSolutionSection from "../components/content/HomeSolutionSection.astro";
 import HomeWorkflowSection from "../components/content/HomeWorkflowSection.astro";
@@ -17,11 +21,16 @@ if (!homeSeo) throw new Error("Could not find the 'home' page metadata.");
   seo={homeSeo.data}
   showChrome={false}
   showHeader={true}
-  showFooter={false}
+  showFooter={true}
+  footerOmitGroups={["compare"]}
   mainClass="site-main site-main--splash"
 >
   <HomeSplashHero />
   <HomeProblemSection />
   <HomeSolutionSection />
   <HomeWorkflowSection />
+  <HomeExportSection />
+  <HomeSecuritySection />
+  <HomeFaqSection />
+  <HomeDownloadSection />
 </BaseLayout>

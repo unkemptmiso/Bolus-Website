@@ -1,34 +1,51 @@
 ---
+import type { FooterGroupId } from "../../config/site-manifest";
 import { footerNavigation, getPageById, siteMetadata } from "../../config/site-manifest";
+import bolusMark from "../../assets/logos/bolus-mark.png";
+
+interface Props {
+  omitGroups?: FooterGroupId[];
+}
+
+const { omitGroups = [] } = Astro.props;
+const visibleGroups = footerNavigation.filter((group) => !omitGroups.includes(group.id));
 ---
 
 <footer class="site-footer">
   <div class="footer-grid">
-    <div class="footer-brand">
-      <p class="eyebrow">Bolus</p>
-      <h2>{siteMetadata.tagline}</h2>
-      <p>{siteMetadata.description}</p>
+    <a
+      class="footer-brand-lockup"
+      href="/"
+      aria-label="Bolus home"
+      draggable="false"
+      style={`--footer-brand-mark-size:${siteMetadata.headerBrand.markSize}px;`}
+    >
+      <span class="footer-brand-lockup__mark" aria-hidden="true">
+        <img src={bolusMark.src} alt="" width="34" height="34" draggable="false" loading="eager" />
+      </span>
+    </a>
+
+    <div class="footer-nav-grid">
+      {visibleGroups.map((group) => (
+        <section class="footer-column">
+          <h2>{group.title}</h2>
+          <ul class="footer-list">
+            {group.links.map((pageId) => {
+              const page = getPageById(pageId);
+
+              if (!page) {
+                return null;
+              }
+
+              return (
+                <li>
+                  <a href={page.path}>{page.navLabel}</a>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      ))}
     </div>
-
-    {footerNavigation.map((group) => (
-      <section>
-        <h3>{group.title}</h3>
-        <ul class="footer-list">
-          {group.links.map((pageId) => {
-            const page = getPageById(pageId);
-
-            if (!page) {
-              return null;
-            }
-
-            return (
-              <li>
-                <a href={page.path}>{page.navLabel}</a>
-              </li>
-            );
-          })}
-        </ul>
-      </section>
-    ))}
   </div>
 </footer>

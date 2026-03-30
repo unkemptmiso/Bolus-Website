@@ -1,4 +1,4 @@
-export type FooterGroupId = "product" | "compare" | "company" | "legal" | "utility";
+export type FooterGroupId = "product" | "compare" | "company" | "legal" | "utility" | "support";
 
 export interface ActionLink {
   label: string;
@@ -562,18 +562,27 @@ export const headerNavigation = [
 
 export const footerNavigation = [
   {
+    id: "product",
     title: "Product",
     links: ["pricing", "simulator", "records", "business"],
   },
   {
+    id: "compare",
     title: "Compare",
     links: ["compare-paper-charts", "compare-maps-anesthesia"],
   },
   {
+    id: "company",
     title: "Company",
-    links: ["security", "support"],
+    links: ["security"],
   },
   {
+    id: "support",
+    title: "Support",
+    links: ["support"],
+  },
+  {
+    id: "legal",
     title: "Legal",
     links: ["privacy", "terms"],
   },

@@ -1,0 +1,98 @@
+---
+const faqs = [
+  {
+    question: "What is Bolus?",
+    answer:
+      "Bolus is an anesthesia record app built for office-based and mobile practice. It helps providers replace paper charting with a faster, cleaner approach to pre-op, intra-op, and post-op anesthesia documentation on iPhone and iPad.",
+  },
+  {
+    question: "Who is Bolus for?",
+    answer:
+      "Bolus is built for office-based anesthesia and sedation providers who need a modern way to document care. That includes anesthesiologists, CRNAs, oral surgeons, dental anesthesia providers, and other outpatient practices looking for cleaner mobile charting.",
+  },
+  {
+    question: "Can Bolus replace paper anesthesia records?",
+    answer:
+      "Yes. Bolus is designed as a practical replacement for paper anesthesia records. Instead of relying on handwritten forms, scanned pages, and documentation pieced together later, providers can chart directly in the app and finish with a cleaner digital record.",
+  },
+  {
+    question: "Can I use Bolus on iPhone and iPad?",
+    answer:
+      "Yes. Bolus is built for mobile anesthesia charting on iPhone and iPad, making it a better fit for office-based and mobile workflows than paper forms or desktop-bound systems.",
+  },
+  {
+    question: "Does Bolus include pre-op, intra-op, and post-op charting?",
+    answer:
+      "Yes. Bolus supports the full workflow from pre-op to post-op, including evaluation notes, consent and attachments, intra-op charting for vitals and medications, and post-op documentation to complete the record in one place.",
+  },
+  {
+    question: "How does Bolus protect patient data?",
+    answer:
+      "Bolus is built for secure anesthesia documentation. PHI stays local on the device, protected by AES-256 encryption and authentication-gated access, rather than being continuously synced through a cloud service.",
+  },
+] as const;
+---
+
+<section class="faq-section" data-faq-section aria-labelledby="home-faq-title">
+  <div class="faq-section__inner">
+    <h2 id="home-faq-title" class="faq-section__title">FAQs</h2>
+
+    <div class="faq-list">
+      {faqs.map((faq, index) => (
+        <article class="faq-item" data-faq-item>
+          <button
+            class="faq-item__trigger"
+            type="button"
+            data-faq-trigger
+            aria-expanded="false"
+          >
+            <span>{faq.question}</span>
+            <span class="faq-item__chevron" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none">
+                <path d="M5 7.5 10 12.5 15 7.5" />
+              </svg>
+            </span>
+          </button>
+          <div class="faq-item__content">
+            <div class="faq-item__content-inner">
+              <p>{faq.answer}</p>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (() => {
+    const section = document.querySelector("[data-faq-section]");
+    if (!(section instanceof HTMLElement)) return;
+
+    const entries = Array.from(section.querySelectorAll("[data-faq-item]"));
+    if (!entries.length) return;
+
+    const setActiveIndex = (activeIndex) => {
+      entries.forEach((entry, index) => {
+        const button = entry.querySelector("[data-faq-trigger]");
+        const content = entry.querySelector(".faq-item__content");
+        if (!(button instanceof HTMLButtonElement) || !(content instanceof HTMLElement)) return;
+
+        const isActive = index === activeIndex;
+        entry.classList.toggle("is-open", isActive);
+        button.setAttribute("aria-expanded", isActive ? "true" : "false");
+        content.classList.toggle("is-open", isActive);
+      });
+    };
+
+    entries.forEach((entry, index) => {
+      const button = entry.querySelector("[data-faq-trigger]");
+      if (!(button instanceof HTMLButtonElement)) return;
+
+      button.addEventListener("click", () => {
+        const isExpanded = button.getAttribute("aria-expanded") === "true";
+        setActiveIndex(isExpanded ? -1 : index);
+      });
+    });
+  })();
+</script>

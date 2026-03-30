@@ -1,89 +1,391 @@
 ---
-const preOpPoints = [
+const workflowPhases = [
   {
-    title: "Built-in evaluation notes",
-    body: "Pre-op evaluation details are already part of the workflow, so you can document them quickly without separate forms or extra steps.",
+    id: "pre-op",
+    label: "Pre-Op",
+    heading: "Pre-op without the paper shuffle.",
+    body: "Bolus helps you move through pre-op quickly by keeping the essential documentation in one place from the start.",
+    points: [
+      {
+        title: "Built-in evaluation notes",
+        body: "Pre-op evaluation details are already part of the workflow, so you can document them quickly without separate forms or extra steps.",
+      },
+      {
+        title: "Consent captured in the record",
+        body: "Consent forms are timestamped, locked into the app, and attached to the case record automatically.",
+      },
+      {
+        title: "Media added on the spot",
+        body: "Use the camera or attachments to add supporting images and files without breaking the flow.",
+      },
+    ],
   },
   {
-    title: "Consent captured in the record",
-    body: "Consent forms are timestamped, locked into the app, and attached to the case record automatically.",
+    id: "intra-op",
+    label: "Intra-Op",
+    heading: "Intra-op charting that keeps up.",
+    body: "With a timeline that continues to move through the case, Bolus helps you chart vitals, medications, and events very quickly, without constantly back charting.",
+    points: [
+      {
+        title: "Vitals in seconds, one hand, no manual entry",
+        body: "Chart vital signs with a one-handed workflow that takes seconds instead of minutes, without stopping to manually enter numbers each time.",
+      },
+      {
+        title: "One-tap medications",
+        body: "Chart common medications, infusions, and local anesthetics with a workflow built to keep documentation fast and low-friction during the case.",
+      },
+      {
+        title: "Case events at your fingertips",
+        body: "Mark important events and add quick comments as they happen, so the record stays thorough without turning into a distraction.",
+      },
+    ],
   },
   {
-    title: "Media added on the spot",
-    body: "Use the camera or attachments to add supporting images and files without breaking the flow.",
+    id: "post-op",
+    label: "Post-Op",
+    heading: "Post-op that wraps up cleanly.",
+    body: "Bolus makes closing out the record feel quick and organized.",
+    points: [
+      {
+        title: "Fast discharge vitals",
+        body: "Enter discharge vitals quickly with a scrubber built for speed.",
+      },
+      {
+        title: "Automatic case summary",
+        body: "Review the case with total anesthesia time already calculated.",
+      },
+      {
+        title: "Controlled substance reconciliation",
+        body: "Complete reconciliation with a signature pad and totals pulled automatically from the record.",
+      },
+    ],
   },
 ] as const;
 ---
 
-<section class="workflow-section" aria-labelledby="home-workflow-title">
+<section
+  class="workflow-section"
+  data-workflow-section
+  data-workflow-active-phase="pre-op"
+  style="--workflow-progress:0; --workflow-phase-index:0; --workflow-copy-shift:0%; --workflow-screen-shift:0%;"
+  aria-labelledby="home-workflow-title"
+>
   <div class="workflow-section__inner">
-    <div class="workflow-section__copy">
-      <p class="workflow-section__eyebrow">Workflow</p>
-      <h2 id="home-workflow-title" class="workflow-section__title">
-        One workflow from pre-op to post-op.
-      </h2>
-      <p class="workflow-section__lede">
-        Bolus is built to follow the case from start to finish, without sending you back to paper.
-      </p>
+    <div class="workflow-section__stage" data-workflow-stage>
+      <div class="workflow-section__copy">
+        <div class="workflow-section__intro">
+          <h2 id="home-workflow-title" class="workflow-section__title">
+            <span class="workflow-section__title-line">One workflow from</span>
+            <span class="workflow-section__title-line">pre-op to post-op.</span>
+          </h2>
+          <p class="workflow-section__lede">Bolus is built to follow the case from start to finish, without sending you back to paper.</p>
+        </div>
 
-      <div class="workflow-section__phase">
-        <p class="workflow-section__phase-label">Pre-Op</p>
-        <h3 class="workflow-section__phase-title">Pre-op without the paper shuffle.</h3>
-        <p class="workflow-section__phase-body">
-          Bolus helps you move through pre-op quickly by keeping the essential documentation in one
-          place from the start.
-        </p>
+        <div class="workflow-section__phase-viewport">
+          <div class="workflow-section__phase-track" data-workflow-copy-track>
+            {workflowPhases.map((phase) => (
+              <section class="workflow-phase-card" data-phase={phase.id}>
+                <div class="workflow-section__phase">
+                  <p class="workflow-section__phase-label">{phase.label}</p>
+                  <h3 class="workflow-section__phase-title">{phase.heading}</h3>
+                  <p class="workflow-section__phase-body">{phase.body}</p>
+                </div>
+
+                <div class="workflow-section__points">
+                  {phase.points.map((point) => (
+                    <article class="workflow-point">
+                      <h4>{point.title}</h4>
+                      <p>{point.body}</p>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
+        </div>
       </div>
 
-      <div class="workflow-section__points">
-        {preOpPoints.map((point) => (
-          <article class="workflow-point">
-            <h4>{point.title}</h4>
-            <p>{point.body}</p>
-          </article>
-        ))}
-      </div>
-    </div>
+      <div class="workflow-section__device">
+        <div class="workflow-phone-shell">
+          <div class="workflow-phone" aria-hidden="true">
+            <div class="workflow-phone__notch"></div>
 
-    <div class="workflow-section__device" aria-hidden="true">
-      <div class="workflow-phone">
-        <div class="workflow-phone__notch"></div>
-        <div class="workflow-phone__screen">
-          <div class="workflow-phone__status">
-            <span>9:41</span>
-            <span>Pre-Op</span>
-          </div>
+            <div class="workflow-phone__screen-viewport">
+              <div class="workflow-phone__screen-track" data-workflow-screen-track>
+                {workflowPhases.map((phase) => (
+                  <section class={`workflow-phone__screen workflow-phone__screen--${phase.id}`}>
+                    <div class="workflow-phone__status">
+                      <span>9:41</span>
+                      <span>{phase.label}</span>
+                    </div>
 
-          <div class="workflow-phone__hero-card">
-            <div class="workflow-phone__hero-chip">Case Ready</div>
-            <div class="workflow-phone__hero-title"></div>
-            <div class="workflow-phone__hero-line workflow-phone__hero-line--short"></div>
-            <div class="workflow-phone__hero-line"></div>
-          </div>
+                    {phase.id === "pre-op" && (
+                      <>
+                        <div class="workflow-phone__hero-card">
+                          <div class="workflow-phone__hero-chip">Case Ready</div>
+                          <div class="workflow-phone__hero-title"></div>
+                          <div class="workflow-phone__hero-line workflow-phone__hero-line--short"></div>
+                          <div class="workflow-phone__hero-line"></div>
+                        </div>
 
-          <div class="workflow-phone__panel">
-            <div class="workflow-phone__panel-title"></div>
-            <div class="workflow-phone__row">
-              <span></span>
-              <span></span>
+                        <div class="workflow-phone__panel workflow-phone__panel--form">
+                          <div class="workflow-phone__panel-title"></div>
+                          <div class="workflow-phone__row">
+                            <span></span>
+                            <span></span>
+                          </div>
+                          <div class="workflow-phone__row">
+                            <span></span>
+                            <span></span>
+                          </div>
+                        </div>
+
+                        <div class="workflow-phone__panel workflow-phone__panel--media">
+                          <div class="workflow-phone__panel-title"></div>
+                          <div class="workflow-phone__media">
+                            <div></div>
+                            <div></div>
+                          </div>
+                        </div>
+                      </>
+                    )}
+
+                    {phase.id === "intra-op" && (
+                      <>
+                        <div class="workflow-phone__panel workflow-phone__panel--timeline">
+                          <div class="workflow-phone__panel-title workflow-phone__panel-title--wide"></div>
+                          <div class="workflow-phone__timeline">
+                            <div class="workflow-phone__timeline-row">
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                            </div>
+                            <div class="workflow-phone__timeline-row">
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                            </div>
+                            <div class="workflow-phone__timeline-row">
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="workflow-phone__panel workflow-phone__panel--actions">
+                          <div class="workflow-phone__panel-title"></div>
+                          <div class="workflow-phone__token-row">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                          </div>
+                          <div class="workflow-phone__event-card">
+                            <div class="workflow-phone__event-line workflow-phone__event-line--short"></div>
+                            <div class="workflow-phone__event-line"></div>
+                          </div>
+                          <div class="workflow-phone__event-card">
+                            <div class="workflow-phone__event-line workflow-phone__event-line--short"></div>
+                            <div class="workflow-phone__event-line workflow-phone__event-line--long"></div>
+                          </div>
+                        </div>
+                      </>
+                    )}
+
+                    {phase.id === "post-op" && (
+                      <>
+                        <div class="workflow-phone__panel workflow-phone__panel--placeholder">
+                          <div class="workflow-phone__hero-title workflow-phone__hero-title--wide"></div>
+                          <div class="workflow-phone__hero-line workflow-phone__hero-line--short"></div>
+                          <div class="workflow-phone__hero-line"></div>
+                        </div>
+
+                        <div class="workflow-phone__panel workflow-phone__panel--summary">
+                          <div class="workflow-phone__panel-title"></div>
+                          <div class="workflow-phone__summary-grid">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                          </div>
+                        </div>
+
+                        <div class="workflow-phone__panel workflow-phone__panel--completion">
+                          <div class="workflow-phone__cta"></div>
+                          <div class="workflow-phone__footer-bar"></div>
+                        </div>
+                      </>
+                    )}
+
+                    {phase.id !== "post-op" && <div class="workflow-phone__footer-bar"></div>}
+                  </section>
+                ))}
+              </div>
             </div>
-            <div class="workflow-phone__row">
-              <span></span>
-              <span></span>
-            </div>
           </div>
 
-          <div class="workflow-phone__panel">
-            <div class="workflow-phone__panel-title"></div>
-            <div class="workflow-phone__media">
-              <div></div>
-              <div></div>
+          <nav class="workflow-tabs" data-workflow-tabs aria-label="Workflow phases">
+            <div class="workflow-tabs__list">
+              {workflowPhases.map((phase, index) => (
+                <button
+                  type="button"
+                  class={`workflow-tabs__item${index === 0 ? " is-active" : ""}`}
+                  data-phase-trigger
+                  data-phase={phase.id}
+                  aria-current={index === 0 ? "page" : undefined}
+                >
+                  <span>{phase.label}</span>
+                </button>
+              ))}
             </div>
-          </div>
-
-          <div class="workflow-phone__footer-bar"></div>
+          </nav>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<script is:inline>
+  (() => {
+    const section = document.querySelector("[data-workflow-section]");
+    if (!(section instanceof HTMLElement)) return;
+
+    const tabs = Array.from(section.querySelectorAll("[data-phase-trigger]"));
+    if (!tabs.length) return;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const compactLayout = window.matchMedia("(max-width: 820px)");
+    const phaseIds = ["pre-op", "intra-op", "post-op"];
+    const phaseProgressMap = [0, 0.4, 0.8];
+    let rafId = 0;
+    let latestProgress = 0;
+    let lockedPhaseIndex = null;
+    let lockExpiresAt = 0;
+
+    const setActiveTab = (activeIndex) => {
+      tabs.forEach((tab, index) => {
+        const isActive = index === activeIndex;
+        tab.classList.toggle("is-active", isActive);
+
+        if (isActive) {
+          tab.setAttribute("aria-current", "page");
+        } else {
+          tab.removeAttribute("aria-current");
+        }
+      });
+    };
+
+    const getPhaseIndex = (progress) => {
+      if (progress < 0.28) return 0;
+      if (progress < 0.58) return 1;
+      return 2;
+    };
+
+    const isPhaseAligned = (phaseIndex, progress) => {
+      if (phaseIndex === 0) return progress < 0.28;
+      if (phaseIndex === 1) return progress >= 0.28 && progress < 0.58;
+      return progress >= 0.58;
+    };
+
+    const applyPhase = (activeIndex, progress) => {
+      const shift = `${activeIndex * 100}%`;
+      const activePhase = phaseIds[activeIndex];
+
+      section.style.setProperty("--workflow-progress", progress.toFixed(4));
+      section.style.setProperty("--workflow-phase-index", `${activeIndex}`);
+      section.style.setProperty("--workflow-copy-shift", shift);
+      section.style.setProperty("--workflow-screen-shift", shift);
+      section.dataset.workflowActivePhase = activePhase;
+
+      setActiveTab(activeIndex);
+    };
+
+    const flushPhase = () => {
+      rafId = 0;
+
+      if (
+        lockedPhaseIndex !== null &&
+        (isPhaseAligned(lockedPhaseIndex, latestProgress) || performance.now() > lockExpiresAt)
+      ) {
+        lockedPhaseIndex = null;
+      }
+
+      const activeIndex = lockedPhaseIndex ?? getPhaseIndex(latestProgress);
+      const displayProgress =
+        lockedPhaseIndex === null ? latestProgress : phaseProgressMap[activeIndex];
+
+      applyPhase(activeIndex, displayProgress);
+    };
+
+    const resetStatic = () => {
+      latestProgress = 0;
+      lockedPhaseIndex = null;
+      applyPhase(0, 0);
+    };
+
+    const updateTarget = () => {
+      if (reducedMotion.matches || compactLayout.matches) {
+        resetStatic();
+        return;
+      }
+
+      const rect = section.getBoundingClientRect();
+      const scrollSpan = Math.max(section.offsetHeight - window.innerHeight, 1);
+      const traveled = Math.min(Math.max(-rect.top, 0), scrollSpan);
+
+      latestProgress = traveled / scrollSpan;
+
+      if (!rafId) {
+        rafId = window.requestAnimationFrame(flushPhase);
+      }
+    };
+
+    const handleChange = () => {
+      if (rafId) {
+        window.cancelAnimationFrame(rafId);
+        rafId = 0;
+      }
+      updateTarget();
+    };
+
+    const scrollToPhase = (phaseIndex) => {
+      const rect = section.getBoundingClientRect();
+      const sectionTop = window.scrollY + rect.top;
+      const scrollSpan = Math.max(section.offsetHeight - window.innerHeight, 1);
+      const targetTop = sectionTop + scrollSpan * phaseProgressMap[phaseIndex];
+
+      if (reducedMotion.matches) {
+        window.scrollTo({
+          top: targetTop,
+          behavior: "auto",
+        });
+        return;
+      }
+
+      window.scrollTo({
+        top: targetTop,
+        behavior: "smooth",
+      });
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => {
+        latestProgress = phaseProgressMap[index];
+        lockedPhaseIndex = index;
+        lockExpiresAt = performance.now() + 1400;
+
+        applyPhase(index, latestProgress);
+
+        if (!compactLayout.matches) {
+          scrollToPhase(index);
+        }
+      });
+    });
+
+    window.addEventListener("scroll", updateTarget, { passive: true });
+    window.addEventListener("resize", handleChange);
+    reducedMotion.addEventListener?.("change", handleChange);
+    compactLayout.addEventListener?.("change", handleChange);
+
+    updateTarget();
+  })();
+</script>

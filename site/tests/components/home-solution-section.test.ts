@@ -27,15 +27,20 @@ describe("home solution section", () => {
   it("uses the approved section three headline and the three drafted proof points", () => {
     expect(solutionSectionSource).toContain("Charting built for speed.");
     expect(solutionSectionSource).toContain("Records made to last.");
-    expect(solutionSectionSource).toContain("Bolus is a mobile anesthesia record app for office-based practice.");
+    expect(solutionSectionSource).toContain(
+      "Bolus is a mobile anesthesia record app for office-based practice.",
+    );
     expect(solutionSectionSource).toContain(
       "It replaces paper charting with a faster, cleaner documentation workflow",
     );
     expect(solutionSectionSource).not.toContain("The Shift");
     expect(solutionSectionSource).toContain("Built for the pace of the case.");
     expect(solutionSectionSource).toContain("One record from start to finish.");
-    expect(solutionSectionSource).toContain("Cleaner when it matters later.");
+    expect(solutionSectionSource).toContain("Export with One-Click");
     expect(solutionSectionSource).toContain('class="solution-card__icon"');
+    expect(solutionSectionSource).toContain("/section3-icons/hourglass-not-done_23f3.png");
+    expect(solutionSectionSource).toContain("/section3-icons/1f5c2_1f2qe.webp");
+    expect(solutionSectionSource).toContain("/section3-icons/1f4e4_1knv5.webp");
   });
 
   it("uses native-feeling cards with scroll-triggered reveal behavior", () => {
@@ -48,8 +53,15 @@ describe("home solution section", () => {
     expect(globalStyles).toContain("justify-items: center;");
     expect(globalStyles).toContain("text-align: center;");
     expect(globalStyles).toContain(".solution-card {");
+    expect(globalStyles).toContain("align-items: center;");
     expect(globalStyles).toContain(".solution-card__icon {");
     expect(globalStyles).toContain(".solution-card.is-visible {");
+    expect(globalStyles).toContain("width: 2.35rem;");
+    expect(globalStyles).toContain("height: 2.35rem;");
+    expect(globalStyles).toContain("padding: 0;");
+    expect(globalStyles).toContain("background: transparent;");
+    expect(globalStyles).toContain("box-shadow: none;");
+    expect(globalStyles).toContain(".solution-card__icon img {");
     expect(globalStyles).toContain("cubic-bezier(0.22, 1.18, 0.36, 1)");
   });
 });
