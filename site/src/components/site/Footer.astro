@@ -25,27 +25,31 @@ const visibleGroups = footerNavigation.filter((group) => !omitGroups.includes(gr
       </span>
     </a>
 
-    <div class="footer-nav-grid">
-      {visibleGroups.map((group) => (
-        <section class="footer-column">
-          <h2>{group.title}</h2>
-          <ul class="footer-list">
-            {group.links.map((pageId) => {
-              const page = getPageById(pageId);
+    <div class="footer-content">
+      <div class="footer-nav-grid">
+        {visibleGroups.map((group) => (
+          <section class="footer-column">
+            <h2>{group.title}</h2>
+            <ul class="footer-list">
+              {group.links.map((pageId) => {
+                const page = getPageById(pageId);
 
-              if (!page) {
-                return null;
-              }
+                if (!page) {
+                  return null;
+                }
 
-              return (
-                <li>
-                  <a href={page.path}>{page.navLabel}</a>
-                </li>
-              );
-            })}
-          </ul>
-        </section>
-      ))}
+                return (
+                  <li>
+                    <a href={page.path}>{page.navLabel}</a>
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        ))}
+      </div>
+
+      <p class="footer-meta">Copyright © Pressor Systems LLC 2026</p>
     </div>
   </div>
 </footer>

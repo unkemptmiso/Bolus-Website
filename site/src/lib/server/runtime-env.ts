@@ -2,7 +2,7 @@ import type { APIContext } from "astro";
 import { z } from "zod";
 
 const runtimeEnvSchema = z.object({
-  PUBLIC_SITE_URL: z.url().default("https://bolus-site.invalid"),
+  PUBLIC_SITE_URL: z.url().default("https://bolusanesthesia.com"),
   PUBLIC_APP_STORE_URL: z.url().default("https://apps.apple.com/us/app/id0000000000"),
   AUTH_JWT_SECRET: z.string().min(12).optional(),
   FIREBASE_PROJECT_ID: z.string().min(2).optional(),

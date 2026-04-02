@@ -31,9 +31,6 @@ describe("site manifest", () => {
   it("keeps the footer groups aligned to the current homepage/footer design", () => {
     expect(footerNavigation.map((group) => group.title)).toEqual([
       "Product",
-      "Compare",
-      "Company",
-      "Support",
       "Legal",
     ]);
   });

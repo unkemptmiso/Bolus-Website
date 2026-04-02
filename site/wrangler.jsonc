@@ -7,6 +7,9 @@
 		"directory": "./dist",
 		"binding": "ASSETS"
 	},
+	"vars": {
+		"PUBLIC_SITE_URL": "https://bolusanesthesia.com"
+	},
 	"observability": {
 		"enabled": true
 	}

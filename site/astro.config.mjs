@@ -8,7 +8,7 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   output: 'static',
-  site: process.env.PUBLIC_SITE_URL ?? "https://bolus-site.invalid",
+  site: process.env.PUBLIC_SITE_URL ?? "https://bolusanesthesia.com",
   integrations: [react(), sitemap()],
   adapter: cloudflare(),
   image: {

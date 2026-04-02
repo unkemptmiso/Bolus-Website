@@ -64,7 +64,7 @@ export interface SitePage {
 export const siteMetadata = {
   name: "Bolus",
   tagline: "Modern anesthesia record app",
-  defaultSiteUrl: "https://bolus-site.invalid",
+  defaultSiteUrl: "https://bolusanesthesia.com",
   description:
     "Bolus helps office-based anesthesia and sedation practices replace paper charting with cleaner, faster, and more defensible records.",
   accentColor: "#4d93ff",
@@ -454,44 +454,48 @@ export const pageRegistry: SitePage[] = [
     path: "/privacy",
     title: "Privacy Policy",
     navLabel: "Privacy",
-    description: "Framework placeholder for the final privacy policy.",
+    description: "Bolus privacy policy for account, device, and clinical documentation data handling.",
     seoTitle: "Privacy Policy | Bolus",
-    seoDescription: "Read the privacy policy framework for the Bolus website and app.",
+    seoDescription: "Read the Bolus privacy policy for local-first anesthesia documentation workflows.",
     category: "legal",
     hero: {
       eyebrow: "Legal",
-      title: "Privacy policy placeholder ready for legal copy.",
-      body: "The route exists now so future legal content can be slotted in without changing navigation or deployment shape.",
+      title: "Privacy Policy",
+      body: "How Bolus handles account data, technical diagnostics, and local-first clinical record workflows.",
     },
-    sections: [
-      {
-        type: "note",
-        title: "Draft status",
-        body: "Replace this section with approved legal language before launch. The route, layout, metadata, and footer linkage are already in place.",
-      },
-    ],
+    sections: [],
   },
   {
     id: "terms",
     path: "/terms",
-    title: "Terms of Service",
+    title: "Terms of Use",
     navLabel: "Terms",
-    description: "Framework placeholder for the final terms of service.",
-    seoTitle: "Terms of Service | Bolus",
-    seoDescription: "Read the terms of service framework for the Bolus website and app.",
+    description: "Bolus terms of use for clinical documentation, accounts, exports, and professional responsibility.",
+    seoTitle: "Terms of Use | Bolus",
+    seoDescription: "Read the Bolus terms of use for accessing and using the anesthesia record app.",
     category: "legal",
     hero: {
       eyebrow: "Legal",
-      title: "Terms route scaffolded for launch readiness.",
-      body: "The structure is ready for final approved language and future versioning workflows.",
+      title: "Terms of Use",
+      body: "The legal terms governing access to Bolus, local-first records, exports, and professional use of the service.",
     },
-    sections: [
-      {
-        type: "note",
-        title: "Draft status",
-        body: "Replace this content with reviewed terms before launch. This placeholder keeps the route map stable in the meantime.",
-      },
-    ],
+    sections: [],
+  },
+  {
+    id: "medical-disclaimer",
+    path: "/medical-disclaimer",
+    title: "Medical Disclaimer",
+    navLabel: "Medical Disclaimer",
+    description: "Bolus medical disclaimer clarifying intended use, verification, and clinician responsibility.",
+    seoTitle: "Medical Disclaimer | Bolus",
+    seoDescription: "Read the Bolus medical disclaimer for documentation-only use and clinician responsibility.",
+    category: "legal",
+    hero: {
+      eyebrow: "Legal",
+      title: "Medical Disclaimer",
+      body: "Important limitations, verification requirements, and clinician responsibilities when using Bolus in patient-care settings.",
+    },
+    sections: [],
   },
   {
     id: "login",
@@ -567,24 +571,9 @@ export const footerNavigation = [
     links: ["pricing", "simulator", "records", "business"],
   },
   {
-    id: "compare",
-    title: "Compare",
-    links: ["compare-paper-charts", "compare-maps-anesthesia"],
-  },
-  {
-    id: "company",
-    title: "Company",
-    links: ["security"],
-  },
-  {
-    id: "support",
-    title: "Support",
-    links: ["support"],
-  },
-  {
     id: "legal",
     title: "Legal",
-    links: ["privacy", "terms"],
+    links: ["privacy", "terms", "medical-disclaimer"],
   },
 ] as const;
 

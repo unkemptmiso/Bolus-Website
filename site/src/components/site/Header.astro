@@ -1,6 +1,4 @@
 ---
-import { Image } from "astro:assets";
-
 import { getPageById, headerNavigation, siteMetadata } from "../../config/site-manifest";
 import bolusMark from "../../assets/logos/bolus-mark.png";
 import bolusText from "../../assets/logos/bolus-text.png";
@@ -22,11 +20,27 @@ const resolvedNavigation = headerNavigation.reduce<Array<{ label: string; path: 
   },
   [],
 );
+const mobileNavigation = [
+  { pageId: "pricing", icon: "pricing" },
+  { pageId: "records", icon: "records" },
+  { pageId: "simulator", icon: "simulator" },
+  { pageId: "business", icon: "business" },
+  { pageId: "security", icon: "security" },
+  { pageId: "support", icon: "support" },
+].reduce<Array<{ label: string; path: string; icon: string }>>((items, item) => {
+  const page = getPageById(item.pageId);
+
+  if (page) {
+    items.push({ label: page.navLabel, path: page.path, icon: item.icon });
+  }
+
+  return items;
+}, []);
 ---
 
-<header class="site-header" data-site-header>
+<header class="site-header" data-site-header data-mobile-menu="closed">
   <div class="site-header__inner">
-    <div class="nav-shell">
+    <div class="nav-shell" data-nav-shell data-mobile-menu="closed">
       <div class="nav-shell__edge nav-shell__edge--brand">
         <a
           class="brand-lockup"
@@ -35,15 +49,26 @@ const resolvedNavigation = headerNavigation.reduce<Array<{ label: string; path: 
           style={`--brand-mark-size:${siteMetadata.headerBrand.markSize}px;--brand-wordmark-height:${siteMetadata.headerBrand.wordmarkHeight}px;`}
         >
           <span class="brand-lockup__mark" aria-hidden="true">
-            <Image
-              src={bolusMark}
+            <img
+              src={bolusMark.src}
               alt="Bolus logo mark"
-              widths={[84, 126]}
-              sizes={`${siteMetadata.headerBrand.markSize}px`}
+              width="34"
+              height="34"
+              loading="eager"
+              decoding="async"
+              draggable="false"
             />
           </span>
           <span class="brand-lockup__text" data-scroll-label aria-hidden="true">
-            <Image src={bolusText} alt="" widths={[187, 280]} sizes="124px" />
+            <img
+              src={bolusText.src}
+              alt=""
+              width="187"
+              height="65"
+              loading="eager"
+              decoding="async"
+              draggable="false"
+            />
           </span>
         </a>
 
@@ -77,6 +102,137 @@ const resolvedNavigation = headerNavigation.reduce<Array<{ label: string; path: 
           </span>
         </a>
       </div>
+
+      <div class="mobile-header">
+        <div class="mobile-header__brand-group">
+          <a
+            class="mobile-brand-lockup"
+            href="/"
+            aria-label="Bolus home"
+            style={`--brand-mark-size:${siteMetadata.headerBrand.markSize}px;--brand-wordmark-height:${siteMetadata.headerBrand.wordmarkHeight}px;`}
+          >
+            <span class="mobile-brand-lockup__mark" aria-hidden="true">
+              <img
+                src={bolusMark.src}
+                alt="Bolus logo mark"
+                width="34"
+                height="34"
+                loading="eager"
+                decoding="async"
+                draggable="false"
+              />
+            </span>
+            <span class="mobile-brand-lockup__text" aria-hidden="true">
+              <img
+                src={bolusText.src}
+                alt=""
+                width="187"
+                height="65"
+                loading="eager"
+                decoding="async"
+                draggable="false"
+              />
+            </span>
+          </a>
+
+          <span class="mobile-header__divider" aria-hidden="true"></span>
+        </div>
+
+        <div class="mobile-header__actions">
+          <a class="mobile-header__cta" href={siteMetadata.headerCta.href}>
+            {siteMetadata.headerCta.label}
+          </a>
+
+          <button
+            class="mobile-menu-toggle"
+            type="button"
+            aria-label="Open navigation menu"
+            aria-controls="mobile-menu-panel"
+            aria-expanded="false"
+            data-mobile-menu-toggle
+          >
+            <span class="mobile-menu-toggle__line" aria-hidden="true"></span>
+            <span class="mobile-menu-toggle__line" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile-menu-shell">
+        <nav
+          id="mobile-menu-panel"
+          class="mobile-menu-panel"
+          aria-label="Mobile"
+          aria-hidden="true"
+          data-mobile-menu-panel
+        >
+          <ul class="mobile-menu-grid">
+            {mobileNavigation.map((item) => {
+              const isCurrent = item.path === currentPath;
+
+              return (
+                <li>
+                  <a
+                    class:list={["mobile-menu-link", { "is-current": isCurrent }]}
+                    href={item.path}
+                    data-mobile-menu-link
+                  >
+                    <span class="mobile-menu-link__icon" aria-hidden="true">
+                      {item.icon === "pricing" && (
+                        <svg viewBox="0 0 24 24" fill="none" role="presentation">
+                          <rect x="3.75" y="6.75" width="16.5" height="10.5" rx="2.5" stroke-width="1.8"></rect>
+                          <path d="M8 9.75H8.01" stroke-width="2.2" stroke-linecap="round"></path>
+                          <path d="M8 14.25H8.01" stroke-width="2.2" stroke-linecap="round"></path>
+                          <path d="M15.9 9.75H16" stroke-width="2.2" stroke-linecap="round"></path>
+                          <path d="M15.9 14.25H16" stroke-width="2.2" stroke-linecap="round"></path>
+                        </svg>
+                      )}
+                      {item.icon === "records" && (
+                        <svg viewBox="0 0 24 24" fill="none" role="presentation">
+                          <path d="M7.25 4.75H14.5L18.25 8.5V18.75A1.5 1.5 0 0 1 16.75 20.25H7.25A1.5 1.5 0 0 1 5.75 18.75V6.25A1.5 1.5 0 0 1 7.25 4.75Z" stroke-width="1.8" stroke-linejoin="round"></path>
+                          <path d="M14.25 4.75V8.75H18.25" stroke-width="1.8" stroke-linejoin="round"></path>
+                          <path d="M8.75 12H15.25" stroke-width="1.8" stroke-linecap="round"></path>
+                          <path d="M8.75 15.5H13" stroke-width="1.8" stroke-linecap="round"></path>
+                        </svg>
+                      )}
+                      {item.icon === "simulator" && (
+                        <svg viewBox="0 0 24 24" fill="none" role="presentation">
+                          <path d="M5 18.5H19" stroke-width="1.8" stroke-linecap="round"></path>
+                          <path d="M8 18.5V9.5A2.75 2.75 0 0 1 10.75 6.75H16A2 2 0 0 1 18 8.75V18.5" stroke-width="1.8" stroke-linejoin="round"></path>
+                          <path d="M5.75 18.5V12.25A1.5 1.5 0 0 1 7.25 10.75H8" stroke-width="1.8" stroke-linejoin="round"></path>
+                          <path d="M11.75 10.5H14.25" stroke-width="1.8" stroke-linecap="round"></path>
+                        </svg>
+                      )}
+                      {item.icon === "business" && (
+                        <svg viewBox="0 0 24 24" fill="none" role="presentation">
+                          <path d="M5.75 18.25V8.75A2 2 0 0 1 7.75 6.75H12.25A2 2 0 0 1 14.25 8.75V18.25" stroke-width="1.8" stroke-linejoin="round"></path>
+                          <path d="M14.25 18.25V11.75A2 2 0 0 1 16.25 9.75H18.25V18.25" stroke-width="1.8" stroke-linejoin="round"></path>
+                          <path d="M9.25 10.5H10.75" stroke-width="1.8" stroke-linecap="round"></path>
+                          <path d="M9.25 14H10.75" stroke-width="1.8" stroke-linecap="round"></path>
+                          <path d="M5 18.25H19" stroke-width="1.8" stroke-linecap="round"></path>
+                        </svg>
+                      )}
+                      {item.icon === "security" && (
+                        <svg viewBox="0 0 24 24" fill="none" role="presentation">
+                          <path d="M12 3.75L18 6V11.25C18 15 15.6 18.43 12 19.75C8.4 18.43 6 15 6 11.25V6L12 3.75Z" stroke-width="1.8" stroke-linejoin="round"></path>
+                          <path d="M9.75 11.75L11.25 13.25L14.75 9.75" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                      )}
+                      {item.icon === "support" && (
+                        <svg viewBox="0 0 24 24" fill="none" role="presentation">
+                          <circle cx="12" cy="12" r="8.25" stroke-width="1.8"></circle>
+                          <path d="M9.7 9.45A2.55 2.55 0 0 1 12.02 8C13.5 8 14.75 9 14.75 10.5C14.75 12.6 12 12.75 12 14.5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                          <path d="M12 17.25H12.1" stroke-width="2.2" stroke-linecap="round"></path>
+                        </svg>
+                      )}
+                    </span>
+                    <span>{item.label}</span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+      </div>
     </div>
   </div>
 </header>
@@ -84,25 +240,52 @@ const resolvedNavigation = headerNavigation.reduce<Array<{ label: string; path: 
 <script is:inline>
   (() => {
     const root = document.documentElement;
-    const desktopQuery = window.matchMedia("(min-width: 901px)");
+    const header = document.querySelector("[data-site-header]");
+    const navShell = header?.querySelector("[data-nav-shell]");
+    const menuToggle = header?.querySelector("[data-mobile-menu-toggle]");
+    const mobileMenuPanel = header?.querySelector("[data-mobile-menu-panel]");
+    const mobileMenuLinks = header?.querySelectorAll("[data-mobile-menu-link]") ?? [];
+    const phoneQuery = window.matchMedia("(max-width: 767px)");
     const condensedEnterThreshold = 18;
     const condensedExitThreshold = 6;
     let isTicking = false;
     let headerState = root.dataset.headerState === "condensed" ? "condensed" : "top";
+    let isMobileMenuOpen = header instanceof HTMLElement && header.dataset.mobileMenu === "open";
+
+    if (!(header instanceof HTMLElement)) {
+      return;
+    }
+
+    const syncMobileMenu = () => {
+      const nextMenuState = isMobileMenuOpen ? "open" : "closed";
+
+      header.dataset.mobileMenu = nextMenuState;
+      if (navShell instanceof HTMLElement) {
+        navShell.dataset.mobileMenu = nextMenuState;
+      }
+
+      if (menuToggle instanceof HTMLButtonElement) {
+        menuToggle.setAttribute("aria-expanded", String(isMobileMenuOpen));
+        menuToggle.setAttribute(
+          "aria-label",
+          isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu",
+        );
+      }
+
+      if (mobileMenuPanel instanceof HTMLElement) {
+        mobileMenuPanel.setAttribute("aria-hidden", String(!isMobileMenuOpen));
+      }
+    };
 
     const updateHeaderState = () => {
-      let nextState = "top";
-
-      if (desktopQuery.matches) {
-        nextState =
-          headerState === "condensed"
-            ? window.scrollY <= condensedExitThreshold
-              ? "top"
-              : "condensed"
-            : window.scrollY >= condensedEnterThreshold
-              ? "condensed"
-              : "top";
-      }
+      const nextState =
+        headerState === "condensed"
+          ? window.scrollY <= condensedExitThreshold
+            ? "top"
+            : "condensed"
+          : window.scrollY >= condensedEnterThreshold
+            ? "condensed"
+            : "top";
 
       if (nextState !== headerState) {
         headerState = nextState;
@@ -121,9 +304,41 @@ const resolvedNavigation = headerNavigation.reduce<Array<{ label: string; path: 
       window.requestAnimationFrame(updateHeaderState);
     };
 
-    updateHeaderState();
-    window.addEventListener("scroll", onScroll, { passive: true });
+    const closeMobileMenu = () => {
+      if (!isMobileMenuOpen) {
+        return;
+      }
 
-    desktopQuery.addEventListener("change", updateHeaderState);
+      isMobileMenuOpen = false;
+      syncMobileMenu();
+    };
+
+    const handlePhoneChange = () => {
+      if (!phoneQuery.matches) {
+        closeMobileMenu();
+      }
+    };
+
+    if (menuToggle instanceof HTMLButtonElement) {
+      menuToggle.addEventListener("click", () => {
+        isMobileMenuOpen = !isMobileMenuOpen;
+        syncMobileMenu();
+      });
+    }
+
+    mobileMenuLinks.forEach((link) => {
+      link.addEventListener("click", closeMobileMenu);
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeMobileMenu();
+      }
+    });
+
+    phoneQuery.addEventListener("change", handlePhoneChange);
+    updateHeaderState();
+    syncMobileMenu();
+    window.addEventListener("scroll", onScroll, { passive: true });
   })();
 </script>
