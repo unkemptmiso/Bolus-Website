@@ -62,13 +62,13 @@ The strongest framing here is:
   * Bolus is a mobile anesthesia record app for office-based practice. It replaces paper charting with a faster, cleaner documentation workflow and produces a record that is more legible, organized, and defensible.
 * **Benefit Blocks (H3 + P)**:
   * **Built for the pace of the case.**
-    * Chart directly on iPhone or iPad with a workflow that is quick, focused, and easy to use in real time.
+    * Chart directly on iPhone or iPad with a workflow that is easy to use in real-time.
   * **One record from start to finish.**
-    * Pre-op, intra-op, and post-op stay connected in one place, so the record builds as the case moves.
-  * **Cleaner when it matters later.**
-    * Export a clear PDF record that is legible, organized, and easier to stand behind.
+    * Pre-Op, Intra-Op, and Post-Op stay connected in one place, so the record builds as the case moves.
+  * **Export with One-Click**
+    * Just one-tap will immediately export a clear PDF that is legible and organized
 * **Why this works**:
-  * This is the clearest bridge into the next section, where we break down the workflow by pre-op, intra-op, and post-op.
+  * This is the clearest bridge into the next section, where we break down the workflow by Pre-Op, Intra-Op, and Post-Op.
 * **Visual**:
   * iPhone and iPad UI shown side by side with a subtle transition toward the final PDF output.
 * **Inline CTA**:
@@ -102,7 +102,7 @@ This is the recommended homepage structure from this point forward. The order is
 **Goal**: This is where the product proves itself. We move from high-level promise into concrete workflow.
 
 * **Section Headline (H2)**:
-  * *One workflow from pre-op to post-op.*
+  * *One workflow from Pre-Op to Post-Op.*
 * **Support Copy (P)**:
   * Bolus is built to follow the case from start to finish, without sending you back to paper.
 * **Structure**:
@@ -110,29 +110,29 @@ This is the recommended homepage structure from this point forward. The order is
     * **Mini heading**:
       * *Pre-op without the paper shuffle.*
     * **Support Copy (P)**:
-      * Bolus helps you move through pre-op quickly by keeping the essential documentation in one place from the start.
+      * Bolus helps you move through Pre-Op quickly by keeping the essential documentation in one place from the start.
     * **Feature Blocks (H3 + P)**:
       * **Built-in evaluation notes**
-        * Pre-op evaluation details are already part of the workflow, so you can document them quickly without separate forms or extra steps.
+        * Pre-Op evaluation notes are already part of the workflow, so you can document them quickly without separate forms or extra steps.
       * **Consent captured in the record**
-        * Consent forms are timestamped, locked into the app, and attached to the case record automatically.
+        * Consent forms are attached and signed electronically to the case record automatically.
       * **Media added on the spot**
-        * Use the camera or attachments to add supporting images and files without breaking the flow.
+        * Use the camera or attachments to add supporting images and files directly to the record.
   * **Intra-Op**
     * **Mini heading**:
       * *Intra-op charting that keeps up.*
     * **Support Copy (P)**:
-      * With a timeline that continues to move through the case, Bolus helps you chart vitals, medications, and events quickly without constantly catching up or backcharting later.
+      * With a timeline that continues to move through the case, Bolus helps you chart quickly without constantly feeling like you have to catch up.
     * **Feature Blocks (H3 + P)**:
       * **Vitals in seconds, one hand, no manual entry**
-        * Chart vital signs with a one-handed workflow that takes seconds instead of minutes, without stopping to manually enter numbers each time.
+        * Chart vital signs in seconds with one hand, no more manually entering numbers one at a time.
       * **One-tap medications**
         * Chart common medications, infusions, and local anesthetics with a workflow built to keep documentation fast and low-friction during the case.
       * **Case events at your fingertips**
         * Mark important events and add quick comments as they happen, so the record stays thorough without turning into a distraction.
   * **Post-Op**
     * **Mini heading**:
-      * *Post-op that wraps up cleanly.*
+      * *Post-Op that wraps up cleanly.*
     * **Support Copy (P)**:
       * Bolus makes closing out the record feel quick and organized.
     * **Feature Blocks (H3 + P)**:
@@ -150,9 +150,9 @@ This is the recommended homepage structure from this point forward. The order is
 **Goal**: Show the finished output, because the final anesthesia record is one of the strongest parts of the product story.
 
 * **Section Headline (H2)**:
-  * *An anesthesia record that doesn’t look like it’s from the 90s.*
+  * *An anesthesia record that doesn’t look like it’s from the '90s.*
 * **Support Copy (P)**:
-  * The final record is clean, legible, and thoughtfully structured, with medications, vital signs, and intraoperative events laid out clearly to reduce ambiguity and reflect the quality of care delivered.
+  * The final record is designed to be defensible and legible with medications, vital signs, and intraoperative events laid out clearly to reduce ambiguity and reflect the quality of care delivered.
 * **Key Points**:
   * readable structure
   * clean timestamps
@@ -187,15 +187,15 @@ This is the recommended homepage structure from this point forward. The order is
   * create room for keywords naturally without forcing them into the higher-conversion sections
 * **Recommended FAQ Questions & Answers**:
   * **What is Bolus?**
-    * Bolus is an anesthesia record app built for office-based and mobile practice. It helps providers replace paper charting with a faster, cleaner approach to pre-op, intra-op, and post-op anesthesia documentation on iPhone and iPad. For practices looking for a mobile anesthesia record that is easier to manage than paper, Bolus is designed to make charting simpler during the case and produce a more legible record when the case is done.
+    * Bolus is an anesthesia record app built for office-based and mobile practice. It helps providers replace paper charting with a faster, cleaner approach to Pre-Op, Intra-Op, and Post-Op anesthesia documentation on iPhone and iPad. For practices looking for a mobile anesthesia record that is easier to manage than paper, Bolus is designed to make charting simpler during the case and produce a more legible record when the case is done.
   * **Who is Bolus for?**
     * Bolus is built for office-based anesthesia and sedation providers who need a modern way to document care. That includes anesthesiologists, CRNAs, oral surgeons, dental anesthesia providers, and other outpatient or office-based practices looking for mobile anesthesia charting and cleaner office-based anesthesia documentation.
   * **Can Bolus replace paper anesthesia records?**
     * Yes. Bolus is designed as a paperless anesthesia charting workflow and a practical replacement for paper anesthesia records. Instead of relying on handwritten forms, scanned pages, and records pieced together later, providers can document care directly in the app and finish with a digital anesthesia record that is cleaner, easier to read, and easier to stand behind.
   * **Can I use Bolus on iPhone and iPad?**
     * Yes. Bolus is built for mobile anesthesia charting on iPhone and iPad. Providers can use it to chart vitals, medications, case events, and other anesthesia documentation without being tied to paper forms or a desktop workstation, making it a better fit for mobile anesthesia practices and office-based care.
-  * **Does Bolus include pre-op, intra-op, and post-op charting?**
-    * Yes. Bolus supports the full anesthesia documentation workflow from pre-op to post-op. That includes pre-op evaluation notes, consent and attachments, intra-op charting for vitals, medications, infusions, local anesthetics, and case events, and post-op documentation to complete the anesthesia record in one place.
+  * **Does Bolus include Pre-Op, Intra-Op, and Post-Op charting?**
+    * Yes. Bolus supports the full anesthesia documentation workflow from Pre-Op to Post-Op. That includes Pre-Op evaluation notes, consent and attachments, Intra-Op charting for vitals, medications, infusions, local anesthetics, and case events, and Post-Op documentation to complete the anesthesia record in one place.
   * **How does Bolus protect patient data?**
     * Bolus is built for secure anesthesia documentation and HIPAA-conscious handling of protected health information. PHI stays local on the device, protected by AES-256 encryption and authentication-gated access, rather than being continuously synced through a cloud service. That helps practices keep sensitive anesthesia records more controlled and more private.
 

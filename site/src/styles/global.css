@@ -2696,7 +2696,7 @@ ul {
   }
 
   .splash__lede {
-    max-width: 15ch;
+    max-width: 20ch;
     font-size: clamp(1.8rem, 7.2vw, 2.7rem);
   }
 
