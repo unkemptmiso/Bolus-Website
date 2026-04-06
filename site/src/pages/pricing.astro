@@ -1,0 +1,659 @@
+---
+import { getEntry } from "astro:content";
+
+import { getPageById } from "../config/site-manifest";
+import { pricingPage } from "../config/pricing-page";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const page = getPageById("pricing");
+const pageSeo = await getEntry("pages", "pricing");
+
+if (!page) {
+  throw new Error("Could not find the 'pricing' page metadata.");
+}
+
+if (!pageSeo) {
+  throw new Error("Could not find the 'pricing' page SEO metadata.");
+}
+
+const topRowPlans = pricingPage.plans.filter((plan) => plan.slug !== "enterprise");
+const enterprisePlan = pricingPage.plans.find((plan) => plan.slug === "enterprise");
+---
+
+<BaseLayout page={page} seo={pageSeo.data}>
+  <article class="pricing-page">
+    <section class="pricing-hero">
+      <div class="pricing-hero__copy">
+        {pricingPage.eyebrow && <p class="pricing-hero__eyebrow">{pricingPage.eyebrow}</p>}
+        <h1 class="pricing-hero__title">
+          {pricingPage.titleLines.map((line) => (
+            <span class="pricing-hero__title-line">{line}</span>
+          ))}
+        </h1>
+        <p class="pricing-hero__body">{pricingPage.body}</p>
+      </div>
+
+      <div class="pricing-hero__meta">
+        <div
+          class="billing-toggle"
+          role="group"
+          aria-label="Choose billing interval"
+          data-billing-root
+          data-default-billing={pricingPage.defaultBilling}
+        >
+          <span class="billing-toggle__highlight" data-billing-highlight aria-hidden="true"></span>
+          <button
+            class="billing-toggle__button"
+            type="button"
+            data-billing-toggle
+            data-billing-mode="monthly"
+            aria-pressed="false"
+          >
+            {pricingPage.billingOptions.monthly.label}
+          </button>
+          <button
+            class="billing-toggle__button"
+            type="button"
+            data-billing-toggle
+            data-billing-mode="annual"
+            aria-pressed="true"
+          >
+            {pricingPage.billingOptions.annual.label}
+            <span class="billing-toggle__pill">{pricingPage.billingOptions.annual.pill}</span>
+          </button>
+        </div>
+
+        {pricingPage.supportingNote && <p class="pricing-hero__note">{pricingPage.supportingNote}</p>}
+      </div>
+    </section>
+
+    <section class="pricing-grid-group" aria-label="Subscription plans">
+      <p class="enterprise-card__eyebrow pricing-grid__eyebrow">Individual Providers</p>
+      <div class="pricing-grid">
+        {topRowPlans.map((plan) => (
+          <article
+            class="plan-card"
+            data-plan-card={plan.slug}
+            data-featured={plan.featured ? "true" : undefined}
+            data-upcoming={plan.upcoming ? "true" : undefined}
+          >
+            <div class="plan-card__inner">
+              <div class="plan-card__top">
+                <h2 class="plan-card__title">{plan.name}</h2>
+                <p class="plan-card__summary">{plan.summary}</p>
+              </div>
+
+              <div class="plan-card__pricing">
+                {plan.prices.annualMonthly === 0 ? (
+                  <p class="plan-card__price" data-billing-price>Free</p>
+                ) : (
+                  <p
+                    class="plan-card__price"
+                    data-billing-animate
+                    data-billing-price
+                    data-annual-price={`$${plan.prices.annualMonthly}`}
+                    data-monthly-price={`$${plan.prices.monthlyMonthly}`}
+                  >
+                    ${plan.prices.annualMonthly}
+                  </p>
+                )}
+                <p
+                  class="plan-card__billing-copy"
+                  data-billing-animate={plan.prices.annualMonthly === 0 ? undefined : true}
+                  data-billing-copy={plan.prices.annualMonthly === 0 ? undefined : true}
+                  data-annual-copy={plan.prices.annualMonthly === 0 ? undefined : "/ month billed annually"}
+                  data-monthly-copy={plan.prices.annualMonthly === 0 ? undefined : "/ month billed monthly"}
+                >
+                  {plan.prices.annualMonthly === 0 ? "Forever" : "/ month billed annually"}
+                </p>
+              </div>
+
+              <ul class="plan-card__features">
+                {plan.features.map((feature) => (
+                  <li>{feature.label}</li>
+                ))}
+              </ul>
+
+              {plan.footerNote && <p class="plan-card__footer">{plan.footerNote}</p>}
+
+              {plan.upcoming ? (
+                <span class="plan-card__disabled-cta" aria-disabled="true">
+                  {plan.ctaLabel}
+                </span>
+              ) : plan.ctaHref ? (
+                <a
+                  class:list={[
+                    "button",
+                    plan.featured ? "button--dark" : "button--secondary",
+                    "plan-card__cta",
+                  ]}
+                  href={plan.ctaHref}
+                >
+                  {plan.ctaLabel}
+                </a>
+              ) : null}
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    {enterprisePlan && (
+      <section class="pricing-grid-group enterprise-section" aria-label="Group Practice Plans">
+        <p class="enterprise-card__eyebrow pricing-grid__eyebrow">Group Practices</p>
+        <article class="enterprise-card" data-plan-card="enterprise">
+          <div class="enterprise-card__copy">
+            <h2 class="enterprise-card__title">Group Practices</h2>
+            <p class="enterprise-card__body">
+              Need a larger rollout, a practice-level conversation, or a more tailored deployment
+              path? We can shape that later without overcomplicating the core pricing now.
+            </p>
+          </div>
+
+          <div class="enterprise-card__meta">
+            <ul class="enterprise-card__list">
+              {enterprisePlan.features.map((feature) => (
+                <li>{feature.label}</li>
+              ))}
+            </ul>
+            {enterprisePlan.ctaHref && (
+              <a class="button button--secondary enterprise-card__cta" href={enterprisePlan.ctaHref}>
+                {enterprisePlan.ctaLabel}
+              </a>
+            )}
+          </div>
+        </article>
+      </section>
+    )}
+  </article>
+</BaseLayout>
+
+<script>
+  const billingRoots = document.querySelectorAll("[data-billing-root]");
+
+  const positionBillingHighlight = (root: HTMLElement, nextMode: "annual" | "monthly") => {
+    const selectedButton = root.querySelector<HTMLElement>(
+      `[data-billing-toggle][data-billing-mode="${nextMode}"]`,
+    );
+
+    if (!selectedButton) return;
+
+    root.style.setProperty("--billing-toggle-x", `${selectedButton.offsetLeft}px`);
+    root.style.setProperty("--billing-toggle-width", `${selectedButton.offsetWidth}px`);
+  };
+
+  const animateBillingChange = () => {
+    const animatedNodes = document.querySelectorAll<HTMLElement>("[data-billing-animate]");
+
+    animatedNodes.forEach((node) => {
+      node.dataset.billingMotion = "out";
+    });
+
+    requestAnimationFrame(() => {
+      window.setTimeout(() => {
+        animatedNodes.forEach((node) => {
+          node.dataset.billingMotion = "in";
+        });
+
+        window.setTimeout(() => {
+          animatedNodes.forEach((node) => {
+            delete node.dataset.billingMotion;
+          });
+        }, 220);
+      }, 90);
+    });
+  };
+
+  const applyBillingMode = (root: HTMLElement, nextMode: "annual" | "monthly") => {
+    root.setAttribute("data-billing-mode", nextMode);
+    positionBillingHighlight(root, nextMode);
+
+    root.querySelectorAll("[data-billing-toggle]").forEach((button) => {
+      const mode = button.getAttribute("data-billing-mode");
+      button.setAttribute("aria-pressed", mode === nextMode ? "true" : "false");
+    });
+
+    document.querySelectorAll<HTMLElement>("[data-billing-price]").forEach((priceNode) => {
+      const annualPrice = priceNode.dataset.annualPrice;
+      const monthlyPrice = priceNode.dataset.monthlyPrice;
+
+      if (!annualPrice || !monthlyPrice) return;
+      priceNode.textContent = nextMode === "annual" ? annualPrice : monthlyPrice;
+    });
+
+    document.querySelectorAll<HTMLElement>("[data-billing-copy]").forEach((copyNode) => {
+      const annualCopy = copyNode.dataset.annualCopy;
+      const monthlyCopy = copyNode.dataset.monthlyCopy;
+
+      if (!annualCopy || !monthlyCopy) return;
+      copyNode.textContent = nextMode === "annual" ? annualCopy : monthlyCopy;
+    });
+  };
+
+  billingRoots.forEach((root) => {
+    if (!(root instanceof HTMLElement)) return;
+
+    const defaultMode = root.getAttribute("data-default-billing");
+    const initialMode = defaultMode === "monthly" ? "monthly" : "annual";
+
+    applyBillingMode(root, initialMode);
+
+    root.querySelectorAll<HTMLButtonElement>("[data-billing-toggle]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const nextMode = button.dataset.billingMode === "monthly" ? "monthly" : "annual";
+        const currentMode = root.getAttribute("data-billing-mode");
+
+        if (currentMode === nextMode) return;
+
+        animateBillingChange();
+        applyBillingMode(root, nextMode);
+      });
+    });
+
+    window.addEventListener("resize", () => {
+      const activeMode = root.getAttribute("data-billing-mode") === "monthly" ? "monthly" : "annual";
+      positionBillingHighlight(root, activeMode);
+    });
+  });
+</script>
+
+<style>
+  .pricing-page {
+    width: min(1120px, calc(100vw - 2.5rem));
+    margin: 0 auto;
+    padding: clamp(4.75rem, 8vw, 7rem) 0 clamp(6rem, 9vw, 8rem);
+  }
+
+  .pricing-hero {
+    display: grid;
+    gap: 1.35rem;
+    justify-items: center;
+    text-align: center;
+    padding-bottom: clamp(2.5rem, 4vw, 3.5rem);
+  }
+
+  .pricing-hero__copy {
+    display: grid;
+    gap: 1rem;
+    justify-items: center;
+    max-width: 52rem;
+  }
+
+  .pricing-hero__eyebrow,
+  .enterprise-card__eyebrow {
+    margin: 0;
+    font-size: 0.78rem;
+    line-height: 1;
+    letter-spacing: 0.14em;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: rgba(15, 23, 42, 0.48);
+  }
+
+  .pricing-hero__title,
+  .plan-card__title,
+  .enterprise-card__title {
+    margin: 0;
+    font-family: "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+      sans-serif;
+    line-height: 1;
+    letter-spacing: -1px;
+    font-weight: 700;
+    color: #000000;
+  }
+
+  .pricing-hero__title {
+    display: grid;
+    width: fit-content;
+    margin-inline: auto;
+    font-size: clamp(3rem, 6vw, 5.4rem);
+    text-align: center;
+  }
+
+  .pricing-hero__title-line {
+    display: block;
+    justify-self: center;
+    white-space: nowrap;
+  }
+
+  .pricing-hero__body {
+    margin: 0;
+    max-width: 46rem;
+    font-family: "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+      sans-serif;
+    font-size: 22px;
+    line-height: 1.5;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.65);
+  }
+
+  .pricing-hero__meta {
+    display: grid;
+    gap: 0.95rem;
+    justify-items: center;
+  }
+
+  .billing-toggle {
+    --billing-toggle-x: 0px;
+    --billing-toggle-width: 0px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    isolation: isolate;
+    padding: 0.4rem;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 999px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(246, 249, 253, 0.94)),
+      rgba(255, 255, 255, 0.96);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.8),
+      0 18px 34px rgba(15, 23, 42, 0.08);
+  }
+
+  .billing-toggle__highlight {
+    position: absolute;
+    top: 0.4rem;
+    bottom: 0.4rem;
+    left: 0;
+    width: var(--billing-toggle-width);
+    border-radius: 999px;
+    background: #0f172a;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18);
+    transform: translateX(var(--billing-toggle-x));
+    transition:
+      transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      width 260ms cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 0;
+  }
+
+  .billing-toggle__button {
+    position: relative;
+    z-index: 1;
+    appearance: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    border-radius: 999px;
+    padding: 0.72rem 1rem;
+    font: inherit;
+    font-size: 0.96rem;
+    font-weight: 600;
+    white-space: nowrap;
+    color: rgba(15, 23, 42, 0.72);
+    cursor: pointer;
+    transition:
+      background-color 180ms ease,
+      color 180ms ease,
+      box-shadow 180ms ease,
+      transform 180ms ease;
+  }
+
+  .billing-toggle__button[aria-pressed="true"] {
+    color: #ffffff;
+  }
+
+  .billing-toggle__pill {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 0.45rem;
+    padding: 0.18rem 0.48rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .pricing-hero__note {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: rgba(15, 23, 42, 0.58);
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.15rem;
+  }
+
+  .pricing-grid-group {
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .pricing-grid__eyebrow {
+    justify-self: start;
+    padding-left: 1.2rem;
+    font-size: 0.88rem;
+  }
+
+  .plan-card {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-height: 100%;
+    padding: 1.2rem;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 32px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(246, 249, 253, 0.95)),
+      rgba(255, 255, 255, 0.96);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.78),
+      0 20px 40px rgba(15, 23, 42, 0.06);
+  }
+
+  .plan-card[data-featured="true"] {
+    border: 2px solid rgba(77, 147, 255, 0.42);
+    background:
+      radial-gradient(circle at top, rgba(77, 147, 255, 0.14), transparent 42%),
+      linear-gradient(180deg, #ffffff 0%, #f4f9ff 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.82),
+      0 28px 52px rgba(77, 147, 255, 0.12);
+    transform: translateY(-0.28rem);
+  }
+
+  .plan-card[data-upcoming="true"] {
+    opacity: 0.68;
+    box-shadow: none;
+  }
+
+  .plan-card__inner {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: 1.35rem;
+    min-height: 100%;
+  }
+
+  .plan-card__top,
+  .plan-card__pricing {
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .plan-card__title {
+    max-width: 10ch;
+    font-size: clamp(2rem, 3vw, 2.5rem);
+    text-wrap: balance;
+  }
+
+  .plan-card[data-plan-card="professional-cloud"] .plan-card__title {
+    max-width: none;
+    font-size: clamp(2rem, 3vw, 2.5rem);
+    white-space: nowrap;
+  }
+
+  .plan-card__summary,
+  .plan-card__footer,
+  .enterprise-card__body {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: rgba(15, 23, 42, 0.64);
+  }
+
+  .plan-card__price {
+    margin: 0;
+    font-family: "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+      sans-serif;
+    font-size: clamp(2.65rem, 4vw, 3.45rem);
+    line-height: 1;
+    letter-spacing: -1px;
+    font-weight: 700;
+    color: #000000;
+  }
+
+  .plan-card__billing-copy {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: rgba(15, 23, 42, 0.56);
+  }
+
+  .plan-card__price,
+  .plan-card__billing-copy {
+    transition:
+      opacity 180ms ease,
+      transform 220ms ease,
+      filter 220ms ease;
+    will-change: opacity, transform, filter;
+  }
+
+  .plan-card__price[data-billing-motion="out"],
+  .plan-card__billing-copy[data-billing-motion="out"] {
+    opacity: 0;
+    transform: translateY(6px);
+    filter: blur(2px);
+  }
+
+  .plan-card__price[data-billing-motion="in"],
+  .plan-card__billing-copy[data-billing-motion="in"] {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+
+  .plan-card__billing-copy--placeholder {
+    visibility: hidden;
+  }
+
+  .plan-card__features,
+  .enterprise-card__list {
+    display: grid;
+    gap: 0.72rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .plan-card__features li,
+  .enterprise-card__list li {
+    position: relative;
+    padding-left: 1.25rem;
+    font-size: 0.98rem;
+    line-height: 1.5;
+    color: rgba(15, 23, 42, 0.86);
+  }
+
+  .plan-card__features li::before,
+  .enterprise-card__list li::before {
+    content: "";
+    position: absolute;
+    top: 0.55rem;
+    left: 0;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 999px;
+    background: rgba(77, 147, 255, 0.82);
+  }
+
+  .plan-card__footer {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+  }
+
+  .plan-card__cta,
+  .plan-card__disabled-cta,
+  .enterprise-card__cta {
+    width: fit-content;
+  }
+
+  .plan-card__disabled-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.9rem;
+    padding: 0 1rem;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.72);
+    font-size: 0.96rem;
+    font-weight: 600;
+    color: rgba(15, 23, 42, 0.46);
+  }
+
+  .enterprise-section {
+    margin-top: clamp(3.5rem, 7vw, 4.5rem);
+  }
+
+  .enterprise-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(18rem, 0.95fr);
+    gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: start;
+    padding: 1.6rem;
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    border-radius: 32px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.96));
+  }
+
+  .enterprise-card__copy,
+  .enterprise-card__meta {
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .enterprise-card__title {
+    font-size: clamp(2rem, 3vw, 2.6rem);
+  }
+
+  @media (max-width: 980px) {
+    .enterprise-card {
+      grid-template-columns: 1fr;
+    }
+
+    .pricing-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .plan-card[data-featured="true"] {
+      transform: none;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .pricing-page {
+      width: min(100%, calc(100vw - 1.5rem));
+      padding-top: clamp(4rem, 14vw, 5rem);
+    }
+
+    .pricing-hero__body {
+      font-size: 19px;
+    }
+
+    .plan-card,
+    .enterprise-card {
+      padding: 1.2rem;
+      border-radius: 28px;
+    }
+  }
+</style>
