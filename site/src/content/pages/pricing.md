@@ -1,6 +1,6 @@
 ---
-title: "pricing | Bolus"
-description: "Bolus help for pricing and office-based anesthesia."
+title: "Pricing | Bolus"
+description: "Simple pricing for clean and defensible office-based anesthesia documentation."
 canonicalURL: "https://bolusanesthesia.com/pricing"
 ogImage: "../../assets/hero/ipad-blank.jpg"
 isHomePage: false

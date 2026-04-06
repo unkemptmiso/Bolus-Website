@@ -180,15 +180,15 @@ export const pageRegistry: SitePage[] = [
     path: "/pricing",
     title: "Pricing",
     navLabel: "Pricing",
-    description: "Simple rollout options for solo clinicians and growing practices.",
+    description: "Simple pricing for clinicians who want cleaner and more defensible documentation.",
     seoTitle: "Pricing | Bolus",
     seoDescription:
-      "See Bolus pricing and rollout options for office-based anesthesia documentation.",
+      "See straightforward Bolus pricing for office-based anesthesia documentation, from Starter through Professional and upcoming cloud backup.",
     category: "product",
     hero: {
       eyebrow: "Product",
-      title: "Pricing that stays focused on documentation, not platform sprawl.",
-      body: "The pricing page is scaffolded to support future App Store and direct-practice purchase flows.",
+      title: "The most robust record, for the cheapest price.",
+      body: "Bolus is the most affordable mobile anesthesia record app on the market, by a long shot. We want Bolus to help you work safely while allowing your practice to thrive. We mean that, and the pricing shows it.",
       primaryCta: {
         label: "Request Pricing Details",
         href: "/support",
