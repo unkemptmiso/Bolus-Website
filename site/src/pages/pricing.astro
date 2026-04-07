@@ -145,17 +145,8 @@ const enterprisePlan = pricingPage.plans.find((plan) => plan.slug === "enterpris
           <div class="enterprise-card__copy">
             <h2 class="enterprise-card__title">Group Practices</h2>
             <p class="enterprise-card__body">
-              Need a larger rollout, a practice-level conversation, or a more tailored deployment
-              path? We can shape that later without overcomplicating the core pricing now.
+              Standardize charting across your entire team. Get even more discounted rates when you enroll multiple providers in your practice.
             </p>
-          </div>
-
-          <div class="enterprise-card__meta">
-            <ul class="enterprise-card__list">
-              {enterprisePlan.features.map((feature) => (
-                <li>{feature.label}</li>
-              ))}
-            </ul>
             {enterprisePlan.ctaHref && (
               <a class="button button--secondary enterprise-card__cta" href={enterprisePlan.ctaHref}>
                 {enterprisePlan.ctaLabel}
@@ -450,7 +441,7 @@ const enterprisePlan = pricingPage.plans.find((plan) => plan.slug === "enterpris
   }
 
   .plan-card[data-featured="true"] {
-    border: 2px solid rgba(77, 147, 255, 0.42);
+    border: 4px solid rgba(77, 147, 255, 0.88);
     background:
       radial-gradient(circle at top, rgba(77, 147, 255, 0.14), transparent 42%),
       linear-gradient(180deg, #ffffff 0%, #f4f9ff 100%);
@@ -541,12 +532,7 @@ const enterprisePlan = pricingPage.plans.find((plan) => plan.slug === "enterpris
     filter: blur(0);
   }
 
-  .plan-card__billing-copy--placeholder {
-    visibility: hidden;
-  }
-
-  .plan-card__features,
-  .enterprise-card__list {
+  .plan-card__features {
     display: grid;
     gap: 0.72rem;
     margin: 0;
@@ -554,8 +540,7 @@ const enterprisePlan = pricingPage.plans.find((plan) => plan.slug === "enterpris
     list-style: none;
   }
 
-  .plan-card__features li,
-  .enterprise-card__list li {
+  .plan-card__features li {
     position: relative;
     padding-left: 1.25rem;
     font-size: 0.98rem;
@@ -563,8 +548,7 @@ const enterprisePlan = pricingPage.plans.find((plan) => plan.slug === "enterpris
     color: rgba(15, 23, 42, 0.86);
   }
 
-  .plan-card__features li::before,
-  .enterprise-card__list li::before {
+  .plan-card__features li::before {
     content: "";
     position: absolute;
     top: 0.55rem;
@@ -587,6 +571,19 @@ const enterprisePlan = pricingPage.plans.find((plan) => plan.slug === "enterpris
     width: fit-content;
   }
 
+  .enterprise-card__cta {
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .enterprise-card__cta:hover {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border-color: #000000 !important;
+  }
+
   .plan-card__disabled-cta {
     display: inline-flex;
     align-items: center;
@@ -607,8 +604,7 @@ const enterprisePlan = pricingPage.plans.find((plan) => plan.slug === "enterpris
 
   .enterprise-card {
     display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(18rem, 0.95fr);
-    gap: clamp(1.5rem, 4vw, 3rem);
+    gap: 1.25rem;
     align-items: start;
     padding: 1.6rem;
     border: 1px solid rgba(15, 23, 42, 0.12);
@@ -616,10 +612,10 @@ const enterprisePlan = pricingPage.plans.find((plan) => plan.slug === "enterpris
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.96));
   }
 
-  .enterprise-card__copy,
-  .enterprise-card__meta {
+  .enterprise-card__copy {
     display: grid;
-    gap: 0.9rem;
+    gap: 1rem;
+    align-items: start;
   }
 
   .enterprise-card__title {
@@ -628,7 +624,7 @@ const enterprisePlan = pricingPage.plans.find((plan) => plan.slug === "enterpris
 
   @media (max-width: 980px) {
     .enterprise-card {
-      grid-template-columns: 1fr;
+      /* single column inherited from main styles */
     }
 
     .pricing-grid {
