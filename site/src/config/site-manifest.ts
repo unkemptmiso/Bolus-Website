@@ -8,38 +8,38 @@ export interface ActionLink {
 
 export type ContentSection =
   | {
-      type: "feature-grid";
-      eyebrow?: string;
-      title: string;
-      description?: string;
-      columns?: 2 | 3;
-      items: Array<{
-        title: string;
-        body: string;
-      }>;
-    }
-  | {
-      type: "checklist";
-      eyebrow?: string;
-      title: string;
-      description?: string;
-      items: string[];
-    }
-  | {
-      type: "note";
-      eyebrow?: string;
+    type: "feature-grid";
+    eyebrow?: string;
+    title: string;
+    description?: string;
+    columns?: 2 | 3;
+    items: Array<{
       title: string;
       body: string;
-    }
+    }>;
+  }
   | {
-      type: "cta";
-      eyebrow?: string;
-      id?: string;
-      title: string;
-      body: string;
-      primaryCta: ActionLink;
-      secondaryCta?: ActionLink;
-    };
+    type: "checklist";
+    eyebrow?: string;
+    title: string;
+    description?: string;
+    items: string[];
+  }
+  | {
+    type: "note";
+    eyebrow?: string;
+    title: string;
+    body: string;
+  }
+  | {
+    type: "cta";
+    eyebrow?: string;
+    id?: string;
+    title: string;
+    body: string;
+    primaryCta: ActionLink;
+    secondaryCta?: ActionLink;
+  };
 
 export interface SitePage {
   id: string;
@@ -76,7 +76,7 @@ export const siteMetadata = {
   },
   headerCta: {
     label: "Get the app",
-    href: "#download",
+    href: "/waitlist",
     variant: "primary" as const,
   },
 };
@@ -280,38 +280,6 @@ export const pageRegistry: SitePage[] = [
             title: "Practice-ready retrieval",
             body: "Future storage and retrieval details can be documented here without redesigning the app shell.",
           },
-        ],
-      },
-    ],
-  },
-  {
-    id: "business",
-    path: "/business",
-    title: "Enterprise & Bulk",
-    navLabel: "Enterprise",
-    description: "Bulk onboarding and practice-level rollout information.",
-    seoTitle: "Enterprise & Bulk | Bolus",
-    seoDescription:
-      "Practice rollout, bulk onboarding, and business support for Bolus deployments.",
-    category: "product",
-    hero: {
-      eyebrow: "Product",
-      title: "A place for practice-wide rollout without turning the product into bloatware.",
-      body: "This route gives sales and rollout content a home without diluting the homepage positioning.",
-      primaryCta: {
-        label: "Talk to Support",
-        href: "/support",
-        variant: "primary",
-      },
-    },
-    sections: [
-      {
-        type: "checklist",
-        title: "Future business content can plug into this page",
-        items: [
-          "Bulk seat provisioning",
-          "Practice onboarding workflows",
-          "Clinic-specific documentation standards",
         ],
       },
     ],
@@ -568,7 +536,7 @@ export const footerNavigation = [
   {
     id: "product",
     title: "Product",
-    links: ["pricing", "simulator", "records", "business"],
+    links: ["pricing", "simulator", "records"],
   },
   {
     id: "legal",

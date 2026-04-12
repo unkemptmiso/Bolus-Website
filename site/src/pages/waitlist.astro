@@ -1,0 +1,522 @@
+---
+import type { CollectionEntry } from "astro:content";
+import waitlistOgImage from "../assets/hero/ipad-blank.jpg";
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+import type { SitePage } from "../config/site-manifest";
+
+const page: SitePage = {
+  id: "waitlist",
+  path: "/waitlist",
+  title: "Waitlist",
+  navLabel: "Waitlist",
+  description: "Join the Bolus waitlist before the app is released.",
+  seoTitle: "Waitlist | Bolus",
+  seoDescription:
+    "Join the Bolus waitlist to hear when the app lands on the App Store.",
+  category: "utility",
+  hero: {
+    title: "Waitlist",
+    body: "Join the waitlist and we’ll let you know as soon as Bolus is on the App Store.",
+  },
+  sections: [],
+};
+
+const seo: CollectionEntry<"pages">["data"] = {
+  title: "Waitlist | Bolus",
+  description: "Join the Bolus waitlist to hear when the app lands on the App Store.",
+  canonicalURL: "https://bolusanesthesia.com/waitlist",
+  ogImage: waitlistOgImage,
+  isHomePage: false,
+};
+---
+
+<BaseLayout page={page} seo={seo}>
+  <article class="waitlist-page">
+    <section class="waitlist-hero" id="download">
+      <div class="waitlist-hero__copy">
+        <h1 class="waitlist-hero__title">Waitlist</h1>
+        <p class="waitlist-hero__body">
+          Bolus is currently undergoing testing in hundreds of practices across the country to
+          ensure it lives up to high clinical standards.
+        </p>
+      </div>
+
+      <div class="waitlist-form-card" data-waitlist-card>
+        <div class="waitlist-form-card__intro">
+          <h2>Join the list</h2>
+          <p>Leave your details and we’ll let you know when Bolus is available for public use.</p>
+        </div>
+
+        <div class="waitlist-form-card__content">
+          <form class="waitlist-form" data-waitlist-form novalidate>
+            <div class="waitlist-form__grid">
+              <label class="waitlist-field waitlist-field--half">
+                <span>Name</span>
+                <input autocomplete="name" name="name" required type="text" />
+              </label>
+
+              <label class="waitlist-field waitlist-field--half">
+                <span>Email</span>
+                <input
+                  autocomplete="email"
+                  autocapitalize="none"
+                  inputmode="email"
+                  name="email"
+                  required
+                  spellcheck="false"
+                  type="text"
+                />
+              </label>
+
+              <label class="waitlist-field waitlist-field--full">
+                <span>Practice Name</span>
+                <input autocomplete="organization" name="practiceName" required type="text" />
+              </label>
+
+              <label class="waitlist-field waitlist-field--full">
+                <span>How did you hear about Bolus?</span>
+                <select name="referralSource" data-referral-source required>
+                  <option value="" selected disabled>Select a source</option>
+                  <option value="instagram">Instagram</option>
+                  <option value="facebook">Facebook</option>
+                  <option value="google-search">Google Search</option>
+                  <option value="ai-recommendation">AI Recommendation</option>
+                  <option value="colleague">Colleague</option>
+                  <option value="my-practice">My Practice</option>
+                  <option value="conference">Conference</option>
+                  <option value="podcast">Podcast</option>
+                  <option value="email">Email</option>
+                  <option value="other">Other</option>
+                </select>
+              </label>
+
+              <label
+                class="waitlist-field waitlist-field--full"
+                data-referral-source-other
+                hidden
+              >
+                <span>Other</span>
+                <input name="referralSourceOther" type="text" />
+              </label>
+
+              <label class="waitlist-field waitlist-field--full">
+                <span>Comments</span>
+                <textarea name="comments" rows="5"></textarea>
+              </label>
+            </div>
+
+            <button class="waitlist-form__submit" type="submit">Join Now</button>
+          </form>
+
+          <p class="waitlist-error" data-waitlist-error hidden></p>
+
+          <div
+            class="waitlist-success"
+            data-waitlist-success
+            hidden
+            role="status"
+            aria-live="polite"
+          >
+            <p class="waitlist-success__eyebrow">You’re on the list</p>
+            <h2>Thank you for signing up.</h2>
+            <p>
+              You&apos;re on our waitlist and will be notified as soon as Bolus hits the App
+              Store. In the meantime, feel free to reach out to
+              <a href="mailto:contact@bolusanesthesia.com">contact@bolusanesthesia.com</a> with
+              any questions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("[data-waitlist-form]");
+  const successState = document.querySelector<HTMLElement>("[data-waitlist-success]");
+  const card = document.querySelector<HTMLElement>("[data-waitlist-card]");
+  const errorState = document.querySelector<HTMLElement>("[data-waitlist-error]");
+  const referralSource = document.querySelector("[data-referral-source]");
+  const otherSourceField = document.querySelector("[data-referral-source-other]");
+  const otherSourceInput = otherSourceField?.querySelector('input[name="referralSourceOther"]');
+  const emailInput = form?.querySelector('input[name="email"]');
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const syncReferralSource = () => {
+    if (
+      !(referralSource instanceof HTMLSelectElement) ||
+      !(otherSourceField instanceof HTMLElement) ||
+      !(otherSourceInput instanceof HTMLInputElement)
+    ) {
+      return;
+    }
+
+    const showOther = referralSource.value === "other";
+    otherSourceField.hidden = !showOther;
+    otherSourceInput.required = showOther;
+
+    if (!showOther) {
+      otherSourceInput.value = "";
+    }
+  };
+
+  const syncEmailValidation = () => {
+    if (!(emailInput instanceof HTMLInputElement)) {
+      return;
+    }
+
+    const trimmedEmail = emailInput.value.trim();
+    emailInput.value = trimmedEmail;
+
+    if (trimmedEmail.length === 0) {
+      emailInput.setCustomValidity("Please enter your email address.");
+      return;
+    }
+
+    if (!emailPattern.test(trimmedEmail)) {
+      emailInput.setCustomValidity("Please enter a valid email address.");
+      return;
+    }
+
+    emailInput.setCustomValidity("");
+  };
+
+  if (referralSource instanceof HTMLSelectElement) {
+    referralSource.addEventListener("change", syncReferralSource);
+    syncReferralSource();
+  }
+
+  if (emailInput instanceof HTMLInputElement) {
+    emailInput.addEventListener("input", syncEmailValidation);
+    emailInput.addEventListener("blur", syncEmailValidation);
+  }
+
+  if (form && successState && card) {
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      syncEmailValidation();
+
+      if (!form.reportValidity()) {
+        return;
+      }
+
+      if (errorState instanceof HTMLElement) {
+        errorState.hidden = true;
+        errorState.textContent = "";
+      }
+
+      const formData = new FormData(form);
+      const payload = {
+        name: String(formData.get("name") ?? ""),
+        email: String(formData.get("email") ?? ""),
+        practiceName: String(formData.get("practiceName") ?? ""),
+        referralSource: String(formData.get("referralSource") ?? ""),
+        referralSourceOther: String(formData.get("referralSourceOther") ?? ""),
+        comments: String(formData.get("comments") ?? ""),
+      };
+
+      try {
+        const response = await fetch("/api/waitlist", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+        const result = (await response.json()) as
+          | { ok: true }
+          | { ok: false; error?: { message?: string } };
+
+        if (!response.ok || result.ok !== true) {
+          const message =
+            result.ok === false
+              ? result.error?.message
+              : undefined;
+          throw new Error(
+            message ?? "Could not save your waitlist signup right now.",
+          );
+        }
+
+        form.hidden = true;
+        successState.hidden = false;
+        card.dataset.waitlistState = "success";
+        form.reset();
+        syncReferralSource();
+        successState.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      } catch (error) {
+        if (errorState instanceof HTMLElement) {
+          errorState.hidden = false;
+          errorState.textContent =
+            error instanceof Error
+              ? error.message
+              : "Could not save your waitlist signup right now.";
+        }
+      }
+    });
+  }
+</script>
+
+<style>
+  .waitlist-page {
+    width: min(760px, calc(100vw - 2rem));
+    margin: 0 auto;
+    padding: clamp(2.8rem, 6vw, 4.4rem) 0 clamp(4rem, 8vw, 6rem);
+  }
+
+  .waitlist-hero {
+    display: grid;
+    gap: 1.85rem;
+  }
+
+  .waitlist-hero__copy,
+  .waitlist-form-card,
+  .waitlist-form-card__content,
+  .waitlist-form,
+  .waitlist-success,
+  .waitlist-form-card__intro,
+  .waitlist-form__grid {
+    display: grid;
+  }
+
+  .waitlist-hero__copy {
+    gap: 0.8rem;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .waitlist-hero__title,
+  .waitlist-form-card__intro h2,
+  .waitlist-success h2 {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue",
+      sans-serif;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -1px;
+    color: #000000;
+  }
+
+  .waitlist-hero__title {
+    font-size: clamp(3rem, 6vw, 4.9rem);
+  }
+
+  .waitlist-hero__body,
+  .waitlist-form-card__intro p,
+  .waitlist-success p {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue",
+      sans-serif;
+    color: rgba(0, 0, 0, 0.65);
+  }
+
+  .waitlist-hero__body {
+    max-width: 40rem;
+    font-size: 22px;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+
+  .waitlist-form-card {
+    grid-template-columns: minmax(13rem, 0.72fr) minmax(0, 1.28fr);
+    gap: clamp(1.5rem, 4vw, 2.4rem);
+    align-items: start;
+    padding: clamp(1.35rem, 3vw, 1.85rem);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 0;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(246, 249, 253, 0.94)),
+      rgba(255, 255, 255, 0.96);
+    box-shadow: none;
+    transition:
+      border-color 220ms ease,
+      box-shadow 220ms ease,
+      transform 220ms ease;
+  }
+
+  .waitlist-form-card[data-waitlist-state="success"] {
+    border-color: rgba(77, 147, 255, 0.28);
+    box-shadow: none;
+    transform: none;
+  }
+
+  .waitlist-form-card__intro {
+    gap: 0.65rem;
+    align-content: start;
+    padding-top: 0.15rem;
+  }
+
+  .waitlist-form-card__intro h2,
+  .waitlist-success h2 {
+    font-size: clamp(2rem, 3vw, 2.45rem);
+  }
+
+  .waitlist-form-card__intro p,
+  .waitlist-success p {
+    font-size: 17px;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+
+  .waitlist-form-card__content {
+    display: grid;
+    min-width: 0;
+  }
+
+  .waitlist-form {
+    gap: 1.15rem;
+  }
+
+  .waitlist-form__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem 0.85rem;
+  }
+
+  .waitlist-field {
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .waitlist-field[hidden],
+  .waitlist-success[hidden] {
+    display: none !important;
+  }
+
+  .waitlist-field--full {
+    grid-column: 1 / -1;
+  }
+
+  .waitlist-field span {
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: rgba(15, 23, 42, 0.72);
+  }
+
+  .waitlist-field input,
+  .waitlist-field select,
+  .waitlist-field textarea {
+    width: 100%;
+    appearance: none;
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    border-radius: 999px;
+    background: rgba(244, 244, 244, 0.92);
+    padding: 0.92rem 1rem;
+    font: inherit;
+    font-size: 1rem;
+    line-height: 1.4;
+    color: #000000;
+    transition:
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      background-color 180ms ease;
+  }
+
+  .waitlist-field select {
+    cursor: pointer;
+    color: rgba(15, 23, 42, 0.76);
+  }
+
+  .waitlist-field textarea {
+    min-height: 8rem;
+    border-radius: 24px;
+    resize: vertical;
+  }
+
+  .waitlist-field input:focus,
+  .waitlist-field select:focus,
+  .waitlist-field textarea:focus {
+    outline: none;
+    border-color: rgba(77, 147, 255, 0.78);
+    box-shadow: 0 0 0 4px rgba(77, 147, 255, 0.12);
+    background: #ffffff;
+  }
+
+  .waitlist-form__submit {
+    appearance: none;
+    width: 100%;
+    min-height: 3.1rem;
+    padding: 0 1.4rem;
+    border: 1px solid #000000;
+    border-radius: 999px;
+    background: #000000;
+    font: inherit;
+    font-size: 0.98rem;
+    font-weight: 600;
+    color: #ffffff;
+    cursor: pointer;
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      background-color 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .waitlist-form__submit:hover,
+  .waitlist-form__submit:focus-visible {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 24px rgba(15, 23, 42, 0.12);
+  }
+
+  .waitlist-form__submit:focus-visible {
+    outline: none;
+  }
+
+  .waitlist-success {
+    gap: 0.5rem;
+    place-self: start stretch;
+    width: 100%;
+    padding: 1rem 1.05rem;
+    border: 1px solid rgba(77, 147, 255, 0.22);
+    border-radius: 22px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(244, 249, 255, 0.96));
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.82),
+      0 16px 28px rgba(77, 147, 255, 0.12);
+  }
+
+  .waitlist-success a {
+    color: #000000;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+
+  .waitlist-success__eyebrow {
+    margin: 0;
+    font-size: 0.78rem;
+    line-height: 1;
+    letter-spacing: 0.14em;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: rgba(15, 23, 42, 0.48);
+  }
+
+  .waitlist-error {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.45;
+    color: #b42318;
+  }
+
+  @media (max-width: 720px) {
+    .waitlist-page {
+      width: min(100%, calc(100vw - 1.5rem));
+      padding-top: clamp(2.4rem, 12vw, 3.5rem);
+    }
+
+    .waitlist-form-card {
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+
+    .waitlist-form__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .waitlist-hero__body {
+      font-size: 19px;
+    }
+  }
+</style>

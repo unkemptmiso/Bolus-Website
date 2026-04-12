@@ -1,8 +1,3 @@
----
-const appStoreUrl =
-  import.meta.env.PUBLIC_APP_STORE_URL ?? "https://apps.apple.com/us/app/id0000000000";
----
-
 <section id="download" class="download-section" aria-labelledby="home-download-title">
   <div class="download-section__inner">
     <div class="download-section__copy">
@@ -13,7 +8,7 @@ const appStoreUrl =
       </p>
       <a
         class="download-section__button"
-        href={appStoreUrl}
+        href="/waitlist"
         aria-label="Download Bolus on the App Store"
       >
         <span class="download-section__button-icon" aria-hidden="true">

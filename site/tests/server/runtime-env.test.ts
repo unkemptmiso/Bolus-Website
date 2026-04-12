@@ -30,4 +30,14 @@ describe("resolveServerRuntimeConfig", () => {
     expect(config.integrations.auth.provider).toBe("firebase");
     expect(config.integrations.stripe.mode).toBe("configured");
   });
+
+  it("trims the Apps Script webhook before validating it", () => {
+    const config = resolveServerRuntimeConfig({
+      PUBLIC_SITE_URL: "https://bolus.invalid",
+      WAITLIST_D1_BINDING: "bound",
+    });
+
+    expect(config.integrations.waitlist.mode).toBe("configured");
+    expect(config.integrations.waitlist.provider).toBe("cloudflare-d1");
+  });
 });

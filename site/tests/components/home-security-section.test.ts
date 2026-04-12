@@ -28,6 +28,10 @@ describe("home security section", () => {
   });
 
   it("uses the approved security copy and proof points", () => {
+    expect(securitySectionSource).toContain('class="security-section__icon-shell"');
+    expect(securitySectionSource).toContain('class="security-section__icon"');
+    expect(securitySectionSource).toContain('src="/privacy-lock.svg"');
+    expect(securitySectionSource).toContain('alt="Privacy lock icon"');
     expect(securitySectionSource).toContain("Secure by design.");
     expect(securitySectionSource).toContain(
       "Bolus is built for secure anesthesia documentation, using AES-256 encryption, authentication-gated access, and local on-device storage so PHI stays off the cloud.",
@@ -41,6 +45,8 @@ describe("home security section", () => {
 
   it("uses a centered trust section with compact proof cards", () => {
     expect(securitySectionSource).toContain('class="security-section__copy"');
+    expect(globalStyles).toContain(".security-section__icon-shell {");
+    expect(globalStyles).toContain(".security-section__icon {");
     expect(securitySectionSource).toContain('class="security-section__points"');
     expect(securitySectionSource).toContain('class="security-point"');
     expect(globalStyles).toContain(".security-section {");
@@ -50,6 +56,9 @@ describe("home security section", () => {
     expect(globalStyles).toContain(".security-point {");
     expect(globalStyles).toContain("justify-items: center;");
     expect(globalStyles).toContain("text-align: center;");
+    expect(globalStyles).toContain("border-radius: 1.85rem;");
+    expect(globalStyles).toContain("box-shadow:");
+    expect(globalStyles).toContain("background: linear-gradient(180deg, #ffffff 0%, #f7f7f7 100%);");
     expect(globalStyles).toContain("grid-template-columns: repeat(3, minmax(0, 1fr));");
   });
 });

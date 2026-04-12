@@ -7,8 +7,16 @@
 		"directory": "./dist",
 		"binding": "ASSETS"
 	},
+	"d1_databases": [
+		{
+			"binding": "WAITLIST_DB",
+			"database_name": "bolus-waitlist",
+			"database_id": "43acf039-73ca-49bb-8401-6099b98f72d0"
+		}
+	],
 	"vars": {
-		"PUBLIC_SITE_URL": "https://bolusanesthesia.com"
+		"PUBLIC_SITE_URL": "https://bolusanesthesia.com",
+		"WAITLIST_GOOGLE_SCRIPT_URL": "https://script.google.com/macros/s/AKfycbwc7P3tMPjyOa18nfpknAd-JI3vkpkfLQU94Oh7L4YJ7_cO8HZcVgCRnAsM4hhYLq1rCw/exec"
 	},
 	"observability": {
 		"enabled": true

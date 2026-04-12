@@ -1,7 +1,7 @@
 ---
 const securityPoints = [
   "AES-256 encryption",
-  "authentication-gated access",
+  "Authentication-gated access",
   "PHI stored locally on device",
 ] as const;
 ---
@@ -9,8 +9,17 @@ const securityPoints = [
 <section class="security-section" aria-labelledby="home-security-title">
   <div class="security-section__inner">
     <div class="security-section__copy">
+      <div class="security-section__icon-shell" aria-hidden="true">
+        <img
+          class="security-section__icon"
+          src="/privacy-lock.svg"
+          alt="Privacy lock icon"
+          width="56"
+          height="56"
+        />
+      </div>
       <h2 id="home-security-title" class="security-section__title">Secure by design.</h2>
-      <p class="security-section__body">Bolus is built for secure anesthesia documentation, using AES-256 encryption, authentication-gated access, and local on-device storage so PHI stays off the cloud.</p>
+      <p class="security-section__body">Bolus is built for secure anesthesia documentation, using AES-256 encryption, Authentication-gated access, and local on-device storage so PHI stays secure.</p>
     </div>
 
     <div class="security-section__points" aria-label="Security proof points">
@@ -21,6 +30,6 @@ const securityPoints = [
       ))}
     </div>
 
-    <a class="security-section__link" href="/security">Full security details</a>
+
   </div>
 </section>
