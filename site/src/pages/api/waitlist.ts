@@ -10,12 +10,13 @@ import {
 import {
   appendWaitlistSubmission,
   parseWaitlistSubmission,
+  sendToGoogleSheets,
   type WaitlistDatabase,
 } from "../../lib/server/waitlist";
 
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, locals }) => {
   const cloudflareEnv = env as { WAITLIST_DB?: WaitlistDatabase };
   const runtimeEnv = {
     ...getRuntimeEnvSource(cloudflareEnv),
@@ -38,9 +39,30 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const submission = parseWaitlistSubmission(payload);
-    await appendWaitlistSubmission(database, submission, {
-      googleScriptUrl: runtime.integrations.waitlist.googleScriptUrl,
-    });
+    const googleScriptUrl = runtime.integrations.waitlist.googleScriptUrl;
+
+    // Use Cloudflare's waitUntil if available to speed up response time
+    // We wait for D1 (fast) but background the Google Sheets push (slow)
+    const runtimeContext = (locals as any).runtime?.ctx;
+
+    if (runtimeContext?.waitUntil && googleScriptUrl) {
+      // 1. Success-critical: Save to D1 first
+      await appendWaitlistSubmission(database, submission, {
+        googleScriptUrl: undefined, // Don't run sheets here
+      });
+
+      // 2. Background: Save to Google Sheets
+      runtimeContext.waitUntil(
+        sendToGoogleSheets(googleScriptUrl, submission).catch((err: any) => {
+          console.error("Background Google Sheets push failed:", err);
+        }),
+      );
+    } else {
+      // Fallback for local dev or if ctx is missing
+      await appendWaitlistSubmission(database, submission, {
+        googleScriptUrl,
+      });
+    }
 
     return jsonSuccess({ status: "submitted" }, { status: 201 });
   } catch (error) {

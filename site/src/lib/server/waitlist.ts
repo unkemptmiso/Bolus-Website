@@ -96,54 +96,62 @@ export async function appendWaitlistSubmission(
   options?: { googleScriptUrl?: string },
 ): Promise<void> {
   const submittedAt = new Date().toISOString();
-  const errors: Error[] = [];
+  const tasks: Promise<void>[] = [];
 
-  // Append to D1 if database is provided
+  // Prepare D1 task
   if (database) {
-    try {
-      const result = await database
-        .prepare(
-          `insert into waitlist_signups (
-            submitted_at,
-            name,
-            email,
-            practice_name,
-            referral_source,
-            referral_source_other,
-            comments
-          ) values (?, ?, ?, ?, ?, ?, ?)`,
-        )
-        .bind(
-          submittedAt,
-          submission.name,
-          submission.email,
-          submission.practiceName,
-          submission.referralSource,
-          submission.referralSourceOther,
-          submission.comments,
-        )
-        .run();
+    tasks.push(
+      (async () => {
+        const result = await database
+          .prepare(
+            `insert into waitlist_signups (
+              submitted_at,
+              name,
+              email,
+              practice_name,
+              referral_source,
+              referral_source_other,
+              comments
+            ) values (?, ?, ?, ?, ?, ?, ?)`,
+          )
+          .bind(
+            submittedAt,
+            submission.name,
+            submission.email,
+            submission.practiceName,
+            submission.referralSource,
+            submission.referralSourceOther,
+            submission.comments,
+          )
+          .run();
 
-      if (result.success === false) {
-        errors.push(new Error("Could not append the waitlist submission to D1."));
-      }
-    } catch (error) {
-      errors.push(error instanceof Error ? error : new Error(String(error)));
-    }
+        if (result.success === false) {
+          throw new Error("Could not append the waitlist submission to D1.");
+        }
+      })(),
+    );
   }
 
-  // Append to Google Sheets if URL is provided
+  // Prepare Google Sheets task
   if (options?.googleScriptUrl) {
-    try {
-      await sendToGoogleSheets(options.googleScriptUrl, submission);
-    } catch (error) {
-      errors.push(error instanceof Error ? error : new Error(String(error)));
-    }
+    tasks.push(sendToGoogleSheets(options.googleScriptUrl, submission));
   }
 
-  if (errors.length > 0) {
-    // If we have multiple errors, we could combine them, but for now we'll just throw the first one
-    // or a generic one if we prefer.
-    throw new Error(errors.map((e) => e.message).join(" | "));
+  if (tasks.length === 0) {
+    return;
+  }
+
+  // Run tasks in parallel and wait for results
+  const results = await Promise.allSettled(tasks);
+  const errors = results
+    .filter((r): r is PromiseRejectedResult => r.status === "rejected")
+    .map((r) => r.reason);
+
+  // If everything failed, we throw an error.
+  // If at least one succeeded, we consider it a success but could log the error.
+  if (errors.length === tasks.length) {
+    throw new Error(
+      `All storage attempts failed: ${errors.map((e) => (e instanceof Error ? e.message : String(e))).join(" | ")}`,
+    );
   }
 }
