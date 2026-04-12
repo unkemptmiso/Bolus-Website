@@ -194,13 +194,26 @@ const seo: CollectionEntry<"pages">["data"] = {
   }
 
   if (form && successState && card) {
+    const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
+
+      if (form.dataset.submitting === "true") {
+        return;
+      }
 
       syncEmailValidation();
 
       if (!form.reportValidity()) {
         return;
+      }
+
+      // Start submission state
+      form.dataset.submitting = "true";
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Joining...";
       }
 
       if (errorState instanceof HTMLElement) {
@@ -231,13 +244,8 @@ const seo: CollectionEntry<"pages">["data"] = {
           | { ok: false; error?: { message?: string } };
 
         if (!response.ok || result.ok !== true) {
-          const message =
-            result.ok === false
-              ? result.error?.message
-              : undefined;
-          throw new Error(
-            message ?? "Could not save your waitlist signup right now.",
-          );
+          const message = result.ok === false ? result.error?.message : undefined;
+          throw new Error(message ?? "Could not save your waitlist signup right now.");
         }
 
         form.hidden = true;
@@ -247,12 +255,17 @@ const seo: CollectionEntry<"pages">["data"] = {
         syncReferralSource();
         successState.scrollIntoView({ behavior: "smooth", block: "nearest" });
       } catch (error) {
+        // Reset submission state on error
+        form.dataset.submitting = "false";
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = "Join Now";
+        }
+
         if (errorState instanceof HTMLElement) {
           errorState.hidden = false;
           errorState.textContent =
-            error instanceof Error
-              ? error.message
-              : "Could not save your waitlist signup right now.";
+            error instanceof Error ? error.message : "Could not save your waitlist signup right now.";
         }
       }
     });
@@ -458,6 +471,13 @@ const seo: CollectionEntry<"pages">["data"] = {
   .waitlist-form__submit:focus-visible {
     transform: translateY(-1px);
     box-shadow: 0 14px 24px rgba(15, 23, 42, 0.12);
+  }
+
+  .waitlist-form__submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
   }
 
   .waitlist-form__submit:focus-visible {
