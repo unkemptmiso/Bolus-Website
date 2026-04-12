@@ -43,16 +43,16 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
     // Use Cloudflare's waitUntil if available to speed up response time
     // We wait for D1 (fast) but background the Google Sheets push (slow)
-    const runtimeContext = (locals as any).runtime?.ctx;
+    const cfContext = (locals as any).cfContext;
 
-    if (runtimeContext?.waitUntil && googleScriptUrl) {
+    if (cfContext?.waitUntil && googleScriptUrl) {
       // 1. Success-critical: Save to D1 first
       await appendWaitlistSubmission(database, submission, {
         googleScriptUrl: undefined, // Don't run sheets here
       });
 
       // 2. Background: Save to Google Sheets
-      runtimeContext.waitUntil(
+      cfContext.waitUntil(
         sendToGoogleSheets(googleScriptUrl, submission).catch((err: any) => {
           console.error("Background Google Sheets push failed:", err);
         }),
