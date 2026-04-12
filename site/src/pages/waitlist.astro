@@ -49,83 +49,84 @@ const seo: CollectionEntry<"pages">["data"] = {
         </div>
 
         <div class="waitlist-form-card__content">
-          <form class="waitlist-form" data-waitlist-form novalidate>
-            <div class="waitlist-form__grid">
-              <label class="waitlist-field waitlist-field--half">
-                <span>Name</span>
-                <input autocomplete="name" name="name" required type="text" />
-              </label>
+          <div class="waitlist-states" data-waitlist-states>
+            <form class="waitlist-form" data-waitlist-form novalidate>
+              <div class="waitlist-form__grid">
+                <label class="waitlist-field waitlist-field--half">
+                  <span>Name</span>
+                  <input autocomplete="name" name="name" required type="text" />
+                </label>
 
-              <label class="waitlist-field waitlist-field--half">
-                <span>Email</span>
-                <input
-                  autocomplete="email"
-                  autocapitalize="none"
-                  inputmode="email"
-                  name="email"
-                  required
-                  spellcheck="false"
-                  type="text"
-                />
-              </label>
+                <label class="waitlist-field waitlist-field--half">
+                  <span>Email</span>
+                  <input
+                    autocomplete="email"
+                    autocapitalize="none"
+                    inputmode="email"
+                    name="email"
+                    required
+                    spellcheck="false"
+                    type="text"
+                  />
+                </label>
 
-              <label class="waitlist-field waitlist-field--full">
-                <span>Practice Name</span>
-                <input autocomplete="organization" name="practiceName" required type="text" />
-              </label>
+                <label class="waitlist-field waitlist-field--full">
+                  <span>Practice Name</span>
+                  <input autocomplete="organization" name="practiceName" required type="text" />
+                </label>
 
-              <label class="waitlist-field waitlist-field--full">
-                <span>How did you hear about Bolus?</span>
-                <select name="referralSource" data-referral-source required>
-                  <option value="" selected disabled>Select a source</option>
-                  <option value="instagram">Instagram</option>
-                  <option value="facebook">Facebook</option>
-                  <option value="google-search">Google Search</option>
-                  <option value="ai-recommendation">AI Recommendation</option>
-                  <option value="colleague">Colleague</option>
-                  <option value="my-practice">My Practice</option>
-                  <option value="conference">Conference</option>
-                  <option value="podcast">Podcast</option>
-                  <option value="email">Email</option>
-                  <option value="other">Other</option>
-                </select>
-              </label>
+                <label class="waitlist-field waitlist-field--full">
+                  <span>How did you hear about Bolus?</span>
+                  <select name="referralSource" data-referral-source required>
+                    <option value="" selected disabled>Select a source</option>
+                    <option value="instagram">Instagram</option>
+                    <option value="facebook">Facebook</option>
+                    <option value="google-search">Google Search</option>
+                    <option value="ai-recommendation">AI Recommendation</option>
+                    <option value="colleague">Colleague</option>
+                    <option value="my-practice">My Practice</option>
+                    <option value="conference">Conference</option>
+                    <option value="podcast">Podcast</option>
+                    <option value="email">Email</option>
+                    <option value="other">Other</option>
+                  </select>
+                </label>
 
-              <label
-                class="waitlist-field waitlist-field--full"
-                data-referral-source-other
-                hidden
-              >
-                <span>Other</span>
-                <input name="referralSourceOther" type="text" />
-              </label>
+                <label
+                  class="waitlist-field waitlist-field--full"
+                  data-referral-source-other
+                  hidden
+                >
+                  <span>Other</span>
+                  <input name="referralSourceOther" type="text" />
+                </label>
 
-              <label class="waitlist-field waitlist-field--full">
-                <span>Comments</span>
-                <textarea name="comments" rows="5"></textarea>
-              </label>
+                <label class="waitlist-field waitlist-field--full">
+                  <span>Comments</span>
+                  <textarea name="comments" rows="5"></textarea>
+                </label>
+              </div>
+
+              <button class="waitlist-form__submit" type="submit">Join Now</button>
+
+              <p class="waitlist-error" data-waitlist-error hidden></p>
+            </form>
+
+            <div
+              class="waitlist-success"
+              data-waitlist-success
+              role="status"
+              aria-live="polite"
+            >
+              <p class="waitlist-success__eyebrow">You’re on the list</p>
+              <h2>Thank you for signing up.</h2>
+              <p>
+                You&apos;re on our waitlist and will be notified as soon as Bolus hits the App
+                Store. In the meantime, feel free to reach out to
+                <a href="mailto:contact@bolusanesthesia.com">contact@bolusanesthesia.com</a> with
+                any questions.
+              </p>
             </div>
-
-            <button class="waitlist-form__submit" type="submit">Join Now</button>
-          </form>
-
-          <p class="waitlist-error" data-waitlist-error hidden></p>
-
-          <div
-            class="waitlist-success"
-            data-waitlist-success
-            hidden
-            role="status"
-            aria-live="polite"
-          >
-            <p class="waitlist-success__eyebrow">You’re on the list</p>
-            <h2>Thank you for signing up.</h2>
-            <p>
-              You&apos;re on our waitlist and will be notified as soon as Bolus hits the App
-              Store. In the meantime, feel free to reach out to
-              <a href="mailto:contact@bolusanesthesia.com">contact@bolusanesthesia.com</a> with
-              any questions.
-            </p>
           </div>
         </div>
       </div>
@@ -194,6 +195,7 @@ const seo: CollectionEntry<"pages">["data"] = {
   }
 
   if (form && successState && card) {
+    const statesContainer = document.querySelector<HTMLElement>("[data-waitlist-states]");
     const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
 
     form.addEventListener("submit", async (event) => {
@@ -248,12 +250,11 @@ const seo: CollectionEntry<"pages">["data"] = {
           throw new Error(message ?? "Could not save your waitlist signup right now.");
         }
 
-        form.hidden = true;
-        successState.hidden = false;
-        card.dataset.waitlistState = "success";
+        if (statesContainer) {
+          statesContainer.dataset.waitlistState = "success";
+        }
         form.reset();
         syncReferralSource();
-        successState.scrollIntoView({ behavior: "smooth", block: "nearest" });
       } catch (error) {
         // Reset submission state on error
         form.dataset.submitting = "false";
@@ -379,7 +380,46 @@ const seo: CollectionEntry<"pages">["data"] = {
     min-width: 0;
   }
 
+  .waitlist-states {
+    display: grid;
+    grid-template-areas: "stack";
+    align-items: start;
+  }
+
+  .waitlist-form,
+  .waitlist-success {
+    grid-area: stack;
+    transition:
+      opacity 600ms cubic-bezier(0.4, 0, 0.2, 1),
+      transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
   .waitlist-form {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .waitlist-success {
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+  }
+
+  .waitlist-states[data-waitlist-state="success"] .waitlist-form {
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+  }
+
+  .waitlist-states[data-waitlist-state="success"] .waitlist-success {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .waitlist-form {
+    display: grid;
     gap: 1.15rem;
   }
 
@@ -486,15 +526,11 @@ const seo: CollectionEntry<"pages">["data"] = {
 
   .waitlist-success {
     gap: 0.5rem;
-    place-self: start stretch;
-    width: 100%;
-    padding: 1rem 1.05rem;
-    border: 1px solid rgba(77, 147, 255, 0.22);
-    border-radius: 22px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(244, 249, 255, 0.96));
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.82),
-      0 16px 28px rgba(77, 147, 255, 0.12);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 20rem;
+    padding: 1rem 0;
   }
 
   .waitlist-success a {
