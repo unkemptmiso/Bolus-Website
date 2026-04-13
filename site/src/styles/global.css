@@ -572,172 +572,25 @@ ul {
   background: radial-gradient(circle, rgba(15, 23, 42, 0.08), transparent 72%);
 }
 
+.splash__media--hero {
+  min-height: auto;
+}
+
+.splash__hero-image {
+  width: 100%;
+  max-width: 1280px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  filter: 
+    drop-shadow(0 20px 48px rgba(15, 23, 42, 0.18)) 
+    drop-shadow(0 8px 20px rgba(15, 23, 42, 0.14));
+}
+
 .splash__device {
   position: absolute;
 }
 
-.splash__placeholder {
-  position: absolute;
-}
-
-.splash__placeholder--workspace {
-  width: min(54vw, 760px);
-  left: 50%;
-  top: 50%;
-  transform: translate(-56%, -50%) rotate(-4deg);
-  opacity: 0.56;
-}
-
-.splash__placeholder--record {
-  width: min(18vw, 220px);
-  left: 50%;
-  top: 50%;
-  transform: translate(-6%, -44%) rotate(5deg);
-  opacity: 0.86;
-}
-
-.placeholder-frame {
-  position: relative;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 30px 70px rgba(15, 23, 42, 0.08);
-  overflow: hidden;
-}
-
-.placeholder-frame--wide {
-  aspect-ratio: 1.32;
-  border-radius: 2.3rem;
-}
-
-.placeholder-frame--tall {
-  aspect-ratio: 0.49;
-  border-radius: 2.7rem;
-  background: linear-gradient(180deg, #fbfdff 0%, #eef3f9 100%);
-}
-
-.placeholder-bar {
-  display: flex;
-  gap: 0.45rem;
-  padding: 1rem 1rem 0;
-}
-
-.placeholder-bar span {
-  width: 0.55rem;
-  height: 0.55rem;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.14);
-}
-
-.placeholder-screen {
-  display: grid;
-  grid-template-columns: 0.28fr 1fr;
-  gap: 1rem;
-  padding: 1rem;
-}
-
-.placeholder-sidebar,
-.placeholder-canvas {
-  border-radius: 1.4rem;
-  background: rgba(241, 245, 249, 0.92);
-}
-
-.placeholder-sidebar {
-  display: grid;
-  align-content: start;
-  gap: 0.8rem;
-  padding: 1rem 0.8rem;
-}
-
-.placeholder-chip {
-  height: 0.8rem;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.14);
-}
-
-.placeholder-chip--dark {
-  background: rgba(15, 23, 42, 0.72);
-}
-
-.placeholder-canvas {
-  display: grid;
-  gap: 0.9rem;
-  padding: 1rem;
-}
-
-.placeholder-header {
-  height: 3.5rem;
-  border-radius: 1.1rem;
-  background: linear-gradient(135deg, rgba(77, 147, 255, 0.16), rgba(77, 147, 255, 0.05));
-}
-
-.placeholder-row {
-  height: 1rem;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.12);
-}
-
-.placeholder-row--strong {
-  width: 72%;
-  background: rgba(15, 23, 42, 0.24);
-}
-
-.placeholder-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.8rem;
-  padding-top: 0.3rem;
-}
-
-.placeholder-grid div {
-  height: 5.3rem;
-  border-radius: 1.1rem;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(15, 23, 42, 0.06);
-}
-
-.placeholder-notch {
-  position: absolute;
-  top: 0.7rem;
-  left: 50%;
-  width: 34%;
-  height: 1.2rem;
-  transform: translateX(-50%);
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.78);
-}
-
-.placeholder-phone-screen {
-  display: grid;
-  gap: 0.85rem;
-  height: 100%;
-  padding: 2.4rem 0.9rem 1rem;
-}
-
-.placeholder-phone-header {
-  height: 3.6rem;
-  border-radius: 1rem;
-  background: rgba(15, 23, 42, 0.08);
-}
-
-.placeholder-phone-card {
-  height: 4.7rem;
-  border-radius: 1rem;
-  background: rgba(255, 255, 255, 0.96);
-  border: 1px solid rgba(15, 23, 42, 0.07);
-}
-
-.placeholder-phone-card--accent {
-  background: linear-gradient(180deg, rgba(77, 147, 255, 0.16), rgba(77, 147, 255, 0.05));
-}
-
-.placeholder-phone-footer {
-  margin-top: auto;
-  height: 0.35rem;
-  width: 34%;
-  justify-self: center;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.22);
-}
 
 .splash__copy {
   display: grid;
@@ -1140,6 +993,24 @@ ul {
   background: rgba(255, 255, 255, 0.78);
 }
 
+.workflow-point[data-preop-video-trigger] {
+  cursor: pointer;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.workflow-point[data-preop-video-trigger]:hover,
+.workflow-point[data-preop-video-trigger]:focus-visible {
+  border-color: rgba(24, 85, 184, 0.18);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.08);
+  transform: translate3d(0, -2px, 0);
+  outline: none;
+}
+
 .workflow-point h4 {
   margin: 0;
   font-size: 1.05rem;
@@ -1171,37 +1042,34 @@ ul {
 .workflow-phone {
   position: relative;
   width: 100%;
-  aspect-ratio: 0.49;
-  padding: 0.78rem;
-  border-radius: 3rem;
-  background: linear-gradient(180deg, #1e2430 0%, #090d15 100%);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.14),
-    0 34px 70px rgba(15, 23, 42, 0.18);
+  aspect-ratio: 0.489; /* 1350 / 2760 */
+  padding: 2.5%; /* Adjusted bezel for Apple asset */
 }
 
-.workflow-phone__notch {
+.workflow-phone__frame {
   position: absolute;
-  top: 1rem;
-  left: 50%;
-  width: 38%;
-  height: 1.45rem;
-  transform: translateX(-50%);
-  border-radius: 999px;
-  background: rgba(0, 0, 0, 0.78);
-  z-index: 2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 10;
 }
+
 
 .workflow-phone__screen-viewport {
-  height: 100%;
-  border-radius: 2.4rem;
+  position: absolute;
+  inset: 1.3% 3.05% 1.45%;
+  border-radius: 2.75rem; /* Match iPhone 17 curve */
   background:
     radial-gradient(circle at top left, rgba(77, 147, 255, 0.14), transparent 35%),
     linear-gradient(180deg, #f9fbff 0%, #edf3fb 100%);
   overflow: hidden;
+  z-index: 1;
 }
 
 .workflow-phone__screen-track {
+  width: 100%;
   height: 100%;
   display: grid;
   grid-auto-rows: 100%;
@@ -1211,11 +1079,56 @@ ul {
 }
 
 .workflow-phone__screen {
+  position: relative;
   height: 100%;
+  min-height: 100%;
   padding: 2.2rem 1rem 1rem;
   display: grid;
   gap: 0.85rem;
   align-content: start;
+}
+
+.workflow-phone__screen--pre-op {
+  position: relative;
+  padding: 0;
+  gap: 0;
+}
+
+.workflow-phone__preview {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  background-color: #f2f6fb;
+}
+
+.workflow-phone__preview-image,
+.workflow-phone__preview-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition:
+    opacity 220ms ease,
+    transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.workflow-phone__preview-image {
+  opacity: 1;
+}
+
+.workflow-phone__preview-video {
+  opacity: 0;
+  background: #000000;
+}
+
+[data-preop-media-state="video"] .workflow-phone__preview-image {
+  opacity: 0;
+}
+
+[data-preop-media-state="video"] .workflow-phone__preview-video {
+  opacity: 1;
 }
 
 .workflow-phone__status {
@@ -2966,5 +2879,61 @@ ul {
   .download-section__device--ipad-pro {
     max-width: 19rem;
     margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  p,
+  li,
+  .splash__body,
+  .problem-section__body,
+  .solution-section__body,
+  .workflow-section__phase-body,
+  .workflow-section__lede,
+  .export-section__body,
+  .security-section__body,
+  .download-section__body {
+    font-size: 16px;
+  }
+
+  .security-section__points {
+    display: none;
+  }
+
+  .security-section {
+    border-top: 1px solid var(--color-line);
+  }
+
+  .solution-card__content p {
+    display: none;
+  }
+
+  .splash__title {
+    font-size: 3.8rem;
+  }
+
+  .splash__lede {
+    line-height: 1.12;
+  }
+
+  .splash__media--hero {
+    min-height: 0;
+  }
+
+  .splash__stack {
+    gap: 0.6rem;
+  }
+
+  .splash {
+    min-height: auto;
+    padding-bottom: 2rem;
+  }
+
+  .problem-section__title {
+    line-height: 1.12;
+  }
+
+  .problem-section__inner {
+    padding-top: 3.5rem;
   }
 }

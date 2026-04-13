@@ -75,17 +75,20 @@ const solutionCards = [
     }
 
     sections.forEach((section) => {
+      const isMobile = window.matchMedia("(max-width: 820px)").matches;
+
       const observer = new IntersectionObserver(
         (entries) => {
           if (!entries.some((entry) => entry.isIntersecting)) return;
-          // Greater delay before starting the sequence to let the user settle into the scroll
+          // Greater delay before starting the sequence on desktop
+          const revealDelay = isMobile ? 120 : 320;
           setTimeout(() => {
             revealCards(section);
-          }, 320);
+          }, revealDelay);
           observer.disconnect();
         },
         {
-          threshold: 0.42, // Much deeper entry for focused reveal
+          threshold: isMobile ? 0.15 : 0.42, // Lower threshold for mobile to ensure trigger
           rootMargin: "0px 0px -5% 0px",
         },
       );

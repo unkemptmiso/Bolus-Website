@@ -1,4 +1,6 @@
 ---
+import defaultPreOpHomepage from "../../assets/workflow/default-pre-op-homepage.png";
+
 const workflowPhases = [
   {
     id: "pre-op",
@@ -51,12 +53,12 @@ const workflowPhases = [
         body: "Enter discharge vitals quickly with a scrubber built for speed.",
       },
       {
-        title: "Automatic case summary",
-        body: "Review the case with total anesthesia time already calculated.",
-      },
-      {
         title: "Controlled substance reconciliation",
         body: "Complete reconciliation with a signature pad and totals pulled automatically from the record.",
+      },
+      {
+        title: "One-click secure PDF export",
+        body: "Generate a high-fidelity PDF export of the entire anesthesia record instantly.",
       },
     ],
   },
@@ -92,12 +94,20 @@ const workflowPhases = [
                 </div>
 
                 <div class="workflow-section__points">
-                  {phase.points.map((point) => (
-                    <article class="workflow-point">
-                      <h4>{point.title}</h4>
-                      <p>{point.body}</p>
-                    </article>
-                  ))}
+                  {phase.points.map((point, index) => {
+                    const isPreOpPreviewTrigger = phase.id === "pre-op" && index === 0;
+
+                    return (
+                      <article
+                        class="workflow-point"
+                        data-preop-video-trigger={isPreOpPreviewTrigger ? "true" : undefined}
+                        tabindex={isPreOpPreviewTrigger ? "0" : undefined}
+                      >
+                        <h4>{point.title}</h4>
+                        <p>{point.body}</p>
+                      </article>
+                    );
+                  })}
                 </div>
               </section>
             ))}
@@ -108,50 +118,47 @@ const workflowPhases = [
       <div class="workflow-section__device">
         <div class="workflow-phone-shell">
           <div class="workflow-phone" aria-hidden="true">
-            <div class="workflow-phone__notch"></div>
+            <img src="/assets/iphone-17-black-portrait.png" alt="" class="workflow-phone__frame" />
 
             <div class="workflow-phone__screen-viewport">
               <div class="workflow-phone__screen-track" data-workflow-screen-track>
                 {workflowPhases.map((phase) => (
                   <section class={`workflow-phone__screen workflow-phone__screen--${phase.id}`}>
-                    <div class="workflow-phone__status">
-                      <span>9:41</span>
-                      <span>{phase.label}</span>
-                    </div>
-
                     {phase.id === "pre-op" && (
-                      <>
-                        <div class="workflow-phone__hero-card">
-                          <div class="workflow-phone__hero-chip">Case Ready</div>
-                          <div class="workflow-phone__hero-title"></div>
-                          <div class="workflow-phone__hero-line workflow-phone__hero-line--short"></div>
-                          <div class="workflow-phone__hero-line"></div>
-                        </div>
-
-                        <div class="workflow-phone__panel workflow-phone__panel--form">
-                          <div class="workflow-phone__panel-title"></div>
-                          <div class="workflow-phone__row">
-                            <span></span>
-                            <span></span>
-                          </div>
-                          <div class="workflow-phone__row">
-                            <span></span>
-                            <span></span>
-                          </div>
-                        </div>
-
-                        <div class="workflow-phone__panel workflow-phone__panel--media">
-                          <div class="workflow-phone__panel-title"></div>
-                          <div class="workflow-phone__media">
-                            <div></div>
-                            <div></div>
-                          </div>
-                        </div>
-                      </>
+                      <div
+                        class="workflow-phone__preview"
+                        data-preop-video-container
+                        data-preop-media-state="image"
+                      >
+                        <img
+                          src={defaultPreOpHomepage.src}
+                          alt=""
+                          class="workflow-phone__preview-image"
+                          loading="eager"
+                          decoding="sync"
+                          fetchpriority="high"
+                        />
+                        <video
+                          class="workflow-phone__preview-video"
+                          data-preop-video
+                          src="/assets/workflow/pre-op-eval-clip.mp4"
+                          poster={defaultPreOpHomepage.src}
+                          muted
+                          loop
+                          playsinline
+                          preload="metadata"
+                          aria-hidden="true"
+                        ></video>
+                      </div>
                     )}
 
                     {phase.id === "intra-op" && (
                       <>
+                        <div class="workflow-phone__status">
+                          <span>9:41</span>
+                          <span>{phase.label}</span>
+                        </div>
+
                         <div class="workflow-phone__panel workflow-phone__panel--timeline">
                           <div class="workflow-phone__panel-title workflow-phone__panel-title--wide"></div>
                           <div class="workflow-phone__timeline">
@@ -194,6 +201,11 @@ const workflowPhases = [
 
                     {phase.id === "post-op" && (
                       <>
+                        <div class="workflow-phone__status">
+                          <span>9:41</span>
+                          <span>{phase.label}</span>
+                        </div>
+
                         <div class="workflow-phone__panel workflow-phone__panel--placeholder">
                           <div class="workflow-phone__hero-title workflow-phone__hero-title--wide"></div>
                           <div class="workflow-phone__hero-line workflow-phone__hero-line--short"></div>
@@ -216,7 +228,7 @@ const workflowPhases = [
                       </>
                     )}
 
-                    {phase.id !== "post-op" && <div class="workflow-phone__footer-bar"></div>}
+                    {phase.id === "intra-op" && <div class="workflow-phone__footer-bar"></div>}
                   </section>
                 ))}
               </div>
@@ -251,6 +263,9 @@ const workflowPhases = [
 
     const tabs = Array.from(section.querySelectorAll("[data-phase-trigger]"));
     if (!tabs.length) return;
+    const trigger = section.querySelector("[data-preop-video-trigger]");
+    const previewContainer = section.querySelector("[data-preop-video-container]");
+    const video = section.querySelector("[data-preop-video]");
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const compactLayout = window.matchMedia("(max-width: 820px)");
@@ -260,6 +275,37 @@ const workflowPhases = [
     let latestProgress = 0;
     let lockedPhaseIndex = null;
     let lockExpiresAt = 0;
+
+    const deactivatePreopPreview = () => {
+      if (!(previewContainer instanceof HTMLElement) || !(video instanceof HTMLVideoElement)) return;
+
+      previewContainer.dataset.preopMediaState = "image";
+      video.pause();
+      video.currentTime = 0;
+    };
+
+    const activatePreopPreview = () => {
+      if (
+        !(previewContainer instanceof HTMLElement) ||
+        !(video instanceof HTMLVideoElement) ||
+        reducedMotion.matches ||
+        compactLayout.matches
+      ) {
+        deactivatePreopPreview();
+        return;
+      }
+
+      video.muted = true;
+      video.defaultMuted = true;
+      previewContainer.dataset.preopMediaState = "video";
+
+      const playback = video.play();
+      if (playback && typeof playback.catch === "function") {
+        playback.catch(() => {
+          deactivatePreopPreview();
+        });
+      }
+    };
 
     const setActiveTab = (activeIndex) => {
       tabs.forEach((tab, index) => {
@@ -295,6 +341,10 @@ const workflowPhases = [
       section.style.setProperty("--workflow-copy-shift", shift);
       section.style.setProperty("--workflow-screen-shift", shift);
       section.dataset.workflowActivePhase = activePhase;
+
+      if (activePhase !== "pre-op") {
+        deactivatePreopPreview();
+      }
 
       setActiveTab(activeIndex);
     };
@@ -380,6 +430,15 @@ const workflowPhases = [
         }
       });
     });
+
+    if (trigger instanceof HTMLElement) {
+      trigger.addEventListener("mouseenter", activatePreopPreview);
+      trigger.addEventListener("mouseleave", deactivatePreopPreview);
+      trigger.addEventListener("pointerenter", activatePreopPreview);
+      trigger.addEventListener("pointerleave", deactivatePreopPreview);
+      trigger.addEventListener("focus", activatePreopPreview);
+      trigger.addEventListener("blur", deactivatePreopPreview);
+    }
 
     window.addEventListener("scroll", updateTarget, { passive: true });
     window.addEventListener("resize", handleChange);

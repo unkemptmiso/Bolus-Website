@@ -1,5 +1,7 @@
 ---
+import { Image } from "astro:assets";
 import { homeSplash } from "../../config/home-splash";
+import heroDevices from "../../assets/hero-devices.png";
 ---
 
 <section class="splash" aria-labelledby="home-splash-title">
@@ -27,47 +29,14 @@ import { homeSplash } from "../../config/home-splash";
     </div>
 
 
-    <div class="splash__media splash__media--stacked" aria-hidden="true">
-      <div class="splash__placeholder splash__placeholder--workspace">
-        <div class="placeholder-frame placeholder-frame--wide">
-          <div class="placeholder-bar">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <div class="placeholder-screen">
-            <div class="placeholder-sidebar">
-              <div class="placeholder-chip placeholder-chip--dark"></div>
-              <div class="placeholder-chip"></div>
-              <div class="placeholder-chip"></div>
-            </div>
-            <div class="placeholder-canvas">
-              <div class="placeholder-header"></div>
-              <div class="placeholder-row placeholder-row--strong"></div>
-              <div class="placeholder-row"></div>
-              <div class="placeholder-row"></div>
-              <div class="placeholder-grid">
-                <div></div>
-                <div></div>
-                <div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="splash__placeholder splash__placeholder--record">
-        <div class="placeholder-frame placeholder-frame--tall">
-          <div class="placeholder-notch"></div>
-          <div class="placeholder-phone-screen">
-            <div class="placeholder-phone-header"></div>
-            <div class="placeholder-phone-card placeholder-phone-card--accent"></div>
-            <div class="placeholder-phone-card"></div>
-            <div class="placeholder-phone-card"></div>
-            <div class="placeholder-phone-footer"></div>
-          </div>
-        </div>
-      </div>
+    <div class="splash__media splash__media--hero" aria-hidden="true">
+      <Image 
+        src={heroDevices} 
+        alt="Bolus anesthesia record on iPad and iPhone" 
+        class="splash__hero-image"
+        width={2560}
+        quality="high"
+      />
     </div>
   </div>
 </section>
