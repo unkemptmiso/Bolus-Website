@@ -684,6 +684,11 @@ ul {
   color: rgba(255, 255, 255, 0.8);
 }
 
+.problem-section__body strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
 .solution-section {
   position: relative;
   overflow: clip;
@@ -1881,150 +1886,51 @@ ul {
 
 .download-section__devices {
   position: relative;
-  height: 21rem;
-  margin-top: 2.8rem;
+  margin-top: 3.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: clamp(1.5rem, 5vw, 4rem);
+  width: 100%;
 }
 
 .download-section__device {
-  position: absolute;
+  position: relative;
   margin: 0;
   color: rgba(15, 23, 42, 0.56);
   font-size: 0.84rem;
   font-weight: 600;
   letter-spacing: 0.01em;
   text-align: center;
+  display: grid;
+  justify-items: center;
+  flex: 0 1 auto;
+}
+
+.download-section__device img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 20px 40px rgba(15, 23, 42, 0.12));
 }
 
 .download-section__device figcaption {
-  padding-top: 0.85rem;
+  padding-top: 1rem;
 }
 
 .download-section__device--iphone {
-  left: 6%;
-  bottom: 1.1rem;
-  width: 11rem;
-  transform: rotate(-9deg);
-}
-
-.download-section__device--ipad-mini {
-  left: 31%;
-  bottom: 0;
-  width: 22rem;
-  z-index: 2;
+  width: 11.5rem;
 }
 
 .download-section__device--ipad-pro {
-  right: 5.5%;
-  bottom: 1.35rem;
-  width: 18rem;
-  transform: rotate(7deg);
+  width: 20rem;
 }
 
-.download-section__screen {
-  position: relative;
-  overflow: hidden;
-  padding: 0.5rem;
-  border-radius: 2rem;
-  background: linear-gradient(180deg, #20232a, #111319);
-  box-shadow: 0 30px 54px rgba(15, 23, 42, 0.18);
+.download-section__device--ipad-mini {
+  width: 17rem;
 }
 
-.download-section__device--ipad-mini .download-section__screen {
-  border-radius: 1.7rem;
-}
 
-.download-section__device--ipad-pro .download-section__screen {
-  border-radius: 1.35rem;
-}
-
-.download-section__screen::before {
-  content: "";
-  display: block;
-  width: 100%;
-  aspect-ratio: 0.78;
-  border-radius: 1.6rem;
-  background: linear-gradient(180deg, #f8fbff, #dbe5f0);
-}
-
-.download-section__device--ipad-mini .download-section__screen::before {
-  aspect-ratio: 1.46;
-  border-radius: 1.25rem;
-}
-
-.download-section__device--ipad-pro .download-section__screen::before {
-  aspect-ratio: 1.58;
-  border-radius: 1rem;
-}
-
-.download-section__screen > .download-section__screen-topbar,
-.download-section__screen > .download-section__screen-stack {
-  position: absolute;
-  left: 1rem;
-  right: 1rem;
-}
-
-.download-section__device--iphone .download-section__screen > .download-section__screen-topbar,
-.download-section__device--iphone .download-section__screen > .download-section__screen-stack {
-  left: 0.95rem;
-  right: 0.95rem;
-}
-
-.download-section__screen-topbar {
-  top: 1rem;
-  height: 16%;
-  border-radius: 1rem;
-  background: linear-gradient(180deg, #edf5fc, #e5edf6);
-}
-
-.download-section__screen-stack {
-  top: 22%;
-  display: grid;
-  gap: 0.62rem;
-}
-
-.download-section__screen-line,
-.download-section__screen-card,
-.download-section__screen-panel {
-  border-radius: 1rem;
-  background: rgba(15, 23, 42, 0.1);
-}
-
-.download-section__screen-line {
-  width: 46%;
-  height: 0.8rem;
-  background: rgba(15, 23, 42, 0.18);
-}
-
-.download-section__screen-line--short {
-  width: 58%;
-}
-
-.download-section__screen-card {
-  height: 2.3rem;
-}
-
-.download-section__screen-card--accent {
-  background: rgba(77, 147, 255, 0.18);
-}
-
-.download-section__screen-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.55rem;
-}
-
-.download-section__screen-grid--split {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.download-section__screen-panel {
-  height: 4.05rem;
-  background: rgba(15, 23, 42, 0.08);
-}
-
-.download-section__screen-panel--wide {
-  height: 3rem;
-}
 
 @media (hover: hover) and (pointer: fine) {
   .solution-card:hover {
@@ -2298,6 +2204,14 @@ ul {
   color: rgba(15, 23, 42, 0.46);
   font-size: 0.9rem;
   line-height: 1.4;
+}
+
+.footer-disclaimer {
+  margin: 0.65rem 0 0;
+  font-family: inherit;
+  color: rgba(15, 23, 42, 0.4);
+  font-size: 0.8rem;
+  line-height: 1.5;
 }
 
 @media (max-width: 900px) {
@@ -2935,5 +2849,10 @@ ul {
 
   .problem-section__inner {
     padding-top: 3.5rem;
+  }
+
+  .export-section__copy {
+    justify-items: start;
+    text-align: left;
   }
 }
