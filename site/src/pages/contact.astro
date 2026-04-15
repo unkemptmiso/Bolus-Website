@@ -1,0 +1,44 @@
+---
+import { getEntry } from "astro:content";
+
+import { getPageById } from "../config/site-manifest";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const contactPage = getPageById("contact");
+const contactSeo = await getEntry("pages", "contact");
+
+if (!contactPage) {
+  throw new Error("Could not find the 'contact' page config.");
+}
+
+if (!contactSeo) {
+  throw new Error("Could not find the 'contact' page metadata.");
+}
+---
+
+<BaseLayout
+  page={contactPage}
+  seo={contactSeo.data}
+  mainClass="site-main site-main--contact"
+  showFooter={false}
+>
+  <section class="contact-page" aria-labelledby="contact-title">
+    <div class="contact-page__inner">
+      <div class="contact-page__copy">
+        <h1 id="contact-title">Get in touch with us</h1>
+        <p class="contact-page__body">We'd love to hear from you.</p>
+      </div>
+      <p class="contact-page__email">
+        <span class="contact-page__email-button" role="text" aria-label="Email address">
+          <span class="contact-page__email-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" role="presentation">
+              <rect x="3.75" y="5.75" width="16.5" height="12.5" rx="3" stroke="currentColor" stroke-width="1.9"></rect>
+              <path d="M5.75 8L12 12.75L18.25 8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+          contact@bolusanesthesia.com
+        </span>
+      </p>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,56 @@
+---
+import { getEntry } from "astro:content";
+
+import { getPageById } from "../config/site-manifest";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const aboutPage = getPageById("about");
+const aboutSeo = await getEntry("pages", "about");
+
+if (!aboutPage) {
+  throw new Error("Could not find the 'about' page config.");
+}
+
+if (!aboutSeo) {
+  throw new Error("Could not find the 'about' page metadata.");
+}
+---
+
+<BaseLayout
+  page={aboutPage}
+  seo={aboutSeo.data}
+  mainClass="site-main site-main--about"
+>
+  <section class="about-page">
+    <section class="about-hero" aria-labelledby="about-title">
+      <h1 id="about-title">Why we built Bolus</h1>
+      <p class="about-hero__dek">Paper charting should not still be the standard.</p>
+    </section>
+
+    <section class="about-manifesto" aria-label="About Bolus">
+      <p>
+        Paper is still common in office-based anesthesia, even though it creates exactly the kinds
+        of problems modern tools should remove. Handwriting adds ambiguity. Scattered pages slow
+        everything down. The final record often looks worse than the care behind it.
+      </p>
+
+      <p>
+        We built Bolus because the standard should feel higher than that. Documentation should be
+        clean, legible, and fast enough to keep up with the case. The record should feel easier to
+        create in the moment and easier to stand behind later.
+      </p>
+
+      <p>
+        Bolus is intentionally focused. It is not trying to become bloated practice software with
+        every administrative feature bolted on. It is built to do one job well: help office-based
+        providers replace paper with a more serious, modern documentation workflow.
+      </p>
+
+      <p>
+        Cleaner records. Less ambiguity. Higher standards.
+      </p>
+
+      <p class="about-manifesto__signoff">Pressor Systems LLC</p>
+    </section>
+  </section>
+</BaseLayout>

@@ -243,44 +243,141 @@ export const pageRegistry: SitePage[] = [
     ],
   },
   {
-    id: "records",
-    path: "/records",
-    title: "Records & Export",
-    navLabel: "Records",
-    description: "Show how Bolus turns live charting into clean records and exports.",
-    seoTitle: "Records & Export | Bolus",
+    id: "about",
+    path: "/about",
+    title: "About Bolus",
+    navLabel: "About",
+    description: "Learn what Bolus is building for office-based anesthesia documentation.",
+    seoTitle: "About | Bolus",
     seoDescription:
-      "Learn how Bolus supports cleaner, more legible anesthesia records and exports.",
+      "Learn about the Bolus mission, product focus, and approach to office-based anesthesia documentation.",
     category: "product",
     hero: {
-      eyebrow: "Product",
-      title: "Cleaner records in, cleaner exports out.",
-      body: "This section is ready for future screenshots, PDF export details, and defensibility messaging.",
+      eyebrow: "About",
+      title: "Built to modernize anesthesia documentation without adding more noise.",
+      body: "Bolus exists to replace messy paper charting with a cleaner, faster, and more defensible workflow for office-based anesthesia teams.",
       primaryCta: {
-        label: "Read the Security Position",
-        href: "/security",
+        label: "Contact Bolus",
+        href: "/contact",
         variant: "primary",
+      },
+      secondaryCta: {
+        label: "Explore Pricing",
+        href: "/pricing",
+        variant: "secondary",
       },
     },
     sections: [
       {
         type: "feature-grid",
-        title: "Built to hold the record story together",
+        eyebrow: "What matters",
+        title: "A tighter product with a clearer purpose.",
         columns: 3,
         items: [
           {
-            title: "Legible outputs",
-            body: "A future PDF/export module can attach here without changing route structure.",
+            title: "Clinical clarity first",
+            body: "Bolus is focused on documentation quality, legibility, and defensibility instead of becoming another bloated admin suite.",
           },
           {
-            title: "Clear timestamps",
-            body: "The content model already centers defensibility and reduced ambiguity.",
+            title: "Built for office-based workflow",
+            body: "The experience is designed around the pace of mobile charting in real procedural settings, not retrofitted from hospital software.",
           },
           {
-            title: "Practice-ready retrieval",
-            body: "Future storage and retrieval details can be documented here without redesigning the app shell.",
+            title: "Serious by design",
+            body: "Security, local-first handling, and deliberate product scope are part of the product philosophy, not afterthoughts.",
           },
         ],
+      },
+      {
+        type: "checklist",
+        eyebrow: "Why practices care",
+        title: "What Bolus is aiming to improve",
+        items: [
+          "Reduce ambiguity from handwritten records and scattered paperwork",
+          "Make charting faster on the devices clinicians already carry",
+          "Create records that are easier to review, retrieve, and stand behind later",
+        ],
+      },
+      {
+        type: "cta",
+        eyebrow: "Next step",
+        title: "Want to learn more or get in touch?",
+        body: "We keep the public site straightforward on purpose. If you want pricing details, workflow context, or product updates, the contact page is the best next stop.",
+        primaryCta: {
+          label: "Email Bolus",
+          href: "mailto:contact@bolusanesthesia.com",
+          variant: "primary",
+        },
+        secondaryCta: {
+          label: "Open Contact Page",
+          href: "/contact",
+          variant: "secondary",
+        },
+      },
+    ],
+  },
+  {
+    id: "contact",
+    path: "/contact",
+    title: "Contact",
+    navLabel: "Contact",
+    description: "Contact Bolus for product questions, pricing, or early access.",
+    seoTitle: "Contact | Bolus",
+    seoDescription:
+      "Email Bolus for questions about pricing, product fit, and office-based anesthesia documentation.",
+    category: "company",
+    hero: {
+      eyebrow: "Contact",
+      title: "Questions, pricing, or early access? Email us directly.",
+      body: "The best way to reach Bolus right now is by email. We keep it simple so conversations can stay direct and useful.",
+      primaryCta: {
+        label: "contact@bolusanesthesia.com",
+        href: "mailto:contact@bolusanesthesia.com",
+        variant: "primary",
+      },
+      secondaryCta: {
+        label: "Join the Waitlist",
+        href: "/waitlist",
+        variant: "secondary",
+      },
+    },
+    sections: [
+      {
+        type: "feature-grid",
+        eyebrow: "Reach out about",
+        title: "The kinds of conversations this page is for",
+        columns: 3,
+        items: [
+          {
+            title: "Product fit",
+            body: "Ask whether Bolus is a good match for your office-based anesthesia or sedation workflow.",
+          },
+          {
+            title: "Pricing questions",
+            body: "Reach out if you want more context on current pricing or what is planned next.",
+          },
+          {
+            title: "Early updates",
+            body: "If you want launch updates or a closer look at the product direction, email is the fastest path.",
+          },
+        ],
+      },
+      {
+        type: "note",
+        eyebrow: "Email",
+        title: "Primary contact",
+        body: "contact@bolusanesthesia.com",
+      },
+      {
+        type: "cta",
+        eyebrow: "Prefer to raise your hand first?",
+        title: "You can still join the waitlist and we will follow up there too.",
+        body: "If email is not the right move yet, the waitlist is still the easiest way to stay in the loop.",
+        primaryCta: {
+          label: "Join the Waitlist",
+          href: "/waitlist",
+          variant: "primary",
+        },
       },
     ],
   },
@@ -299,8 +396,8 @@ export const pageRegistry: SitePage[] = [
       title: "Paper is familiar. It is also risky, slow, and hard to defend.",
       body: "This route is ready for SEO comparison content while keeping the top-level navigation minimal.",
       primaryCta: {
-        label: "See the Product",
-        href: "/records",
+        label: "About Bolus",
+        href: "/about",
         variant: "primary",
       },
     },
@@ -341,38 +438,6 @@ export const pageRegistry: SitePage[] = [
         type: "note",
         title: "Future comparison copy can remain modular.",
         body: "Competitor pages can expand SEO coverage while still reusing the same layout, metadata, and content primitives.",
-      },
-    ],
-  },
-  {
-    id: "security",
-    path: "/security",
-    title: "Mission & Security",
-    navLabel: "Security",
-    description: "Bolus positioning on security, trust, and clinical seriousness.",
-    seoTitle: "Mission & Security | Bolus",
-    seoDescription:
-      "Read the Bolus mission and security position for office-based anesthesia documentation.",
-    category: "company",
-    hero: {
-      eyebrow: "Company",
-      title: "Trust is built through clarity, restraint, and serious documentation standards.",
-      body: "This route holds the brand's clinical seriousness and future technical security detail in one stable place.",
-      primaryCta: {
-        label: "Read Support",
-        href: "/support",
-        variant: "primary",
-      },
-    },
-    sections: [
-      {
-        type: "checklist",
-        title: "Security framework placeholders",
-        items: [
-          "Cloudflare runtime boundary for server-only secrets",
-          "Typed env validation for auth and payments",
-          "Dedicated app handoff routes for future authenticated flows",
-        ],
       },
     ],
   },
@@ -526,17 +591,17 @@ export const pageRegistry: SitePage[] = [
 ];
 
 export const headerNavigation = [
+  { label: "About", pageId: "about" },
   { label: "Pricing", pageId: "pricing" },
-  { label: "Records", pageId: "records" },
-  { label: "Security", pageId: "security" },
   { label: "Support", pageId: "support" },
+  { label: "Contact", pageId: "contact" },
 ] as const;
 
 export const footerNavigation = [
   {
     id: "product",
     title: "Product",
-    links: ["pricing", "simulator", "records"],
+    links: ["pricing", "simulator", "about"],
   },
   {
     id: "legal",

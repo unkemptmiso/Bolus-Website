@@ -16,10 +16,10 @@ describe("site manifest", () => {
 
   it("keeps the desktop header navigation aligned to the four-link Flighty-style layout", () => {
     expect(headerNavigation.map((item) => item.label)).toEqual([
+      "About",
       "Pricing",
-      "Records",
-      "Security",
       "Support",
+      "Contact",
     ]);
     expect(
       headerNavigation.every((item) =>
