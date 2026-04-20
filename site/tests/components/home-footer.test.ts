@@ -31,6 +31,8 @@ describe("home footer", () => {
     expect(footerSource).toContain('<footer class="site-footer">');
     expect(footerSource).toContain("omitGroups = []");
     expect(footerSource).toContain("footerNavigation.filter((group) => !omitGroups.includes(group.id))");
+    expect(footerSource).toContain("const groupPage = getPageById(group.id);");
+    expect(footerSource).toContain('class="footer-column__heading-link"');
     expect(footerSource).toContain("footer-brand-lockup");
     expect(footerSource).toContain('class="footer-content"');
     expect(footerSource).not.toContain('import { Image } from "astro:assets";');
@@ -49,6 +51,7 @@ describe("home footer", () => {
     expect(globalStylesSource).toContain("flex-wrap: nowrap;");
     expect(globalStylesSource).toContain(".footer-column {\n  flex: 0 0 auto;");
     expect(globalStylesSource).toContain(".footer-column {\n  flex: 0 0 auto;\n  min-width: min(8.75rem, 100%);\n  display: grid;\n  gap: 0.18rem;");
+    expect(globalStylesSource).toContain(".footer-column h2 a {");
     expect(globalStylesSource).toContain(".footer-list {\n  display: grid;\n  gap: 0.2rem;");
     expect(globalStylesSource).toContain(".footer-meta {\n  margin: 1.1rem 0 0;");
     expect(globalStylesSource).toContain(

@@ -12,8 +12,8 @@ export interface LegalDocument {
 }
 
 export const legalDocuments: Record<string, LegalDocument> = {
-  privacy: {
-    title: "Bolus Privacy Policy",
+  "privacy-policy": {
+    title: "Privacy Policy",
     company: "Pressor Systems LLC",
     effectiveDate: "March 7, 2026",
     introduction: [
@@ -84,8 +84,8 @@ export const legalDocuments: Record<string, LegalDocument> = {
       },
     ],
   },
-  terms: {
-    title: "Bolus Terms of Use",
+  "terms-of-service": {
+    title: "Terms of Service",
     company: "Pressor Systems LLC",
     effectiveDate: "March 7, 2026",
     introduction: [
@@ -276,6 +276,78 @@ export const legalDocuments: Record<string, LegalDocument> = {
         title: "8. Contact",
         body: [
           "Questions about this Medical Disclaimer may be directed to:",
+          "Email: contact@bolusanesthesia.com",
+          "Website: bolusanesthesia.com",
+        ],
+      },
+    ],
+  },
+  "hipaa-compliance-policy": {
+    title: "HIPAA Compliance Policy",
+    company: "Pressor Systems LLC",
+    effectiveDate: "March 7, 2026",
+    introduction: [
+      "This policy explains how Bolus is designed to protect sensitive information and what users must do to use the app responsibly in clinical settings.",
+    ],
+    sections: [
+      {
+        title: "1. Purpose of This Policy",
+        body: [
+          "Bolus is built to support anesthesia documentation workflows. This policy is intended to help users understand how the app handles protected health information and how to use the app responsibly. It does not replace independent legal obligations, privacy laws, or institutional policies.",
+        ],
+      },
+      {
+        title: "2. How Bolus Stores Data",
+        body: [
+          "Bolus uses a local-first architecture. In general, case logs are stored on the device rather than on Bolus-operated servers. This means patient-related records are primarily kept on the clinician's device and are not routinely synced to the cloud by the app itself.",
+        ],
+      },
+      {
+        title: "3. Required User Safeguards",
+        body: [
+          "Bolus includes security protections, but the clinical environment still depends on the user following safe practices. Access to the app should remain protected by biometric authentication and or a device passcode. Device-level sharing features that could expose protected health information should be reviewed and disabled where appropriate.",
+        ],
+      },
+      {
+        title: "4. Transmission and Export Responsibility",
+        body: [
+          "When records leave the device, the user is responsible for choosing an appropriate destination and transmission method. Exports should only be sent through secure, lawful, institution-approved channels using encrypted transfer methods where available.",
+        ],
+      },
+      {
+        title: "5. Device Responsibility",
+        body: [
+          "Because records are stored locally, device control is critical. Users are responsible for maintaining physical control of the device, limiting unauthorized access, and using device protections such as automatic locking and remote management features when available.",
+        ],
+      },
+      {
+        title: "6. Legal and Professional Obligations",
+        body: [
+          "Users remain responsible for complying with HIPAA, the HITECH Act, applicable state law, employer or practice requirements, and professional obligations. Bolus is a documentation tool and does not eliminate the user's legal duty to protect protected health information.",
+        ],
+      },
+      {
+        title: "7. External Systems and Sharing Limits",
+        body: [
+          "Bolus cannot control external systems once records are exported. Users must confirm that receiving destinations, email systems, drives, and facility computers are appropriate for protected health information before sending records outside the app.",
+        ],
+      },
+      {
+        title: "8. Data Loss, Retention, and Recovery",
+        body: [
+          "Local-first storage reduces unnecessary exposure, but it also means recovery may be limited. Records may be unavailable if a device is lost, damaged, reset, deleted, or otherwise rendered inaccessible without an appropriate compliant backup strategy.",
+        ],
+      },
+      {
+        title: "9. Future Cloud Features",
+        body: [
+          "If Bolus later offers cloud backup, synchronization, analytics, or related hosted services involving protected health information, those features would require separate safeguards and applicable business associate terms before use.",
+        ],
+      },
+      {
+        title: "10. Questions",
+        body: [
+          "Questions about this policy should be directed to Bolus support.",
           "Email: contact@bolusanesthesia.com",
           "Website: bolusanesthesia.com",
         ],

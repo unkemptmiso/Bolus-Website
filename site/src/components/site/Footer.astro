@@ -27,9 +27,18 @@ const visibleGroups = footerNavigation.filter((group) => !omitGroups.includes(gr
 
     <div class="footer-content">
       <div class="footer-nav-grid">
-        {visibleGroups.map((group) => (
+        {visibleGroups.map((group) => {
+          const groupPage = getPageById(group.id);
+
+          return (
           <section class="footer-column">
-            <h2>{group.title}</h2>
+            <h2>
+              {groupPage ? (
+                <a class="footer-column__heading-link" href={groupPage.path}>{group.title}</a>
+              ) : (
+                group.title
+              )}
+            </h2>
             <ul class="footer-list">
               {group.links.map((pageId) => {
                 const page = getPageById(pageId);
@@ -46,7 +55,7 @@ const visibleGroups = footerNavigation.filter((group) => !omitGroups.includes(gr
               })}
             </ul>
           </section>
-        ))}
+        )})}
       </div>
 
       <p class="footer-meta">Copyright © Pressor Systems LLC 2026</p>

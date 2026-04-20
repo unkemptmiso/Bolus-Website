@@ -1,12 +1,14 @@
 ---
-import { getEntry } from "astro:content";
+import { getCollection } from "astro:content";
 
 import { getPageById } from "../config/site-manifest";
 import { pricingPage } from "../config/pricing-page";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const page = getPageById("pricing");
-const pageSeo = await getEntry("pages", "pricing");
+const pageSeo = (await getCollection("pages")).find(
+  (entry) => entry.data.canonicalURL === "https://bolusanesthesia.com/pricing",
+);
 
 if (!page) {
   throw new Error("Could not find the 'pricing' page metadata.");

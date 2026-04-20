@@ -483,8 +483,23 @@ export const pageRegistry: SitePage[] = [
     ],
   },
   {
-    id: "privacy",
-    path: "/privacy",
+    id: "legal",
+    path: "/legal",
+    title: "Legal",
+    navLabel: "Legal",
+    description: "Browse Bolus legal documents, privacy terms, medical disclaimers, and HIPAA compliance guidance in one place.",
+    seoTitle: "Legal | Bolus",
+    seoDescription: "Review Bolus legal documents including privacy policy, terms of service, medical disclaimer, and HIPAA compliance policy.",
+    category: "legal",
+    hero: {
+      title: "Legal",
+      body: "",
+    },
+    sections: [],
+  },
+  {
+    id: "privacy-policy",
+    path: "/legal/privacy-policy",
     title: "Privacy Policy",
     navLabel: "Privacy",
     description: "Bolus privacy policy for account, device, and clinical documentation data handling.",
@@ -499,24 +514,24 @@ export const pageRegistry: SitePage[] = [
     sections: [],
   },
   {
-    id: "terms",
-    path: "/terms",
-    title: "Terms of Use",
-    navLabel: "Terms",
-    description: "Bolus terms of use for clinical documentation, accounts, exports, and professional responsibility.",
-    seoTitle: "Terms of Use | Bolus",
-    seoDescription: "Read the Bolus terms of use for accessing and using the anesthesia record app.",
+    id: "terms-of-service",
+    path: "/legal/terms-of-service",
+    title: "Terms of Service",
+    navLabel: "Terms of Service",
+    description: "Bolus terms of service for clinical documentation, accounts, exports, and professional responsibility.",
+    seoTitle: "Terms of Service | Bolus",
+    seoDescription: "Read the Bolus terms of service for accessing and using the anesthesia record app.",
     category: "legal",
     hero: {
       eyebrow: "Legal",
-      title: "Terms of Use",
+      title: "Terms of Service",
       body: "The legal terms governing access to Bolus, local-first records, exports, and professional use of the service.",
     },
     sections: [],
   },
   {
     id: "medical-disclaimer",
-    path: "/medical-disclaimer",
+    path: "/legal/medical-disclaimer",
     title: "Medical Disclaimer",
     navLabel: "Medical Disclaimer",
     description: "Bolus medical disclaimer clarifying intended use, verification, and clinician responsibility.",
@@ -527,6 +542,22 @@ export const pageRegistry: SitePage[] = [
       eyebrow: "Legal",
       title: "Medical Disclaimer",
       body: "Important limitations, verification requirements, and clinician responsibilities when using Bolus in patient-care settings.",
+    },
+    sections: [],
+  },
+  {
+    id: "hipaa-compliance-policy",
+    path: "/legal/hipaa-compliance-policy",
+    title: "HIPAA Compliance Policy",
+    navLabel: "HIPAA Policy",
+    description: "Bolus HIPAA compliance policy covering local-first storage, exports, device safeguards, and professional responsibility.",
+    seoTitle: "HIPAA Compliance Policy | Bolus",
+    seoDescription: "Read the Bolus HIPAA compliance policy for secure local-first anesthesia documentation workflows.",
+    category: "legal",
+    hero: {
+      eyebrow: "Legal",
+      title: "HIPAA Compliance Policy",
+      body: "How Bolus approaches local-first data handling, device responsibility, exports, and HIPAA-conscious documentation workflows.",
     },
     sections: [],
   },
@@ -606,8 +637,15 @@ export const footerNavigation = [
   {
     id: "legal",
     title: "Legal",
-    links: ["privacy", "terms", "medical-disclaimer"],
+    links: ["privacy-policy", "terms-of-service", "medical-disclaimer", "hipaa-compliance-policy"],
   },
+] as const;
+
+export const legalDocumentPageIds = [
+  "privacy-policy",
+  "terms-of-service",
+  "medical-disclaimer",
+  "hipaa-compliance-policy",
 ] as const;
 
 export const secondaryPages = pageRegistry.filter((page) => page.path !== "/");
@@ -618,6 +656,12 @@ export function getPageById(pageId: string): SitePage | undefined {
 
 export function getPageByPath(pathname: string): SitePage | undefined {
   return pageRegistry.find((page) => page.path === pathname);
+}
+
+export function getLegalDocumentPages(): SitePage[] {
+  return legalDocumentPageIds
+    .map((pageId) => getPageById(pageId))
+    .filter((page): page is SitePage => Boolean(page));
 }
 
 export function getStaticSlug(pathname: string): string | undefined {

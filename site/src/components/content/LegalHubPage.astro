@@ -1,0 +1,33 @@
+---
+import type { SitePage } from "../../config/site-manifest";
+import { getLegalDocumentPages } from "../../config/site-manifest";
+
+interface Props {
+  page: SitePage;
+}
+
+const { page } = Astro.props;
+const legalPages = getLegalDocumentPages();
+---
+
+<article class="legal-hub">
+  <div class="legal-hub__inner">
+    <header class="legal-hub__header">
+      {page.hero.eyebrow && <p class="eyebrow">{page.hero.eyebrow}</p>}
+      <h1 class="legal-hub__title">{page.hero.title}</h1>
+      {page.hero.body && <p class="legal-hub__body">{page.hero.body}</p>}
+    </header>
+
+    <section class="legal-hub__list" aria-label="Legal documents">
+      {legalPages.map((legalPage) => (
+        <a class="legal-hub__card" href={legalPage.path}>
+          <div class="legal-hub__card-copy">
+            <h2>{legalPage.title}</h2>
+            <p>{legalPage.description}</p>
+          </div>
+          <span class="legal-hub__card-arrow" aria-hidden="true">Read</span>
+        </a>
+      ))}
+    </section>
+  </div>
+</article>

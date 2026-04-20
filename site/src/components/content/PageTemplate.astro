@@ -1,6 +1,7 @@
 ---
 import type { SitePage } from "../../config/site-manifest";
 import LegalDocumentPage from "./LegalDocumentPage.astro";
+import LegalHubPage from "./LegalHubPage.astro";
 import PageSections from "./PageSections.astro";
 
 interface Props {
@@ -11,7 +12,9 @@ const { page } = Astro.props;
 const heroHeadingId = `${page.id}-hero-title`;
 ---
 
-{page.category === "legal" ? (
+{page.id === "legal" ? (
+  <LegalHubPage page={page} />
+) : page.category === "legal" && page.id !== "legal" ? (
   <LegalDocumentPage page={page} />
 ) : (
 <article class="page-shell">

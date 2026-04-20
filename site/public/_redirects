@@ -1,4 +1,11 @@
 # Bolus Edge Redirects
 # Optimized for Cloudflare Pages
 
-/old-path  /new-path  301
+/privacy  /legal/privacy-policy  301
+/privacy-policy  /legal/privacy-policy  301
+/terms  /legal/terms-of-service  301
+/terms-of-service  /legal/terms-of-service  301
+/medical-disclaimer  /legal/medical-disclaimer  301
+/hipaa  /legal/hipaa-compliance-policy  301
+/hippa  /legal/hipaa-compliance-policy  301
+/legal/hippa-compliance-policy  /legal/hipaa-compliance-policy  301

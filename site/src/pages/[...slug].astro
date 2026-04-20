@@ -1,9 +1,11 @@
 ---
 import { getEntry } from "astro:content";
+import defaultPageOgImage from "../assets/hero/ipad-blank.jpg";
 import PageTemplate from "../components/content/PageTemplate.astro";
 import {
   getStaticSlug,
   secondaryPages,
+  siteMetadata,
   type SitePage,
 } from "../config/site-manifest";
 import BaseLayout from "../layouts/BaseLayout.astro";
@@ -21,12 +23,15 @@ interface Props {
 
 const { page } = Astro.props;
 const pageSeo = await getEntry("pages", page.id);
-
-if (!pageSeo) {
-  throw new Error(`Could not find the '${page.id}' page metadata.`);
-}
+const resolvedSeo = pageSeo?.data ?? {
+  title: page.seoTitle,
+  description: page.seoDescription,
+  canonicalURL: new URL(page.path, siteMetadata.defaultSiteUrl).toString(),
+  ogImage: defaultPageOgImage,
+  isHomePage: false,
+};
 ---
 
-<BaseLayout page={page} seo={pageSeo.data}>
+<BaseLayout page={page} seo={resolvedSeo}>
   <PageTemplate page={page} />
 </BaseLayout>
