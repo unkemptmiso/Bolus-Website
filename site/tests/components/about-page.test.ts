@@ -15,11 +15,12 @@ describe("about page", () => {
   it("uses a dedicated dark editorial page instead of the generic page template", () => {
     expect(aboutPageSource).toContain('getEntry("pages", "about")');
     expect(aboutPageSource).toContain('mainClass="site-main site-main--about"');
+    expect(aboutPageSource).toContain('footerVariant="dark"');
     expect(aboutPageSource).not.toContain("PageTemplate");
     expect(aboutPageSource).toContain('class="about-page"');
     expect(aboutPageSource).toContain('class="about-hero"');
     expect(aboutPageSource).toContain("Why we built Bolus");
-    expect(aboutPageSource).toContain("Paper charting should not still be the standard.");
+    expect(aboutPageSource).toContain("A note from our team");
     expect(aboutPageSource).toContain('class="about-manifesto"');
     expect(aboutPageSource).not.toContain('class="about-art"');
   });
@@ -42,5 +43,8 @@ describe("about page", () => {
     expect(globalStylesSource).toContain("text-align: left;");
     expect(globalStylesSource).toContain(".about-manifesto {");
     expect(globalStylesSource).toContain("background: #050816;");
+    expect(globalStylesSource).toContain(".site-footer--dark {");
+    expect(globalStylesSource).toContain(".site-footer--dark .footer-brand-lockup__mark img {");
+    expect(globalStylesSource).toContain("filter: brightness(0) invert(1);");
   });
 });

@@ -1,4 +1,4 @@
-export type FooterGroupId = "product" | "compare" | "company" | "legal" | "utility" | "support";
+export type FooterGroupId = "product" | "compare" | "company" | "legal" | "utility";
 
 export interface ActionLink {
   label: string;
@@ -165,8 +165,8 @@ export const homePage: SitePage = {
         variant: "primary",
       },
       secondaryCta: {
-        label: "View Support",
-        href: "/support",
+        label: "Contact Us",
+        href: "/contact",
         variant: "secondary",
       },
     },
@@ -190,8 +190,8 @@ export const pageRegistry: SitePage[] = [
       title: "The most robust record, for the cheapest price.",
       body: "Bolus is the most affordable mobile anesthesia record app on the market, by a long shot. We want Bolus to help you work safely while allowing your practice to thrive. We mean that, and the pricing shows it.",
       primaryCta: {
-        label: "Request Pricing Details",
-        href: "/support",
+        label: "Contact Us",
+        href: "/contact",
         variant: "primary",
       },
       secondaryCta: {
@@ -442,47 +442,6 @@ export const pageRegistry: SitePage[] = [
     ],
   },
   {
-    id: "support",
-    path: "/support",
-    title: "Help & FAQs",
-    navLabel: "Support",
-    description: "Support hub and FAQ framework for clinicians and practice teams.",
-    seoTitle: "Support | Bolus",
-    seoDescription: "Get support and answers about the Bolus anesthesia record app.",
-    category: "company",
-    hero: {
-      eyebrow: "Company",
-      title: "A quiet place for operational questions, onboarding, and troubleshooting.",
-      body: "Support content can grow here without adding clutter to the primary navigation.",
-      primaryCta: {
-        label: "Check API Health",
-        href: "/api/health",
-        variant: "primary",
-      },
-    },
-    sections: [
-      {
-        type: "feature-grid",
-        title: "Planned support modules",
-        columns: 3,
-        items: [
-          {
-            title: "FAQ blocks",
-            body: "SEO-friendly support content can be added without compromising the homepage.",
-          },
-          {
-            title: "Launch guides",
-            body: "Practice onboarding guides can live beside troubleshooting content.",
-          },
-          {
-            title: "Escalation paths",
-            body: "Future contact or support forms can point at the existing API boundary.",
-          },
-        ],
-      },
-    ],
-  },
-  {
     id: "legal",
     path: "/legal",
     title: "Legal",
@@ -624,7 +583,6 @@ export const pageRegistry: SitePage[] = [
 export const headerNavigation = [
   { label: "About", pageId: "about" },
   { label: "Pricing", pageId: "pricing" },
-  { label: "Support", pageId: "support" },
   { label: "Contact", pageId: "contact" },
 ] as const;
 

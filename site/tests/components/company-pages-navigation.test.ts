@@ -24,9 +24,12 @@ describe("company pages navigation", () => {
     expect(siteManifestSource).not.toContain('path: "/records"');
     expect(siteManifestSource).not.toContain('id: "security"');
     expect(siteManifestSource).not.toContain('path: "/security"');
+    expect(siteManifestSource).not.toContain('id: "support"');
+    expect(siteManifestSource).not.toContain('path: "/support"');
     expect(headerSource).toContain('{ pageId: "about", icon: "about" }');
     expect(headerSource).toContain('{ pageId: "contact", icon: "contact" }');
     expect(headerSource).not.toContain('{ pageId: "records", icon: "records" }');
     expect(headerSource).not.toContain('{ pageId: "security", icon: "security" }');
+    expect(headerSource).not.toContain('{ pageId: "support", icon: "support" }');
   });
 });

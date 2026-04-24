@@ -1,5 +1,44 @@
 ---
-import defaultPreOpHomepage from "../../assets/workflow/default-pre-op-homepage.png";
+const workflowPreviewClips = {
+  "pre-op": [
+    {
+      id: "evaluation",
+      src: "/assets/workflow/pre-op-evaluation.mp4",
+    },
+    {
+      id: "consent",
+      src: "/assets/workflow/pre-op-consent.mp4",
+    },
+    {
+      id: "media",
+      src: "/assets/workflow/pre-op-media-attachment.mp4",
+    },
+  ],
+  "intra-op": [
+    {
+      id: "vitals",
+      src: "/assets/workflow/intra-op-vitals.mp4",
+    },
+    {
+      id: "medications",
+      src: "/assets/workflow/intra-op-medications.mp4",
+    },
+    {
+      id: "events",
+      src: "/assets/workflow/intra-op-events.mp4",
+    },
+  ],
+  "post-op": [
+    {
+      id: "vitals",
+      src: "/assets/workflow/post-op-vitals.mp4",
+    },
+    {
+      id: "substances",
+      src: "/assets/workflow/post-op-substances.mp4",
+    },
+  ],
+} as const;
 
 const workflowPhases = [
   {
@@ -95,13 +134,15 @@ const workflowPhases = [
 
                 <div class="workflow-section__points">
                   {phase.points.map((point, index) => {
-                    const isPreOpPreviewTrigger = phase.id === "pre-op" && index === 0;
+                    const workflowClip = workflowPreviewClips[phase.id][index];
 
                     return (
                       <article
                         class="workflow-point"
-                        data-preop-video-trigger={isPreOpPreviewTrigger ? "true" : undefined}
-                        tabindex={isPreOpPreviewTrigger ? "0" : undefined}
+                        data-workflow-video-trigger={workflowClip ? "true" : undefined}
+                        data-workflow-phase={workflowClip ? phase.id : undefined}
+                        data-workflow-clip={workflowClip?.id}
+                        tabindex={workflowClip ? "0" : undefined}
                       >
                         <h4>{point.title}</h4>
                         <p>{point.body}</p>
@@ -122,115 +163,39 @@ const workflowPhases = [
 
             <div class="workflow-phone__screen-viewport">
               <div class="workflow-phone__screen-track" data-workflow-screen-track>
-                {workflowPhases.map((phase) => (
+                {workflowPhases.map((phase) => {
+                  const phaseClips = workflowPreviewClips[phase.id];
+
+                  return (
                   <section class={`workflow-phone__screen workflow-phone__screen--${phase.id}`}>
-                    {phase.id === "pre-op" && (
+                    {phaseClips.length > 0 && (
                       <div
                         class="workflow-phone__preview"
-                        data-preop-video-container
-                        data-preop-media-state="image"
+                        data-workflow-video-container
+                        data-workflow-video-phase={phase.id}
+                        data-workflow-media-state="video"
                       >
-                        <img
-                          src={defaultPreOpHomepage.src}
-                          alt=""
-                          class="workflow-phone__preview-image"
-                          loading="eager"
-                          decoding="sync"
-                          fetchpriority="high"
-                        />
-                        <video
-                          class="workflow-phone__preview-video"
-                          data-preop-video
-                          src="/assets/workflow/pre-op-eval-clip.mp4"
-                          poster={defaultPreOpHomepage.src}
-                          muted
-                          loop
-                          playsinline
-                          preload="metadata"
-                          aria-hidden="true"
-                        ></video>
+                        <div class="workflow-phone__preview-media">
+                          {phaseClips.map((clip, index) => (
+                            <video
+                              class={`workflow-phone__preview-video${index === 0 ? " is-active" : ""}`}
+                              data-workflow-video
+                              data-workflow-video-phase={phase.id}
+                              data-workflow-clip-id={clip.id}
+                              src={clip.src}
+                              muted
+                              autoplay={phase.id === "pre-op" && index === 0 ? true : undefined}
+                              playsinline
+                              preload={phase.id === "pre-op" && index === 0 ? "auto" : "metadata"}
+                              aria-hidden="true"
+                            ></video>
+                          ))}
+                        </div>
                       </div>
                     )}
-
-                    {phase.id === "intra-op" && (
-                      <>
-                        <div class="workflow-phone__status">
-                          <span>9:41</span>
-                          <span>{phase.label}</span>
-                        </div>
-
-                        <div class="workflow-phone__panel workflow-phone__panel--timeline">
-                          <div class="workflow-phone__panel-title workflow-phone__panel-title--wide"></div>
-                          <div class="workflow-phone__timeline">
-                            <div class="workflow-phone__timeline-row">
-                              <span></span>
-                              <span></span>
-                              <span></span>
-                            </div>
-                            <div class="workflow-phone__timeline-row">
-                              <span></span>
-                              <span></span>
-                              <span></span>
-                            </div>
-                            <div class="workflow-phone__timeline-row">
-                              <span></span>
-                              <span></span>
-                              <span></span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="workflow-phone__panel workflow-phone__panel--actions">
-                          <div class="workflow-phone__panel-title"></div>
-                          <div class="workflow-phone__token-row">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                          </div>
-                          <div class="workflow-phone__event-card">
-                            <div class="workflow-phone__event-line workflow-phone__event-line--short"></div>
-                            <div class="workflow-phone__event-line"></div>
-                          </div>
-                          <div class="workflow-phone__event-card">
-                            <div class="workflow-phone__event-line workflow-phone__event-line--short"></div>
-                            <div class="workflow-phone__event-line workflow-phone__event-line--long"></div>
-                          </div>
-                        </div>
-                      </>
-                    )}
-
-                    {phase.id === "post-op" && (
-                      <>
-                        <div class="workflow-phone__status">
-                          <span>9:41</span>
-                          <span>{phase.label}</span>
-                        </div>
-
-                        <div class="workflow-phone__panel workflow-phone__panel--placeholder">
-                          <div class="workflow-phone__hero-title workflow-phone__hero-title--wide"></div>
-                          <div class="workflow-phone__hero-line workflow-phone__hero-line--short"></div>
-                          <div class="workflow-phone__hero-line"></div>
-                        </div>
-
-                        <div class="workflow-phone__panel workflow-phone__panel--summary">
-                          <div class="workflow-phone__panel-title"></div>
-                          <div class="workflow-phone__summary-grid">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                          </div>
-                        </div>
-
-                        <div class="workflow-phone__panel workflow-phone__panel--completion">
-                          <div class="workflow-phone__cta"></div>
-                          <div class="workflow-phone__footer-bar"></div>
-                        </div>
-                      </>
-                    )}
-
-                    {phase.id === "intra-op" && <div class="workflow-phone__footer-bar"></div>}
                   </section>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -263,48 +228,183 @@ const workflowPhases = [
 
     const tabs = Array.from(section.querySelectorAll("[data-phase-trigger]"));
     if (!tabs.length) return;
-    const trigger = section.querySelector("[data-preop-video-trigger]");
-    const previewContainer = section.querySelector("[data-preop-video-container]");
-    const video = section.querySelector("[data-preop-video]");
+    const clipTriggers = Array.from(section.querySelectorAll("[data-workflow-video-trigger]"));
+    const videoSlots = Array.from(section.querySelectorAll("[data-workflow-video]"));
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const compactLayout = window.matchMedia("(max-width: 820px)");
     const phaseIds = ["pre-op", "intra-op", "post-op"];
     const phaseProgressMap = [0, 0.4, 0.8];
+    const workflowCrossfadeMs = 760;
+    const workflowClips = {
+      "pre-op": [
+        { id: "evaluation", src: "/assets/workflow/pre-op-evaluation.mp4" },
+        { id: "consent", src: "/assets/workflow/pre-op-consent.mp4" },
+        { id: "media", src: "/assets/workflow/pre-op-media-attachment.mp4" },
+      ],
+      "intra-op": [
+        { id: "vitals", src: "/assets/workflow/intra-op-vitals.mp4" },
+        { id: "medications", src: "/assets/workflow/intra-op-medications.mp4" },
+        { id: "events", src: "/assets/workflow/intra-op-events.mp4" },
+      ],
+      "post-op": [
+        { id: "vitals", src: "/assets/workflow/post-op-vitals.mp4" },
+        { id: "substances", src: "/assets/workflow/post-op-substances.mp4" },
+      ],
+    };
     let rafId = 0;
     let latestProgress = 0;
     let lockedPhaseIndex = null;
     let lockExpiresAt = 0;
-
-    const deactivatePreopPreview = () => {
-      if (!(previewContainer instanceof HTMLElement) || !(video instanceof HTMLVideoElement)) return;
-
-      previewContainer.dataset.preopMediaState = "image";
-      video.pause();
-      video.currentTime = 0;
+    let activeClipIndexByPhase = {
+      "pre-op": 0,
+      "intra-op": 0,
+      "post-op": 0,
+    };
+    let requestedClipIndexByPhase = {
+      "pre-op": 0,
+      "intra-op": 0,
+      "post-op": 0,
     };
 
-    const activatePreopPreview = () => {
-      if (
-        !(previewContainer instanceof HTMLElement) ||
-        !(video instanceof HTMLVideoElement) ||
-        reducedMotion.matches ||
-        compactLayout.matches
-      ) {
-        deactivatePreopPreview();
+    const getPhaseClips = (phase) => workflowClips[phase] ?? [];
+
+    const getPhaseVideoSlots = (phase) =>
+      videoSlots.filter((video) => video.dataset.workflowVideoPhase === phase);
+
+    const getVideoSlot = (phase, clipIndex) => {
+      const clip = getPhaseClips(phase)[clipIndex];
+      if (!clip) return null;
+
+      const slot = videoSlots.find(
+        (video) =>
+          video.dataset.workflowVideoPhase === phase && video.dataset.workflowClipId === clip.id,
+      );
+      return slot instanceof HTMLVideoElement ? slot : null;
+    };
+
+    const prepareVideoSlot = (slot) => {
+      slot.muted = true;
+      slot.defaultMuted = true;
+      slot.playsInline = true;
+      slot.preload = "auto";
+    };
+
+    const pauseWorkflowPreview = (phase) => {
+      getPhaseVideoSlots(phase).forEach((slot) => {
+        if (!(slot instanceof HTMLVideoElement)) return;
+
+        slot.pause();
+      });
+    };
+
+    const playSlot = (slot, { restart = false } = {}) => {
+      prepareVideoSlot(slot);
+
+      if (restart) {
+        slot.currentTime = 0;
+      }
+
+      const playback = slot.play();
+      if (playback && typeof playback.catch === "function") {
+        playback.catch(() => {});
+      }
+    };
+
+    const warmWorkflowVideos = () => {
+      videoSlots.forEach((slot) => {
+        if (!(slot instanceof HTMLVideoElement)) return;
+
+        prepareVideoSlot(slot);
+
+        if (slot.readyState === HTMLMediaElement.HAVE_NOTHING) {
+          slot.load();
+        }
+      });
+    };
+
+    const whenVideoCanRender = (slot, callback) => {
+      if (slot.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+        callback();
         return;
       }
 
-      video.muted = true;
-      video.defaultMuted = true;
-      previewContainer.dataset.preopMediaState = "video";
+      let settled = false;
+      const finish = () => {
+        if (settled) return;
+        settled = true;
+        slot.removeEventListener("loadeddata", finish);
+        slot.removeEventListener("canplay", finish);
+        callback();
+      };
 
-      const playback = video.play();
-      if (playback && typeof playback.catch === "function") {
-        playback.catch(() => {
-          deactivatePreopPreview();
+      slot.addEventListener("loadeddata", finish);
+      slot.addEventListener("canplay", finish);
+      prepareVideoSlot(slot);
+      slot.load();
+    };
+
+    const crossFadeToClip = (phase, clipIndex, { restart = true } = {}) => {
+      const clip = getPhaseClips(phase)[clipIndex];
+      const nextSlot = getVideoSlot(phase, clipIndex);
+      if (!clip || !nextSlot) return;
+
+      requestedClipIndexByPhase[phase] = clipIndex;
+
+      whenVideoCanRender(nextSlot, () => {
+        if (requestedClipIndexByPhase[phase] !== clipIndex) return;
+
+        const phaseSlots = getPhaseVideoSlots(phase);
+        const currentSlots = phaseSlots.filter((slot) => slot.classList.contains("is-active"));
+
+        activeClipIndexByPhase[phase] = clipIndex;
+        playSlot(nextSlot, { restart });
+        nextSlot.classList.add("is-active");
+
+        currentSlots.forEach((slot) => {
+          if (slot !== nextSlot) {
+            slot.classList.add("is-leaving");
+            slot.classList.remove("is-active");
+          }
         });
+
+        window.setTimeout(() => {
+          phaseSlots.forEach((slot) => {
+            if (slot instanceof HTMLVideoElement && slot !== nextSlot) {
+              slot.classList.remove("is-leaving");
+              slot.pause();
+            }
+          });
+        }, workflowCrossfadeMs + 80);
+      });
+    };
+
+    const playClipByIndex = (phase, clipIndex, options = {}) => {
+      const activeSlot = getVideoSlot(phase, activeClipIndexByPhase[phase] ?? 0);
+      const clip = getPhaseClips(phase)[clipIndex];
+      if (!activeSlot || !clip) return;
+
+      if (activeClipIndexByPhase[phase] === clipIndex) {
+        playSlot(activeSlot, options);
+        return;
       }
+
+      crossFadeToClip(phase, clipIndex, options);
+    };
+
+    const playNextWorkflowClip = (phase) => {
+      const phaseClips = getPhaseClips(phase);
+      if (!phaseClips.length) return;
+
+      playClipByIndex(phase, ((activeClipIndexByPhase[phase] ?? 0) + 1) % phaseClips.length);
+    };
+
+    const pauseInactiveWorkflowPreviews = (activePhase) => {
+      phaseIds.forEach((phase) => {
+        if (phase !== activePhase) {
+          pauseWorkflowPreview(phase);
+        }
+      });
     };
 
     const setActiveTab = (activeIndex) => {
@@ -342,9 +442,10 @@ const workflowPhases = [
       section.style.setProperty("--workflow-screen-shift", shift);
       section.dataset.workflowActivePhase = activePhase;
 
-      if (activePhase !== "pre-op") {
-        deactivatePreopPreview();
+      if (getPhaseClips(activePhase).length) {
+        playClipByIndex(activePhase, activeClipIndexByPhase[activePhase] ?? 0, { restart: false });
       }
+      pauseInactiveWorkflowPreviews(activePhase);
 
       setActiveTab(activeIndex);
     };
@@ -431,14 +532,34 @@ const workflowPhases = [
       });
     });
 
-    if (trigger instanceof HTMLElement) {
-      trigger.addEventListener("mouseenter", activatePreopPreview);
-      trigger.addEventListener("mouseleave", deactivatePreopPreview);
-      trigger.addEventListener("pointerenter", activatePreopPreview);
-      trigger.addEventListener("pointerleave", deactivatePreopPreview);
-      trigger.addEventListener("focus", activatePreopPreview);
-      trigger.addEventListener("blur", deactivatePreopPreview);
-    }
+    videoSlots.forEach((slot) => {
+      if (!(slot instanceof HTMLVideoElement)) return;
+
+      slot.addEventListener("ended", () => {
+        if (slot.classList.contains("is-active")) {
+          const phase = slot.dataset.workflowVideoPhase;
+          if (phase) {
+            playNextWorkflowClip(phase);
+          }
+        }
+      });
+    });
+
+    clipTriggers.forEach((trigger) => {
+      if (!(trigger instanceof HTMLElement)) return;
+
+      const cueClip = () => {
+        const phase = trigger.dataset.workflowPhase;
+        const phaseClips = getPhaseClips(phase);
+        const clipIndex = phaseClips.findIndex((clip) => clip.id === trigger.dataset.workflowClip);
+        if (clipIndex >= 0) {
+          playClipByIndex(phase, clipIndex);
+        }
+      };
+
+      trigger.addEventListener("pointerenter", cueClip);
+      trigger.addEventListener("focus", cueClip);
+    });
 
     window.addEventListener("scroll", updateTarget, { passive: true });
     window.addEventListener("resize", handleChange);
@@ -446,5 +567,12 @@ const workflowPhases = [
     compactLayout.addEventListener?.("change", handleChange);
 
     updateTarget();
+    playClipByIndex("pre-op", 0, { restart: false });
+
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(warmWorkflowVideos, { timeout: 1200 });
+    } else {
+      window.setTimeout(warmWorkflowVideos, 600);
+    }
   })();
 </script>

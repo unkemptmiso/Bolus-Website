@@ -14,6 +14,7 @@ interface Props {
   showHeader?: boolean;
   showFooter?: boolean;
   footerOmitGroups?: FooterGroupId[];
+  footerVariant?: "default" | "dark";
   mainClass?: string;
 }
 
@@ -24,6 +25,7 @@ const {
   showHeader = showChrome,
   showFooter = showChrome,
   footerOmitGroups = [],
+  footerVariant = "default",
   mainClass = "site-main",
 } = Astro.props;
 ---
@@ -45,6 +47,6 @@ const {
         <slot />
       </article>
     </main>
-    {showFooter && <Footer omitGroups={footerOmitGroups} />}
+    {showFooter && <Footer omitGroups={footerOmitGroups} variant={footerVariant} />}
   </body>
 </html>

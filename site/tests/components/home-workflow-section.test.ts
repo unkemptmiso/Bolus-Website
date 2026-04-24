@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 
 import { describe, expect, it } from "vitest";
 
@@ -14,6 +14,8 @@ const globalStyles = readFileSync(
   new URL("../../src/styles/global.css", import.meta.url),
   "utf8",
 );
+const workflowAssetUrl = (filename: string) =>
+  new URL(`../../public/assets/workflow/${filename}`, import.meta.url);
 
 describe("home workflow section", () => {
   it("mounts the fourth homepage section after the solution block", () => {
@@ -64,43 +66,63 @@ describe("home workflow section", () => {
     expect(workflowSectionSource).not.toContain("Placeholder");
   });
 
-  it("uses a hover-triggered pre-op phone preview with a screenshot fallback and lazy video source", () => {
-    expect(workflowSectionSource).toContain('import defaultPreOpHomepage from "../../assets/workflow/default-pre-op-homepage.png";');
-    expect(workflowSectionSource).toContain('data-preop-video-trigger');
-    expect(workflowSectionSource).toContain('tabindex={isPreOpPreviewTrigger ? "0" : undefined}');
-    expect(workflowSectionSource).toContain('data-preop-media-state="image"');
-    expect(workflowSectionSource).toContain('data-preop-video-container');
-    expect(workflowSectionSource).toContain('src={defaultPreOpHomepage.src}');
-    expect(workflowSectionSource).toContain('class="workflow-phone__preview-image"');
-    expect(workflowSectionSource).toContain('loading="eager"');
-    expect(workflowSectionSource).toContain('data-preop-video');
-    expect(workflowSectionSource).toContain('src="/assets/workflow/pre-op-eval-clip.mp4"');
-    expect(workflowSectionSource).toContain('poster={defaultPreOpHomepage.src}');
-    expect(workflowSectionSource).toContain('preload="metadata"');
+  it("uses autoplaying workflow phone video playlists with tile-triggered clips", () => {
+    expect(workflowSectionSource).not.toContain('import defaultPreOpHomepage');
+    expect(workflowSectionSource).not.toContain('class="workflow-phone__preview-image"');
+    expect(workflowSectionSource).not.toContain('src={defaultPreOpHomepage.src}');
+    expect(workflowSectionSource).toContain("const workflowPreviewClips = {");
+    expect(workflowSectionSource).toContain('id: "evaluation"');
+    expect(workflowSectionSource).toContain('src: "/assets/workflow/pre-op-evaluation.mp4"');
+    expect(workflowSectionSource).toContain('id: "consent"');
+    expect(workflowSectionSource).toContain('src: "/assets/workflow/pre-op-consent.mp4"');
+    expect(workflowSectionSource).toContain('id: "media"');
+    expect(workflowSectionSource).toContain('src: "/assets/workflow/pre-op-media-attachment.mp4"');
+    expect(workflowSectionSource).toContain('src: "/assets/workflow/intra-op-vitals.mp4"');
+    expect(workflowSectionSource).toContain('src: "/assets/workflow/intra-op-medications.mp4"');
+    expect(workflowSectionSource).toContain('src: "/assets/workflow/intra-op-events.mp4"');
+    expect(workflowSectionSource).toContain('src: "/assets/workflow/post-op-vitals.mp4"');
+    expect(workflowSectionSource).toContain('src: "/assets/workflow/post-op-substances.mp4"');
+    expect(workflowSectionSource).not.toContain('src: "/assets/workflow/post-op-export');
+    expect(workflowSectionSource).toContain('data-workflow-video-trigger');
+    expect(workflowSectionSource).toContain('data-workflow-phase={workflowClip ? phase.id : undefined}');
+    expect(workflowSectionSource).toContain('data-workflow-clip={workflowClip?.id}');
+    expect(workflowSectionSource).toContain('tabindex={workflowClip ? "0" : undefined}');
+    expect(workflowSectionSource).toContain('data-workflow-media-state="video"');
+    expect(workflowSectionSource).toContain('data-workflow-video-container');
+    expect(workflowSectionSource).toContain("phaseClips.map");
+    expect(workflowSectionSource).toContain("data-workflow-video");
+    expect(workflowSectionSource).toContain("data-workflow-clip-id={clip.id}");
+    expect(workflowSectionSource).toContain('autoplay');
+    expect(workflowSectionSource).toContain('preload={phase.id === "pre-op" && index === 0 ? "auto" : "metadata"}');
     expect(workflowSectionSource).toContain('muted');
-    expect(workflowSectionSource).toContain('loop');
     expect(workflowSectionSource).toContain('playsinline');
-    expect(workflowSectionSource).toContain('trigger.addEventListener("mouseenter"');
-    expect(workflowSectionSource).toContain('trigger.addEventListener("mouseleave"');
+    expect(workflowSectionSource).toContain('class="workflow-phone__preview-media"');
+    expect(workflowSectionSource).not.toContain("workflow-phone__preview-statusbar");
+    expect(workflowSectionSource).not.toContain("workflow-phone__preview-time");
     expect(workflowSectionSource).toContain('trigger.addEventListener("pointerenter"');
-    expect(workflowSectionSource).toContain('trigger.addEventListener("pointerleave"');
     expect(workflowSectionSource).toContain('trigger.addEventListener("focus"');
-    expect(workflowSectionSource).toContain('trigger.addEventListener("blur"');
-    expect(workflowSectionSource).toContain('video.defaultMuted = true');
-    expect(workflowSectionSource).toContain("video.play()");
-    expect(workflowSectionSource).toContain("video.pause()");
-    expect(workflowSectionSource).toContain("video.currentTime = 0");
+    expect(workflowSectionSource).toContain('slot.addEventListener("ended"');
+    expect(workflowSectionSource).toContain('playClipByIndex("pre-op", 0, { restart: false })');
+    expect(workflowSectionSource).toContain("crossFadeToClip");
+    expect(workflowSectionSource).toContain("workflowCrossfadeMs");
+    expect(workflowSectionSource).toContain('slot.classList.add("is-leaving")');
+    expect(workflowSectionSource).toContain("whenVideoCanRender");
+    expect(workflowSectionSource).toContain("warmWorkflowVideos");
+    expect(workflowSectionSource).toContain("workflowClips");
     expect(globalStyles).toContain(".workflow-phone__preview {");
-    expect(globalStyles).toContain(".workflow-phone__preview-image {");
+    expect(globalStyles).toContain(".workflow-phone__preview-media {");
+    expect(globalStyles).not.toContain(".workflow-phone__preview-statusbar {");
     expect(globalStyles).toContain(".workflow-phone__preview-video {");
-    expect(globalStyles).toContain('[data-preop-media-state="video"] .workflow-phone__preview-image {');
-    expect(globalStyles).toContain('[data-preop-media-state="video"] .workflow-phone__preview-video {');
-    expect(globalStyles).toContain(".workflow-point[data-preop-video-trigger] {");
+    expect(globalStyles).toContain(".workflow-phone__preview-video.is-active {");
+    expect(globalStyles).toContain(".workflow-phone__preview-video.is-leaving {");
+    expect(globalStyles).toContain("opacity 760ms cubic-bezier(0.45, 0, 0.2, 1)");
+    expect(globalStyles).not.toContain("--workflow-preview-statusbar-height");
+    expect(globalStyles).toContain(".workflow-point[data-workflow-video-trigger] {");
     expect(globalStyles).toContain(".workflow-phone__frame {");
     expect(globalStyles).toContain("z-index: 10;");
     expect(globalStyles).toContain(".workflow-phone__screen-viewport {");
     expect(globalStyles).toContain("position: absolute;");
-    expect(globalStyles).toContain("inset: 1.3% 3.05% 1.45%;");
+    expect(globalStyles).toContain("inset: 1.3% 4% 1.45%;");
     expect(globalStyles).toContain("z-index: 1;");
     expect(globalStyles).toContain(".workflow-phone__screen {");
     expect(globalStyles).toContain("min-height: 100%;");
@@ -108,6 +130,26 @@ describe("home workflow section", () => {
     expect(globalStyles).toContain("position: relative;");
     expect(globalStyles).toContain(".workflow-phone__preview {");
     expect(globalStyles).toContain("inset: 0;");
+    expect(globalStyles).toContain("object-fit: contain;");
+  });
+
+  it("ships workflow clips as web video assets instead of duplicate MOV files", () => {
+    expect(existsSync(workflowAssetUrl("pre-op-evaluation.mp4"))).toBe(true);
+    expect(existsSync(workflowAssetUrl("pre-op-consent.mp4"))).toBe(true);
+    expect(existsSync(workflowAssetUrl("pre-op-media-attachment.mp4"))).toBe(true);
+    expect(existsSync(workflowAssetUrl("intra-op-vitals.mp4"))).toBe(true);
+    expect(existsSync(workflowAssetUrl("intra-op-medications.mp4"))).toBe(true);
+    expect(existsSync(workflowAssetUrl("intra-op-events.mp4"))).toBe(true);
+    expect(existsSync(workflowAssetUrl("post-op-vitals.mp4"))).toBe(true);
+    expect(existsSync(workflowAssetUrl("post-op-substances.mp4"))).toBe(true);
+    expect(existsSync(workflowAssetUrl("pre-op-evaluation.mov"))).toBe(false);
+    expect(existsSync(workflowAssetUrl("pre-op-consent.mov"))).toBe(false);
+    expect(existsSync(workflowAssetUrl("pre-op-media-attachment.mov"))).toBe(false);
+    expect(existsSync(workflowAssetUrl("intra-op-vitals.mov"))).toBe(false);
+    expect(existsSync(workflowAssetUrl("intra-op-medications.mov"))).toBe(false);
+    expect(existsSync(workflowAssetUrl("intra-op-events.mov"))).toBe(false);
+    expect(existsSync(workflowAssetUrl("post-op-vitals.mov"))).toBe(false);
+    expect(existsSync(workflowAssetUrl("post-op-substances.mov"))).toBe(false);
   });
 
   it("uses a pinned workflow story layout with stacked copy and phone tracks", () => {
@@ -144,6 +186,9 @@ describe("home workflow section", () => {
     );
     expect(globalStyles).toContain(".workflow-phone__screen-viewport {");
     expect(globalStyles).toContain(".workflow-phone__screen-track {");
+    expect(globalStyles).toContain("grid-auto-columns: 100%;");
+    expect(globalStyles).toContain("grid-auto-flow: column;");
+    expect(globalStyles).toContain("transform: translate3d(calc(var(--workflow-screen-shift, 0%) * -1), 0, 0);");
     expect(globalStyles).toContain(".workflow-tabs {");
     expect(globalStyles).toContain("min-height: 280vh;");
     expect(globalStyles).toContain("min-height: inherit;");

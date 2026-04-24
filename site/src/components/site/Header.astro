@@ -23,7 +23,6 @@ const resolvedNavigation = headerNavigation.reduce<Array<{ label: string; path: 
 const mobileNavigation = [
   { pageId: "about", icon: "about" },
   { pageId: "pricing", icon: "pricing" },
-  { pageId: "support", icon: "support" },
   { pageId: "contact", icon: "contact" },
   { pageId: "simulator", icon: "simulator" },
   { pageId: "business", icon: "business" },
@@ -214,13 +213,6 @@ const mobileNavigation = [
                         <svg viewBox="0 0 24 24" fill="none" role="presentation">
                           <rect x="4.25" y="6.25" width="15.5" height="11.5" rx="2.25" stroke-width="1.8"></rect>
                           <path d="M5.75 8L12 12.75L18.25 8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
-                      )}
-                      {item.icon === "support" && (
-                        <svg viewBox="0 0 24 24" fill="none" role="presentation">
-                          <circle cx="12" cy="12" r="8.25" stroke-width="1.8"></circle>
-                          <path d="M9.7 9.45A2.55 2.55 0 0 1 12.02 8C13.5 8 14.75 9 14.75 10.5C14.75 12.6 12 12.75 12 14.5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
-                          <path d="M12 17.25H12.1" stroke-width="2.2" stroke-linecap="round"></path>
                         </svg>
                       )}
                     </span>

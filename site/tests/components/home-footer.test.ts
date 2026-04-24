@@ -26,10 +26,12 @@ const globalStylesSource = readFileSync(
 describe("home footer", () => {
   it("uses the shared site footer on the homepage with only product and legal groups", () => {
     expect(baseLayoutSource).toContain("footerOmitGroups?: FooterGroupId[];");
-    expect(baseLayoutSource).toContain('{showFooter && <Footer omitGroups={footerOmitGroups} />}');
+    expect(baseLayoutSource).toContain('footerVariant?: "default" | "dark";');
+    expect(baseLayoutSource).toContain('{showFooter && <Footer omitGroups={footerOmitGroups} variant={footerVariant} />}');
     expect(homePageSource).toContain("showFooter={true}");
-    expect(footerSource).toContain('<footer class="site-footer">');
+    expect(footerSource).toContain('class:list={["site-footer", { "site-footer--dark": variant === "dark" }]}');
     expect(footerSource).toContain("omitGroups = []");
+    expect(footerSource).toContain('variant = "default"');
     expect(footerSource).toContain("footerNavigation.filter((group) => !omitGroups.includes(group.id))");
     expect(footerSource).toContain("const groupPage = getPageById(group.id);");
     expect(footerSource).toContain('class="footer-column__heading-link"');

@@ -128,7 +128,7 @@ export const pricingPage: PricingPageContent = {
         { label: "Reserved for future practice-level terms" },
       ],
       ctaLabel: "Get in Touch",
-      ctaHref: "/support",
+      ctaHref: "/contact",
       footerNote: "Standardize charting across your entire practice with weighted group discounts.",
     },
   ],

@@ -1118,7 +1118,7 @@ ul {
   background: rgba(255, 255, 255, 0.78);
 }
 
-.workflow-point[data-preop-video-trigger] {
+.workflow-point[data-workflow-video-trigger] {
   cursor: pointer;
   transition:
     border-color 180ms ease,
@@ -1127,8 +1127,8 @@ ul {
     transform 180ms ease;
 }
 
-.workflow-point[data-preop-video-trigger]:hover,
-.workflow-point[data-preop-video-trigger]:focus-visible {
+.workflow-point[data-workflow-video-trigger]:hover,
+.workflow-point[data-workflow-video-trigger]:focus-visible {
   border-color: rgba(24, 85, 184, 0.18);
   background: rgba(255, 255, 255, 0.94);
   box-shadow: 0 16px 34px rgba(15, 23, 42, 0.08);
@@ -1184,7 +1184,7 @@ ul {
 
 .workflow-phone__screen-viewport {
   position: absolute;
-  inset: 1.3% 3.05% 1.45%;
+  inset: 1.3% 4% 1.45%;
   border-radius: 2.75rem; /* Match iPhone 17 curve */
   background:
     radial-gradient(circle at top left, rgba(77, 147, 255, 0.14), transparent 35%),
@@ -1197,8 +1197,10 @@ ul {
   width: 100%;
   height: 100%;
   display: grid;
+  grid-auto-columns: 100%;
+  grid-auto-flow: column;
   grid-auto-rows: 100%;
-  transform: translate3d(0, calc(var(--workflow-screen-shift, 0%) * -1), 0);
+  transform: translate3d(calc(var(--workflow-screen-shift, 0%) * -1), 0, 0);
   transition: transform 560ms cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform;
 }
@@ -1227,33 +1229,35 @@ ul {
   background-color: #f2f6fb;
 }
 
-.workflow-phone__preview-image,
+.workflow-phone__preview-media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
 .workflow-phone__preview-video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center top;
+  opacity: 0;
+  background: #f2f6fb;
+  z-index: 1;
   transition:
-    opacity 220ms ease,
+    opacity 760ms cubic-bezier(0.45, 0, 0.2, 1),
     transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.workflow-phone__preview-image {
+.workflow-phone__preview-video.is-active {
   opacity: 1;
+  z-index: 2;
 }
 
-.workflow-phone__preview-video {
+.workflow-phone__preview-video.is-leaving {
   opacity: 0;
-  background: #000000;
-}
-
-[data-preop-media-state="video"] .workflow-phone__preview-image {
-  opacity: 0;
-}
-
-[data-preop-media-state="video"] .workflow-phone__preview-video {
-  opacity: 1;
+  z-index: 3;
 }
 
 .workflow-phone__status {
@@ -2337,6 +2341,46 @@ ul {
   color: rgba(15, 23, 42, 0.4);
   font-size: 0.8rem;
   line-height: 1.5;
+}
+
+.site-footer--dark {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  background: #050816;
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.site-footer--dark .footer-grid {
+  width: var(--container);
+  margin: 0 auto;
+}
+
+.site-footer--dark .footer-brand-lockup,
+.site-footer--dark .footer-column h2,
+.site-footer--dark .footer-column h2 a {
+  color: #ffffff;
+}
+
+.site-footer--dark .footer-brand-lockup__mark img {
+  filter: brightness(0) invert(1);
+}
+
+.site-footer--dark .footer-list a {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.site-footer--dark .footer-list a:hover,
+.site-footer--dark .footer-list a:focus-visible {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.site-footer--dark .footer-meta {
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.site-footer--dark .footer-disclaimer {
+  color: rgba(255, 255, 255, 0.48);
 }
 
 @media (max-width: 900px) {

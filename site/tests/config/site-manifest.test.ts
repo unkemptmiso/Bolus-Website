@@ -18,7 +18,6 @@ describe("site manifest", () => {
     expect(headerNavigation.map((item) => item.label)).toEqual([
       "About",
       "Pricing",
-      "Support",
       "Contact",
     ]);
     expect(
