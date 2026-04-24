@@ -7,7 +7,7 @@ export const homeSplash = {
     headlineLetterSpacing: "-1px",
     headlineLineHeight: "1",
     fontStack:
-      '"SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif',
+      'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
   },
   actions: [],
   layout: {

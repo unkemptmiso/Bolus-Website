@@ -26,6 +26,7 @@ describe("home splash config", () => {
   it("uses typography values aligned with the foundational docs", () => {
     expect(homeSplash.typography.headlineLetterSpacing).toBe("-1px");
     expect(homeSplash.typography.headlineLineHeight).toBe("1");
+    expect(homeSplash.typography.fontStack).toContain("system-ui");
     expect(homeSplash.typography.fontStack).toContain("-apple-system");
   });
 

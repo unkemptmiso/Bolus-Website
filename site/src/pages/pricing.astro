@@ -287,10 +287,10 @@ const enterprisePlan = pricingPage.plans.find((plan) => plan.slug === "enterpris
   .plan-card__title,
   .enterprise-card__title {
     margin: 0;
-    font-family: "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
       sans-serif;
     line-height: 1;
-    letter-spacing: -1px;
+    letter-spacing: -0.28px;
     font-weight: 700;
     color: #000000;
   }
@@ -300,6 +300,7 @@ const enterprisePlan = pricingPage.plans.find((plan) => plan.slug === "enterpris
     width: fit-content;
     margin-inline: auto;
     font-size: clamp(3rem, 6vw, 5.4rem);
+    letter-spacing: -1px;
     text-align: center;
   }
 
@@ -312,10 +313,11 @@ const enterprisePlan = pricingPage.plans.find((plan) => plan.slug === "enterpris
   .pricing-hero__body {
     margin: 0;
     max-width: 46rem;
-    font-family: "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
       sans-serif;
     font-size: 22px;
     line-height: 1.5;
+    letter-spacing: 0px;
     font-weight: 500;
     color: rgba(0, 0, 0, 0.65);
   }
@@ -475,6 +477,7 @@ const enterprisePlan = pricingPage.plans.find((plan) => plan.slug === "enterpris
   .plan-card__title {
     max-width: 10ch;
     font-size: clamp(2rem, 3vw, 2.5rem);
+    line-height: 1;
     text-wrap: balance;
   }
 
@@ -488,14 +491,17 @@ const enterprisePlan = pricingPage.plans.find((plan) => plan.slug === "enterpris
   .plan-card__footer,
   .enterprise-card__body {
     margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+      sans-serif;
     font-size: 1rem;
     line-height: 1.55;
+    letter-spacing: 0px;
     color: rgba(15, 23, 42, 0.64);
   }
 
   .plan-card__price {
     margin: 0;
-    font-family: "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
       sans-serif;
     font-size: clamp(2.65rem, 4vw, 3.45rem);
     line-height: 1;

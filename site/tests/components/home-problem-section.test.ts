@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 
 import { describe, expect, it } from "vitest";
 
@@ -13,6 +13,10 @@ const problemSectionSource = readFileSync(
 const globalStyles = readFileSync(
   new URL("../../src/styles/global.css", import.meta.url),
   "utf8",
+);
+const crumpledRecordAsset = new URL(
+  "../../public/assets/home/crumpled-sample-record.webp",
+  import.meta.url,
 );
 
 describe("home problem section", () => {
@@ -46,10 +50,22 @@ describe("home problem section", () => {
     expect(problemSectionSource).toContain('class="problem-section"');
     expect(problemSectionSource).toContain('class="problem-section__title"');
     expect(problemSectionSource).toContain('class="problem-section__body"');
+    expect(problemSectionSource).toContain('class="problem-section__record"');
+    expect(problemSectionSource).toContain('src="/assets/home/crumpled-sample-record.webp"');
+    expect(problemSectionSource).toContain('alt="Crumpled handwritten anesthesia record"');
+    expect(problemSectionSource).toContain('loading="lazy"');
+    expect(existsSync(crumpledRecordAsset)).toBe(true);
     expect(globalStyles).toContain(".problem-section {");
     expect(globalStyles).toContain(".problem-section__inner {");
+    expect(globalStyles).toContain("min-height: clamp(560px, 70vw, 760px);");
     expect(globalStyles).toContain(".problem-section__title {");
     expect(globalStyles).toContain(".problem-section__body {");
+    expect(globalStyles).toContain(".problem-section__record {");
+    expect(globalStyles).toContain(".problem-section__record::after {");
+    expect(globalStyles).toContain("@supports (animation-timeline: view())");
+    expect(globalStyles).toContain("animation: problem-record-reveal linear both;");
+    expect(globalStyles).toContain("@keyframes problem-record-reveal");
+    expect(globalStyles).toContain("@media (prefers-reduced-motion: reduce)");
     expect(globalStyles).toContain(
       'font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;',
     );

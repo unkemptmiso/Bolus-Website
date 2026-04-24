@@ -256,6 +256,7 @@ const workflowPhases = [
     let latestProgress = 0;
     let lockedPhaseIndex = null;
     let lockExpiresAt = 0;
+    let hasEnteredWorkflowViewport = false;
     let activeClipIndexByPhase = {
       "pre-op": 0,
       "intra-op": 0,
@@ -407,6 +408,11 @@ const workflowPhases = [
       });
     };
 
+    const hasWorkflowEnteredViewport = () => {
+      const rect = section.getBoundingClientRect();
+      return rect.top <= window.innerHeight * 0.88 && rect.bottom >= window.innerHeight * 0.18;
+    };
+
     const setActiveTab = (activeIndex) => {
       tabs.forEach((tab, index) => {
         const isActive = index === activeIndex;
@@ -442,10 +448,14 @@ const workflowPhases = [
       section.style.setProperty("--workflow-screen-shift", shift);
       section.dataset.workflowActivePhase = activePhase;
 
-      if (getPhaseClips(activePhase).length) {
+      if (hasEnteredWorkflowViewport && getPhaseClips(activePhase).length) {
         playClipByIndex(activePhase, activeClipIndexByPhase[activePhase] ?? 0, { restart: false });
+      } else {
+        phaseIds.forEach((phase) => pauseWorkflowPreview(phase));
       }
-      pauseInactiveWorkflowPreviews(activePhase);
+      if (hasEnteredWorkflowViewport) {
+        pauseInactiveWorkflowPreviews(activePhase);
+      }
 
       setActiveTab(activeIndex);
     };
@@ -474,6 +484,8 @@ const workflowPhases = [
     };
 
     const updateTarget = () => {
+      hasEnteredWorkflowViewport = hasEnteredWorkflowViewport || hasWorkflowEnteredViewport();
+
       if (reducedMotion.matches || compactLayout.matches) {
         resetStatic();
         return;
@@ -567,7 +579,6 @@ const workflowPhases = [
     compactLayout.addEventListener?.("change", handleChange);
 
     updateTarget();
-    playClipByIndex("pre-op", 0, { restart: false });
 
     if ("requestIdleCallback" in window) {
       window.requestIdleCallback(warmWorkflowVideos, { timeout: 1200 });

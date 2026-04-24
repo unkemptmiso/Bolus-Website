@@ -33,11 +33,16 @@ describe("pricing page", () => {
     });
   });
 
-  it("uses the homepage headline spacing rules and includes a real billing toggle", () => {
+  it("uses the guidance typography scale and includes a real billing toggle", () => {
     expect(pricingPageSource).toContain('data-billing-toggle');
     expect(pricingPageSource).toContain('data-billing-price');
     expect(pricingPageSource).toContain('data-billing-copy');
+    expect(pricingPageSource).toContain('font-size: clamp(3rem, 6vw, 5.4rem);');
     expect(pricingPageSource).toContain('letter-spacing: -1px;');
+    expect(pricingPageSource).toContain('font-size: 22px;');
+    expect(pricingPageSource).toContain('letter-spacing: 0px;');
+    expect(pricingPageSource).toContain('font-size: clamp(2rem, 3vw, 2.5rem);');
+    expect(pricingPageSource).toContain('font-size: 1rem;');
     expect(pricingPageSource).toContain('querySelectorAll("[data-billing-toggle]")');
   });
 
@@ -88,7 +93,7 @@ describe("pricing page", () => {
   it("keeps professional cloud on a single title line", () => {
     expect(pricingPageSource).toContain('.plan-card[data-plan-card="professional-cloud"] .plan-card__title {');
     expect(pricingPageSource).toContain("max-width: none;");
-    expect(pricingPageSource).toContain("font-size: clamp(1.7rem, 2.2vw, 2.15rem);");
+    expect(pricingPageSource).toContain("font-size: clamp(2rem, 3vw, 2.5rem);");
     expect(pricingPageSource).toContain("white-space: nowrap;");
   });
 
@@ -96,16 +101,15 @@ describe("pricing page", () => {
     expect(pricingPageSource).toContain('data-plan-card={plan.slug}');
     expect(pricingPageSource).toContain('data-featured={plan.featured ? "true" : undefined}');
     expect(pricingPageSource).toContain('data-upcoming={plan.upcoming ? "true" : undefined}');
-    expect(pricingPageSource).toContain("border: 2px solid rgba(77, 147, 255, 0.42);");
+    expect(pricingPageSource).toContain("border: 4px solid rgba(77, 147, 255, 0.88);");
     expect(pricingPageSource).toContain("border: 1px solid rgba(15, 23, 42, 0.12);");
     expect(pricingPageSource).not.toContain("border: 1px dashed rgba(15, 23, 42, 0.16);");
   });
 
   it("keeps every pricing card on the same internal layout skeleton", () => {
-    expect(pricingPageSource).toContain('"plan-card__billing-copy--placeholder"');
-    expect(pricingPageSource).toContain(
-      'aria-hidden={plan.prices.annualMonthly === 0 ? "true" : undefined}',
-    );
+    expect(pricingPageSource).toContain('class="plan-card__pricing"');
+    expect(pricingPageSource).toContain('class="plan-card__billing-copy"');
+    expect(pricingPageSource).toContain('data-billing-copy={plan.prices.annualMonthly === 0 ? undefined : true}');
     expect(pricingPageSource).toContain(".plan-card {\n    display: flex;");
     expect(pricingPageSource).toContain("flex-direction: column;");
   });

@@ -66,7 +66,7 @@ describe("home workflow section", () => {
     expect(workflowSectionSource).not.toContain("Placeholder");
   });
 
-  it("uses autoplaying workflow phone video playlists with tile-triggered clips", () => {
+  it("uses workflow phone video playlists that start only after the section enters view", () => {
     expect(workflowSectionSource).not.toContain('import defaultPreOpHomepage');
     expect(workflowSectionSource).not.toContain('class="workflow-phone__preview-image"');
     expect(workflowSectionSource).not.toContain('src={defaultPreOpHomepage.src}');
@@ -102,7 +102,9 @@ describe("home workflow section", () => {
     expect(workflowSectionSource).toContain('trigger.addEventListener("pointerenter"');
     expect(workflowSectionSource).toContain('trigger.addEventListener("focus"');
     expect(workflowSectionSource).toContain('slot.addEventListener("ended"');
-    expect(workflowSectionSource).toContain('playClipByIndex("pre-op", 0, { restart: false })');
+    expect(workflowSectionSource).toContain("hasEnteredWorkflowViewport");
+    expect(workflowSectionSource).toContain("hasWorkflowEnteredViewport");
+    expect(workflowSectionSource).not.toContain('playClipByIndex("pre-op", 0, { restart: false })');
     expect(workflowSectionSource).toContain("crossFadeToClip");
     expect(workflowSectionSource).toContain("workflowCrossfadeMs");
     expect(workflowSectionSource).toContain('slot.classList.add("is-leaving")');
