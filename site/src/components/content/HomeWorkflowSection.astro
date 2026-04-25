@@ -159,7 +159,14 @@ const workflowPhases = [
       <div class="workflow-section__device">
         <div class="workflow-phone-shell">
           <div class="workflow-phone" aria-hidden="true">
-            <img src="/assets/iphone-17-black-portrait.png" alt="" class="workflow-phone__frame" />
+            <img
+              src="/assets/iphone-17-black-portrait.webp"
+              alt=""
+              class="workflow-phone__frame"
+              loading="eager"
+              decoding="async"
+              fetchpriority="high"
+            />
 
             <div class="workflow-phone__screen-viewport">
               <div class="workflow-phone__screen-track" data-workflow-screen-track>
@@ -186,7 +193,7 @@ const workflowPhases = [
                               muted
                               autoplay={phase.id === "pre-op" && index === 0 ? true : undefined}
                               playsinline
-                              preload={phase.id === "pre-op" && index === 0 ? "auto" : "metadata"}
+                              preload={index === 0 ? "auto" : "metadata"}
                               aria-hidden="true"
                             ></video>
                           ))}

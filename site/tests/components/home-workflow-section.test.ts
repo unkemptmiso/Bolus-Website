@@ -93,7 +93,7 @@ describe("home workflow section", () => {
     expect(workflowSectionSource).toContain("data-workflow-video");
     expect(workflowSectionSource).toContain("data-workflow-clip-id={clip.id}");
     expect(workflowSectionSource).toContain('autoplay');
-    expect(workflowSectionSource).toContain('preload={phase.id === "pre-op" && index === 0 ? "auto" : "metadata"}');
+    expect(workflowSectionSource).toContain('preload={index === 0 ? "auto" : "metadata"}');
     expect(workflowSectionSource).toContain('muted');
     expect(workflowSectionSource).toContain('playsinline');
     expect(workflowSectionSource).toContain('class="workflow-phone__preview-media"');

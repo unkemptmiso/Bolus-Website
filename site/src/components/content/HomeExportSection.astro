@@ -1,27 +1,27 @@
 ---
 const recordPages = [
   {
-    src: "/assets/record-screenshots/page-1.png",
+    src: "/assets/record-screenshots/page-1.webp",
     label: "Record page 1",
   },
   {
-    src: "/assets/record-screenshots/page-2.png",
+    src: "/assets/record-screenshots/page-2.webp",
     label: "Record page 2",
   },
   {
-    src: "/assets/record-screenshots/page-3.png",
+    src: "/assets/record-screenshots/page-3.webp",
     label: "Record page 3",
   },
   {
-    src: "/assets/record-screenshots/page-4.png",
+    src: "/assets/record-screenshots/page-4.webp",
     label: "Record page 4",
   },
   {
-    src: "/assets/record-screenshots/page-5.png",
+    src: "/assets/record-screenshots/page-5.webp",
     label: "Record page 5",
   },
   {
-    src: "/assets/record-screenshots/page-6.png",
+    src: "/assets/record-screenshots/page-6.webp",
     label: "Record page 6",
   },
 ] as const;
@@ -72,8 +72,9 @@ const initialYaw = -20;
                 alt={page.label}
                 width="2479"
                 height="3508"
-                loading={index === 0 ? "eager" : "lazy"}
+                loading="eager"
                 decoding="async"
+                fetchpriority={index === 0 ? "high" : "low"}
               />
             </button>
           );

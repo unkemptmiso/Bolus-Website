@@ -53,7 +53,8 @@ describe("home problem section", () => {
     expect(problemSectionSource).toContain('class="problem-section__record"');
     expect(problemSectionSource).toContain('src="/assets/home/crumpled-sample-record.webp"');
     expect(problemSectionSource).toContain('alt="Crumpled handwritten anesthesia record"');
-    expect(problemSectionSource).toContain('loading="lazy"');
+    expect(problemSectionSource).toContain('loading="eager"');
+    expect(problemSectionSource).toContain('fetchpriority="high"');
     expect(existsSync(crumpledRecordAsset)).toBe(true);
     expect(globalStyles).toContain(".problem-section {");
     expect(globalStyles).toContain(".problem-section__inner {");

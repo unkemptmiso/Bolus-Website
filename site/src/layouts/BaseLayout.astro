@@ -16,6 +16,15 @@ interface Props {
   footerOmitGroups?: FooterGroupId[];
   footerVariant?: "default" | "dark";
   mainClass?: string;
+  assetHints?: AssetHint[];
+}
+
+interface AssetHint {
+  href: string;
+  as?: "image" | "video";
+  rel?: "preload" | "prefetch";
+  type?: string;
+  fetchpriority?: "high" | "low" | "auto";
 }
 
 const {
@@ -28,6 +37,7 @@ const {
   footerVariant = "default",
   mainClass = "site-main",
 } = Astro.props;
+const assetHints = Astro.props.assetHints ?? [];
 ---
 
 <!doctype html>
@@ -37,6 +47,15 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/png" href={bolusFavicon.src} />
+    {assetHints.map((hint) => (
+      <link
+        rel={hint.rel ?? "preload"}
+        href={hint.href}
+        as={hint.rel === "prefetch" ? undefined : hint.as}
+        type={hint.type}
+        fetchpriority={hint.fetchpriority}
+      />
+    ))}
     <SeoHead data={seo} />
   </head>
   <body>

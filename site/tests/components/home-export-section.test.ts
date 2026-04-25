@@ -40,8 +40,8 @@ describe("home export section", () => {
     expect(exportSectionSource).toContain('class="export-section__preview"');
     expect(exportSectionSource).toContain('class="record-rolodex"');
     expect(exportSectionSource).toContain("recordPages");
-    expect(exportSectionSource).toContain("/assets/record-screenshots/page-1.png");
-    expect(exportSectionSource).toContain("/assets/record-screenshots/page-6.png");
+    expect(exportSectionSource).toContain("/assets/record-screenshots/page-1.webp");
+    expect(exportSectionSource).toContain("/assets/record-screenshots/page-6.webp");
     expect(exportSectionSource).toContain("export-document-card");
     expect(exportSectionSource).toContain("data-record-page");
     expect(exportSectionSource).toContain("data-record-rolodex");
