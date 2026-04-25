@@ -891,6 +891,33 @@ ul {
   }
 }
 
+@media (max-width: 1320px) {
+  .problem-section__inner {
+    width: calc(100vw - 2rem);
+    margin-left: 1rem;
+    margin-right: auto;
+  }
+
+  .problem-section__copy {
+    max-width: min(58vw, 38rem);
+  }
+
+  .problem-section__title {
+    max-width: 14ch;
+    font-size: 50px;
+  }
+
+  .problem-section__body {
+    max-width: min(58vw, 38rem);
+    font-size: 20px;
+  }
+
+  .problem-section__record {
+    right: clamp(-24rem, -24vw, -15rem);
+    width: min(42vw, 500px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .problem-section__record {
     animation: none;
@@ -1726,6 +1753,31 @@ ul {
   outline-offset: 6px;
 }
 
+@media (max-width: 1180px) {
+  .record-rolodex {
+    width: min(100%, 60rem);
+    height: min(62vw, 36rem);
+    min-height: 27rem;
+  }
+
+  .export-document-card {
+    left: 16%;
+    width: min(32vw, 20rem);
+  }
+}
+
+@media (max-width: 980px) {
+  .record-rolodex {
+    width: min(100%, 44rem);
+    height: 28rem;
+  }
+
+  .export-document-card {
+    left: 24%;
+    width: min(30vw, 16rem);
+  }
+}
+
 .security-section {
   position: relative;
   background: linear-gradient(180deg, #fbfcfe 0%, #f2f6fb 100%);
@@ -1952,7 +2004,7 @@ ul {
 .download-section__inner {
   width: min(1120px, calc(100vw - 2.5rem));
   margin: 0 auto;
-  padding: 3.2rem 2rem 1.75rem;
+  padding: 3.2rem 2rem;
   border-radius: 40px;
   background: radial-gradient(circle at top, #f9fbfc 0%, #eef2f6 42%, #e7edf3 100%);
   box-shadow:
@@ -2102,7 +2154,89 @@ ul {
   width: 17rem;
 }
 
+@media (max-width: 1320px) {
+  .workflow-section__stage {
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 0.68fr);
+    gap: clamp(1.75rem, 3.5vw, 3rem);
+  }
 
+  .workflow-section__title {
+    font-size: 50px;
+  }
+
+  .workflow-phone-shell {
+    width: min(100%, 18rem);
+  }
+
+  .workflow-tabs {
+    width: min(100%, 17rem);
+  }
+}
+
+@media (max-width: 1180px) {
+  .workflow-section__stage {
+    grid-template-columns: minmax(0, 1fr) minmax(230px, 0.56fr);
+    gap: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .workflow-section__title {
+    max-width: 10.5ch;
+    font-size: 46px;
+    line-height: 1.04;
+  }
+
+  .workflow-section__title-line {
+    display: inline;
+    white-space: normal;
+  }
+
+  .workflow-section__lede,
+  .workflow-section__phase-body {
+    max-width: 34rem;
+    font-size: 19px;
+  }
+
+  .workflow-section__phase-title {
+    font-size: 1.55rem;
+  }
+
+  .workflow-section__points {
+    gap: 0.7rem;
+  }
+
+  .workflow-point {
+    gap: 0.35rem;
+    padding: 0.85rem 0.9rem;
+    border-radius: 20px;
+  }
+
+  .workflow-point h4 {
+    font-size: 0.98rem;
+  }
+
+  .workflow-point p {
+    font-size: 0.92rem;
+    line-height: 1.4;
+  }
+
+  .workflow-phone-shell {
+    width: min(100%, 15.5rem);
+    gap: 0.8rem;
+  }
+
+  .workflow-tabs {
+    width: min(100%, 15rem);
+  }
+
+  .workflow-tabs__item {
+    min-height: 2.45rem;
+    padding: 0.34rem 0.24rem;
+    border-radius: 1.1rem;
+    font-size: 0.82rem;
+    line-height: 1;
+    white-space: nowrap;
+  }
+}
 
 @media (hover: hover) and (pointer: fine) {
   .solution-card:hover {
@@ -3033,7 +3167,22 @@ ul {
   }
 
   .workflow-tabs {
-    width: min(100%, 18rem);
+    width: min(100%, 16rem);
+    padding: 0.3rem;
+    border-radius: 1.55rem;
+  }
+
+  .workflow-tabs__list {
+    gap: 0.22rem;
+  }
+
+  .workflow-tabs__item {
+    min-height: 2.45rem;
+    padding: 0.34rem 0.24rem;
+    border-radius: 1.1rem;
+    font-size: 0.82rem;
+    line-height: 1;
+    white-space: nowrap;
   }
 
   .workflow-section__phase-viewport {
@@ -3091,7 +3240,7 @@ ul {
 
   .export-document-card {
     left: 24%;
-    width: min(72vw, 18rem);
+    width: min(64vw, 16rem);
     border-radius: 0.75rem;
   }
 
@@ -3176,6 +3325,15 @@ ul {
 
   .security-section {
     border-top: 1px solid var(--color-line);
+  }
+
+  .record-rolodex {
+    height: 22rem;
+  }
+
+  .export-document-card {
+    left: 28%;
+    width: min(74vw, 14rem);
   }
 
   .solution-card__content p {

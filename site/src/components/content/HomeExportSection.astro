@@ -86,10 +86,25 @@ const initialYaw = -20;
 <script is:inline>
   (() => {
     const rolodexes = document.querySelectorAll("[data-record-rolodex]");
-    const getGeometry = () =>
-      window.matchMedia("(max-width: 720px)").matches
-        ? { restSpread: 82, neighborNudge: 48 }
-        : { restSpread: 190, neighborNudge: 72 };
+    const getGeometry = () => {
+      if (window.matchMedia("(max-width: 560px)").matches) {
+        return { restSpread: 64, neighborNudge: 28 };
+      }
+
+      if (window.matchMedia("(max-width: 720px)").matches) {
+        return { restSpread: 82, neighborNudge: 40 };
+      }
+
+      if (window.matchMedia("(max-width: 980px)").matches) {
+        return { restSpread: 88, neighborNudge: 34 };
+      }
+
+      if (window.matchMedia("(max-width: 1180px)").matches) {
+        return { restSpread: 132, neighborNudge: 50 };
+      }
+
+      return { restSpread: 190, neighborNudge: 72 };
+    };
 
     rolodexes.forEach((rolodex) => {
       const pages = Array.from(rolodex.querySelectorAll("[data-record-page]"));

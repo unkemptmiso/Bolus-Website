@@ -46,10 +46,11 @@ describe("home export section", () => {
     expect(exportSectionSource).toContain("data-record-page");
     expect(exportSectionSource).toContain("data-record-rolodex");
     expect(exportSectionSource).toContain("const initialSpread = 190;");
-    expect(exportSectionSource).toContain("const focusStage = 520;");
     expect(exportSectionSource).toContain("max-width: 720px");
+    expect(exportSectionSource).toContain("max-width: 980px");
+    expect(exportSectionSource).toContain("max-width: 1180px");
     expect(exportSectionSource).toContain("restSpread");
-    expect(exportSectionSource).toContain("focusStage");
+    expect(exportSectionSource).toContain("neighborNudge");
     expect(exportSectionSource).toContain("--page-yaw\", isActive ? \"0deg\"");
     expect(exportSectionSource).toContain("--page-yaw");
     expect(exportSectionSource).toContain("--page-depth");
@@ -64,6 +65,14 @@ describe("home export section", () => {
     expect(globalStyles).toContain("rotateY");
     expect(globalStyles).toContain("left: 12%;");
     expect(globalStyles).toContain("width: min(100%, 88rem);");
+    expect(globalStyles).toContain("@media (max-width: 1180px)");
+    expect(globalStyles).toContain("width: min(100%, 60rem);");
+    expect(globalStyles).toContain("width: min(32vw, 20rem);");
+    expect(globalStyles).toContain("@media (max-width: 980px)");
+    expect(globalStyles).toContain("width: min(100%, 44rem);");
+    expect(globalStyles).toContain("width: min(30vw, 16rem);");
+    expect(globalStyles).toContain("width: min(64vw, 16rem);");
+    expect(globalStyles).toContain("width: min(74vw, 14rem);");
     expect(globalStyles).toContain("transition:");
     expect(globalStyles).toContain("transform:");
     expect(globalStyles).toContain("grid-template-columns: 1fr;");

@@ -208,6 +208,17 @@ describe("home workflow section", () => {
     expect(globalStyles).toContain("background: #2c2c2e;");
     expect(globalStyles).toContain("color: #ffffff;");
     expect(globalStyles).toContain("grid-template-columns: minmax(0, 0.95fr) minmax(300px, 0.85fr);");
+    expect(globalStyles).toContain("@media (max-width: 1320px)");
+    expect(globalStyles).toContain("grid-template-columns: minmax(0, 1fr) minmax(260px, 0.68fr);");
+    expect(globalStyles).toContain("width: min(100%, 18rem);");
+    expect(globalStyles).toContain("@media (max-width: 1180px)");
+    expect(globalStyles).toContain("grid-template-columns: minmax(0, 1fr) minmax(230px, 0.56fr);");
+    expect(globalStyles).toContain("font-size: 46px;");
+    expect(globalStyles).toContain("width: min(100%, 15.5rem);");
+    expect(globalStyles).toContain("width: min(100%, 16rem);");
+    expect(globalStyles).toContain("min-height: 2.45rem;");
+    expect(globalStyles).toContain("font-size: 0.82rem;");
+    expect(globalStyles).toContain("white-space: nowrap;");
     expect(globalStyles).toContain(".workflow-phone {");
     expect(globalStyles).toContain(".workflow-phone__screen-track {");
   });

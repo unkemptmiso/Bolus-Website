@@ -86,6 +86,12 @@ describe("home problem section", () => {
     expect(globalStyles).toContain("color: rgba(255, 255, 255, 0.8);");
     expect(globalStyles).toContain(".problem-section__title-line {");
     expect(globalStyles).toContain("max-width: 48ch;");
+    expect(globalStyles).toContain("@media (max-width: 1320px)");
+    expect(globalStyles).toContain("width: calc(100vw - 2rem);");
+    expect(globalStyles).toContain("margin-left: 1rem;");
+    expect(globalStyles).toContain("max-width: min(58vw, 38rem);");
+    expect(globalStyles).toContain("right: clamp(-24rem, -24vw, -15rem);");
+    expect(globalStyles).toContain("width: min(42vw, 500px);");
     expect(globalStyles).toContain(".problem-section__title {\n    max-width: none;");
     expect(globalStyles).toContain("width: 100%;");
   });
