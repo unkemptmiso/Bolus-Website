@@ -41,7 +41,7 @@ describe("pricing page", () => {
     expect(pricingPageSource).toContain('letter-spacing: -1px;');
     expect(pricingPageSource).toContain('font-size: 22px;');
     expect(pricingPageSource).toContain('letter-spacing: 0px;');
-    expect(pricingPageSource).toContain('font-size: clamp(2rem, 3vw, 2.5rem);');
+    expect(pricingPageSource).toContain('font-size: clamp(1.85rem, 2.65vw, 2.25rem);');
     expect(pricingPageSource).toContain('font-size: 1rem;');
     expect(pricingPageSource).toContain('querySelectorAll("[data-billing-toggle]")');
   });
@@ -93,7 +93,10 @@ describe("pricing page", () => {
   it("keeps professional cloud on a single title line", () => {
     expect(pricingPageSource).toContain('.plan-card[data-plan-card="professional-cloud"] .plan-card__title {');
     expect(pricingPageSource).toContain("max-width: none;");
-    expect(pricingPageSource).toContain("font-size: clamp(2rem, 3vw, 2.5rem);");
+    expect(pricingPageSource).toContain("font-size: clamp(1.85rem, 2.65vw, 2.25rem);");
+    expect(pricingPageSource).toContain(
+      ".plan-card__title,\n    .plan-card[data-plan-card=\"professional-cloud\"] .plan-card__title {\n      font-size: clamp(2rem, 3vw, 2.5rem);",
+    );
     expect(pricingPageSource).toContain("white-space: nowrap;");
   });
 

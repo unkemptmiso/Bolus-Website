@@ -476,14 +476,14 @@ const enterprisePlan = pricingPage.plans.find((plan) => plan.slug === "enterpris
 
   .plan-card__title {
     max-width: 10ch;
-    font-size: clamp(2rem, 3vw, 2.5rem);
+    font-size: clamp(1.85rem, 2.65vw, 2.25rem);
     line-height: 1;
     text-wrap: balance;
   }
 
   .plan-card[data-plan-card="professional-cloud"] .plan-card__title {
     max-width: none;
-    font-size: clamp(2rem, 3vw, 2.5rem);
+    font-size: clamp(1.85rem, 2.65vw, 2.25rem);
     white-space: nowrap;
   }
 
@@ -650,14 +650,74 @@ const enterprisePlan = pricingPage.plans.find((plan) => plan.slug === "enterpris
       padding-top: clamp(4rem, 14vw, 5rem);
     }
 
-    .pricing-hero__body {
-      font-size: 19px;
+
+    .plan-card__title,
+    .plan-card[data-plan-card="professional-cloud"] .plan-card__title {
+      font-size: clamp(2rem, 3vw, 2.5rem);
     }
 
     .plan-card,
     .enterprise-card {
       padding: 1.2rem;
       border-radius: 28px;
+    }
+
+    .plan-card__inner {
+      gap: 1.15rem;
+    }
+
+    .plan-card__features {
+      gap: 0.5rem;
+    }
+
+    .enterprise-card {
+      gap: 1rem;
+    }
+
+    .pricing-hero__title {
+      width: 100%;
+      font-size: clamp(2.6rem, 12vw, 3.5rem);
+    }
+
+    .pricing-hero__title-line {
+      white-space: normal;
+    }
+
+    .pricing-hero__body {
+      width: 100%;
+      max-width: 100%;
+      font-size: 19px;
+    }
+
+    .billing-toggle {
+      padding: 0.32rem;
+      gap: 0.25rem;
+    }
+
+    .billing-toggle__button {
+      padding: 0.58rem 0.82rem;
+      font-size: 0.88rem;
+    }
+
+    .billing-toggle__pill {
+      margin-left: 0.35rem;
+      padding: 0.15rem 0.42rem;
+      font-size: 0.65rem;
+    }
+
+    .billing-toggle__highlight {
+      top: 0.32rem;
+      bottom: 0.32rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .pricing-hero__title {
+      font-size: 2.8rem;
+    }
+
+    .pricing-hero__body {
+      font-size: 16px;
     }
   }
 </style>
