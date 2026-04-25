@@ -29,8 +29,8 @@ describe("home problem section", () => {
   });
 
   it("uses the approved section two headline and support copy", () => {
-    expect(problemSectionSource).toContain("Your anesthesia record shouldn't");
-    expect(problemSectionSource).toContain("feel like a liability.");
+    expect(problemSectionSource).toContain("Your anesthesia record");
+    expect(problemSectionSource).toContain("shouldn't feel like a liability.");
     expect(problemSectionSource).toContain('class="problem-section__title-line"');
     expect(problemSectionSource).toContain(
       "Ambiguous timestamps and crossed-out vitals create",
@@ -62,6 +62,15 @@ describe("home problem section", () => {
     expect(globalStyles).toContain(".problem-section__body {");
     expect(globalStyles).toContain(".problem-section__record {");
     expect(globalStyles).toContain(".problem-section__record::after {");
+    expect(globalStyles).toContain("justify-items: start;");
+    expect(globalStyles).toContain("text-align: left;");
+    expect(globalStyles).toContain("right: clamp(-18rem, -16vw, -10rem);");
+    expect(globalStyles).toContain("width: min(48vw, 580px);");
+    expect(globalStyles).toContain("max-width: 48ch;");
+    expect(globalStyles).toContain("opacity: 1;");
+    expect(globalStyles).toContain("transform: translate3d(0, 24%, 0);");
+    expect(globalStyles).toContain("transform: translate3d(-14px, 15px, 0);");
+    expect(globalStyles).toContain("transform: translate3d(-28px, 30px, 0);");
     expect(globalStyles).toContain("@supports (animation-timeline: view())");
     expect(globalStyles).toContain("animation: problem-record-reveal linear both;");
     expect(globalStyles).toContain("@keyframes problem-record-reveal");
@@ -76,7 +85,7 @@ describe("home problem section", () => {
     expect(globalStyles).toContain("line-height: 1.5;");
     expect(globalStyles).toContain("color: rgba(255, 255, 255, 0.8);");
     expect(globalStyles).toContain(".problem-section__title-line {");
-    expect(globalStyles).toContain("max-width: 58ch;");
+    expect(globalStyles).toContain("max-width: 48ch;");
     expect(globalStyles).toContain(".problem-section__title {\n    max-width: none;");
     expect(globalStyles).toContain("width: 100%;");
   });

@@ -48,6 +48,7 @@ describe("home solution section", () => {
     expect(solutionSectionSource).toContain('data-solution-card');
     expect(globalStyles).toContain(".solution-section {");
     expect(globalStyles).toContain(".solution-section__inner {");
+    expect(globalStyles).toContain("padding: clamp(5rem, 9vw, 7.5rem) 0 clamp(3.5rem, 5vw, 4.75rem);");
     expect(globalStyles).toContain("background: #ffffff;");
     expect(globalStyles).toContain("grid-template-columns: 1fr;");
     expect(globalStyles).toContain("justify-items: center;");

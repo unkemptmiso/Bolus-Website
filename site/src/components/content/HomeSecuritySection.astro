@@ -19,13 +19,13 @@ const securityPoints = [
         />
       </div>
       <h2 id="home-security-title" class="security-section__title">Secure by design.</h2>
-      <p class="security-section__body">Bolus is built for secure anesthesia documentation, using AES-256 encryption, authentication-gated access, and local on-device storage so PHI stays secure.</p>
+      <p class="security-section__body">Bolus is built for secure anesthesia documentation, using <span class="u-color-ios-blue">AES-256 encryption</span>, authentication-gated access, and local on-device storage so PHI stays secure.</p>
     </div>
 
     <div class="security-section__points" aria-label="Security proof points">
       {securityPoints.map((point) => (
         <article class="security-point">
-          <h3>{point}</h3>
+          <h3 class={point === "AES-256 encryption" ? "u-color-ios-blue" : ""}>{point}</h3>
         </article>
       ))}
     </div>

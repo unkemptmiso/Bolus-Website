@@ -28,6 +28,7 @@ describe("about page", () => {
   it("uses the guidance typography and a simple dark text-first layout", () => {
     expect(globalStylesSource).toContain(".site-main--about {");
     expect(globalStylesSource).toContain(".about-page {");
+    expect(globalStylesSource).toContain("padding: 120px 24px 72px;");
     expect(globalStylesSource).toContain(".about-hero {");
     expect(globalStylesSource).toContain("justify-items: center;");
     expect(globalStylesSource).toContain(".about-hero h1 {");
@@ -44,6 +45,7 @@ describe("about page", () => {
     expect(globalStylesSource).toContain(".about-manifesto {");
     expect(globalStylesSource).toContain("background: #050816;");
     expect(globalStylesSource).toContain(".site-footer--dark {");
+    expect(globalStylesSource).toContain("padding-top: clamp(3rem, 4.5vw, 4rem);");
     expect(globalStylesSource).toContain(".site-footer--dark .footer-brand-lockup__mark img {");
     expect(globalStylesSource).toContain("filter: brightness(0) invert(1);");
   });

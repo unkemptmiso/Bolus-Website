@@ -176,6 +176,9 @@ describe("home workflow section", () => {
     expect(globalStyles).toContain(".workflow-section {");
     expect(globalStyles).toContain(".workflow-section__inner {");
     expect(globalStyles).toContain(".workflow-section__stage {");
+    expect(globalStyles).toContain(
+      "padding: clamp(3.25rem, 5.5vw, 4.5rem) 0 clamp(5rem, 9vw, 7rem);",
+    );
     expect(globalStyles).toContain(".workflow-section__title-line {");
     expect(globalStyles).toContain(".workflow-section__phase-viewport {");
     expect(globalStyles).toContain(".workflow-section__phase-track {");
