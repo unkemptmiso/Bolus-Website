@@ -104,7 +104,7 @@ export const homePage: SitePage = {
     },
     secondaryCta: {
       label: "See how it works",
-      href: "/simulator",
+      href: "/#workflow",
       variant: "secondary",
     },
   },
@@ -210,35 +210,6 @@ export const pageRegistry: SitePage[] = [
           "Typed runtime config for Stripe and auth credentials",
           "Template-friendly pricing content blocks for future frontend agents",
         ],
-      },
-    ],
-  },
-  {
-    id: "simulator",
-    path: "/simulator",
-    title: "Simulator",
-    navLabel: "Simulator",
-    description: "Future home for interactive workflow and case simulations.",
-    seoTitle: "Simulator | Bolus",
-    seoDescription:
-      "Explore the planned workflow simulator for the Bolus anesthesia record app.",
-    category: "product",
-    hero: {
-      eyebrow: "Product",
-      title: "A dedicated surface for case-flow and charting simulations.",
-      body: "React islands and Framer Motion are installed so this page can evolve into a rich simulator without bloating the rest of the site.",
-      primaryCta: {
-        label: "View API Health",
-        href: "/api/health",
-        variant: "primary",
-      },
-    },
-    sections: [
-      {
-        type: "note",
-        eyebrow: "Next Up",
-        title: "Interactive work belongs here, not everywhere.",
-        body: "The framework keeps simulation logic isolated so the rest of the marketing site can remain static, fast, and SEO-friendly.",
       },
     ],
   },
@@ -590,7 +561,7 @@ export const footerNavigation = [
   {
     id: "product",
     title: "Product",
-    links: ["pricing", "simulator", "about"],
+    links: ["pricing", "about"],
   },
   {
     id: "legal",

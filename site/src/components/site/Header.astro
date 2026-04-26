@@ -24,7 +24,6 @@ const mobileNavigation = [
   { pageId: "about", icon: "about" },
   { pageId: "pricing", icon: "pricing" },
   { pageId: "contact", icon: "contact" },
-  { pageId: "simulator", icon: "simulator" },
   { pageId: "business", icon: "business" },
 ].reduce<Array<{ label: string; path: string; icon: string }>>((items, item) => {
   const page = getPageById(item.pageId);
@@ -192,14 +191,6 @@ const mobileNavigation = [
                           <path d="M4.75 18.75H19.25" stroke-width="1.8" stroke-linecap="round"></path>
                         </svg>
                       )}
-                      {item.icon === "simulator" && (
-                        <svg viewBox="0 0 24 24" fill="none" role="presentation">
-                          <path d="M5 18.5H19" stroke-width="1.8" stroke-linecap="round"></path>
-                          <path d="M8 18.5V9.5A2.75 2.75 0 0 1 10.75 6.75H16A2 2 0 0 1 18 8.75V18.5" stroke-width="1.8" stroke-linejoin="round"></path>
-                          <path d="M5.75 18.5V12.25A1.5 1.5 0 0 1 7.25 10.75H8" stroke-width="1.8" stroke-linejoin="round"></path>
-                          <path d="M11.75 10.5H14.25" stroke-width="1.8" stroke-linecap="round"></path>
-                        </svg>
-                      )}
                       {item.icon === "business" && (
                         <svg viewBox="0 0 24 24" fill="none" role="presentation">
                           <path d="M5.75 18.25V8.75A2 2 0 0 1 7.75 6.75H12.25A2 2 0 0 1 14.25 8.75V18.25" stroke-width="1.8" stroke-linejoin="round"></path>
@@ -236,7 +227,7 @@ const mobileNavigation = [
     const menuToggle = header?.querySelector("[data-mobile-menu-toggle]");
     const mobileMenuPanel = header?.querySelector("[data-mobile-menu-panel]");
     const mobileMenuLinks = header?.querySelectorAll("[data-mobile-menu-link]") ?? [];
-    const phoneQuery = window.matchMedia("(max-width: 767px)");
+    const phoneQuery = window.matchMedia("(max-width: 900px)");
     const condensedEnterThreshold = 18;
     const condensedExitThreshold = 6;
     let isTicking = false;

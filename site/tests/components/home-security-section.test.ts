@@ -34,13 +34,11 @@ describe("home security section", () => {
     expect(securitySectionSource).toContain('alt="Privacy lock icon"');
     expect(securitySectionSource).toContain("Secure by design.");
     expect(securitySectionSource).toContain(
-      "Bolus is built for secure anesthesia documentation, using AES-256 encryption, authentication-gated access, and local on-device storage so PHI stays off the cloud.",
+      "Bolus is built for secure anesthesia documentation, using <span class=\"u-color-ios-blue\">AES-256 encryption</span>, authentication-gated access, and local on-device storage so PHI stays secure.",
     );
     expect(securitySectionSource).toContain("AES-256 encryption");
-    expect(securitySectionSource).toContain("authentication-gated access");
+    expect(securitySectionSource).toContain("Authentication-gated access");
     expect(securitySectionSource).toContain("PHI stored locally on device");
-    expect(securitySectionSource).toContain("Full security details");
-    expect(securitySectionSource).toContain('href="/security"');
   });
 
   it("uses a centered trust section with compact proof cards", () => {
@@ -60,5 +58,24 @@ describe("home security section", () => {
     expect(globalStyles).toContain("box-shadow:");
     expect(globalStyles).toContain("background: linear-gradient(180deg, #ffffff 0%, #f7f7f7 100%);");
     expect(globalStyles).toContain("grid-template-columns: repeat(3, minmax(0, 1fr));");
+  });
+
+  it("keeps the proof cards in a tablet-friendly grid instead of stacking them in one column", () => {
+    expect(globalStyles).toContain("@media (max-width: 820px)");
+    expect(globalStyles).toContain(`  .security-section__points {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }`);
+    expect(globalStyles).toContain(`  .security-point:last-child {
+    grid-column: 1 / -1;
+    max-width: min(100%, 22rem);
+    justify-self: center;
+  }`);
+  });
+
+  it("hides the proof cards entirely on iPad mini portrait and smaller to match the phone treatment", () => {
+    expect(globalStyles).toContain("@media (max-width: 768px)");
+    expect(globalStyles).toContain(`  .security-section__points {
+    display: none;
+  }`);
   });
 });

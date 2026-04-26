@@ -27,7 +27,6 @@ describe("page metadata titles", () => {
       'title: "Medical Disclaimer | Bolus"',
     );
     expect(readPage("privacy-policy.md")).toContain('title: "Privacy Policy | Bolus"');
-    expect(readPage("simulator.md")).toContain('title: "Simulator | Bolus"');
     expect(readPage("terms-of-service.md")).toContain(
       'title: "Terms of Service | Bolus"',
     );

@@ -72,9 +72,9 @@ const initialYaw = -20;
                 alt={page.label}
                 width="2479"
                 height="3508"
-                loading="eager"
+                loading="lazy"
                 decoding="async"
-                fetchpriority={index === 0 ? "high" : "low"}
+                fetchpriority="low"
               />
             </button>
           );
@@ -86,9 +86,11 @@ const initialYaw = -20;
 
 <script is:inline>
   (() => {
+    const mobileCarouselBreakpoint = "(max-width: 768px)";
     const rolodexes = document.querySelectorAll("[data-record-rolodex]");
+    const mobileCarousel = window.matchMedia(mobileCarouselBreakpoint);
     const getGeometry = () => {
-      if (window.matchMedia("(max-width: 560px)").matches) {
+      if (window.matchMedia(mobileCarouselBreakpoint).matches) {
         return { restSpread: 64, neighborNudge: 28 };
       }
 
@@ -114,30 +116,159 @@ const initialYaw = -20;
         return;
       }
 
+      let mobileProgrammaticScroll = false;
+      let mobileProgrammaticScrollTimer = 0;
+
+      const getDesktopLayout = () => {
+        const { restSpread, neighborNudge } = getGeometry();
+        const firstPage = pages[0];
+
+        if (!(firstPage instanceof HTMLElement)) {
+          return {
+            restSpread,
+            neighborNudge,
+            minShift: 0,
+            maxShift: restSpread * Math.max(0, pages.length - 1),
+          };
+        }
+
+        const pageBounds = firstPage.getBoundingClientRect();
+        const rolodexBounds = rolodex.getBoundingClientRect();
+        const pageWidth = pageBounds.width || firstPage.offsetWidth;
+        const rolodexWidth = rolodexBounds.width || rolodex.clientWidth;
+        const computedLeft = Number.parseFloat(window.getComputedStyle(firstPage).left);
+        const pageLeft = Number.isFinite(computedLeft) ? computedLeft : rolodexWidth * 0.18;
+        const edgeInset = 28;
+        const minShift = Math.max(0, pageWidth / 2 - pageLeft + edgeInset);
+        const maxShift = Math.max(minShift, rolodexWidth - pageLeft - pageWidth / 2 - edgeInset);
+        const pageIntervals = Math.max(1, pages.length - 1);
+        const availableSpread = Math.max(48, (maxShift - minShift) / pageIntervals);
+        const safeSpread = Math.min(restSpread, availableSpread);
+        const previousPagePeek = Math.min(76, Math.max(44, safeSpread * 0.72));
+
+        return {
+          restSpread: safeSpread,
+          neighborNudge: Math.min(neighborNudge, Math.max(18, safeSpread * 0.45)),
+          previousPagePeek,
+          minShift,
+          maxShift,
+        };
+      };
+
+      const clampPageShift = (shift, layout) => Math.min(layout.maxShift, Math.max(layout.minShift, shift));
+
+      const updateActiveState = (activeIndex) => {
+        rolodex.dataset.activeIndex = String(activeIndex);
+        rolodex.style.setProperty("--active-index", String(activeIndex));
+
+        pages.forEach((page, index) => {
+          if (!(page instanceof HTMLElement)) return;
+
+          const isActive = index === activeIndex;
+          page.classList.toggle("is-active", isActive);
+          page.setAttribute("aria-pressed", isActive ? "true" : "false");
+          page.style.setProperty("--page-z", isActive ? "90" : String(60 - index));
+        });
+      };
+
+      const syncMobileActivePage = () => {
+        if (!mobileCarousel.matches) return;
+        if (mobileProgrammaticScroll) return;
+
+        const viewportCenter = rolodex.scrollLeft + rolodex.clientWidth / 2;
+        const activeIndex = pages.reduce((closestIndex, page, index) => {
+          if (!(page instanceof HTMLElement)) return closestIndex;
+
+          const closestPage = pages[closestIndex];
+          if (!(closestPage instanceof HTMLElement)) return index;
+
+          const pageCenter = page.offsetLeft + page.offsetWidth / 2;
+          const closestCenter = closestPage.offsetLeft + closestPage.offsetWidth / 2;
+
+          return Math.abs(pageCenter - viewportCenter) < Math.abs(closestCenter - viewportCenter)
+            ? index
+            : closestIndex;
+        }, 0);
+
+        updateActiveState(activeIndex);
+      };
+
+      const finishMobileProgrammaticScroll = () => {
+        mobileProgrammaticScroll = false;
+        window.clearTimeout(mobileProgrammaticScrollTimer);
+        mobileProgrammaticScrollTimer = 0;
+        syncMobileActivePage();
+      };
+
+      const stopMobileProgrammaticScroll = () => {
+        if (!mobileProgrammaticScroll) return;
+
+        mobileProgrammaticScroll = false;
+        window.clearTimeout(mobileProgrammaticScrollTimer);
+        mobileProgrammaticScrollTimer = 0;
+      };
+
+      const centerMobilePage = (index) => {
+        if (!mobileCarousel.matches) return false;
+
+        const page = pages[index];
+        if (!(page instanceof HTMLElement)) return false;
+
+        const targetScrollLeft = page.offsetLeft - (rolodex.clientWidth - page.offsetWidth) / 2;
+        mobileProgrammaticScroll = true;
+        updateActiveState(index);
+        window.clearTimeout(mobileProgrammaticScrollTimer);
+        rolodex.scrollTo({ left: targetScrollLeft, behavior: "smooth" });
+        mobileProgrammaticScrollTimer = window.setTimeout(finishMobileProgrammaticScroll, 720);
+
+        return true;
+      };
+
+      let mobileScrollFrame = 0;
+      const queueMobileActivePageSync = () => {
+        if (mobileScrollFrame !== 0) return;
+
+        mobileScrollFrame = window.requestAnimationFrame(() => {
+          mobileScrollFrame = 0;
+          syncMobileActivePage();
+        });
+      };
+
       const setRestingStack = () => {
-        const { restSpread } = getGeometry();
-        rolodex.dataset.activeIndex = "0";
-        rolodex.style.setProperty("--active-index", "0");
+        if (mobileCarousel.matches) {
+          syncMobileActivePage();
+          return;
+        }
+
+        const layout = getDesktopLayout();
+        updateActiveState(0);
 
         pages.forEach((page, index) => {
           if (!(page instanceof HTMLElement)) return;
 
           const isActive = index === 0;
+          const shift = clampPageShift(index * layout.restSpread, layout);
 
-          page.classList.toggle("is-active", isActive);
-          page.setAttribute("aria-pressed", isActive ? "true" : "false");
-          page.style.setProperty("--page-shift", `${index * restSpread}px`);
+          page.style.setProperty("--page-shift", `${shift}px`);
           page.style.setProperty("--page-depth", isActive ? "48px" : `${index * -14}px`);
           page.style.setProperty("--page-yaw", isActive ? "-18deg" : "-20deg");
           page.style.setProperty("--page-scale", isActive ? "1.04" : String(Math.max(0.84, 0.94 - index * 0.015)));
-          page.style.setProperty("--page-z", String(60 - index));
         });
       };
 
       const setActivePage = (activeIndex) => {
-        const { restSpread, neighborNudge } = getGeometry();
-        rolodex.dataset.activeIndex = String(activeIndex);
-        rolodex.style.setProperty("--active-index", String(activeIndex));
+        if (mobileCarousel.matches) {
+          updateActiveState(activeIndex);
+          return;
+        }
+
+        const layout = getDesktopLayout();
+        const { restSpread, neighborNudge } = layout;
+        const activeShift = clampPageShift(
+          Math.max(activeIndex * restSpread, layout.minShift + layout.previousPagePeek),
+          layout,
+        );
+        updateActiveState(activeIndex);
 
         pages.forEach((page, index) => {
           if (!(page instanceof HTMLElement)) return;
@@ -148,30 +279,53 @@ const initialYaw = -20;
              neighbors shift slightly away to make room */
           let shift;
           if (isActive) {
-            shift = index * restSpread;
+            shift = activeShift;
+          } else if (index === activeIndex - 1) {
+            shift = activeShift - layout.previousPagePeek;
           } else if (index < activeIndex) {
             shift = index * restSpread - neighborNudge;
           } else {
             shift = index * restSpread + neighborNudge;
           }
 
-          page.classList.toggle("is-active", isActive);
-          page.setAttribute("aria-pressed", isActive ? "true" : "false");
+          shift = clampPageShift(shift, layout);
+
           page.style.setProperty("--page-shift", `${shift}px`);
           page.style.setProperty("--page-depth", isActive ? "68px" : `${index * -14}px`);
           page.style.setProperty("--page-yaw", isActive ? "0deg" : "-20deg");
           page.style.setProperty("--page-scale", isActive ? "1.06" : String(Math.max(0.84, 0.94 - index * 0.015)));
-          page.style.setProperty("--page-z", isActive ? "90" : String(60 - index));
         });
+      };
+
+      const focusPage = (index) => {
+        if (mobileCarousel.matches) {
+          updateActiveState(index);
+          return;
+        }
+
+        setActivePage(index);
       };
 
       pages.forEach((page, index) => {
         page.addEventListener("mouseenter", () => setActivePage(index));
-        page.addEventListener("focus", () => setActivePage(index));
+        page.addEventListener("focus", () => focusPage(index));
+        page.addEventListener("click", (event) => {
+          if (centerMobilePage(index)) {
+            event.preventDefault();
+          }
+        });
       });
 
       rolodex.addEventListener("mouseleave", setRestingStack);
+      rolodex.addEventListener("scroll", queueMobileActivePageSync, { passive: true });
+      rolodex.addEventListener("pointerdown", stopMobileProgrammaticScroll, { passive: true });
+      rolodex.addEventListener("scrollend", finishMobileProgrammaticScroll);
       window.addEventListener("resize", () => {
+        if (mobileCarousel.matches) {
+          syncMobileActivePage();
+          return;
+        }
+
         const activeIndex = Number(rolodex.dataset.activeIndex ?? 0);
         if (Number.isNaN(activeIndex) || activeIndex === 0) {
           setRestingStack();
@@ -180,6 +334,7 @@ const initialYaw = -20;
 
         setActivePage(activeIndex);
       });
+      mobileCarousel.addEventListener?.("change", () => window.requestAnimationFrame(setRestingStack));
 
       setRestingStack();
     });

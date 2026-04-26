@@ -66,7 +66,7 @@ describe("header scroll motion", () => {
     expect(headerSource).toContain('data-mobile-menu-toggle');
     expect(headerSource).toContain('id="mobile-menu-panel"');
     expect(headerSource).toContain('class="mobile-menu-panel"');
-    expect(headerSource).toContain('{ pageId: "simulator", icon: "simulator" }');
+    expect(headerSource).not.toContain('{ pageId: "simulator", icon: "simulator" }');
     expect(headerSource).toContain('{ pageId: "business", icon: "business" }');
     expect(headerSource).toContain('header.dataset.mobileMenu = nextMenuState;');
     expect(headerSource).toContain('menuToggle.setAttribute("aria-expanded", String(isMobileMenuOpen));');

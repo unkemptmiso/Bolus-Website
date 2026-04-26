@@ -1,3 +1,7 @@
+---
+const downloadPreviewSrc = "/assets/home/download-devices.webp";
+---
+
 <section id="download" class="download-section" aria-labelledby="home-download-title">
   <div class="download-section__inner">
     <div class="download-section__copy">
@@ -6,6 +10,15 @@
         Bolus keeps your anesthesia record clear, quick, and connected from Pre-Op to
         Post-Op on iPhone, iPad mini, and iPad Pro.
       </p>
+      <img 
+        src={downloadPreviewSrc}
+        alt="Bolus on iPhone and iPad" 
+        class="download-section__preview-image"
+        width="1020"
+        height="924"
+        loading="lazy"
+        decoding="async"
+      />
       <a
         class="download-section__button"
         href="/waitlist"

@@ -8,6 +8,11 @@ const assetSize = (path: string) =>
 const maxBytes = (mb: number) => mb * 1024 * 1024;
 
 describe("homepage asset budgets", () => {
+  it("keeps the section two record and download preview in compressed web formats", () => {
+    expect(assetSize("public/assets/home/updated-anesthesia-record.webp")).toBeLessThan(maxBytes(0.25));
+    expect(assetSize("public/assets/home/download-devices.webp")).toBeLessThan(maxBytes(0.2));
+  });
+
   it("keeps document preview images lightweight without relying on huge PNGs", () => {
     for (const page of [1, 2, 3, 4, 5, 6]) {
       expect(assetSize(`public/assets/record-screenshots/page-${page}.webp`)).toBeLessThan(maxBytes(0.2));

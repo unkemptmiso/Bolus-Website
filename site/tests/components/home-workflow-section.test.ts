@@ -66,7 +66,7 @@ describe("home workflow section", () => {
     expect(workflowSectionSource).not.toContain("Placeholder");
   });
 
-  it("uses workflow phone video playlists that start only after the section enters view", () => {
+  it("uses workflow phone video playlists that stay unloaded until the section enters view", () => {
     expect(workflowSectionSource).not.toContain('import defaultPreOpHomepage');
     expect(workflowSectionSource).not.toContain('class="workflow-phone__preview-image"');
     expect(workflowSectionSource).not.toContain('src={defaultPreOpHomepage.src}');
@@ -93,7 +93,8 @@ describe("home workflow section", () => {
     expect(workflowSectionSource).toContain("data-workflow-video");
     expect(workflowSectionSource).toContain("data-workflow-clip-id={clip.id}");
     expect(workflowSectionSource).toContain('autoplay');
-    expect(workflowSectionSource).toContain('preload={index === 0 ? "auto" : "metadata"}');
+    expect(workflowSectionSource).toContain('data-workflow-video-src={clip.src}');
+    expect(workflowSectionSource).toContain('preload="none"');
     expect(workflowSectionSource).toContain('muted');
     expect(workflowSectionSource).toContain('playsinline');
     expect(workflowSectionSource).toContain('class="workflow-phone__preview-media"');
@@ -106,10 +107,12 @@ describe("home workflow section", () => {
     expect(workflowSectionSource).toContain("hasWorkflowEnteredViewport");
     expect(workflowSectionSource).not.toContain('playClipByIndex("pre-op", 0, { restart: false })');
     expect(workflowSectionSource).toContain("crossFadeToClip");
+    expect(workflowSectionSource).toContain("ensureWorkflowVideoSource");
     expect(workflowSectionSource).toContain("workflowCrossfadeMs");
     expect(workflowSectionSource).toContain('slot.classList.add("is-leaving")');
     expect(workflowSectionSource).toContain("whenVideoCanRender");
-    expect(workflowSectionSource).toContain("warmWorkflowVideos");
+    expect(workflowSectionSource).not.toContain("warmWorkflowVideos");
+    expect(workflowSectionSource).not.toContain("requestIdleCallback");
     expect(workflowSectionSource).toContain("workflowClips");
     expect(globalStyles).toContain(".workflow-phone__preview {");
     expect(globalStyles).toContain(".workflow-phone__preview-media {");
@@ -156,6 +159,7 @@ describe("home workflow section", () => {
 
   it("uses a pinned workflow story layout with stacked copy and phone tracks", () => {
     expect(workflowSectionSource).toContain('data-workflow-section');
+    expect(workflowSectionSource).toContain('id="workflow"');
     expect(workflowSectionSource).toContain('data-workflow-stage');
     expect(workflowSectionSource).toContain('data-workflow-copy-track');
     expect(workflowSectionSource).toContain('data-workflow-screen-track');

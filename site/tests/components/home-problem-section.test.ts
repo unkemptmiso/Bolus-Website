@@ -14,8 +14,8 @@ const globalStyles = readFileSync(
   new URL("../../src/styles/global.css", import.meta.url),
   "utf8",
 );
-const crumpledRecordAsset = new URL(
-  "../../public/assets/home/crumpled-sample-record.webp",
+const updatedRecordAsset = new URL(
+  "../../public/assets/home/updated-anesthesia-record.webp",
   import.meta.url,
 );
 
@@ -51,11 +51,14 @@ describe("home problem section", () => {
     expect(problemSectionSource).toContain('class="problem-section__title"');
     expect(problemSectionSource).toContain('class="problem-section__body"');
     expect(problemSectionSource).toContain('class="problem-section__record"');
-    expect(problemSectionSource).toContain('src="/assets/home/crumpled-sample-record.webp"');
-    expect(problemSectionSource).toContain('alt="Crumpled handwritten anesthesia record"');
-    expect(problemSectionSource).toContain('loading="eager"');
-    expect(problemSectionSource).toContain('fetchpriority="high"');
-    expect(existsSync(crumpledRecordAsset)).toBe(true);
+    expect(problemSectionSource).toContain('const problemRecordSrc = "/assets/home/updated-anesthesia-record.webp?v=20260426";');
+    expect(problemSectionSource).toContain('src={problemRecordSrc}');
+    expect(problemSectionSource).toContain('alt="Handwritten anesthesia record"');
+    expect(problemSectionSource).toContain('width="980"');
+    expect(problemSectionSource).toContain('height="1305"');
+    expect(problemSectionSource).toContain('loading="lazy"');
+    expect(problemSectionSource).not.toContain('fetchpriority="high"');
+    expect(existsSync(updatedRecordAsset)).toBe(true);
     expect(globalStyles).toContain(".problem-section {");
     expect(globalStyles).toContain(".problem-section__inner {");
     expect(globalStyles).toContain("min-height: clamp(560px, 70vw, 760px);");
@@ -93,6 +96,23 @@ describe("home problem section", () => {
     expect(globalStyles).toContain("max-width: min(58vw, 38rem);");
     expect(globalStyles).toContain("right: clamp(-24rem, -24vw, -15rem);");
     expect(globalStyles).toContain("width: min(42vw, 500px);");
+    expect(globalStyles).toContain('@media (orientation: portrait) and (min-width: 820px) and (max-width: 1045px)');
+    expect(globalStyles).toContain("grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);");
+    expect(globalStyles).toContain("gap: clamp(1rem, 1.8vw, 1.75rem);");
+    expect(globalStyles).toContain("align-items: center;");
+    expect(globalStyles).toContain("min-height: auto;");
+    expect(globalStyles).toContain("padding: 3.25rem 0 1.75rem;");
+    expect(globalStyles).toContain("padding-left: clamp(2.25rem, 5vw, 4rem);");
+    expect(globalStyles).toContain("padding-right: clamp(1.25rem, 2.5vw, 2rem);");
+    expect(globalStyles).toContain(".problem-section__copy {\n    max-width: none;");
+    expect(globalStyles).toContain("width: 100%;");
+    expect(globalStyles).toContain("position: relative;");
+    expect(globalStyles).toContain("right: auto;");
+    expect(globalStyles).toContain("bottom: auto;");
+    expect(globalStyles).toContain("justify-self: start;");
+    expect(globalStyles).toContain("width: min(100%, 32rem);");
+    expect(globalStyles).toContain("margin: 0 0 -0.5rem -0.75rem;");
+    expect(globalStyles).toContain("animation: none;");
     expect(globalStyles).toContain(".problem-section__title {\n    max-width: none;");
     expect(globalStyles).toContain("width: 100%;");
   });

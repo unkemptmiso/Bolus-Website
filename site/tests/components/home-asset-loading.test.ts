@@ -40,31 +40,30 @@ describe("homepage asset loading", () => {
     expect(baseLayoutSource).toContain("fetchpriority={hint.fetchpriority}");
   });
 
-  it("passes critical preloads and below-fold prefetches from the homepage", () => {
+  it("passes only truly critical preloads from the homepage", () => {
     expect(indexSource).toContain('import { getImage } from "astro:assets";');
     expect(indexSource).toContain('import heroDevices from "../assets/hero-devices.png";');
     expect(indexSource).toContain("const optimizedHeroDevices = await getImage");
     expect(indexSource).toContain("const homepageAssetHints");
     expect(indexSource).toContain("href: optimizedHeroDevices.src");
-    expect(indexSource).toContain('href: "/assets/home/crumpled-sample-record.webp"');
-    expect(indexSource).toContain('href: "/assets/iphone-17-black-portrait.webp"');
-    expect(indexSource).toContain('href: "/assets/workflow/pre-op-evaluation.mp4"');
-    expect(indexSource).toContain('href: "/assets/record-screenshots/page-1.webp"');
-    expect(indexSource).toContain('rel: "prefetch"');
-    expect(indexSource).toContain('href: "/assets/workflow/intra-op-events.mp4"');
+    expect(indexSource).not.toContain("problemRecordHint");
+    expect(indexSource).not.toContain('href: "/assets/iphone-17-black-portrait.webp"');
+    expect(indexSource).not.toContain('href: "/assets/workflow/pre-op-evaluation.mp4"');
+    expect(indexSource).not.toContain('href: "/assets/record-screenshots/page-1.webp"');
+    expect(indexSource).not.toContain('rel: "prefetch"');
     expect(indexSource).toContain('assetHints={homepageAssetHints}');
   });
 
-  it("marks visible homepage media as eager and high-priority where appropriate", () => {
+  it("keeps below-fold homepage media out of the eager loading path", () => {
     expect(splashHeroSource).toContain('loading="eager"');
     expect(splashHeroSource).toContain('fetchpriority="high"');
-    expect(problemSectionSource).toContain('loading="eager"');
-    expect(problemSectionSource).toContain('fetchpriority="high"');
+    expect(problemSectionSource).toContain('loading="lazy"');
+    expect(problemSectionSource).not.toContain('fetchpriority="high"');
     expect(solutionSectionSource).toContain('loading="eager"');
     expect(workflowSectionSource).toContain('class="workflow-phone__frame"');
-    expect(workflowSectionSource).toContain('loading="eager"');
-    expect(workflowSectionSource).toContain('preload={index === 0 ? "auto" : "metadata"}');
-    expect(exportSectionSource).toContain('loading="eager"');
-    expect(exportSectionSource).toContain('fetchpriority={index === 0 ? "high" : "low"}');
+    expect(workflowSectionSource).toContain('loading="lazy"');
+    expect(workflowSectionSource).toContain('preload="none"');
+    expect(exportSectionSource).toContain('loading="lazy"');
+    expect(exportSectionSource).toContain('fetchpriority="low"');
   });
 });

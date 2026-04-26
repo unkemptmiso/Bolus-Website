@@ -1,3 +1,7 @@
+---
+const problemRecordSrc = "/assets/home/updated-anesthesia-record.webp?v=20260426";
+---
+
 <section class="problem-section" aria-labelledby="home-problem-title">
   <div class="problem-section__inner">
     <div class="problem-section__copy">
@@ -14,11 +18,12 @@
 
     <figure class="problem-section__record">
       <img
-        src="/assets/home/crumpled-sample-record.webp"
-        alt="Crumpled handwritten anesthesia record"
-        loading="eager"
+        src={problemRecordSrc}
+        alt="Handwritten anesthesia record"
+        width="980"
+        height="1305"
+        loading="lazy"
         decoding="async"
-        fetchpriority="high"
       />
     </figure>
   </div>

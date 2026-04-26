@@ -105,6 +105,7 @@ const workflowPhases = [
 ---
 
 <section
+  id="workflow"
   class="workflow-section"
   data-workflow-section
   data-workflow-active-phase="pre-op"
@@ -163,9 +164,8 @@ const workflowPhases = [
               src="/assets/iphone-17-black-portrait.webp"
               alt=""
               class="workflow-phone__frame"
-              loading="eager"
+              loading="lazy"
               decoding="async"
-              fetchpriority="high"
             />
 
             <div class="workflow-phone__screen-viewport">
@@ -189,11 +189,11 @@ const workflowPhases = [
                               data-workflow-video
                               data-workflow-video-phase={phase.id}
                               data-workflow-clip-id={clip.id}
-                              src={clip.src}
+                              data-workflow-video-src={clip.src}
                               muted
                               autoplay={phase.id === "pre-op" && index === 0 ? true : undefined}
                               playsinline
-                              preload={index === 0 ? "auto" : "metadata"}
+                              preload="none"
                               aria-hidden="true"
                             ></video>
                           ))}
@@ -239,7 +239,7 @@ const workflowPhases = [
     const videoSlots = Array.from(section.querySelectorAll("[data-workflow-video]"));
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const compactLayout = window.matchMedia("(max-width: 820px)");
+    const compactLayout = window.matchMedia("(max-width: 1099px)");
     const phaseIds = ["pre-op", "intra-op", "post-op"];
     const phaseProgressMap = [0, 0.4, 0.8];
     const workflowCrossfadeMs = 760;
@@ -291,11 +291,18 @@ const workflowPhases = [
       return slot instanceof HTMLVideoElement ? slot : null;
     };
 
+    const ensureWorkflowVideoSource = (slot) => {
+      const source = slot.dataset.workflowVideoSrc;
+      if (!source || slot.getAttribute("src") === source) return;
+
+      slot.setAttribute("src", source);
+    };
+
     const prepareVideoSlot = (slot) => {
       slot.muted = true;
       slot.defaultMuted = true;
       slot.playsInline = true;
-      slot.preload = "auto";
+      slot.preload = "metadata";
     };
 
     const pauseWorkflowPreview = (phase) => {
@@ -307,6 +314,7 @@ const workflowPhases = [
     };
 
     const playSlot = (slot, { restart = false } = {}) => {
+      ensureWorkflowVideoSource(slot);
       prepareVideoSlot(slot);
 
       if (restart) {
@@ -319,19 +327,9 @@ const workflowPhases = [
       }
     };
 
-    const warmWorkflowVideos = () => {
-      videoSlots.forEach((slot) => {
-        if (!(slot instanceof HTMLVideoElement)) return;
-
-        prepareVideoSlot(slot);
-
-        if (slot.readyState === HTMLMediaElement.HAVE_NOTHING) {
-          slot.load();
-        }
-      });
-    };
-
     const whenVideoCanRender = (slot, callback) => {
+      ensureWorkflowVideoSource(slot);
+
       if (slot.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
         callback();
         return;
@@ -586,11 +584,5 @@ const workflowPhases = [
     compactLayout.addEventListener?.("change", handleChange);
 
     updateTarget();
-
-    if ("requestIdleCallback" in window) {
-      window.requestIdleCallback(warmWorkflowVideos, { timeout: 1200 });
-    } else {
-      window.setTimeout(warmWorkflowVideos, 600);
-    }
   })();
 </script>
