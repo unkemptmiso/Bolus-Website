@@ -3108,13 +3108,13 @@ ul {
   }
 
   .solution-section__title {
-    max-width: 12ch;
+    max-width: 24ch;
     font-size: 42px;
     line-height: 1.05;
   }
 
   .solution-section__title-line {
-    display: inline;
+    display: block;
   }
 
   .solution-section__desc {
