@@ -170,7 +170,7 @@ describe("home workflow section", () => {
     expect(workflowSectionSource).toContain('tab.addEventListener("click"');
     expect(workflowSectionSource).toContain("window.scrollTo({");
     expect(workflowSectionSource).toContain('behavior: "smooth"');
-    expect(workflowSectionSource).toContain('window.matchMedia("(max-width: 820px)")');
+    expect(workflowSectionSource).toContain('window.matchMedia("(max-width: 819px)")');
     expect(workflowSectionSource).toContain("progress < 0.28");
     expect(workflowSectionSource).toContain("progress < 0.58");
     expect(workflowSectionSource).toContain('class="workflow-section__copy"');
@@ -225,5 +225,14 @@ describe("home workflow section", () => {
     expect(globalStyles).toContain("white-space: nowrap;");
     expect(globalStyles).toContain(".workflow-phone {");
     expect(globalStyles).toContain(".workflow-phone__screen-track {");
+  });
+
+  it("does not rely on a global portrait override block that rewrites multiple homepage sections", () => {
+    expect(globalStyles).not.toContain("/* iPad Portrait Overrides (768px to 1099px) */");
+    expect(globalStyles).not.toContain("@media (orientation: portrait) and (max-width: 1099px)");
+    expect(globalStyles).not.toContain("@media (max-width: 1099px) {");
+    expect(globalStyles).toContain("@media (max-width: 819px) {");
+    expect(globalStyles).not.toContain(".workflow-section {\n    padding-top: 2rem !important;");
+    expect(globalStyles).not.toContain(".export-section__inner {\n    padding-top: 2.5rem !important;");
   });
 });

@@ -60,6 +60,24 @@ const assetHints = Astro.props.assetHints ?? [];
   </head>
   <body>
     <a class="skip-link" href="#content">Skip to content</a>
+    <div class="ipad-debug-badge">TABLET PORTRAIT ACTIVE</div>
+    <div class="site-build-badge">SITE BUILD ACTIVE</div>
+    <div class="viewport-debug">
+      WIDTH: <span id="vw-display">0</span>px<br/>
+      ORIENT: <span id="orient-display">unknown</span>
+    </div>
+
+    <script is:inline>
+      function updateDebug() {
+        const vw = document.getElementById('vw-display');
+        const orient = document.getElementById('orient-display');
+        if (vw) vw.textContent = window.innerWidth;
+        if (orient) orient.textContent = window.innerHeight > window.innerWidth ? 'PORTRAIT' : 'LANDSCAPE';
+      }
+      window.addEventListener('resize', updateDebug);
+      updateDebug();
+    </script>
+
     {showHeader && <Header currentPath={page.path} />}
     <main id="content" class={mainClass}>
       <article itemscope itemtype="https://schema.org/Article">

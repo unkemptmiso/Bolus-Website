@@ -1,5 +1,50 @@
 @import "./tokens.css";
 
+.ipad-debug-badge {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: #ff0000;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  z-index: 9999;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.site-build-badge {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #000;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  z-index: 10000;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.viewport-debug {
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  background: #000;
+  color: #00ff00;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-weight: bold;
+  z-index: 10000;
+  font-size: 13px;
+  line-height: 1.4;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  font-family: monospace;
+}
+
 *,
 *::before,
 *::after {
@@ -3017,7 +3062,7 @@ ul {
   }
 }
 
-@media (max-width: 1099px) {
+@media (max-width: 819px) {
   .splash {
     align-items: flex-start;
     padding: 2.5rem 0 4rem;
@@ -3061,7 +3106,6 @@ ul {
     transform: translate(-50%, -46%) rotate(4deg);
   }
 
-  /* Portrait iPads handled by the (max-width: 1100px) and (orientation: portrait) block above */
   .problem-section__inner {
     display: grid;
     min-height: auto;
@@ -3333,40 +3377,169 @@ ul {
   }
 }
 
-@media (orientation: portrait) and (max-width: 1099px) {
+@media (min-width: 769px) and (max-width: 1320px) {
+  .ipad-debug-badge {
+    display: block !important;
+  }
+
+  /* 1. Global Section Spacing & Width */
+  .splash__stack,
+  .problem-section__inner,
+  .solution-section__inner,
+  .workflow-section__inner,
+  .export-section__inner,
+  .security-section__inner,
+  .faq-section__inner,
+  .download-section__inner,
+  .legal-hub__inner,
+  .legal-page__inner {
+    width: min(100%, 1120px) !important;
+    max-width: calc(100vw - 4rem) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
   .splash {
-    padding-bottom: 2rem !important;
+    min-height: auto !important;
+    padding-bottom: 4rem !important;
   }
 
+  .splash__media--hero {
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  .splash__stack {
+    gap: 1.5rem !important;
+  }
+
+  /* Reduce vertical padding for all sections */
   .problem-section__inner {
-    grid-template-columns: 1fr !important;
-    padding-top: 2.5rem !important;
-    padding-bottom: 2rem !important;
-  }
-
-  .problem-section__record {
-    width: min(100%, 36rem) !important;
-    margin: 1.5rem auto -4rem !important;
-  }
-
-  .solution-section__inner {
-    padding-top: 2.5rem !important;
-    padding-bottom: 2.5rem !important;
-  }
-
-  .workflow-section {
     padding-top: 2rem !important;
-    padding-bottom: 3rem !important;
+    padding-bottom: 4rem !important;
     min-height: auto !important;
   }
 
-  .workflow-section__stage {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
+  .solution-section__inner,
+  .workflow-section__inner,
+  .export-section__inner,
+  .security-section__inner,
+  .faq-section__inner,
+  .download-section__inner {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+    min-height: auto !important;
   }
 
+  .workflow-section {
+    min-height: auto !important;
+  }
+
+  /* 2. Fix Problem Section (Section 2) */
+  .problem-section {
+    overflow: visible !important;
+  }
+
+  .problem-section__inner {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 3.5rem !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .problem-section__copy {
+    max-width: 44rem !important;
+    width: 100% !important;
+    justify-items: center !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+  }
+
+  .problem-section__title {
+    max-width: none !important;
+    width: 100% !important;
+    font-size: clamp(38px, 6vw, 48px) !important;
+    line-height: 1.1 !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .problem-section__title-line {
+    display: inline !important;
+    white-space: normal !important;
+  }
+
+  .problem-section__body {
+    max-width: 36rem !important;
+    margin: 0 auto !important;
+    font-size: 19px !important;
+    line-height: 1.5 !important;
+  }
+
+  .problem-section__record {
+    position: relative !important;
+    inset: auto !important;
+    justify-self: center !important;
+    width: min(100%, 36rem) !important;
+    margin: 0 auto !important;
+    opacity: 1 !important;
+    animation: none !important;
+    transform: none !important;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3)) !important;
+  }
+
+  .problem-section__record::before,
+  .problem-section__record::after {
+    display: none !important; /* Remove stacked paper effect if it causes clipping issues on tablet */
+  }
+
+  /* 3. Workflow Section Adjustments */
+  .workflow-section__stage {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 3rem !important;
+    position: static !important;
+    min-height: auto !important;
+    text-align: center !important;
+  }
+
+  .workflow-section__copy {
+    max-width: 36rem !important;
+    width: 100% !important;
+  }
+
+  .workflow-section__device {
+    order: 2 !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  .workflow-phone-shell {
+    width: min(100%, 20rem) !important;
+    margin: 0 auto !important;
+  }
+
+  /* 4. Export Section Adjustments */
   .export-section__inner {
-    padding-top: 2.5rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 3.5rem !important;
+    text-align: center !important;
+  }
+
+  .export-section__copy {
+    max-width: 36rem !important;
+  }
+
+  .export-section__preview {
+    width: 100% !important;
+    justify-content: center !important;
   }
 }
 
@@ -3644,43 +3817,5 @@ ul {
 
   .u-hide-mobile {
     display: none;
-  }
-}
-
-/* iPad Portrait Overrides (768px to 1099px) */
-@media (orientation: portrait) and (max-width: 1099px) {
-  .splash {
-    padding-bottom: 2rem !important;
-  }
-
-  .problem-section__inner {
-    grid-template-columns: 1fr !important;
-    padding-top: 2.5rem !important;
-    padding-bottom: 2rem !important;
-  }
-
-  .problem-section__record {
-    width: min(100%, 36rem) !important;
-    margin: 1.5rem auto -4rem !important;
-  }
-
-  .solution-section__inner {
-    padding-top: 2.5rem !important;
-    padding-bottom: 2.5rem !important;
-  }
-
-  .workflow-section {
-    padding-top: 2rem !important;
-    padding-bottom: 3rem !important;
-    min-height: auto !important;
-  }
-
-  .workflow-section__stage {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-  }
-
-  .export-section__inner {
-    padding-top: 2.5rem !important;
   }
 }
