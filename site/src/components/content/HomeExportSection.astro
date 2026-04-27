@@ -80,6 +80,11 @@ const initialYaw = -20;
           );
         })}
       </div>
+      <div class="rolodex-pagination" aria-hidden="true" data-rolodex-pagination>
+        {recordPages.map((_, index) => (
+          <div class={`rolodex-pagination__dot${index === 0 ? " is-active" : ""}`} />
+        ))}
+      </div>
     </div>
   </div>
 </section>
@@ -168,6 +173,11 @@ const initialYaw = -20;
           page.classList.toggle("is-active", isActive);
           page.setAttribute("aria-pressed", isActive ? "true" : "false");
           page.style.setProperty("--page-z", isActive ? "90" : String(60 - index));
+        });
+
+        const dots = Array.from(rolodex.parentElement.querySelectorAll("[data-rolodex-pagination] .rolodex-pagination__dot"));
+        dots.forEach((dot, index) => {
+          dot.classList.toggle("is-active", index === activeIndex);
         });
       };
 

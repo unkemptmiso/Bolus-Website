@@ -60,6 +60,7 @@ const assetHints = Astro.props.assetHints ?? [];
   </head>
   <body>
     <a class="skip-link" href="#content">Skip to content</a>
+    <!-- 
     <div class="ipad-debug-badge">TABLET PORTRAIT ACTIVE</div>
     <div class="site-build-badge">SITE BUILD ACTIVE</div>
     <div class="viewport-debug">
@@ -77,6 +78,7 @@ const assetHints = Astro.props.assetHints ?? [];
       window.addEventListener('resize', updateDebug);
       updateDebug();
     </script>
+    -->
 
     {showHeader && <Header currentPath={page.path} />}
     <main id="content" class={mainClass}>
