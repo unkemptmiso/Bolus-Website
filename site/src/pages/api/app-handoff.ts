@@ -13,7 +13,7 @@ export const GET: APIRoute = ({ locals }) => {
 
   return jsonSuccess({
     destinations: {
-      download: runtime.integrations.appHandoff.downloadUrl,
+      download: runtime.site.appStoreUrl,
       login: `${runtime.site.url}/login`,
       dashboard: `${runtime.site.url}/app`,
     },
@@ -44,7 +44,7 @@ export const POST: APIRoute = async ({ locals, request }) => {
 
   const target =
     destination === "download"
-      ? runtime.integrations.appHandoff.downloadUrl
+      ? runtime.site.appStoreUrl
       : destination === "login"
         ? `${runtime.site.url}/login`
         : `${runtime.site.url}/app`;
@@ -52,6 +52,6 @@ export const POST: APIRoute = async ({ locals, request }) => {
   return jsonSuccess({
     destination,
     target,
-    mode: runtime.integrations.appHandoff.mode,
+    mode: "redirect",
   });
 };

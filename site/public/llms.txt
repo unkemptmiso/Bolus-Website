@@ -1,0 +1,28 @@
+# Bolus
+
+Bolus is a mobile anesthesia record app for office-based and procedural sedation workflows.
+
+It helps anesthesia providers document pre-op, intra-op, and recovery information, then export a clean PDF anesthesia record.
+
+Bolus is designed for anesthesiologists, CRNAs, dentist anesthesiologists, oral surgeons, and clinicians performing office-based anesthesia or sedation.
+
+Core topics:
+- Mobile anesthesia charting
+- Office-based anesthesia documentation
+- Dental anesthesia records
+- Sedation recordkeeping
+- Paper anesthesia chart alternatives
+- Local-first clinical documentation
+- Secure PDF anesthesia record export
+
+Key pages:
+- Home: https://bolusanesthesia.com/
+- Pricing: https://bolusanesthesia.com/pricing
+- About: https://bolusanesthesia.com/about
+- Paper chart comparison: https://bolusanesthesia.com/compare/paper-charts
+- Privacy Policy: https://bolusanesthesia.com/legal/privacy-policy
+- Terms of Service: https://bolusanesthesia.com/legal/terms-of-service
+- HIPAA Compliance Policy: https://bolusanesthesia.com/legal/hipaa-compliance-policy
+
+Contact:
+contact@bolusanesthesia.com

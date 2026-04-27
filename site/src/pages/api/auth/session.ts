@@ -8,13 +8,14 @@ import {
 
 export const GET: APIRoute = ({ locals }) => {
   const runtime = resolveServerRuntimeConfig(getRuntimeEnvSource({ locals }));
+  const mode = runtime.auth ? "configured" : "mocked";
 
   return jsonSuccess({
-    mode: runtime.integrations.auth.mode,
-    provider: runtime.integrations.auth.provider,
+    mode,
+    provider: "firebase",
     authenticated: false,
     message:
-      runtime.integrations.auth.mode === "configured"
+      mode === "configured"
         ? "Auth credentials are present. Replace this placeholder with real session verification."
         : "Auth is still mocked. Add credentials and session verification when the app handoff is ready.",
   });

@@ -44,10 +44,14 @@ export interface PricingPageContent {
 
 export const pricingPage: PricingPageContent = {
   eyebrow: "",
-  title: "The most robust record, for the cheapest price.",
-  titleLines: ["The most robust record,", "for the cheapest price."],
+  title: "The cleanest way to leave paper, at the lowest price.",
+  titleLines: [
+    "The cleanest way",
+    "to leave paper,",
+    "at the lowest price.",
+  ],
   body:
-    "Bolus is the most affordable mobile anesthesia record app on the market, by a long shot. We want Bolus to help you work safely while allowing your practice to thrive. We mean that, and the pricing shows it.",
+    "Bolus is built for clinicians who want clean, defensible anesthesia records without paying hospital-software prices. It is intentionally affordable, because better documentation should not become another burden on your practice.",
   supportingNote: "",
   defaultBilling: "annual" as BillingMode,
   billingOptions: {

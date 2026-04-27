@@ -51,6 +51,7 @@ export interface SitePage {
   seoDescription: string;
   category: FooterGroupId;
   hiddenPrimaryHeading?: string;
+  noindex?: boolean;
   hero: {
     eyebrow?: string;
     title: string;
@@ -88,11 +89,11 @@ export const homePage: SitePage = {
   navLabel: "Home",
   description:
     "Bolus is a modern, defensible replacement for paper charting in office-based anesthesia and sedation practice.",
-  seoTitle: "Bolus | Anesthesia Record",
+  seoTitle: "Bolus | Anesthesia Record App",
   seoDescription:
-    "Ditch paper charting. Bolus is a clean, mobile-first anesthesia record app designed to help office-based practices create highly defensible documentation.",
+    "Mobile anesthesia charting for office-based procedures. Create clean, legible records from pre-op through recovery and export a professional PDF.",
   category: "utility",
-  hiddenPrimaryHeading: "The Modern Anesthesia Record App for Office-Based Practice",
+  hiddenPrimaryHeading: "Anesthesia Record App for Office-Based Practice",
   hero: {
     eyebrow: "Office-Based Anesthesia Documentation",
     title: "Ditch paper. Modernize your practice with clean and defensible records.",
@@ -181,23 +182,18 @@ export const pageRegistry: SitePage[] = [
     title: "Pricing",
     navLabel: "Pricing",
     description: "Simple pricing for clinicians who want cleaner and more defensible documentation.",
-    seoTitle: "Pricing | Bolus",
+    seoTitle: "Pricing | Bolus Anesthesia Charting",
     seoDescription:
-      "See straightforward Bolus pricing for office-based anesthesia documentation, from Starter through Professional and upcoming cloud backup.",
+      "Simple pricing for anesthesia documentation software built for office-based clinicians. Start free and upgrade when your workflow grows.",
     category: "product",
     hero: {
       eyebrow: "Product",
-      title: "The most robust record, for the cheapest price.",
-      body: "Bolus is the most affordable mobile anesthesia record app on the market, by a long shot. We want Bolus to help you work safely while allowing your practice to thrive. We mean that, and the pricing shows it.",
+      title: "The cleanest way to leave paper, at the lowest price.",
+      body: "Bolus is built for clinicians who want clean, defensible anesthesia records without paying hospital-software prices. It is intentionally affordable, because better documentation should not become another burden on your practice.",
       primaryCta: {
         label: "Contact Us",
         href: "/contact",
         variant: "primary",
-      },
-      secondaryCta: {
-        label: "Compare Against Paper",
-        href: "/compare/paper-charts",
-        variant: "secondary",
       },
     },
     sections: [
@@ -219,9 +215,9 @@ export const pageRegistry: SitePage[] = [
     title: "About Bolus",
     navLabel: "About",
     description: "Learn what Bolus is building for office-based anesthesia documentation.",
-    seoTitle: "About | Bolus",
+    seoTitle: "About Bolus | Built for Anesthesia Documentation",
     seoDescription:
-      "Learn about the Bolus mission, product focus, and approach to office-based anesthesia documentation.",
+      "Bolus was built by clinicians to make anesthesia documentation faster, cleaner, and easier to stand behind.",
     category: "product",
     hero: {
       eyebrow: "About",
@@ -293,9 +289,9 @@ export const pageRegistry: SitePage[] = [
     title: "Contact",
     navLabel: "Contact",
     description: "Contact Bolus for product questions, pricing, or early access.",
-    seoTitle: "Contact | Bolus",
+    seoTitle: "Contact Bolus",
     seoDescription:
-      "Email Bolus for questions about pricing, product fit, and office-based anesthesia documentation.",
+      "Contact Bolus for product questions, pricing, early access, or support.",
     category: "company",
     hero: {
       eyebrow: "Contact",
@@ -355,12 +351,13 @@ export const pageRegistry: SitePage[] = [
   {
     id: "compare-paper-charts",
     path: "/compare/paper-charts",
+    noindex: true,
     title: "Bolus vs Paper Charts",
     navLabel: "vs. Paper Charts",
     description: "Comparison page for the clearest incumbent: paper charting.",
-    seoTitle: "Bolus vs Paper Charts",
+    seoTitle: "Bolus vs Paper Anesthesia Charts",
     seoDescription:
-      "See how Bolus compares with paper charting for office-based anesthesia records.",
+      "Compare paper anesthesia charts with Bolus, a mobile anesthesia record app built for cleaner documentation and PDF export.",
     category: "compare",
     hero: {
       eyebrow: "Compare",
@@ -387,12 +384,13 @@ export const pageRegistry: SitePage[] = [
   {
     id: "compare-maps-anesthesia",
     path: "/compare/maps-anesthesia",
+    noindex: true,
     title: "Bolus vs Maps Anesthesia",
     navLabel: "vs. Maps Anesthesia",
     description: "Comparison page template for alternative software positioning.",
     seoTitle: "Bolus vs Maps Anesthesia",
     seoDescription:
-      "Compare Bolus with Maps Anesthesia for office-based anesthesia documentation.",
+      "Compare Bolus with Maps Anesthesia for mobile anesthesia charting, office-based documentation, and PDF record export.",
     category: "compare",
     hero: {
       eyebrow: "Compare",
@@ -419,7 +417,7 @@ export const pageRegistry: SitePage[] = [
     navLabel: "Legal",
     description: "Browse Bolus legal documents, privacy terms, medical disclaimers, and HIPAA compliance guidance in one place.",
     seoTitle: "Legal | Bolus",
-    seoDescription: "Review Bolus legal documents including privacy policy, terms of service, medical disclaimer, and HIPAA compliance policy.",
+    seoDescription: "View Bolus legal documents, including privacy, terms of service, medical disclaimer, and HIPAA compliance policy.",
     category: "legal",
     hero: {
       title: "Legal",
@@ -434,7 +432,7 @@ export const pageRegistry: SitePage[] = [
     navLabel: "Privacy",
     description: "Bolus privacy policy for account, device, and clinical documentation data handling.",
     seoTitle: "Privacy Policy | Bolus",
-    seoDescription: "Read the Bolus privacy policy for local-first anesthesia documentation workflows.",
+    seoDescription: "Read how Bolus handles account data, device security, local-first clinical records, and privacy for anesthesia documentation.",
     category: "legal",
     hero: {
       eyebrow: "Legal",
@@ -450,7 +448,7 @@ export const pageRegistry: SitePage[] = [
     navLabel: "Terms of Service",
     description: "Bolus terms of service for clinical documentation, accounts, exports, and professional responsibility.",
     seoTitle: "Terms of Service | Bolus",
-    seoDescription: "Read the Bolus terms of service for accessing and using the anesthesia record app.",
+    seoDescription: "Review the terms that govern use of Bolus for anesthesia documentation, accounts, subscriptions, and record exports.",
     category: "legal",
     hero: {
       eyebrow: "Legal",
@@ -466,7 +464,7 @@ export const pageRegistry: SitePage[] = [
     navLabel: "Medical Disclaimer",
     description: "Bolus medical disclaimer clarifying intended use, verification, and clinician responsibility.",
     seoTitle: "Medical Disclaimer | Bolus",
-    seoDescription: "Read the Bolus medical disclaimer for documentation-only use and clinician responsibility.",
+    seoDescription: "Bolus is a documentation tool only. Review its intended use, clinician responsibility, and medical disclaimer.",
     category: "legal",
     hero: {
       eyebrow: "Legal",
@@ -482,7 +480,7 @@ export const pageRegistry: SitePage[] = [
     navLabel: "HIPAA Policy",
     description: "Bolus HIPAA compliance policy covering local-first storage, exports, device safeguards, and professional responsibility.",
     seoTitle: "HIPAA Compliance Policy | Bolus",
-    seoDescription: "Read the Bolus HIPAA compliance policy for secure local-first anesthesia documentation workflows.",
+    seoDescription: "Review Bolus policies for local-first storage, device security, record export, and clinician responsibility under HIPAA.",
     category: "legal",
     hero: {
       eyebrow: "Legal",
@@ -494,11 +492,12 @@ export const pageRegistry: SitePage[] = [
   {
     id: "login",
     path: "/login",
+    noindex: true,
     title: "Sign In",
     navLabel: "Sign In",
     description: "Entry point for future authenticated app handoff.",
     seoTitle: "Sign In | Bolus",
-    seoDescription: "Sign in route placeholder for the Bolus app experience.",
+    seoDescription: "Sign in to Bolus.",
     category: "utility",
     hero: {
       eyebrow: "App",
@@ -525,11 +524,12 @@ export const pageRegistry: SitePage[] = [
   {
     id: "app",
     path: "/app",
+    noindex: true,
     title: "Dashboard",
     navLabel: "App",
     description: "Placeholder for the future web app shell.",
-    seoTitle: "App | Bolus",
-    seoDescription: "App shell placeholder for authenticated Bolus experiences.",
+    seoTitle: "Dashboard | Bolus",
+    seoDescription: "Access the Bolus dashboard.",
     category: "utility",
     hero: {
       eyebrow: "App",

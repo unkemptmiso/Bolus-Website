@@ -11,10 +11,13 @@ import {
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 export function getStaticPaths() {
-  return secondaryPages.map((page) => ({
-    params: { slug: getStaticSlug(page.path) },
-    props: { page },
-  }));
+  const excludedPaths = new Set(["/about", "/contact", "/pricing"]);
+  return secondaryPages
+    .filter((page) => !excludedPaths.has(page.path))
+    .map((page) => ({
+      params: { slug: getStaticSlug(page.path) },
+      props: { page },
+    }));
 }
 
 interface Props {
