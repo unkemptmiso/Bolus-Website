@@ -93,7 +93,6 @@ export const homePage: SitePage = {
   seoDescription:
     "Mobile anesthesia charting for office-based procedures. Create clean, legible records from pre-op through recovery and export a professional PDF.",
   category: "utility",
-  hiddenPrimaryHeading: "Anesthesia Record App for Office-Based Practice",
   hero: {
     eyebrow: "Office-Based Anesthesia Documentation",
     title: "Ditch paper. Modernize your practice with clean and defensible records.",
