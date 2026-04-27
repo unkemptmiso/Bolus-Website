@@ -88,7 +88,7 @@ export const homePage: SitePage = {
   navLabel: "Home",
   description:
     "Bolus is a modern, defensible replacement for paper charting in office-based anesthesia and sedation practice.",
-  seoTitle: "Bolus | Modern Office-Based Anesthesia Record App",
+  seoTitle: "Bolus | Anesthesia Record",
   seoDescription:
     "Ditch paper charting. Bolus is a clean, mobile-first anesthesia record app designed to help office-based practices create highly defensible documentation.",
   category: "utility",
