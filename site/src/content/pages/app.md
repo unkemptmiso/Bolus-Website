@@ -1,6 +1,6 @@
 ---
-title: "App | Bolus"
-description: "Bolus help for app and office-based anesthesia."
+title: "Dashboard | Bolus"
+description: "Access the Bolus dashboard."
 canonicalURL: "https://bolusanesthesia.com/app"
 ogImage: "../../assets/hero/ipad-blank.jpg"
 isHomePage: false

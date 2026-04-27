@@ -1,6 +1,6 @@
 ---
 title: "Sign In | Bolus"
-description: "Bolus help for login and office-based anesthesia."
+description: "Sign in to Bolus."
 canonicalURL: "https://bolusanesthesia.com/login"
 ogImage: "../../assets/hero/ipad-blank.jpg"
 isHomePage: false

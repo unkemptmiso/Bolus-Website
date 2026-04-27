@@ -1,6 +1,6 @@
 ---
-title: "Bolus | Anesthesia Record"
-description: "Ditch paper charting. Bolus is a clean, mobile-first anesthesia record app designed to help office-based practices create highly defensible documentation."
+title: "Bolus | Anesthesia Record App"
+description: "Mobile anesthesia charting for office-based procedures. Create clean, legible records from pre-op through recovery and export a professional PDF."
 canonicalURL: "https://bolusanesthesia.com/"
 ogImage: "../../assets/hero/bolus-og-preview.png"
 isHomePage: true

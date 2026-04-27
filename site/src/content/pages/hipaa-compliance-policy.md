@@ -1,6 +1,6 @@
 ---
 title: "HIPAA Compliance Policy | Bolus"
-description: "Bolus HIPAA compliance policy for local-first storage, secure exports, and clinician device responsibility."
+description: "Review Bolus policies for local-first storage, device security, record export, and clinician responsibility under HIPAA."
 canonicalURL: "https://bolusanesthesia.com/legal/hipaa-compliance-policy"
 ogImage: "../../assets/hero/ipad-blank.jpg"
 isHomePage: false

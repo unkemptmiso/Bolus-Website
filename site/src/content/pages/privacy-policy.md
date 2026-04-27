@@ -1,6 +1,6 @@
 ---
 title: "Privacy Policy | Bolus"
-description: "Bolus privacy policy for local-first anesthesia documentation and account data handling."
+description: "Read how Bolus handles account data, device security, local-first clinical records, and privacy for anesthesia documentation."
 canonicalURL: "https://bolusanesthesia.com/legal/privacy-policy"
 ogImage: "../../assets/hero/ipad-blank.jpg"
 isHomePage: false

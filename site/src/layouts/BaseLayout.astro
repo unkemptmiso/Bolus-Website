@@ -4,7 +4,6 @@ import type { CollectionEntry } from "astro:content";
 import SeoHead from "../components/seo/SeoHead.astro";
 import Footer from "../components/site/Footer.astro";
 import Header from "../components/site/Header.astro";
-import bolusFavicon from "../assets/logos/bolus-favicon.png";
 import "../styles/global.css";
 
 interface Props {
@@ -38,6 +37,7 @@ const {
   mainClass = "site-main",
 } = Astro.props;
 const assetHints = Astro.props.assetHints ?? [];
+const faviconHref = "/favicon.svg?v=20260426";
 ---
 
 <!doctype html>
@@ -46,7 +46,9 @@ const assetHints = Astro.props.assetHints ?? [];
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/png" href={bolusFavicon.src} />
+    <link rel="icon" type="image/svg+xml" href={faviconHref} />
+    <link rel="shortcut icon" href={faviconHref} />
+    <link rel="apple-touch-icon" href={faviconHref} />
     {assetHints.map((hint) => (
       <link
         rel={hint.rel ?? "preload"}
