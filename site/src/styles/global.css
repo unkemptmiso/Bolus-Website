@@ -3365,7 +3365,6 @@ ul {
   .workflow-section[data-workflow-active-phase="pre-op"] .workflow-phase-card:not([data-phase="pre-op"]),
   .workflow-section[data-workflow-active-phase="intra-op"] .workflow-phase-card:not([data-phase="intra-op"]),
   .workflow-section[data-workflow-active-phase="post-op"] .workflow-phase-card:not([data-phase="post-op"]) {
-    display: block;
     opacity: 0.4; /* Dim inactive cards slightly while scrolling */
   }
 
@@ -3386,11 +3385,6 @@ ul {
     display: none;
   }
 
-  .workflow-section[data-workflow-active-phase="pre-op"] .workflow-phone__screen:not(.workflow-phone__screen--pre-op),
-  .workflow-section[data-workflow-active-phase="intra-op"] .workflow-phone__screen:not(.workflow-phone__screen--intra-op),
-  .workflow-section[data-workflow-active-phase="post-op"] .workflow-phone__screen:not(.workflow-phone__screen--post-op) {
-    display: none;
-  }
 
   .export-section__inner {
     width: min(1120px, calc(100vw - 2rem));
