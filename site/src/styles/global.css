@@ -149,6 +149,18 @@ ul {
   background: #ffffff;
 }
 
+.site-main--paper-alt {
+  width: 100%;
+  max-width: none;
+  background: #050816;
+}
+
+.site-main--mobile-charting {
+  width: 100%;
+  max-width: none;
+  background: #050816;
+}
+
 .site-header {
   position: sticky;
   top: 0;

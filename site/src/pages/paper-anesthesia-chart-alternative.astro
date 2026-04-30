@@ -1,0 +1,559 @@
+---
+import { getEntry } from "astro:content";
+
+import { getPageById } from "../config/site-manifest";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const page = getPageById("paper-anesthesia-chart-alternative");
+const seo = await getEntry("pages", "paper-anesthesia-chart-alternative");
+
+if (!page) {
+  throw new Error("Could not find the 'paper-anesthesia-chart-alternative' page config.");
+}
+
+if (!seo) {
+  throw new Error("Could not find the 'paper-anesthesia-chart-alternative' page metadata.");
+}
+
+const painPoints = [
+  {
+    icon: "⚠️",
+    title: "Hard to read",
+    body: "Rushed handwriting and crowded fields make records difficult to interpret hours, months, or years later.",
+  },
+  {
+    icon: "📂",
+    title: "Easy to misplace",
+    body: "A single sheet of paper can be lost, misfiled, or damaged before it reaches the chart.",
+  },
+  {
+    icon: "🔍",
+    title: "Difficult to audit",
+    body: "Inconsistent formats between providers make quality review slow and unreliable.",
+  },
+  {
+    icon: "⏱️",
+    title: "Incomplete timelines",
+    body: "Handwritten timestamps are often approximate, leaving gaps that matter in review.",
+  },
+];
+
+const bolusAdvantages = [
+  {
+    number: "01",
+    title: "One continuous workflow",
+    body: "Document pre-op, intra-op, and recovery in a single connected record that builds as the case moves.",
+  },
+  {
+    number: "02",
+    title: "Legible by default",
+    body: "Typed entries and structured fields eliminate the ambiguity of handwriting. Every record reads the same way.",
+  },
+  {
+    number: "03",
+    title: "Professional PDF export",
+    body: "Finish the case and export a clean, organized record that can be shared, stored, or filed immediately.",
+  },
+  {
+    number: "04",
+    title: "Built for office-based practice",
+    body: "Designed for settings where hospital EMRs are unavailable, too slow, or not built for the case flow.",
+  },
+];
+---
+
+<BaseLayout
+  page={page}
+  seo={seo.data}
+  mainClass="site-main site-main--paper-alt"
+  footerVariant="dark"
+>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="paper-hero" aria-labelledby="paper-hero-title">
+    <div class="paper-hero__inner">
+      <h1 id="paper-hero-title" class="paper-hero__title">
+        <span class="paper-hero__title-line">Paper charts are familiar.</span>
+        <span class="paper-hero__title-line paper-hero__title-line--accent">They are also vulnerable.</span>
+      </h1>
+      <p class="paper-hero__body">
+        Paper still works because it is fast and simple. But the same things that make paper easy in the moment create problems later — records that are hard to read, easy to lose, and harder to defend.
+      </p>
+      <div class="paper-hero__actions">
+        <a class="paper-cta paper-cta--primary" href="/pricing">View Pricing</a>
+        <a class="paper-cta paper-cta--ghost" href="/contact">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PAIN POINTS ═══ -->
+  <section class="paper-pain" aria-labelledby="paper-pain-title">
+    <div class="paper-pain__inner">
+      <div class="paper-pain__header">
+        <h2 id="paper-pain-title" class="paper-pain__title">
+          The problem with paper anesthesia records
+        </h2>
+        <p class="paper-pain__desc">
+          Handwritten anesthesia records can be hard to read. Times can be unclear. Medication entries can be crowded. Vitals can be crossed out, squeezed in, or difficult to follow. When a chart is reviewed days, months, or years later, those details matter.
+        </p>
+      </div>
+      <div class="paper-pain__grid" role="list">
+        {painPoints.map((item) => (
+          <article class="paper-pain__card" role="listitem">
+            <span class="paper-pain__card-icon" aria-hidden="true">{item.icon}</span>
+            <h3 class="paper-pain__card-title">{item.title}</h3>
+            <p class="paper-pain__card-body">{item.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ DEFENSIBLE RECORD ═══ -->
+  <section class="paper-standard" aria-labelledby="paper-standard-title">
+    <div class="paper-standard__inner">
+      <h2 id="paper-standard-title" class="paper-standard__title">
+        What a defensible anesthesia record needs
+      </h2>
+      <p class="paper-standard__body">
+        A good anesthesia record should be clear, complete, and easy to follow. It should show the case timeline. It should make medications, vitals, airway events, fluids, and recovery details easy to review. It should be legible without explanation. It should look professional when exported, shared, or stored.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ HOW BOLUS HELPS ═══ -->
+  <section class="paper-how" aria-labelledby="paper-how-title">
+    <div class="paper-how__inner">
+      <div class="paper-how__header">
+        <h2 id="paper-how-title" class="paper-how__title">How Bolus helps</h2>
+        <p class="paper-how__subtitle">
+          A mobile anesthesia record app built to replace paper charting with a cleaner workflow.
+        </p>
+      </div>
+      <div class="paper-how__list" role="list">
+        {bolusAdvantages.map((item) => (
+          <article class="paper-how__item" role="listitem">
+            <span class="paper-how__item-number" aria-hidden="true">{item.number}</span>
+            <div class="paper-how__item-content">
+              <h3 class="paper-how__item-title">{item.title}</h3>
+              <p class="paper-how__item-body">{item.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA ═══ -->
+  <section class="paper-close" aria-labelledby="paper-close-title">
+    <div class="paper-close__inner">
+      <h2 id="paper-close-title" class="paper-close__title">Leave paper behind</h2>
+      <p class="paper-close__body">
+        Paper may be familiar, but it should not be the standard for modern anesthesia documentation. Bolus gives clinicians a cleaner, more defensible way to chart.
+      </p>
+      <div class="paper-close__actions">
+        <a class="paper-cta paper-cta--primary" href="/pricing">View Pricing</a>
+        <a class="paper-cta paper-cta--ghost" href="/contact">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* ──────────────────────────────────────────
+     Root — matches site dark palette
+     ────────────────────────────────────────── */
+  .site-main--paper-alt {
+    width: 100%;
+    max-width: none;
+    background: #050816;
+    color: rgba(235, 242, 255, 0.94);
+  }
+
+  /* ──────────────────────────────────────────
+     Typography base for this page
+     ────────────────────────────────────────── */
+  :global(.site-main--paper-alt) h1,
+  :global(.site-main--paper-alt) h2,
+  :global(.site-main--paper-alt) h3 {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    letter-spacing: -0.03em;
+    color: #f5f8ff;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  :global(.site-main--paper-alt) p {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    color: rgba(255, 255, 255, 0.72);
+    margin: 0;
+  }
+
+  /* ──────────────────────────────────────────
+     Shared CTA buttons
+     ────────────────────────────────────────── */
+  .paper-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    padding: 0 1.5rem;
+    border-radius: 999px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    font-size: 1rem;
+    font-weight: 620;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    transition: transform 200ms ease, box-shadow 200ms ease, opacity 200ms ease;
+  }
+
+  .paper-cta:hover {
+    transform: translateY(-1px);
+  }
+
+  .paper-cta--primary {
+    background: #4d93ff;
+    color: #ffffff;
+    box-shadow: 0 12px 28px rgba(77, 147, 255, 0.22);
+  }
+
+  .paper-cta--primary:hover {
+    box-shadow: 0 16px 36px rgba(77, 147, 255, 0.32);
+  }
+
+  .paper-cta--ghost {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .paper-cta--ghost:hover {
+    border-color: rgba(255, 255, 255, 0.34);
+    color: #ffffff;
+  }
+
+  /* ──────────────────────────────────────────
+     §1 — HERO
+     ────────────────────────────────────────── */
+  .paper-hero {
+    position: relative;
+    padding: clamp(7rem, 14vw, 10rem) 24px clamp(5rem, 10vw, 7.5rem);
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .paper-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 55% 50% at 50% 0%, rgba(77, 147, 255, 0.09), transparent),
+      radial-gradient(circle at 30% 80%, rgba(54, 67, 122, 0.08), transparent 50%);
+    pointer-events: none;
+  }
+
+  .paper-hero__inner {
+    position: relative;
+    width: min(800px, 100%);
+    margin: 0 auto;
+    display: grid;
+    gap: 28px;
+    justify-items: center;
+  }
+
+  .paper-hero__title {
+    font-size: clamp(2.8rem, 6.5vw, 4.2rem);
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+  }
+
+  .paper-hero__title-line {
+    display: block;
+  }
+
+  .paper-hero__title-line--accent {
+    color: rgba(255, 255, 255, 0.52);
+  }
+
+  .paper-hero__body {
+    max-width: 36rem;
+    font-size: 1.15rem;
+    line-height: 1.62;
+    font-weight: 450;
+    color: rgba(255, 255, 255, 0.62);
+  }
+
+  .paper-hero__actions {
+    display: flex;
+    gap: 14px;
+    padding-top: 8px;
+  }
+
+  /* ──────────────────────────────────────────
+     §2 — PAIN POINTS
+     ────────────────────────────────────────── */
+  .paper-pain {
+    padding: clamp(4rem, 8vw, 6rem) 24px;
+  }
+
+  .paper-pain__inner {
+    width: min(1080px, 100%);
+    margin: 0 auto;
+    display: grid;
+    gap: clamp(2.5rem, 5vw, 3.5rem);
+  }
+
+  .paper-pain__header {
+    display: grid;
+    gap: 18px;
+    max-width: 38rem;
+  }
+
+  .paper-pain__title {
+    font-size: clamp(1.9rem, 4vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.06;
+    letter-spacing: -0.03em;
+  }
+
+  .paper-pain__desc {
+    font-size: 1.06rem;
+    line-height: 1.65;
+    font-weight: 420;
+    color: rgba(255, 255, 255, 0.56);
+  }
+
+  .paper-pain__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .paper-pain__card {
+    padding: clamp(1.6rem, 3vw, 2.2rem);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    display: grid;
+    gap: 10px;
+    transition: border-color 200ms ease, background 200ms ease;
+  }
+
+  .paper-pain__card:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .paper-pain__card-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  .paper-pain__card-title {
+    font-size: 1.08rem;
+    font-weight: 650;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+
+  .paper-pain__card-body {
+    font-size: 0.96rem;
+    line-height: 1.58;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* ──────────────────────────────────────────
+     §3 — DEFENSIBLE STANDARD
+     ────────────────────────────────────────── */
+  .paper-standard {
+    padding: clamp(4rem, 8vw, 6rem) 24px;
+  }
+
+  .paper-standard__inner {
+    width: min(720px, 100%);
+    margin: 0 auto;
+    display: grid;
+    gap: 22px;
+    text-align: center;
+  }
+
+  .paper-standard__title {
+    font-size: clamp(1.7rem, 3.5vw, 2.3rem);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+  }
+
+  .paper-standard__body {
+    font-size: 1.06rem;
+    line-height: 1.68;
+    font-weight: 420;
+    color: rgba(255, 255, 255, 0.56);
+    max-width: 42rem;
+    margin: 0 auto;
+  }
+
+  /* ──────────────────────────────────────────
+     §4 — HOW BOLUS HELPS
+     ────────────────────────────────────────── */
+  .paper-how {
+    padding: clamp(4rem, 8vw, 6rem) 24px;
+  }
+
+  .paper-how__inner {
+    width: min(800px, 100%);
+    margin: 0 auto;
+    display: grid;
+    gap: clamp(2.5rem, 5vw, 3.5rem);
+  }
+
+  .paper-how__header {
+    display: grid;
+    gap: 14px;
+  }
+
+  .paper-how__title {
+    font-size: clamp(1.9rem, 4vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.06;
+    letter-spacing: -0.03em;
+  }
+
+  .paper-how__subtitle {
+    font-size: 1.06rem;
+    line-height: 1.55;
+    font-weight: 420;
+    color: rgba(255, 255, 255, 0.56);
+    max-width: 34rem;
+  }
+
+  .paper-how__list {
+    display: grid;
+    gap: 0;
+  }
+
+  .paper-how__item {
+    display: grid;
+    grid-template-columns: 3.2rem 1fr;
+    gap: 0 16px;
+    align-items: start;
+    padding: clamp(1.4rem, 2.5vw, 1.8rem) 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .paper-how__item:last-child {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .paper-how__item-number {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: rgba(77, 147, 255, 0.7);
+    padding-top: 3px;
+  }
+
+  .paper-how__item-content {
+    display: grid;
+    gap: 6px;
+  }
+
+  .paper-how__item-title {
+    font-size: 1.12rem;
+    font-weight: 650;
+    line-height: 1.28;
+    letter-spacing: -0.02em;
+  }
+
+  .paper-how__item-body {
+    font-size: 0.98rem;
+    line-height: 1.58;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.48);
+  }
+
+  /* ──────────────────────────────────────────
+     §5 — CLOSING CTA
+     ────────────────────────────────────────── */
+  .paper-close {
+    padding: clamp(5rem, 10vw, 8rem) 24px clamp(6rem, 12vw, 9rem);
+    text-align: center;
+    position: relative;
+  }
+
+  .paper-close::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 55% at 50% 100%, rgba(77, 147, 255, 0.06), transparent);
+    pointer-events: none;
+  }
+
+  .paper-close__inner {
+    position: relative;
+    width: min(640px, 100%);
+    margin: 0 auto;
+    display: grid;
+    gap: 22px;
+    justify-items: center;
+  }
+
+  .paper-close__title {
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.04em;
+  }
+
+  .paper-close__body {
+    font-size: 1.06rem;
+    line-height: 1.62;
+    font-weight: 420;
+    color: rgba(255, 255, 255, 0.56);
+    max-width: 32rem;
+  }
+
+  .paper-close__actions {
+    display: flex;
+    gap: 14px;
+    padding-top: 8px;
+  }
+
+  /* ──────────────────────────────────────────
+     RESPONSIVE
+     ────────────────────────────────────────── */
+  @media (max-width: 640px) {
+    .paper-hero {
+      padding-top: clamp(5.5rem, 18vw, 8rem);
+      padding-bottom: clamp(3.5rem, 10vw, 5rem);
+    }
+
+    .paper-hero__title {
+      font-size: clamp(2.2rem, 9vw, 3.2rem);
+    }
+
+    .paper-hero__body {
+      font-size: 1.05rem;
+    }
+
+    .paper-pain__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .paper-hero__actions,
+    .paper-close__actions {
+      flex-direction: column;
+      width: 100%;
+      align-items: stretch;
+    }
+
+    .paper-cta {
+      justify-content: center;
+    }
+  }
+</style>

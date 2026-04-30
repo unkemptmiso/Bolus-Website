@@ -11,7 +11,7 @@ import {
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 export function getStaticPaths() {
-  const excludedPaths = new Set(["/about", "/contact", "/pricing"]);
+  const excludedPaths = new Set(["/about", "/contact", "/pricing", "/paper-anesthesia-chart-alternative", "/mobile-anesthesia-charting"]);
   return secondaryPages
     .filter((page) => !excludedPaths.has(page.path))
     .map((page) => ({

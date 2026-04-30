@@ -1,0 +1,335 @@
+---
+import { getEntry } from "astro:content";
+import { getPageById } from "../config/site-manifest";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const page = getPageById("mobile-anesthesia-charting");
+const seo = await getEntry("pages", "mobile-anesthesia-charting");
+if (!page) throw new Error("Could not find the 'mobile-anesthesia-charting' page config.");
+if (!seo) throw new Error("Could not find the 'mobile-anesthesia-charting' page metadata.");
+
+const checklistItems = [
+  "Legible anesthesia documentation",
+  "Clear case timeline",
+  "Structured medications and events",
+  "Pre-op, intra-op, and recovery in one record",
+  "Professional PDF export",
+  "Built for office-based anesthesia",
+];
+
+const workflowSteps = [
+  { number: "01", title: "Pre-op", body: "Document evaluation notes, consent, attachments, and case details before the procedure starts." },
+  { number: "02", title: "Intra-op", body: "Record medications, vitals, airway events, fluids, and key moments as the case moves." },
+  { number: "03", title: "Recovery", body: "Complete the record with post-op details, discharge vitals, and final review." },
+];
+
+const providerTypes = [
+  "Mobile Anesthesiologists",
+  "CRNAs",
+  "Dentist Anesthesiologists",
+  "Oral Surgery Offices",
+  "Dental Sedation",
+  "Office-Based Procedural Sedation",
+];
+
+const faqs = [
+  { question: "What is mobile anesthesia charting?", answer: "Mobile anesthesia charting is anesthesia documentation performed on a mobile device, such as an iPhone or iPad, instead of a paper record or desktop-bound system." },
+  { question: "Is Bolus mobile anesthesia software?", answer: "Bolus is mobile anesthesia charting software focused on documentation and PDF record export. It is not a full practice management platform." },
+  { question: "Can Bolus replace paper anesthesia charts?", answer: "Yes. Bolus is designed to replace paper anesthesia charting with a cleaner mobile workflow and professional PDF export." },
+  { question: "Is Bolus for mobile anesthesiologists?", answer: "Yes. Bolus is built for mobile and office-based anesthesia providers, including anesthesiologists, CRNAs, dentist anesthesiologists, and oral surgery sedation teams." },
+  { question: "Does Bolus include pre-op, intra-op, and recovery documentation?", answer: "Yes. Bolus supports documentation from pre-op through intra-op charting and recovery, so the case stays connected in one record." },
+  { question: "Can Bolus export a PDF anesthesia record?", answer: "Yes. Bolus exports a clean PDF anesthesia record when the case is complete." },
+];
+---
+
+<BaseLayout page={page} seo={seo.data} mainClass="site-main site-main--mobile-charting" footerVariant="dark">
+
+  <!-- §1 HERO — centered -->
+  <section class="mc-hero" aria-labelledby="mc-hero-title">
+    <div class="mc-hero__inner">
+      <h1 id="mc-hero-title" class="mc-hero__title">Mobile anesthesia charting built around the record.</h1>
+      <p class="mc-hero__body">Bolus helps mobile and office-based anesthesia providers document the case from pre-op through recovery, then export a clean PDF record.</p>
+      <div class="mc-hero__actions">
+        <a class="mc-cta mc-cta--primary" href="/pricing">View Pricing</a>
+        <a class="mc-cta mc-cta--ghost" href="/contact">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- §2 PULL-QUOTE — centered statement, no heading -->
+  <section class="mc-statement" aria-label="Why mobile charting is different">
+    <div class="mc-statement__inner">
+      <div class="mc-statement__rule" aria-hidden="true"></div>
+      <p class="mc-statement__text">Mobile anesthesia cases do not always have the support of a hospital EMR, an anesthesia cart, or a fixed documentation station. The record has to move with the clinician — fast enough to use during the case and clear enough to review after.</p>
+      <div class="mc-statement__rule" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- §3 CHECKLIST — left heading + checklist rows -->
+  <section class="mc-checklist-section" aria-labelledby="mc-paper-title">
+    <div class="mc-checklist-section__inner">
+      <div class="mc-checklist-section__header">
+        <h2 id="mc-paper-title" class="mc-section-title">Paper works until the chart is questioned</h2>
+        <p class="mc-section-body">Paper records are familiar, but they create avoidable weak points. Handwriting can be difficult to read. Medication entries can get crowded. Timelines can become unclear.</p>
+      </div>
+      <ul class="mc-checklist" role="list">
+        {checklistItems.map((item) => (
+          <li class="mc-checklist__item">
+            <span class="mc-checklist__check" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none"><path d="M5 10.5 8.5 14 15 6.5" /></svg>
+            </span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- §4 TWO-COLUMN CARDS — side by side, different layout from everything else -->
+  <section class="mc-duo" aria-label="Key differentiators">
+    <div class="mc-duo__inner">
+      <article class="mc-duo__card">
+        <span class="mc-duo__label" aria-hidden="true">Export</span>
+        <h2 class="mc-duo__card-title">A professional PDF at the end of the case</h2>
+        <p class="mc-duo__card-body">The final record should not look like a scanned worksheet. Bolus exports a clean PDF anesthesia record that can be shared, stored, or imported into the office workflow.</p>
+      </article>
+      <article class="mc-duo__card">
+        <span class="mc-duo__label" aria-hidden="true">Focus</span>
+        <h2 class="mc-duo__card-title">Focused charting, not bloated practice management</h2>
+        <p class="mc-duo__card-body">Some platforms try to manage scheduling, billing, messaging, and e-prescribing. Bolus is focused on the anesthesia record. That focus keeps the product cleaner for clinicians.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- §5 WORKFLOW — numbered steps -->
+  <section class="mc-workflow" aria-labelledby="mc-workflow-title">
+    <div class="mc-workflow__inner">
+      <h2 id="mc-workflow-title" class="mc-section-title mc-section-title--centered">One record from pre-op to recovery</h2>
+      <div class="mc-workflow__list" role="list">
+        {workflowSteps.map((step) => (
+          <article class="mc-workflow__item" role="listitem">
+            <span class="mc-workflow__item-number" aria-hidden="true">{step.number}</span>
+            <div class="mc-workflow__item-content">
+              <h3 class="mc-workflow__item-title">{step.title}</h3>
+              <p class="mc-workflow__item-body">{step.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- §6 BUILT FOR — centered heading + pill tags -->
+  <section class="mc-audience" aria-labelledby="mc-audience-title">
+    <div class="mc-audience__inner">
+      <h2 id="mc-audience-title" class="mc-section-title mc-section-title--centered">Built for clinicians outside the hospital OR</h2>
+      <div class="mc-audience__pills">
+        {providerTypes.map((type) => (
+          <span class="mc-audience__pill">{type}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- §7 FAQ — accordion -->
+  <section class="mc-faq" data-mc-faq-section aria-labelledby="mc-faq-title">
+    <div class="mc-faq__inner">
+      <h2 id="mc-faq-title" class="mc-section-title">Frequently Asked Questions</h2>
+      <div class="mc-faq__list">
+        {faqs.map((faq) => (
+          <article class="mc-faq__item" data-mc-faq-item>
+            <button class="mc-faq__trigger" type="button" data-mc-faq-trigger aria-expanded="false">
+              <span>{faq.question}</span>
+              <span class="mc-faq__chevron" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none"><path d="M5 7.5 10 12.5 15 7.5" /></svg>
+              </span>
+            </button>
+            <div class="mc-faq__content">
+              <div class="mc-faq__content-inner"><p>{faq.answer}</p></div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- §8 CLOSE CTA — centered -->
+  <section class="mc-close" aria-labelledby="mc-close-title">
+    <div class="mc-close__inner">
+      <h2 id="mc-close-title" class="mc-close__title">Ready to leave paper charting behind?</h2>
+      <p class="mc-close__body">Bolus gives mobile and office-based anesthesia providers a cleaner way to document care.</p>
+      <div class="mc-close__actions">
+        <a class="mc-cta mc-cta--primary" href="/pricing">View Pricing</a>
+        <a class="mc-cta mc-cta--ghost" href="/contact">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<script is:inline>
+  (() => {
+    const section = document.querySelector("[data-mc-faq-section]");
+    if (!(section instanceof HTMLElement)) return;
+    const entries = Array.from(section.querySelectorAll("[data-mc-faq-item]"));
+    if (!entries.length) return;
+    const setActiveIndex = (activeIndex) => {
+      entries.forEach((entry, index) => {
+        const button = entry.querySelector("[data-mc-faq-trigger]");
+        const content = entry.querySelector(".mc-faq__content");
+        if (!(button instanceof HTMLButtonElement) || !(content instanceof HTMLElement)) return;
+        const isActive = index === activeIndex;
+        entry.classList.toggle("is-open", isActive);
+        button.setAttribute("aria-expanded", isActive ? "true" : "false");
+        content.classList.toggle("is-open", isActive);
+      });
+    };
+    entries.forEach((entry, index) => {
+      const button = entry.querySelector("[data-mc-faq-trigger]");
+      if (!(button instanceof HTMLButtonElement)) return;
+      button.addEventListener("click", () => {
+        const isExpanded = button.getAttribute("aria-expanded") === "true";
+        setActiveIndex(isExpanded ? -1 : index);
+      });
+    });
+  })();
+</script>
+
+<style>
+  /* ── SHARED SECTION TITLE ── */
+  .mc-section-title { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 56px; font-weight: 700; line-height: 1; letter-spacing: -0.28px; color: #f5f8ff; margin: 0; text-wrap: balance; }
+  .mc-section-title--centered { text-align: center; }
+  .mc-section-body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; max-width: 48ch; font-size: 22px; line-height: 1.5; font-weight: 500; color: rgba(255,255,255,0.8); margin: 0; }
+
+  /* ── CTA ── */
+  .mc-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: 0 1.5rem; border-radius: 999px; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 1rem; font-weight: 620; letter-spacing: -0.02em; text-decoration: none; transition: transform 200ms ease, box-shadow 200ms ease; }
+  .mc-cta:hover { transform: translateY(-1px); }
+  .mc-cta--primary { background: #4d93ff; color: #fff; box-shadow: 0 12px 28px rgba(77,147,255,0.22); }
+  .mc-cta--primary:hover { box-shadow: 0 16px 36px rgba(77,147,255,0.32); }
+  .mc-cta--ghost { background: transparent; color: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.18); }
+  .mc-cta--ghost:hover { border-color: rgba(255,255,255,0.34); color: #fff; }
+
+  /* ──────────────────────────────────────
+     §1 HERO — centered
+     ────────────────────────────────────── */
+  .mc-hero { position: relative; padding: 120px 24px 96px; text-align: center; overflow: hidden; }
+  .mc-hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 55% 50% at 50% 0%, rgba(77,147,255,0.09), transparent), radial-gradient(circle at 30% 80%, rgba(54,67,122,0.08), transparent 50%); pointer-events: none; }
+  .mc-hero__inner { position: relative; width: min(760px, calc(100% - 2rem)); margin: 0 auto; display: grid; gap: 24px; justify-items: center; }
+  .mc-hero__title { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 65px; font-weight: 700; line-height: 1; letter-spacing: -1px; color: #f5f8ff; margin: 0; text-wrap: balance; }
+  .mc-hero__body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; max-width: 42rem; font-size: 22px; line-height: 1.5; font-weight: 500; color: rgba(255,255,255,0.8); margin: 0; }
+  .mc-hero__actions { display: flex; gap: 14px; padding-top: 8px; }
+
+  /* ──────────────────────────────────────
+     §2 PULL-QUOTE STATEMENT — centered, no heading
+     ────────────────────────────────────── */
+  .mc-statement { padding: 0 24px; }
+  .mc-statement__inner { width: min(680px, calc(100% - 2rem)); margin: 0 auto; display: grid; gap: 32px; justify-items: center; text-align: center; }
+  .mc-statement__rule { width: 48px; height: 1px; background: rgba(77,147,255,0.3); }
+  .mc-statement__text { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 24px; line-height: 1.55; font-weight: 500; letter-spacing: -0.01em; color: rgba(255,255,255,0.7); font-style: italic; margin: 0; }
+
+  /* ──────────────────────────────────────
+     §3 CHECKLIST — left heading + rows
+     ────────────────────────────────────── */
+  .mc-checklist-section { padding: 96px 24px 0; }
+  .mc-checklist-section__inner { width: min(760px, calc(100% - 2rem)); margin: 0 auto; display: grid; gap: 48px; }
+  .mc-checklist-section__header { display: grid; gap: 20px; }
+  .mc-checklist { display: grid; gap: 0; }
+  .mc-checklist__item { display: flex; align-items: center; gap: 14px; padding: 16px 0; border-top: 1px solid rgba(255,255,255,0.07); font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 19px; line-height: 1.5; font-weight: 500; color: rgba(255,255,255,0.88); }
+  .mc-checklist__item:last-child { border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .mc-checklist__check { flex: 0 0 auto; width: 1.25rem; height: 1.25rem; color: rgba(77,147,255,0.8); }
+  .mc-checklist__check svg { width: 100%; height: 100%; }
+  .mc-checklist__check path { stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* ──────────────────────────────────────
+     §4 TWO-COLUMN CARDS — side by side
+     ────────────────────────────────────── */
+  .mc-duo { padding: 96px 24px 0; }
+  .mc-duo__inner { width: min(1040px, calc(100% - 2rem)); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .mc-duo__card { display: grid; gap: 16px; padding: 36px 32px; border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; background: linear-gradient(165deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01)); }
+  .mc-duo__label { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(77,147,255,0.7); }
+  .mc-duo__card-title { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 28px; font-weight: 700; line-height: 1.12; letter-spacing: -0.5px; color: #f5f8ff; margin: 0; text-wrap: balance; }
+  .mc-duo__card-body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 19px; line-height: 1.5; font-weight: 400; color: rgba(255,255,255,0.6); margin: 0; }
+
+  /* ──────────────────────────────────────
+     §5 WORKFLOW — centered heading + numbered rows
+     ────────────────────────────────────── */
+  .mc-workflow { padding: 96px 24px 0; }
+  .mc-workflow__inner { width: min(760px, calc(100% - 2rem)); margin: 0 auto; display: grid; gap: 48px; }
+  .mc-workflow__list { display: grid; gap: 0; }
+  .mc-workflow__item { display: grid; grid-template-columns: 3.2rem 1fr; gap: 0 16px; align-items: start; padding: 24px 0; border-top: 1px solid rgba(255,255,255,0.07); }
+  .mc-workflow__item:last-child { border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .mc-workflow__item-number { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.05em; color: rgba(77,147,255,0.7); padding-top: 3px; }
+  .mc-workflow__item-content { display: grid; gap: 6px; }
+  .mc-workflow__item-title { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 1.12rem; font-weight: 650; line-height: 1.28; letter-spacing: -0.02em; color: #f5f8ff; margin: 0; }
+  .mc-workflow__item-body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 19px; line-height: 1.5; font-weight: 400; color: rgba(255,255,255,0.6); margin: 0; }
+
+  /* ──────────────────────────────────────
+     §6 AUDIENCE — centered heading + pill tags
+     ────────────────────────────────────── */
+  .mc-audience { padding: 96px 24px 0; text-align: center; }
+  .mc-audience__inner { width: min(760px, calc(100% - 2rem)); margin: 0 auto; display: grid; gap: 40px; justify-items: center; }
+  .mc-audience__pills { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  .mc-audience__pill { padding: 10px 20px; border: 1px solid rgba(255,255,255,0.1); border-radius: 999px; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 0.95rem; font-weight: 550; letter-spacing: -0.01em; color: rgba(255,255,255,0.82); background: rgba(255,255,255,0.03); transition: border-color 200ms ease, background 200ms ease; }
+  .mc-audience__pill:hover { border-color: rgba(77,147,255,0.3); background: rgba(77,147,255,0.06); }
+
+  /* ──────────────────────────────────────
+     §7 FAQ — accordion
+     ────────────────────────────────────── */
+  .mc-faq { padding: 96px 24px 0; }
+  .mc-faq__inner { width: min(760px, calc(100% - 2rem)); margin: 0 auto; display: grid; gap: 48px; }
+  .mc-faq__list { border-top: 1px solid rgba(255,255,255,0.1); }
+  .mc-faq__item { border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .mc-faq__trigger { width: 100%; margin: 0; padding: 1.2rem 0; border: none; background: transparent; display: flex; align-items: center; justify-content: space-between; gap: 1rem; cursor: pointer; text-align: left; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 1rem; color: #f5f8ff; }
+  .mc-faq__trigger span:first-child { font-size: 1.08rem; line-height: 1.3; letter-spacing: -0.02em; font-weight: 600; }
+  .mc-faq__chevron { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; width: 1.2rem; height: 1.2rem; color: rgba(255,255,255,0.5); transition: transform 180ms ease; }
+  .mc-faq__chevron svg { width: 100%; height: 100%; }
+  .mc-faq__chevron path { stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .mc-faq__item.is-open .mc-faq__chevron { transform: rotate(180deg); }
+  .mc-faq__content { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 260ms cubic-bezier(0.22,1,0.36,1); }
+  .mc-faq__content.is-open { grid-template-rows: 1fr; }
+  .mc-faq__content-inner { overflow: hidden; }
+  .mc-faq__content-inner p { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; padding: 0 2.25rem 1.35rem 0; font-size: 19px; line-height: 1.5; color: rgba(255,255,255,0.6); margin: 0; }
+
+  /* ──────────────────────────────────────
+     §8 CLOSE CTA — centered
+     ────────────────────────────────────── */
+  .mc-close { padding: 120px 24px 144px; text-align: center; position: relative; }
+  .mc-close::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 55% at 50% 100%, rgba(77,147,255,0.06), transparent); pointer-events: none; }
+  .mc-close__inner { position: relative; width: min(640px, calc(100% - 2rem)); margin: 0 auto; display: grid; gap: 22px; justify-items: center; }
+  .mc-close__title { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 56px; font-weight: 700; line-height: 1; letter-spacing: -0.28px; color: #f5f8ff; margin: 0; text-wrap: balance; }
+  .mc-close__body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 22px; line-height: 1.5; font-weight: 500; color: rgba(255,255,255,0.8); max-width: 32rem; margin: 0; }
+  .mc-close__actions { display: flex; gap: 14px; padding-top: 8px; }
+
+  /* ──────────────────────────────────────
+     RESPONSIVE
+     ────────────────────────────────────── */
+  @media (max-width: 743px) {
+    .mc-hero { padding: 104px 24px 72px; }
+    .mc-hero__title { font-size: 56px; }
+    .mc-hero__body { font-size: 20px; }
+    .mc-statement__text { font-size: 21px; }
+    .mc-section-title, .mc-close__title { font-size: 48px; }
+    .mc-section-body, .mc-close__body { font-size: 20px; }
+    .mc-duo__card-title { font-size: 24px; }
+    .mc-duo__inner { grid-template-columns: 1fr; }
+    .mc-checklist-section, .mc-duo, .mc-workflow, .mc-audience, .mc-faq { padding-top: 72px; }
+  }
+
+  @media (max-width: 640px) {
+    .mc-hero { padding: 88px 20px 56px; }
+    .mc-hero__title { font-size: clamp(3.2rem, 12vw, 4.5rem); }
+    .mc-hero__body { font-size: 19px; }
+    .mc-statement { padding: 0 20px; }
+    .mc-statement__text { font-size: 19px; }
+    .mc-checklist-section, .mc-duo, .mc-workflow, .mc-audience, .mc-faq { padding: 64px 20px 0; }
+    .mc-section-title, .mc-close__title { font-size: clamp(2.4rem, 10vw, 3.5rem); }
+    .mc-section-body, .mc-close__body { font-size: 19px; }
+    .mc-duo__card { padding: 28px 24px; }
+    .mc-duo__card-title { font-size: 22px; }
+    .mc-close { padding: 80px 20px 96px; }
+    .mc-hero__actions, .mc-close__actions { flex-direction: column; width: 100%; align-items: stretch; }
+    .mc-cta { justify-content: center; }
+    .mc-checklist-section__inner, .mc-workflow__inner, .mc-faq__inner { gap: 36px; }
+    .mc-audience__inner { gap: 28px; }
+  }
+</style>

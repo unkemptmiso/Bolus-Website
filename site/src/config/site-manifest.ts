@@ -176,6 +176,221 @@ export const homePage: SitePage = {
 export const pageRegistry: SitePage[] = [
   homePage,
   {
+    id: "paper-anesthesia-chart-alternative",
+    path: "/paper-anesthesia-chart-alternative",
+    title: "Paper Anesthesia Chart Alternative",
+    navLabel: "Paper Chart Alternative",
+    description:
+      "Paper anesthesia records are familiar, but they are hard to read, easy to misplace, and harder to defend. See how Bolus gives clinicians a cleaner alternative.",
+    seoTitle: "Paper Anesthesia Chart Alternative | Bolus",
+    seoDescription:
+      "Paper anesthesia records are familiar, but they are hard to read, easy to misplace, and harder to defend. See how Bolus gives clinicians a cleaner alternative.",
+    category: "product",
+    hero: {
+      eyebrow: "Paper Chart Alternative",
+      title: "Paper anesthesia charts are familiar. They are also vulnerable.",
+      body: "Paper still works because it is fast, simple, and familiar. But the same things that make paper easy in the moment can create problems later.",
+      primaryCta: {
+        label: "View Pricing",
+        href: "/pricing",
+        variant: "primary",
+      },
+      secondaryCta: {
+        label: "Contact Us",
+        href: "/contact",
+        variant: "secondary",
+      },
+    },
+    sections: [
+      {
+        type: "checklist",
+        title: "The problem with paper anesthesia records",
+        description:
+          "Handwritten anesthesia records can be hard to read. Times can be unclear. Medication entries can be crowded. Vitals can be crossed out, squeezed in, or difficult to follow. When a chart is reviewed days, months, or years later, those details matter.",
+        items: [
+          "Hard to read",
+          "Easy to misplace",
+          "Difficult to audit",
+          "Inconsistent between providers",
+          "Vulnerable to incomplete timelines",
+          "Harder to review after the case is over",
+        ],
+      },
+      {
+        type: "note",
+        title: "What a defensible anesthesia record needs",
+        body: "A good anesthesia record should be clear, complete, and easy to follow. It should show the case timeline. It should make medications, vitals, airway events, fluids, and recovery details easy to review. It should be legible without explanation. It should look professional when exported, shared, or stored.",
+      },
+      {
+        type: "feature-grid",
+        title: "How Bolus helps",
+        description:
+          "Bolus is a mobile anesthesia record app built to replace paper charting with a cleaner workflow. It helps clinicians chart from pre-op through recovery, keep the record legible, and export a professional PDF when the case is done.",
+        columns: 3,
+        items: [
+          {
+            title: "One workflow",
+            body: "Document pre-op, intra-op, and recovery in one continuous record.",
+          },
+          {
+            title: "Legible by default",
+            body: "Typed entries and structured fields make the chart easier to review later.",
+          },
+          {
+            title: "Professional PDF export",
+            body: "Create a clean record that can be shared, stored, or imported into the office workflow.",
+          },
+        ],
+      },
+      {
+        type: "note",
+        title: "Built for office-based anesthesia",
+        body: "Bolus is designed for office-based and procedural sedation settings where hospital EMRs may be unavailable, too slow, or not built for the case flow. It is made for clinicians who need a practical way to document anesthesia care without adding unnecessary overhead.",
+      },
+      {
+        type: "cta",
+        title: "Leave paper behind",
+        body: "Paper may be familiar, but it should not be the standard for modern anesthesia documentation. Bolus gives clinicians a cleaner, more defensible way to chart.",
+        primaryCta: {
+          label: "View Pricing",
+          href: "/pricing",
+          variant: "primary",
+        },
+        secondaryCta: {
+          label: "Contact Us",
+          href: "/contact",
+          variant: "secondary",
+        },
+      },
+    ],
+  },
+  {
+    id: "mobile-anesthesia-charting",
+    path: "/mobile-anesthesia-charting",
+    title: "Mobile Anesthesia Charting",
+    navLabel: "Mobile Anesthesia Charting",
+    description: "Bolus is a mobile anesthesia charting app for office-based anesthesia, dental sedation, and procedural cases. Replace paper charts with clean PDF records.",
+    seoTitle: "Mobile Anesthesia Charting App | Bolus",
+    seoDescription: "Bolus is a mobile anesthesia charting app for office-based anesthesia, dental sedation, and procedural cases. Replace paper charts with clean PDF records.",
+    category: "product",
+    hero: {
+      eyebrow: "Mobile Anesthesia Charting",
+      title: "Mobile anesthesia charting built around the record.",
+      body: "Bolus helps mobile and office-based anesthesia providers document the case from pre-op through recovery, then export a clean PDF record. It is built for clinicians who need charting that is fast in the room and defensible after the case.",
+      primaryCta: {
+        label: "View Pricing",
+        href: "/pricing",
+        variant: "primary",
+      },
+      secondaryCta: {
+        label: "Contact Us",
+        href: "/contact",
+        variant: "secondary",
+      },
+    },
+    sections: [
+      {
+        type: "note",
+        title: "Why mobile anesthesia charting is different",
+        body: "Mobile anesthesia cases do not always have the support of a hospital EMR, an anesthesia cart, or a fixed documentation station. The record has to move with the clinician. It has to be fast enough to use during the case and clear enough to review after the case is over.",
+      },
+      {
+        type: "checklist",
+        title: "Paper works until the chart is questioned",
+        description: "Paper records are familiar, but they create avoidable weak points. Handwriting can be difficult to read. Medication entries can get crowded. Timelines can become unclear. Records can be misplaced, scanned poorly, or hard to audit later.",
+        items: [
+          "Legible anesthesia documentation",
+          "Clear case timeline",
+          "Structured medications and events",
+          "Pre-op, intra-op, and recovery in one record",
+          "Professional PDF export",
+          "Built for office-based anesthesia",
+        ],
+      },
+      {
+        type: "feature-grid",
+        title: "One record from pre-op to recovery",
+        description: "Bolus keeps the anesthesia record connected from the first pre-op note through recovery. Instead of piecing together separate forms, paper notes, and scanned pages, the case builds into one organized record.",
+        columns: 3,
+        items: [
+          {
+            title: "Pre-op",
+            body: "Document evaluation notes, consent, attachments, and case details before the procedure starts.",
+          },
+          {
+            title: "Intra-op",
+            body: "Record medications, vitals, airway events, fluids, and key moments as the case moves.",
+          },
+          {
+            title: "Recovery",
+            body: "Complete the record with post-op details, discharge vitals, and final review.",
+          },
+        ],
+      },
+      {
+        type: "note",
+        title: "A professional PDF at the end of the case",
+        body: "The final record should not look like a scanned worksheet. Bolus exports a clean PDF anesthesia record that can be shared, stored, or imported into the office workflow.",
+      },
+      {
+        type: "note",
+        title: "Focused charting, not bloated practice management",
+        body: "Some mobile anesthesia platforms try to manage scheduling, billing, messaging, e-prescribing, patient portals, and EMR access. Bolus is focused on the anesthesia record. That focus keeps the product cleaner for clinicians who mainly need better charting.",
+      },
+      {
+        type: "note",
+        title: "Built for dental, oral surgery, and office-based anesthesia",
+        body: "Bolus is designed for clinicians documenting anesthesia outside the hospital OR. That includes mobile anesthesiologists, dentist anesthesiologists, CRNAs, oral surgery offices, dental sedation cases, and office-based procedural sedation.",
+      },
+      {
+        type: "feature-grid",
+        title: "Frequently Asked Questions",
+        columns: 2,
+        items: [
+          {
+            title: "What is mobile anesthesia charting?",
+            body: "Mobile anesthesia charting is anesthesia documentation performed on a mobile device, such as an iPhone or iPad, instead of a paper record or desktop-bound system.",
+          },
+          {
+            title: "Is Bolus mobile anesthesia software?",
+            body: "Bolus is mobile anesthesia charting software focused on documentation and PDF record export. It is not a full practice management platform.",
+          },
+          {
+            title: "Can Bolus replace paper anesthesia charts?",
+            body: "Yes. Bolus is designed to replace paper anesthesia charting with a cleaner mobile workflow and professional PDF export.",
+          },
+          {
+            title: "Is Bolus for mobile anesthesiologists?",
+            body: "Yes. Bolus is built for mobile and office-based anesthesia providers, including anesthesiologists, CRNAs, dentist anesthesiologists, and oral surgery sedation teams.",
+          },
+          {
+            title: "Does Bolus include pre-op, intra-op, and recovery documentation?",
+            body: "Yes. Bolus supports documentation from pre-op through intra-op charting and recovery, so the case stays connected in one record.",
+          },
+          {
+            title: "Can Bolus export a PDF anesthesia record?",
+            body: "Yes. Bolus exports a clean PDF anesthesia record when the case is complete.",
+          },
+        ],
+      },
+      {
+        type: "cta",
+        title: "Ready to leave paper charting behind?",
+        body: "Bolus gives mobile and office-based anesthesia providers a cleaner way to document care.",
+        primaryCta: {
+          label: "View Pricing",
+          href: "/pricing",
+          variant: "primary",
+        },
+        secondaryCta: {
+          label: "Contact Us",
+          href: "/contact",
+          variant: "secondary",
+        },
+      },
+    ],
+  },
+  {
     id: "pricing",
     path: "/pricing",
     title: "Pricing",
@@ -560,7 +775,7 @@ export const footerNavigation = [
   {
     id: "product",
     title: "Product",
-    links: ["pricing", "about"],
+    links: ["pricing", "about", "paper-anesthesia-chart-alternative", "mobile-anesthesia-charting"],
   },
   {
     id: "legal",
