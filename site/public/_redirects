@@ -1,11 +1,43 @@
 # Bolus Edge Redirects
 # Optimized for Cloudflare Pages
 
-/privacy  /legal/privacy-policy  301
-/privacy-policy  /legal/privacy-policy  301
-/terms  /legal/terms-of-service  301
-/terms-of-service  /legal/terms-of-service  301
-/medical-disclaimer  /legal/medical-disclaimer  301
-/hipaa  /legal/hipaa-compliance-policy  301
-/hippa  /legal/hipaa-compliance-policy  301
-/legal/hippa-compliance-policy  /legal/hipaa-compliance-policy  301
+# Canonical public routes: force one permanent hop to the trailing-slash URL.
+/about  /about/  301
+/contact  /contact/  301
+/legal  /legal/  301
+/legal/hipaa-compliance-policy  /legal/hipaa-compliance-policy/  301
+/legal/medical-disclaimer  /legal/medical-disclaimer/  301
+/legal/privacy-policy  /legal/privacy-policy/  301
+/legal/terms-of-service  /legal/terms-of-service/  301
+/mobile-anesthesia-charting  /mobile-anesthesia-charting/  301
+/paper-anesthesia-chart-alternative  /paper-anesthesia-chart-alternative/  301
+/pricing  /pricing/  301
+/waitlist  /waitlist/  301
+
+# Legacy legal aliases.
+/privacy  /legal/privacy-policy/  301
+/privacy/  /legal/privacy-policy/  301
+/privacy-policy  /legal/privacy-policy/  301
+/privacy-policy/  /legal/privacy-policy/  301
+/terms  /legal/terms-of-service/  301
+/terms/  /legal/terms-of-service/  301
+/terms-of-service  /legal/terms-of-service/  301
+/terms-of-service/  /legal/terms-of-service/  301
+/medical-disclaimer  /legal/medical-disclaimer/  301
+/medical-disclaimer/  /legal/medical-disclaimer/  301
+/hipaa  /legal/hipaa-compliance-policy/  301
+/hipaa/  /legal/hipaa-compliance-policy/  301
+/hippa  /legal/hipaa-compliance-policy/  301
+/hippa/  /legal/hipaa-compliance-policy/  301
+/legal/hippa-compliance-policy  /legal/hipaa-compliance-policy/  301
+/legal/hippa-compliance-policy/  /legal/hipaa-compliance-policy/  301
+
+# Removed public pages from earlier site versions.
+/simulator  /  301
+/simulator/  /  301
+/business  /pricing/  301
+/business/  /pricing/  301
+/support  /contact/  301
+/support/  /contact/  301
+/security  /legal/hipaa-compliance-policy/  301
+/security/  /legal/hipaa-compliance-policy/  301

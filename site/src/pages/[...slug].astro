@@ -26,10 +26,11 @@ interface Props {
 
 const { page } = Astro.props;
 const pageSeo = await getEntry("pages", page.id);
+const canonicalPath = page.path === "/" ? "/" : `${page.path.replace(/\/$/, "")}/`;
 const resolvedSeo = pageSeo?.data ?? {
   title: page.seoTitle,
   description: page.seoDescription,
-  canonicalURL: new URL(page.path, siteMetadata.defaultSiteUrl).toString(),
+  canonicalURL: new URL(canonicalPath, siteMetadata.defaultSiteUrl).toString(),
   ogImage: defaultPageOgImage,
   isHomePage: false,
 };

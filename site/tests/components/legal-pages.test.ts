@@ -66,9 +66,12 @@ describe("legal pages", () => {
     expect(siteManifestSource).toContain(
       'links: ["privacy-policy", "terms-of-service", "medical-disclaimer", "hipaa-compliance-policy"]',
     );
-    expect(redirectsSource).toContain("/privacy  /legal/privacy-policy  301");
-    expect(redirectsSource).toContain("/terms  /legal/terms-of-service  301");
-    expect(redirectsSource).toContain("/medical-disclaimer  /legal/medical-disclaimer  301");
+    expect(redirectsSource).toContain("/privacy  /legal/privacy-policy/  301");
+    expect(redirectsSource).toContain("/privacy/  /legal/privacy-policy/  301");
+    expect(redirectsSource).toContain("/terms  /legal/terms-of-service/  301");
+    expect(redirectsSource).toContain("/terms/  /legal/terms-of-service/  301");
+    expect(redirectsSource).toContain("/medical-disclaimer  /legal/medical-disclaimer/  301");
+    expect(redirectsSource).toContain("/medical-disclaimer/  /legal/medical-disclaimer/  301");
   });
 
   it("uses a legal hub plus dedicated legal document source and layout instead of the old placeholder note blocks", () => {
@@ -92,20 +95,20 @@ describe("legal pages", () => {
 
   it("keeps dedicated SEO metadata and simple white legal page styling for the hub and documents", () => {
     expect(legalHubSeoSource).toContain('title: "Legal | Bolus"');
-    expect(legalHubSeoSource).toContain('canonicalURL: "https://bolusanesthesia.com/legal"');
+    expect(legalHubSeoSource).toContain('canonicalURL: "https://bolusanesthesia.com/legal/"');
     expect(siteManifestSource).toContain('id: "legal"');
     expect(siteManifestSource).toContain('title: "Legal"');
     expect(legalHubPageSource).not.toContain('page.hero.eyebrow ?? "Legal"');
     expect(siteManifestSource).toContain('body: ""');
     expect(privacySeoSource).toContain('title: "Privacy Policy | Bolus"');
-    expect(privacySeoSource).toContain('canonicalURL: "https://bolusanesthesia.com/legal/privacy-policy"');
+    expect(privacySeoSource).toContain('canonicalURL: "https://bolusanesthesia.com/legal/privacy-policy/"');
     expect(termsSeoSource).toContain('title: "Terms of Service | Bolus"');
-    expect(termsSeoSource).toContain('canonicalURL: "https://bolusanesthesia.com/legal/terms-of-service"');
+    expect(termsSeoSource).toContain('canonicalURL: "https://bolusanesthesia.com/legal/terms-of-service/"');
     expect(disclaimerSeoSource).toContain('title: "Medical Disclaimer | Bolus"');
-    expect(disclaimerSeoSource).toContain('canonicalURL: "https://bolusanesthesia.com/legal/medical-disclaimer"');
+    expect(disclaimerSeoSource).toContain('canonicalURL: "https://bolusanesthesia.com/legal/medical-disclaimer/"');
     expect(hipaaSeoSource).toContain('title: "HIPAA Compliance Policy | Bolus"');
     expect(hipaaSeoSource).toContain(
-      'canonicalURL: "https://bolusanesthesia.com/legal/hipaa-compliance-policy"',
+      'canonicalURL: "https://bolusanesthesia.com/legal/hipaa-compliance-policy/"',
     );
     expect(globalStylesSource).toContain(".legal-hub {");
     expect(globalStylesSource).toContain(".legal-hub__list {");

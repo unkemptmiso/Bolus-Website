@@ -42,15 +42,15 @@ describe("production domain configuration", () => {
     );
 
     expect(comparePaperSource).toContain(
-      'canonicalURL: "https://bolusanesthesia.com/compare/paper-charts"',
+      'canonicalURL: "https://bolusanesthesia.com/compare/paper-charts/"',
     );
     expect(compareMapsSource).toContain(
-      'canonicalURL: "https://bolusanesthesia.com/compare/maps-anesthesia"',
+      'canonicalURL: "https://bolusanesthesia.com/compare/maps-anesthesia/"',
     );
 
     expect(wranglerSource).toContain('"vars": {');
     expect(wranglerSource).toContain('"PUBLIC_SITE_URL": "https://bolusanesthesia.com"');
-    expect(runtimeEnvSource).toContain('PUBLIC_SITE_URL: z.url().default("https://bolusanesthesia.com")');
+    expect(runtimeEnvSource).toContain('PUBLIC_SITE_URL: z.string().trim().url().default("https://bolusanesthesia.com")');
     expect(siteManifestSource).toContain('defaultSiteUrl: "https://bolusanesthesia.com"');
     expect(astroConfigSource).toContain('site: process.env.PUBLIC_SITE_URL ?? "https://bolusanesthesia.com"');
     expect(runtimeEnvSource).not.toContain("https://bolus-site.invalid");
