@@ -3,6 +3,12 @@
 	"compatibility_flags": ["global_fetch_strictly_public"],
 	"name": "bolus-website",
 	"main": "@astrojs/cloudflare/entrypoints/server",
+	"routes": [
+		{
+			"pattern": "bolusanesthesia.com/*",
+			"zone_name": "bolusanesthesia.com"
+		}
+	],
 	"assets": {
 		"directory": "./dist",
 		"binding": "ASSETS",

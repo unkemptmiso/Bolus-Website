@@ -17,4 +17,9 @@ describe("HTTPS enforcement", () => {
   it("runs the Worker before static assets so the HTTPS middleware can protect public pages", () => {
     expect(wranglerSource).toContain('"run_worker_first": true');
   });
+
+  it("publishes the Worker on the production zone route", () => {
+    expect(wranglerSource).toContain('"pattern": "bolusanesthesia.com/*"');
+    expect(wranglerSource).toContain('"zone_name": "bolusanesthesia.com"');
+  });
 });
