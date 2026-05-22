@@ -158,7 +158,7 @@ ul {
 .site-main--mobile-charting {
   width: 100%;
   max-width: none;
-  background: #050816;
+  background: #ffffff;
 }
 
 .site-header {
@@ -3649,7 +3649,7 @@ ul {
     opacity: 1;
   }
 
-  .export-document-card+.export-document-card {
+  .export-document-card + .export-document-card {
     margin-left: -2.1rem;
   }
 

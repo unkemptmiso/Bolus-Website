@@ -14,7 +14,6 @@ const noindexPaths = pageRegistry
 export default defineConfig({
   output: 'static',
   site: process.env.PUBLIC_SITE_URL ?? "https://bolusanesthesia.com",
-  trailingSlash: "always",
   integrations: [
     react(), 
     sitemap({

@@ -8,144 +8,322 @@ const seo = await getEntry("pages", "mobile-anesthesia-charting");
 if (!page) throw new Error("Could not find the 'mobile-anesthesia-charting' page config.");
 if (!seo) throw new Error("Could not find the 'mobile-anesthesia-charting' page metadata.");
 
-const checklistItems = [
-  "Legible anesthesia documentation",
-  "Clear case timeline",
-  "Structured medications and events",
-  "Pre-op, intra-op, and recovery in one record",
-  "Professional PDF export",
-  "Built for office-based anesthesia",
-];
+const solutionCards = [
+  {
+    title: "Chart on the devices you already carry.",
+    body: "Bolus is built for mobile anesthesia charting on iPhone and iPad, so documentation can stay with the clinician instead of living on a clipboard or desktop workstation.",
+    iconSrc: "/section3-icons/hourglass-not-done_23f3.png",
+  },
+  {
+    title: "Keep the case connected.",
+    body: "Pre-Op, Intra-Op, and Post-Op stay in one anesthesia record, reducing the need to stitch separate forms together after the procedure.",
+    iconSrc: "/section3-icons/1f5c2_1f2qe.webp",
+  },
+  {
+    title: "Leave with a clean PDF.",
+    body: "When the case is complete, Bolus exports a legible, organized anesthesia record PDF that looks professional when reviewed, shared, or stored.",
+    iconSrc: "/section3-icons/1f4e4_1knv5.webp",
+  },
+] as const;
 
-const workflowSteps = [
-  { number: "01", title: "Pre-op", body: "Document evaluation notes, consent, attachments, and case details before the procedure starts." },
-  { number: "02", title: "Intra-op", body: "Record medications, vitals, airway events, fluids, and key moments as the case moves." },
-  { number: "03", title: "Recovery", body: "Complete the record with post-op details, discharge vitals, and final review." },
-];
+const workflowPhases = [
+  {
+    label: "Pre-Op",
+    title: "Pre-op without the paper shuffle.",
+    body: "Document evaluation notes, consent, attachments, and case details before the procedure starts.",
+  },
+  {
+    label: "Intra-Op",
+    title: "Chart vitals, medications, and events in the room.",
+    body: "Record the timeline as the case moves, without manually rebuilding the story later from memory and handwritten notes.",
+  },
+  {
+    label: "Post-Op",
+    title: "Wrap the record cleanly.",
+    body: "Complete recovery documentation, discharge vitals, controlled substance reconciliation, and final review in the same workflow.",
+  },
+] as const;
 
-const providerTypes = [
-  "Mobile Anesthesiologists",
+const comparisonPoints = [
+  {
+    title: "Focused charting",
+    body: "Bolus concentrates on the anesthesia record itself: fast charting, clear timelines, and a polished final PDF.",
+  },
+  {
+    title: "Mobile-first workflow",
+    body: "The page is built around iPhone and iPad charting because mobile and office-based anesthesia often happens away from a fixed documentation station.",
+  },
+  {
+    title: "Less administrative noise",
+    body: "Many mobile anesthesia practice software platforms center scheduling, billing, portals, and broad practice operations. Bolus keeps the story closer to clinical documentation.",
+  },
+] as const;
+
+const audienceTypes = [
+  "Mobile anesthesiologists",
   "CRNAs",
-  "Dentist Anesthesiologists",
-  "Oral Surgery Offices",
-  "Dental Sedation",
-  "Office-Based Procedural Sedation",
-];
+  "Dentist anesthesiologists",
+  "Oral surgery offices",
+  "Dental sedation teams",
+  "Office-based procedural sedation",
+] as const;
+
+const exportPages = [
+  { src: "/assets/record-screenshots/page-1.webp", label: "Bolus PDF anesthesia record page 1" },
+  { src: "/assets/record-screenshots/page-2.webp", label: "Bolus PDF anesthesia record page 2" },
+  { src: "/assets/record-screenshots/page-3.webp", label: "Bolus PDF anesthesia record page 3" },
+] as const;
+
+const securityPoints = [
+  "AES-256 encryption",
+  "Authentication-gated access",
+  "PHI stored locally on device",
+] as const;
 
 const faqs = [
-  { question: "What is mobile anesthesia charting?", answer: "Mobile anesthesia charting is anesthesia documentation performed on a mobile device, such as an iPhone or iPad, instead of a paper record or desktop-bound system." },
-  { question: "Is Bolus mobile anesthesia software?", answer: "Bolus is mobile anesthesia charting software focused on documentation and PDF record export. It is not a full practice management platform." },
-  { question: "Can Bolus replace paper anesthesia charts?", answer: "Yes. Bolus is designed to replace paper anesthesia charting with a cleaner mobile workflow and professional PDF export." },
-  { question: "Is Bolus for mobile anesthesiologists?", answer: "Yes. Bolus is built for mobile and office-based anesthesia providers, including anesthesiologists, CRNAs, dentist anesthesiologists, and oral surgery sedation teams." },
-  { question: "Does Bolus include pre-op, intra-op, and recovery documentation?", answer: "Yes. Bolus supports documentation from pre-op through intra-op charting and recovery, so the case stays connected in one record." },
-  { question: "Can Bolus export a PDF anesthesia record?", answer: "Yes. Bolus exports a clean PDF anesthesia record when the case is complete." },
-];
+  {
+    question: "What should a mobile anesthesia charting app include?",
+    answer:
+      "A useful mobile anesthesia charting app should support the full case record: pre-op evaluation, consent and attachments, intra-op vitals, medications, fluids, events, recovery notes, and a clean anesthesia record PDF export.",
+  },
+  {
+    question: "Can Bolus work for mobile anesthesia practices?",
+    answer:
+      "Yes. Bolus is designed for mobile anesthesia practices and office-based anesthesia teams that need charting on iPhone and iPad instead of relying on paper forms or a desktop-bound EMR.",
+  },
+  {
+    question: "How is Bolus different from mobile anesthesia practice software?",
+    answer:
+      "Bolus is focused on anesthesia documentation rather than trying to become a full practice management platform. If you are comparing mobile anesthesia practice software, Maps Anesthesia, broad EMR tools, or paper charting, Bolus is the more focused record-first option.",
+  },
+  {
+    question: "Can Bolus replace paper anesthesia charts?",
+    answer:
+      "Bolus is built to replace paper anesthesia charting with a cleaner digital workflow. Clinicians can document the case in the app and finish with a legible, organized PDF record.",
+  },
+  {
+    question: "Does Bolus support iPhone and iPad anesthesia charting?",
+    answer:
+      "Yes. Bolus is built around iPhone and iPad anesthesia charting so providers can document where the case is happening, not only from a fixed office computer.",
+  },
+  {
+    question: "Is Bolus for hospital anesthesia departments?",
+    answer:
+      "Bolus is primarily positioned for office-based, outpatient, dental, oral surgery, and mobile anesthesia workflows where paper charting is still common and a large hospital system may be the wrong fit.",
+  },
+] as const;
 ---
 
-<BaseLayout page={page} seo={seo.data} mainClass="site-main site-main--mobile-charting" footerVariant="dark">
-
-  <!-- §1 HERO — centered -->
+<BaseLayout page={page} seo={seo.data} mainClass="site-main site-main--mobile-charting">
   <section class="mc-hero" aria-labelledby="mc-hero-title">
     <div class="mc-hero__inner">
-      <h1 id="mc-hero-title" class="mc-hero__title">Mobile anesthesia charting built around the record.</h1>
-      <p class="mc-hero__body">Bolus helps mobile and office-based anesthesia providers document the case from pre-op through recovery, then export a clean PDF record.</p>
-      <div class="mc-hero__actions">
-        <a class="mc-cta mc-cta--primary" href="/pricing">View Pricing</a>
-        <a class="mc-cta mc-cta--ghost" href="/contact">Contact Us</a>
+      <div class="mc-hero__copy">
+        <p class="mc-eyebrow">Mobile Anesthesia Charting App</p>
+        <h1 id="mc-hero-title" class="mc-hero__title">Mobile anesthesia charting for office-based cases.</h1>
+        <p class="mc-hero__lede">
+          Bolus helps mobile and office-based anesthesia providers chart on iPhone and iPad,
+          keep the case connected from pre-op through recovery, and export a clean PDF record
+          when the procedure is done.
+        </p>
+        <div class="mc-actions" aria-label="Mobile anesthesia charting page actions">
+          <a class="mc-button mc-button--primary" href="/waitlist">Get the app</a>
+          <a class="mc-button mc-button--secondary" href="#workflow">See the workflow</a>
+        </div>
       </div>
+
+      <figure class="mc-hero__media">
+        <img
+          src="/combined-hero-shot.png"
+          alt="The Bolus mobile anesthesia charting interface shown on iPhone and iPad"
+          width="2560"
+          height="1500"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        />
+      </figure>
     </div>
   </section>
 
-  <!-- §2 PULL-QUOTE — centered statement, no heading -->
-  <section class="mc-statement" aria-label="Why mobile charting is different">
-    <div class="mc-statement__inner">
-      <div class="mc-statement__rule" aria-hidden="true"></div>
-      <p class="mc-statement__text">Mobile anesthesia cases do not always have the support of a hospital EMR, an anesthesia cart, or a fixed documentation station. The record has to move with the clinician — fast enough to use during the case and clear enough to review after.</p>
-      <div class="mc-statement__rule" aria-hidden="true"></div>
-    </div>
-  </section>
-
-  <!-- §3 CHECKLIST — left heading + checklist rows -->
-  <section class="mc-checklist-section" aria-labelledby="mc-paper-title">
-    <div class="mc-checklist-section__inner">
-      <div class="mc-checklist-section__header">
-        <h2 id="mc-paper-title" class="mc-section-title">Paper works until the chart is questioned</h2>
-        <p class="mc-section-body">Paper records are familiar, but they create avoidable weak points. Handwriting can be difficult to read. Medication entries can get crowded. Timelines can become unclear.</p>
+  <section class="mc-problem" aria-labelledby="mc-problem-title">
+    <div class="mc-problem__inner">
+      <div class="mc-problem__copy">
+        <p class="mc-eyebrow mc-eyebrow--dark">Why mobile charting matters</p>
+        <h2 id="mc-problem-title">Paper gets worse when the practice is mobile.</h2>
+        <p>
+          Mobile anesthesia cases do not always have a hospital EMR, an anesthesia cart, or a
+          fixed documentation station. The record has to move with the clinician, stay legible
+          during the case, and still make sense when someone reviews it later.
+        </p>
       </div>
-      <ul class="mc-checklist" role="list">
-        {checklistItems.map((item) => (
-          <li class="mc-checklist__item">
-            <span class="mc-checklist__check" aria-hidden="true">
-              <svg viewBox="0 0 20 20" fill="none"><path d="M5 10.5 8.5 14 15 6.5" /></svg>
-            </span>
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
+
+      <figure class="mc-problem__record">
+        <img
+          src="/assets/home/updated-anesthesia-record.webp"
+          alt="Handwritten paper anesthesia record with crossed-out notes and vitals"
+          width="980"
+          height="1305"
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
     </div>
   </section>
 
-  <!-- §4 TWO-COLUMN CARDS — side by side, different layout from everything else -->
-  <section class="mc-duo" aria-label="Key differentiators">
-    <div class="mc-duo__inner">
-      <article class="mc-duo__card">
-        <span class="mc-duo__label" aria-hidden="true">Export</span>
-        <h2 class="mc-duo__card-title">A professional PDF at the end of the case</h2>
-        <p class="mc-duo__card-body">The final record should not look like a scanned worksheet. Bolus exports a clean PDF anesthesia record that can be shared, stored, or imported into the office workflow.</p>
-      </article>
-      <article class="mc-duo__card">
-        <span class="mc-duo__label" aria-hidden="true">Focus</span>
-        <h2 class="mc-duo__card-title">Focused charting, not bloated practice management</h2>
-        <p class="mc-duo__card-body">Some platforms try to manage scheduling, billing, messaging, and e-prescribing. Bolus is focused on the anesthesia record. That focus keeps the product cleaner for clinicians.</p>
-      </article>
+  <section class="mc-solution" aria-labelledby="mc-solution-title">
+    <div class="mc-section-heading mc-section-heading--centered">
+      <p class="mc-eyebrow">Paperless anesthesia charting</p>
+      <h2 id="mc-solution-title">A mobile record that keeps up in the room.</h2>
+      <p>
+        Bolus turns mobile anesthesia documentation into a cleaner workflow: chart quickly while
+        care is happening, then leave with a record that is easier to read and easier to stand
+        behind.
+      </p>
+    </div>
+
+    <div class="mc-solution__stack" role="list" aria-label="Bolus mobile charting benefits">
+      {solutionCards.map((card) => (
+        <article class="mc-solution-card" role="listitem">
+          <img src={card.iconSrc} alt="" width="44" height="44" loading="lazy" decoding="async" aria-hidden="true" />
+          <div>
+            <h3>{card.title}</h3>
+            <p>{card.body}</p>
+          </div>
+        </article>
+      ))}
     </div>
   </section>
 
-  <!-- §5 WORKFLOW — numbered steps -->
-  <section class="mc-workflow" aria-labelledby="mc-workflow-title">
+  <section id="workflow" class="mc-workflow" aria-labelledby="mc-workflow-title">
     <div class="mc-workflow__inner">
-      <h2 id="mc-workflow-title" class="mc-section-title mc-section-title--centered">One record from pre-op to recovery</h2>
-      <div class="mc-workflow__list" role="list">
-        {workflowSteps.map((step) => (
-          <article class="mc-workflow__item" role="listitem">
-            <span class="mc-workflow__item-number" aria-hidden="true">{step.number}</span>
-            <div class="mc-workflow__item-content">
-              <h3 class="mc-workflow__item-title">{step.title}</h3>
-              <p class="mc-workflow__item-body">{step.body}</p>
-            </div>
+      <div class="mc-workflow__copy">
+        <p class="mc-eyebrow">Pre-Op to Post-Op</p>
+        <h2 id="mc-workflow-title">Built for the way mobile anesthesia actually moves.</h2>
+        <p>
+          The strongest mobile anesthesia charting workflow is not a pile of screens. It is one
+          connected record that follows the case from the first note to the final export.
+        </p>
+
+        <div class="mc-workflow__phases" role="list">
+          {workflowPhases.map((phase) => (
+            <article class="mc-phase" role="listitem">
+              <p>{phase.label}</p>
+              <h3>{phase.title}</h3>
+              <span>{phase.body}</span>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div class="mc-workflow__phone" aria-label="Bolus intra-op vitals workflow preview">
+        <img
+          class="mc-workflow__frame"
+          src="/assets/iphone-17-black-portrait.webp"
+          alt=""
+          width="900"
+          height="1800"
+          loading="lazy"
+          decoding="async"
+          aria-hidden="true"
+        />
+        <video
+          class="mc-workflow__video"
+          src="/assets/workflow/intra-op-vitals.mp4"
+          muted
+          autoplay
+          loop
+          playsinline
+          preload="metadata"
+          aria-hidden="true"
+        ></video>
+      </div>
+    </div>
+  </section>
+
+  <section class="mc-focus" aria-labelledby="mc-focus-title">
+    <div class="mc-focus__inner">
+      <div class="mc-section-heading">
+        <p class="mc-eyebrow">Alternative landing page positioning</p>
+        <h2 id="mc-focus-title">Focused charting, not another bloated practice platform.</h2>
+        <p>
+          Search results for mobile anesthesia practice can make every product sound like an
+          all-in-one operations suite. Bolus is intentionally narrower: the anesthesia record,
+          the mobile charting workflow, and the final PDF.
+        </p>
+      </div>
+
+      <div class="mc-focus__grid" role="list">
+        {comparisonPoints.map((point) => (
+          <article class="mc-focus-card" role="listitem">
+            <h3>{point.title}</h3>
+            <p>{point.body}</p>
           </article>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- §6 BUILT FOR — centered heading + pill tags -->
   <section class="mc-audience" aria-labelledby="mc-audience-title">
     <div class="mc-audience__inner">
-      <h2 id="mc-audience-title" class="mc-section-title mc-section-title--centered">Built for clinicians outside the hospital OR</h2>
-      <div class="mc-audience__pills">
-        {providerTypes.map((type) => (
-          <span class="mc-audience__pill">{type}</span>
-        ))}
+      <h2 id="mc-audience-title">Made for anesthesia outside the hospital OR.</h2>
+      <div class="mc-audience__pills" aria-label="Provider types">
+        {audienceTypes.map((type) => <span>{type}</span>)}
       </div>
     </div>
   </section>
 
-  <!-- §7 FAQ — accordion -->
+  <section class="mc-export" aria-labelledby="mc-export-title">
+    <div class="mc-section-heading mc-section-heading--centered">
+      <p class="mc-eyebrow">Anesthesia Record PDF Export</p>
+      <h2 id="mc-export-title">A finished record that does not look like a scanned worksheet.</h2>
+      <p>
+        The final anesthesia record is one of the best reasons to leave paper. Bolus organizes
+        medications, vital signs, events, and recovery details into a PDF that is cleaner to
+        review, store, and share.
+      </p>
+    </div>
+
+    <div class="mc-export__pages" aria-label="Bolus anesthesia record PDF previews">
+      {exportPages.map((page, index) => (
+        <figure class="mc-export-page" style={`--page-index:${index};`}>
+          <img src={page.src} alt={page.label} width="2479" height="3508" loading="lazy" decoding="async" />
+        </figure>
+      ))}
+    </div>
+  </section>
+
+  <section class="mc-security" aria-labelledby="mc-security-title">
+    <div class="mc-security__inner">
+      <img src="/privacy-lock.svg" alt="" width="64" height="64" loading="lazy" decoding="async" aria-hidden="true" />
+      <h2 id="mc-security-title">Secure by design.</h2>
+      <p>
+        Bolus is built for secure anesthesia documentation, using AES-256 encryption,
+        authentication-gated access, and local on-device storage so PHI stays controlled.
+      </p>
+      <div class="mc-security__points" aria-label="Security proof points">
+        {securityPoints.map((point) => <span>{point}</span>)}
+      </div>
+    </div>
+  </section>
+
   <section class="mc-faq" data-mc-faq-section aria-labelledby="mc-faq-title">
     <div class="mc-faq__inner">
-      <h2 id="mc-faq-title" class="mc-section-title">Frequently Asked Questions</h2>
+      <div class="mc-section-heading">
+        <p class="mc-eyebrow">Mobile anesthesia charting FAQ</p>
+        <h2 id="mc-faq-title">Questions clinicians search before switching.</h2>
+      </div>
+
       <div class="mc-faq__list">
         {faqs.map((faq) => (
           <article class="mc-faq__item" data-mc-faq-item>
             <button class="mc-faq__trigger" type="button" data-mc-faq-trigger aria-expanded="false">
               <span>{faq.question}</span>
-              <span class="mc-faq__chevron" aria-hidden="true">
-                <svg viewBox="0 0 20 20" fill="none"><path d="M5 7.5 10 12.5 15 7.5" /></svg>
-              </span>
+              <span class="mc-faq__icon" aria-hidden="true"></span>
             </button>
             <div class="mc-faq__content">
-              <div class="mc-faq__content-inner"><p>{faq.answer}</p></div>
+              <div class="mc-faq__content-inner">
+                <p>{faq.answer}</p>
+              </div>
             </div>
           </article>
         ))}
@@ -153,183 +331,819 @@ const faqs = [
     </div>
   </section>
 
-  <!-- §8 CLOSE CTA — centered -->
   <section class="mc-close" aria-labelledby="mc-close-title">
     <div class="mc-close__inner">
-      <h2 id="mc-close-title" class="mc-close__title">Ready to leave paper charting behind?</h2>
-      <p class="mc-close__body">Bolus gives mobile and office-based anesthesia providers a cleaner way to document care.</p>
-      <div class="mc-close__actions">
-        <a class="mc-cta mc-cta--primary" href="/pricing">View Pricing</a>
-        <a class="mc-cta mc-cta--ghost" href="/contact">Contact Us</a>
+      <div class="mc-close__copy">
+        <p class="mc-eyebrow">Leave paper behind</p>
+        <h2 id="mc-close-title">Bring mobile anesthesia charting up to the standard of your care.</h2>
+        <p>
+          Bolus gives office-based and mobile anesthesia providers a cleaner way to document the
+          case, protect the record, and finish with a professional PDF.
+        </p>
+        <div class="mc-actions">
+          <a class="mc-button mc-button--primary" href="/waitlist">Get the app</a>
+          <a class="mc-button mc-button--secondary" href="/pricing">View pricing</a>
+        </div>
       </div>
+      <img
+        src="/assets/home/download-devices.webp"
+        alt="The Bolus app interface shown across iPhone, iPad mini, and iPad Pro"
+        width="1689"
+        height="1082"
+        loading="lazy"
+        decoding="async"
+      />
     </div>
   </section>
-
 </BaseLayout>
 
 <script is:inline>
   (() => {
     const section = document.querySelector("[data-mc-faq-section]");
     if (!(section instanceof HTMLElement)) return;
-    const entries = Array.from(section.querySelectorAll("[data-mc-faq-item]"));
-    if (!entries.length) return;
-    const setActiveIndex = (activeIndex) => {
-      entries.forEach((entry, index) => {
-        const button = entry.querySelector("[data-mc-faq-trigger]");
-        const content = entry.querySelector(".mc-faq__content");
-        if (!(button instanceof HTMLButtonElement) || !(content instanceof HTMLElement)) return;
-        const isActive = index === activeIndex;
-        entry.classList.toggle("is-open", isActive);
-        button.setAttribute("aria-expanded", isActive ? "true" : "false");
-        content.classList.toggle("is-open", isActive);
+
+    const items = Array.from(section.querySelectorAll("[data-mc-faq-item]"));
+    const setOpenItem = (openIndex) => {
+      items.forEach((item, index) => {
+        const trigger = item.querySelector("[data-mc-faq-trigger]");
+        const content = item.querySelector(".mc-faq__content");
+        if (!(trigger instanceof HTMLButtonElement) || !(content instanceof HTMLElement)) return;
+
+        const isOpen = index === openIndex;
+        item.classList.toggle("is-open", isOpen);
+        trigger.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        content.classList.toggle("is-open", isOpen);
       });
     };
-    entries.forEach((entry, index) => {
-      const button = entry.querySelector("[data-mc-faq-trigger]");
-      if (!(button instanceof HTMLButtonElement)) return;
-      button.addEventListener("click", () => {
-        const isExpanded = button.getAttribute("aria-expanded") === "true";
-        setActiveIndex(isExpanded ? -1 : index);
+
+    items.forEach((item, index) => {
+      const trigger = item.querySelector("[data-mc-faq-trigger]");
+      if (!(trigger instanceof HTMLButtonElement)) return;
+
+      trigger.addEventListener("click", () => {
+        const isExpanded = trigger.getAttribute("aria-expanded") === "true";
+        setOpenItem(isExpanded ? -1 : index);
       });
     });
   })();
 </script>
 
 <style>
-  /* ── SHARED SECTION TITLE ── */
-  .mc-section-title { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 56px; font-weight: 700; line-height: 1; letter-spacing: -0.28px; color: #f5f8ff; margin: 0; text-wrap: balance; }
-  .mc-section-title--centered { text-align: center; }
-  .mc-section-body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; max-width: 48ch; font-size: 22px; line-height: 1.5; font-weight: 500; color: rgba(255,255,255,0.8); margin: 0; }
-
-  /* ── CTA ── */
-  .mc-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: 0 1.5rem; border-radius: 999px; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 1rem; font-weight: 620; letter-spacing: -0.02em; text-decoration: none; transition: transform 200ms ease, box-shadow 200ms ease; }
-  .mc-cta:hover { transform: translateY(-1px); }
-  .mc-cta--primary { background: #4d93ff; color: #fff; box-shadow: 0 12px 28px rgba(77,147,255,0.22); }
-  .mc-cta--primary:hover { box-shadow: 0 16px 36px rgba(77,147,255,0.32); }
-  .mc-cta--ghost { background: transparent; color: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.18); }
-  .mc-cta--ghost:hover { border-color: rgba(255,255,255,0.34); color: #fff; }
-
-  /* ──────────────────────────────────────
-     §1 HERO — centered
-     ────────────────────────────────────── */
-  .mc-hero { position: relative; padding: 120px 24px 96px; text-align: center; overflow: hidden; }
-  .mc-hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 55% 50% at 50% 0%, rgba(77,147,255,0.09), transparent), radial-gradient(circle at 30% 80%, rgba(54,67,122,0.08), transparent 50%); pointer-events: none; }
-  .mc-hero__inner { position: relative; width: min(760px, calc(100% - 2rem)); margin: 0 auto; display: grid; gap: 24px; justify-items: center; }
-  .mc-hero__title { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 65px; font-weight: 700; line-height: 1; letter-spacing: -1px; color: #f5f8ff; margin: 0; text-wrap: balance; }
-  .mc-hero__body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; max-width: 42rem; font-size: 22px; line-height: 1.5; font-weight: 500; color: rgba(255,255,255,0.8); margin: 0; }
-  .mc-hero__actions { display: flex; gap: 14px; padding-top: 8px; }
-
-  /* ──────────────────────────────────────
-     §2 PULL-QUOTE STATEMENT — centered, no heading
-     ────────────────────────────────────── */
-  .mc-statement { padding: 0 24px; }
-  .mc-statement__inner { width: min(680px, calc(100% - 2rem)); margin: 0 auto; display: grid; gap: 32px; justify-items: center; text-align: center; }
-  .mc-statement__rule { width: 48px; height: 1px; background: rgba(77,147,255,0.3); }
-  .mc-statement__text { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 24px; line-height: 1.55; font-weight: 500; letter-spacing: -0.01em; color: rgba(255,255,255,0.7); font-style: italic; margin: 0; }
-
-  /* ──────────────────────────────────────
-     §3 CHECKLIST — left heading + rows
-     ────────────────────────────────────── */
-  .mc-checklist-section { padding: 96px 24px 0; }
-  .mc-checklist-section__inner { width: min(760px, calc(100% - 2rem)); margin: 0 auto; display: grid; gap: 48px; }
-  .mc-checklist-section__header { display: grid; gap: 20px; }
-  .mc-checklist { display: grid; gap: 0; }
-  .mc-checklist__item { display: flex; align-items: center; gap: 14px; padding: 16px 0; border-top: 1px solid rgba(255,255,255,0.07); font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 19px; line-height: 1.5; font-weight: 500; color: rgba(255,255,255,0.88); }
-  .mc-checklist__item:last-child { border-bottom: 1px solid rgba(255,255,255,0.07); }
-  .mc-checklist__check { flex: 0 0 auto; width: 1.25rem; height: 1.25rem; color: rgba(77,147,255,0.8); }
-  .mc-checklist__check svg { width: 100%; height: 100%; }
-  .mc-checklist__check path { stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-
-  /* ──────────────────────────────────────
-     §4 TWO-COLUMN CARDS — side by side
-     ────────────────────────────────────── */
-  .mc-duo { padding: 96px 24px 0; }
-  .mc-duo__inner { width: min(1040px, calc(100% - 2rem)); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .mc-duo__card { display: grid; gap: 16px; padding: 36px 32px; border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; background: linear-gradient(165deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01)); }
-  .mc-duo__label { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(77,147,255,0.7); }
-  .mc-duo__card-title { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 28px; font-weight: 700; line-height: 1.12; letter-spacing: -0.5px; color: #f5f8ff; margin: 0; text-wrap: balance; }
-  .mc-duo__card-body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 19px; line-height: 1.5; font-weight: 400; color: rgba(255,255,255,0.6); margin: 0; }
-
-  /* ──────────────────────────────────────
-     §5 WORKFLOW — centered heading + numbered rows
-     ────────────────────────────────────── */
-  .mc-workflow { padding: 96px 24px 0; }
-  .mc-workflow__inner { width: min(760px, calc(100% - 2rem)); margin: 0 auto; display: grid; gap: 48px; }
-  .mc-workflow__list { display: grid; gap: 0; }
-  .mc-workflow__item { display: grid; grid-template-columns: 3.2rem 1fr; gap: 0 16px; align-items: start; padding: 24px 0; border-top: 1px solid rgba(255,255,255,0.07); }
-  .mc-workflow__item:last-child { border-bottom: 1px solid rgba(255,255,255,0.07); }
-  .mc-workflow__item-number { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.05em; color: rgba(77,147,255,0.7); padding-top: 3px; }
-  .mc-workflow__item-content { display: grid; gap: 6px; }
-  .mc-workflow__item-title { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 1.12rem; font-weight: 650; line-height: 1.28; letter-spacing: -0.02em; color: #f5f8ff; margin: 0; }
-  .mc-workflow__item-body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 19px; line-height: 1.5; font-weight: 400; color: rgba(255,255,255,0.6); margin: 0; }
-
-  /* ──────────────────────────────────────
-     §6 AUDIENCE — centered heading + pill tags
-     ────────────────────────────────────── */
-  .mc-audience { padding: 96px 24px 0; text-align: center; }
-  .mc-audience__inner { width: min(760px, calc(100% - 2rem)); margin: 0 auto; display: grid; gap: 40px; justify-items: center; }
-  .mc-audience__pills { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-  .mc-audience__pill { padding: 10px 20px; border: 1px solid rgba(255,255,255,0.1); border-radius: 999px; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 0.95rem; font-weight: 550; letter-spacing: -0.01em; color: rgba(255,255,255,0.82); background: rgba(255,255,255,0.03); transition: border-color 200ms ease, background 200ms ease; }
-  .mc-audience__pill:hover { border-color: rgba(77,147,255,0.3); background: rgba(77,147,255,0.06); }
-
-  /* ──────────────────────────────────────
-     §7 FAQ — accordion
-     ────────────────────────────────────── */
-  .mc-faq { padding: 96px 24px 0; }
-  .mc-faq__inner { width: min(760px, calc(100% - 2rem)); margin: 0 auto; display: grid; gap: 48px; }
-  .mc-faq__list { border-top: 1px solid rgba(255,255,255,0.1); }
-  .mc-faq__item { border-bottom: 1px solid rgba(255,255,255,0.1); }
-  .mc-faq__trigger { width: 100%; margin: 0; padding: 1.2rem 0; border: none; background: transparent; display: flex; align-items: center; justify-content: space-between; gap: 1rem; cursor: pointer; text-align: left; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 1rem; color: #f5f8ff; }
-  .mc-faq__trigger span:first-child { font-size: 1.08rem; line-height: 1.3; letter-spacing: -0.02em; font-weight: 600; }
-  .mc-faq__chevron { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; width: 1.2rem; height: 1.2rem; color: rgba(255,255,255,0.5); transition: transform 180ms ease; }
-  .mc-faq__chevron svg { width: 100%; height: 100%; }
-  .mc-faq__chevron path { stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-  .mc-faq__item.is-open .mc-faq__chevron { transform: rotate(180deg); }
-  .mc-faq__content { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 260ms cubic-bezier(0.22,1,0.36,1); }
-  .mc-faq__content.is-open { grid-template-rows: 1fr; }
-  .mc-faq__content-inner { overflow: hidden; }
-  .mc-faq__content-inner p { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; padding: 0 2.25rem 1.35rem 0; font-size: 19px; line-height: 1.5; color: rgba(255,255,255,0.6); margin: 0; }
-
-  /* ──────────────────────────────────────
-     §8 CLOSE CTA — centered
-     ────────────────────────────────────── */
-  .mc-close { padding: 120px 24px 144px; text-align: center; position: relative; }
-  .mc-close::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 55% at 50% 100%, rgba(77,147,255,0.06), transparent); pointer-events: none; }
-  .mc-close__inner { position: relative; width: min(640px, calc(100% - 2rem)); margin: 0 auto; display: grid; gap: 22px; justify-items: center; }
-  .mc-close__title { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 56px; font-weight: 700; line-height: 1; letter-spacing: -0.28px; color: #f5f8ff; margin: 0; text-wrap: balance; }
-  .mc-close__body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; font-size: 22px; line-height: 1.5; font-weight: 500; color: rgba(255,255,255,0.8); max-width: 32rem; margin: 0; }
-  .mc-close__actions { display: flex; gap: 14px; padding-top: 8px; }
-
-  /* ──────────────────────────────────────
-     RESPONSIVE
-     ────────────────────────────────────── */
-  @media (max-width: 743px) {
-    .mc-hero { padding: 104px 24px 72px; }
-    .mc-hero__title { font-size: 56px; }
-    .mc-hero__body { font-size: 20px; }
-    .mc-statement__text { font-size: 21px; }
-    .mc-section-title, .mc-close__title { font-size: 48px; }
-    .mc-section-body, .mc-close__body { font-size: 20px; }
-    .mc-duo__card-title { font-size: 24px; }
-    .mc-duo__inner { grid-template-columns: 1fr; }
-    .mc-checklist-section, .mc-duo, .mc-workflow, .mc-audience, .mc-faq { padding-top: 72px; }
+  .mc-eyebrow {
+    margin: 0;
+    font-size: 0.78rem;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #007aff;
   }
 
-  @media (max-width: 640px) {
-    .mc-hero { padding: 88px 20px 56px; }
-    .mc-hero__title { font-size: clamp(3.2rem, 12vw, 4.5rem); }
-    .mc-hero__body { font-size: 19px; }
-    .mc-statement { padding: 0 20px; }
-    .mc-statement__text { font-size: 19px; }
-    .mc-checklist-section, .mc-duo, .mc-workflow, .mc-audience, .mc-faq { padding: 64px 20px 0; }
-    .mc-section-title, .mc-close__title { font-size: clamp(2.4rem, 10vw, 3.5rem); }
-    .mc-section-body, .mc-close__body { font-size: 19px; }
-    .mc-duo__card { padding: 28px 24px; }
-    .mc-duo__card-title { font-size: 22px; }
-    .mc-close { padding: 80px 20px 96px; }
-    .mc-hero__actions, .mc-close__actions { flex-direction: column; width: 100%; align-items: stretch; }
-    .mc-cta { justify-content: center; }
-    .mc-checklist-section__inner, .mc-workflow__inner, .mc-faq__inner { gap: 36px; }
-    .mc-audience__inner { gap: 28px; }
+  .mc-eyebrow--dark {
+    color: rgba(126, 180, 255, 0.94);
+  }
+
+  .mc-button {
+    display: inline-flex;
+    min-height: 3rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.25rem;
+    border-radius: 999px;
+    font-size: 1rem;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .mc-button:hover,
+  .mc-button:focus-visible {
+    transform: translateY(-1px);
+  }
+
+  .mc-button--primary {
+    background: #007aff;
+    color: #ffffff;
+    box-shadow: 0 16px 34px rgba(0, 122, 255, 0.2);
+  }
+
+  .mc-button--secondary {
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    background: rgba(255, 255, 255, 0.82);
+    color: rgba(15, 23, 42, 0.82);
+  }
+
+  .mc-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .mc-section-heading {
+    display: grid;
+    gap: 1rem;
+    max-width: 47rem;
+  }
+
+  .mc-section-heading--centered {
+    margin: 0 auto;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .mc-section-heading h2,
+  .mc-problem h2,
+  .mc-audience h2,
+  .mc-security h2,
+  .mc-close h2 {
+    margin: 0;
+    font-size: clamp(2.8rem, 5vw, 4.1rem);
+    line-height: 1;
+    letter-spacing: -0.28px;
+    font-weight: 700;
+    color: #000000;
+  }
+
+  .mc-section-heading p:not(.mc-eyebrow),
+  .mc-problem p:not(.mc-eyebrow),
+  .mc-security p,
+  .mc-close p:not(.mc-eyebrow) {
+    margin: 0;
+    font-size: 21px;
+    line-height: 1.5;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.65);
+  }
+
+  .mc-hero {
+    overflow: clip;
+    background: #ffffff;
+  }
+
+  .mc-hero__inner {
+    width: min(1380px, calc(100vw - 2.5rem));
+    margin: 0 auto;
+    padding: clamp(3.25rem, 6vw, 5.5rem) 0 clamp(2.25rem, 5vw, 4rem);
+    display: grid;
+    gap: clamp(2rem, 4vw, 3.25rem);
+    justify-items: center;
+    text-align: center;
+  }
+
+  .mc-hero__copy {
+    display: grid;
+    gap: 1rem;
+    justify-items: center;
+    max-width: 58rem;
+  }
+
+  .mc-hero__title {
+    max-width: 13ch;
+    margin: 0;
+    font-size: clamp(4rem, 6.2vw, 6.25rem);
+    line-height: 1;
+    letter-spacing: -1px;
+    font-weight: 700;
+    color: #000000;
+  }
+
+  .mc-hero__lede {
+    max-width: 48rem;
+    margin: 0;
+    font-size: 21px;
+    line-height: 1.5;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.65);
+  }
+
+  .mc-hero__media {
+    width: 100%;
+    margin: 0;
+  }
+
+  .mc-hero__media img {
+    display: block;
+    width: min(100%, 1280px);
+    height: auto;
+    margin: 0 auto;
+    filter:
+      drop-shadow(0 12px 28px rgba(15, 23, 42, 0.14))
+      drop-shadow(0 4px 10px rgba(15, 23, 42, 0.08));
+  }
+
+  .mc-problem {
+    position: relative;
+    overflow: clip;
+    background:
+      radial-gradient(circle at top center, rgba(54, 67, 122, 0.16), transparent 36%),
+      linear-gradient(180deg, #07030c 0%, #040109 100%);
+  }
+
+  .mc-problem__inner {
+    position: relative;
+    width: min(1120px, calc(100vw - 2.5rem));
+    min-height: clamp(560px, 70vw, 760px);
+    margin: 0 auto;
+    padding: clamp(5.75rem, 10vw, 8.5rem) 0 clamp(6rem, 10vw, 8.75rem);
+    isolation: isolate;
+  }
+
+  .mc-problem__copy {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    gap: 1.55rem;
+    max-width: 42rem;
+  }
+
+  .mc-problem h2 {
+    max-width: 14ch;
+    color: #ffffff;
+  }
+
+  .mc-problem p:not(.mc-eyebrow) {
+    max-width: 48ch;
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .mc-problem__record {
+    position: absolute;
+    right: clamp(-18rem, -16vw, -10rem);
+    bottom: clamp(-4.25rem, -6vw, -2rem);
+    z-index: 1;
+    width: min(48vw, 580px);
+    margin: 0;
+    filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.32));
+    transform: rotate(2deg);
+    pointer-events: none;
+  }
+
+  .mc-problem__record::before,
+  .mc-problem__record::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgba(248, 246, 239, 0.94);
+    box-shadow: 0 20px 42px rgba(0, 0, 0, 0.28);
+  }
+
+  .mc-problem__record::before {
+    transform: translate3d(-18px, 12px, 0) rotate(-1.5deg);
+  }
+
+  .mc-problem__record::after {
+    transform: translate3d(-9px, 6px, 0) rotate(-0.8deg);
+  }
+
+  .mc-problem__record img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .mc-solution,
+  .mc-focus,
+  .mc-export,
+  .mc-faq {
+    padding: clamp(5rem, 9vw, 7.5rem) 1.25rem;
+    background: #ffffff;
+  }
+
+  .mc-solution__stack {
+    width: min(56rem, 100%);
+    margin: clamp(2rem, 4vw, 3rem) auto 0;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .mc-solution-card {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 1rem;
+    align-items: center;
+    padding: 1.2rem 1.25rem;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 24px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(246, 249, 253, 0.95)),
+      rgba(255, 255, 255, 0.96);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.8),
+      0 20px 44px rgba(15, 23, 42, 0.08);
+  }
+
+  .mc-solution-card img {
+    width: 2.4rem;
+    height: 2.4rem;
+    object-fit: contain;
+  }
+
+  .mc-solution-card h3,
+  .mc-focus-card h3,
+  .mc-phase h3 {
+    margin: 0;
+    font-size: 1.18rem;
+    line-height: 1.14;
+    letter-spacing: -0.03em;
+    font-weight: 650;
+    color: #0f172a;
+  }
+
+  .mc-solution-card p,
+  .mc-focus-card p {
+    margin: 0.45rem 0 0;
+    font-size: 1.01rem;
+    line-height: 1.5;
+    color: rgba(15, 23, 42, 0.68);
+  }
+
+  .mc-workflow {
+    padding: clamp(5.25rem, 9vw, 7.75rem) 1.25rem;
+    background: linear-gradient(180deg, #f7f9fc 0%, #ffffff 100%);
+    overflow: clip;
+  }
+
+  .mc-workflow__inner {
+    width: min(1120px, 100%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(18rem, 0.75fr);
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: center;
+  }
+
+  .mc-workflow__copy {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .mc-workflow__copy h2 {
+    max-width: 12ch;
+    margin: 0;
+    font-size: clamp(2.8rem, 5vw, 4.1rem);
+    line-height: 1;
+    letter-spacing: -0.28px;
+    font-weight: 700;
+  }
+
+  .mc-workflow__copy > p:not(.mc-eyebrow) {
+    max-width: 43rem;
+    margin: 0;
+    font-size: 21px;
+    line-height: 1.5;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.65);
+  }
+
+  .mc-workflow__phases {
+    display: grid;
+    gap: 0;
+    margin-top: 1.4rem;
+    border-top: 1px solid rgba(15, 23, 42, 0.1);
+  }
+
+  .mc-phase {
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    gap: 0.5rem 1.25rem;
+    padding: 1.15rem 0;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.1);
+  }
+
+  .mc-phase p {
+    margin: 0;
+    font-size: 0.82rem;
+    line-height: 1.2;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #007aff;
+  }
+
+  .mc-phase span {
+    grid-column: 2;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: rgba(15, 23, 42, 0.64);
+  }
+
+  .mc-workflow__phone {
+    position: relative;
+    width: min(100%, 22rem);
+    margin: 0 auto;
+    isolation: isolate;
+  }
+
+  .mc-workflow__phone::before {
+    content: "";
+    position: absolute;
+    inset: 12% -16% 8%;
+    z-index: -1;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(0, 122, 255, 0.14), transparent 68%);
+    filter: blur(14px);
+  }
+
+  .mc-workflow__frame {
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 20px 36px rgba(15, 23, 42, 0.18));
+    pointer-events: none;
+  }
+
+  .mc-workflow__video {
+    position: absolute;
+    z-index: 1;
+    top: 3.1%;
+    left: 6.8%;
+    width: 86.4%;
+    height: 93.8%;
+    border-radius: 9.5% / 4.8%;
+    object-fit: cover;
+    background: #f8fafc;
+  }
+
+  .mc-focus {
+    background: linear-gradient(180deg, #ffffff 0%, #f7f9fc 100%);
+  }
+
+  .mc-focus__inner {
+    width: min(1120px, 100%);
+    margin: 0 auto;
+    display: grid;
+    gap: clamp(2rem, 4vw, 3rem);
+  }
+
+  .mc-focus__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .mc-focus-card {
+    min-height: 15rem;
+    display: grid;
+    align-content: start;
+    padding: 1.4rem;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.86);
+    box-shadow: 0 18px 36px rgba(15, 23, 42, 0.06);
+  }
+
+  .mc-audience {
+    padding: clamp(5rem, 8vw, 7rem) 1.25rem;
+    background: #050816;
+    color: #ffffff;
+  }
+
+  .mc-audience__inner {
+    width: min(1120px, 100%);
+    margin: 0 auto;
+    display: grid;
+    gap: 2rem;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .mc-audience h2 {
+    max-width: 15ch;
+    color: #ffffff;
+  }
+
+  .mc-audience__pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.7rem;
+  }
+
+  .mc-audience__pills span {
+    padding: 0.7rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 0.98rem;
+    line-height: 1.2;
+    font-weight: 600;
+  }
+
+  .mc-export {
+    overflow: clip;
+    background: #ffffff;
+  }
+
+  .mc-export__pages {
+    width: min(960px, 100%);
+    min-height: clamp(28rem, 58vw, 42rem);
+    margin: clamp(2.75rem, 6vw, 4rem) auto 0;
+    position: relative;
+    display: grid;
+    place-items: center;
+    perspective: 1400px;
+  }
+
+  .mc-export-page {
+    position: absolute;
+    width: min(34vw, 22rem);
+    aspect-ratio: 2479 / 3508;
+    margin: 0;
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 24px 52px rgba(15, 23, 42, 0.12);
+    transform:
+      translateX(calc((var(--page-index) - 1) * 11rem))
+      translateY(calc(var(--page-index) * 1.15rem))
+      rotate(calc((var(--page-index) - 1) * 4deg));
+  }
+
+  .mc-export-page img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .mc-security {
+    padding: clamp(4.5rem, 8vw, 6.5rem) 1.25rem;
+    background: linear-gradient(180deg, #fbfcfe 0%, #f2f6fb 100%);
+  }
+
+  .mc-security__inner {
+    width: min(1120px, 100%);
+    margin: 0 auto;
+    display: grid;
+    gap: 1.2rem;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .mc-security__inner > img {
+    width: 5.75rem;
+    height: 5.75rem;
+    padding: 1rem;
+    border-radius: 24px;
+    background: linear-gradient(180deg, #ffffff 0%, #f7f7f7 100%);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.95) inset,
+      0 10px 18px rgba(15, 23, 42, 0.08),
+      0 2px 6px rgba(15, 23, 42, 0.05);
+  }
+
+  .mc-security p {
+    max-width: 50rem;
+  }
+
+  .mc-security__points {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.9rem;
+    margin-top: 1rem;
+  }
+
+  .mc-security__points span {
+    min-height: 5.75rem;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.78);
+    color: #0f172a;
+    font-size: 1rem;
+    line-height: 1.25;
+    font-weight: 650;
+    box-shadow: 0 16px 32px rgba(15, 23, 42, 0.05);
+  }
+
+  .mc-faq__inner {
+    width: min(900px, 100%);
+    margin: 0 auto;
+    display: grid;
+    gap: 2rem;
+  }
+
+  .mc-faq__list {
+    border-top: 1px solid rgba(15, 23, 42, 0.1);
+  }
+
+  .mc-faq__item {
+    border-bottom: 1px solid rgba(15, 23, 42, 0.1);
+  }
+
+  .mc-faq__trigger {
+    width: 100%;
+    min-height: 4.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 0;
+    border: 0;
+    background: transparent;
+    color: #0f172a;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .mc-faq__trigger span:first-child {
+    font-size: 1.1rem;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    font-weight: 650;
+  }
+
+  .mc-faq__icon {
+    position: relative;
+    flex: 0 0 auto;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .mc-faq__icon::before,
+  .mc-faq__icon::after {
+    content: "";
+    position: absolute;
+    inset: 50% 0 auto;
+    height: 2px;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.54);
+    transition: transform 180ms ease;
+  }
+
+  .mc-faq__icon::after {
+    transform: rotate(90deg);
+  }
+
+  .mc-faq__item.is-open .mc-faq__icon::after {
+    transform: rotate(0deg);
+  }
+
+  .mc-faq__content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 240ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .mc-faq__content.is-open {
+    grid-template-rows: 1fr;
+  }
+
+  .mc-faq__content-inner {
+    overflow: hidden;
+  }
+
+  .mc-faq__content p {
+    max-width: 48rem;
+    margin: 0;
+    padding: 0 2.25rem 1.35rem 0;
+    font-size: 1.04rem;
+    line-height: 1.55;
+    color: rgba(15, 23, 42, 0.66);
+  }
+
+  .mc-close {
+    padding: clamp(5rem, 9vw, 7rem) 1.25rem clamp(5.5rem, 9vw, 8rem);
+    background: #ffffff;
+    overflow: clip;
+  }
+
+  .mc-close__inner {
+    width: min(1120px, 100%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(18rem, 1fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+
+  .mc-close__copy {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .mc-close img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter:
+      drop-shadow(0 16px 30px rgba(15, 23, 42, 0.12))
+      drop-shadow(0 4px 10px rgba(15, 23, 42, 0.08));
+  }
+
+  @media (max-width: 980px) {
+    .mc-workflow__inner,
+    .mc-close__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .mc-workflow__copy {
+      justify-items: center;
+      text-align: center;
+    }
+
+    .mc-workflow__copy h2 {
+      max-width: 14ch;
+    }
+
+    .mc-focus__grid,
+    .mc-security__points {
+      grid-template-columns: 1fr;
+    }
+
+    .mc-close__copy {
+      justify-items: center;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .mc-hero__inner,
+    .mc-problem__inner {
+      width: calc(100vw - 2rem);
+    }
+
+    .mc-hero__title {
+      font-size: clamp(3.2rem, 14vw, 4.8rem);
+    }
+
+    .mc-hero__lede,
+    .mc-section-heading p:not(.mc-eyebrow),
+    .mc-problem p:not(.mc-eyebrow),
+    .mc-workflow__copy > p:not(.mc-eyebrow),
+    .mc-security p,
+    .mc-close p:not(.mc-eyebrow) {
+      font-size: 19px;
+    }
+
+    .mc-section-heading h2,
+    .mc-problem h2,
+    .mc-workflow__copy h2,
+    .mc-audience h2,
+    .mc-security h2,
+    .mc-close h2 {
+      font-size: clamp(2.4rem, 10vw, 3.5rem);
+    }
+
+    .mc-problem__inner {
+      min-height: 0;
+      padding-bottom: clamp(18rem, 78vw, 30rem);
+    }
+
+    .mc-problem__copy {
+      max-width: min(100%, 36rem);
+    }
+
+    .mc-problem__record {
+      right: 50%;
+      bottom: -4rem;
+      width: min(88vw, 24rem);
+      transform: translateX(50%) rotate(2deg);
+    }
+
+    .mc-solution-card,
+    .mc-phase {
+      grid-template-columns: 1fr;
+    }
+
+    .mc-phase span {
+      grid-column: auto;
+    }
+
+    .mc-workflow__phone {
+      width: min(100%, 18.5rem);
+    }
+
+    .mc-export__pages {
+      min-height: 26rem;
+    }
+
+    .mc-export-page {
+      width: min(56vw, 14.25rem);
+      transform:
+        translateX(calc((var(--page-index) - 1) * 4.8rem))
+        translateY(calc(var(--page-index) * 1rem))
+        rotate(calc((var(--page-index) - 1) * 4deg));
+    }
+
+    .mc-actions {
+      width: 100%;
+      flex-direction: column;
+    }
+
+    .mc-button {
+      width: 100%;
+    }
   }
 </style>

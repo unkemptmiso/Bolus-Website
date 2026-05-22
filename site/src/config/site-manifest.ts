@@ -178,6 +178,7 @@ export const pageRegistry: SitePage[] = [
   {
     id: "paper-anesthesia-chart-alternative",
     path: "/paper-anesthesia-chart-alternative",
+    noindex: true,
     title: "Paper Anesthesia Chart Alternative",
     navLabel: "Paper Chart Alternative",
     description:
@@ -267,16 +268,17 @@ export const pageRegistry: SitePage[] = [
   {
     id: "mobile-anesthesia-charting",
     path: "/mobile-anesthesia-charting",
+    noindex: true,
     title: "Mobile Anesthesia Charting",
     navLabel: "Mobile Anesthesia Charting",
-    description: "Bolus is a mobile anesthesia charting app for office-based anesthesia, dental sedation, and procedural cases. Replace paper charts with clean PDF records.",
-    seoTitle: "Mobile Anesthesia Charting App | Bolus",
-    seoDescription: "Bolus is a mobile anesthesia charting app for office-based anesthesia, dental sedation, and procedural cases. Replace paper charts with clean PDF records.",
+    description: "Mobile anesthesia charting for office-based anesthesia, dental sedation, and procedural cases. Chart on iPhone and iPad, then export clean PDF records.",
+    seoTitle: "Mobile Anesthesia Charting App for Office-Based Care | Bolus",
+    seoDescription: "Mobile anesthesia charting for office-based anesthesia, dental sedation, and procedural cases. Chart on iPhone and iPad, then export clean PDF records.",
     category: "product",
     hero: {
       eyebrow: "Mobile Anesthesia Charting",
-      title: "Mobile anesthesia charting built around the record.",
-      body: "Bolus helps mobile and office-based anesthesia providers document the case from pre-op through recovery, then export a clean PDF record. It is built for clinicians who need charting that is fast in the room and defensible after the case.",
+      title: "Mobile anesthesia charting for office-based cases.",
+      body: "Bolus helps mobile and office-based anesthesia providers chart on iPhone and iPad, keep the case connected from pre-op through recovery, and export a clean PDF record when the procedure is done.",
       primaryCta: {
         label: "View Pricing",
         href: "/pricing",
@@ -775,7 +777,7 @@ export const footerNavigation = [
   {
     id: "product",
     title: "Product",
-    links: ["pricing", "about", "paper-anesthesia-chart-alternative", "mobile-anesthesia-charting"],
+    links: ["pricing", "about"],
   },
   {
     id: "legal",

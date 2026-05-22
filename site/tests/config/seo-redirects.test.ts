@@ -14,8 +14,6 @@ describe("SEO redirects", () => {
       "/legal/medical-disclaimer  /legal/medical-disclaimer/  301",
       "/legal/privacy-policy  /legal/privacy-policy/  301",
       "/legal/terms-of-service  /legal/terms-of-service/  301",
-      "/mobile-anesthesia-charting  /mobile-anesthesia-charting/  301",
-      "/paper-anesthesia-chart-alternative  /paper-anesthesia-chart-alternative/  301",
       "/pricing  /pricing/  301",
       "/waitlist  /waitlist/  301",
     ];
@@ -50,20 +48,27 @@ describe("SEO redirects", () => {
     }
   });
 
-  it("redirects removed public pages to the closest current destination", () => {
+  it("redirects unpublished charting pages to the homepage", () => {
     const expectedRedirects = [
-      "/simulator  /  301",
-      "/simulator/  /  301",
-      "/business  /pricing/  301",
-      "/business/  /pricing/  301",
-      "/support  /contact/  301",
-      "/support/  /contact/  301",
-      "/security  /legal/hipaa-compliance-policy/  301",
-      "/security/  /legal/hipaa-compliance-policy/  301",
+      "/mobile-anesthesia-charting  /  301",
+      "/mobile-anesthesia-charting/  /  301",
+      "/mobile-anesthesia-charting/index.html  /  301",
+      "/paper-anesthesia-chart-alternative  /  301",
+      "/paper-anesthesia-chart-alternative/  /  301",
+      "/paper-anesthesia-chart-alternative/index.html  /  301",
     ];
 
     for (const redirect of expectedRedirects) {
       expect(redirectsSource).toContain(redirect);
+    }
+  });
+
+  it("does not keep legacy redirects for deleted marketing pages", () => {
+    const deletedPagePaths = ["/support", "/simulator", "/business", "/security"];
+
+    for (const path of deletedPagePaths) {
+      expect(redirectsSource).not.toMatch(new RegExp(`^${path}\\s`, "m"));
+      expect(redirectsSource).not.toMatch(new RegExp(`^${path}/\\s`, "m"));
     }
   });
 });

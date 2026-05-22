@@ -37,7 +37,10 @@ const {
   mainClass = "site-main",
 } = Astro.props;
 const assetHints = Astro.props.assetHints ?? [];
-const faviconHref = "/favicon.svg?v=20260426";
+const faviconVersion = "20260512";
+const faviconIcoHref = `/favicon.ico?v=${faviconVersion}`;
+const faviconSvgHref = `/favicon.svg?v=${faviconVersion}`;
+const faviconPngHref = `/favicon-mark.png?v=${faviconVersion}`;
 ---
 
 <!doctype html>
@@ -46,9 +49,10 @@ const faviconHref = "/favicon.svg?v=20260426";
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/svg+xml" href={faviconHref} />
-    <link rel="shortcut icon" href={faviconHref} />
-    <link rel="apple-touch-icon" href={faviconHref} />
+    <link rel="icon" href={faviconIcoHref} sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href={faviconSvgHref} sizes="any" />
+    <link rel="shortcut icon" href={faviconIcoHref} />
+    <link rel="apple-touch-icon" href={faviconPngHref} />
     {assetHints.map((hint) => (
       <link
         rel={hint.rel ?? "preload"}

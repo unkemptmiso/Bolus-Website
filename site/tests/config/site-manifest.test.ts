@@ -34,6 +34,19 @@ describe("site manifest", () => {
     ]);
   });
 
+  it("keeps draft SEO landing pages out of public navigation and indexing", () => {
+    const productFooterLinks = footerNavigation.find((group) => group.id === "product")?.links;
+    const hiddenPageIds = [
+      "paper-anesthesia-chart-alternative",
+      "mobile-anesthesia-charting",
+    ];
+
+    for (const pageId of hiddenPageIds) {
+      expect(productFooterLinks).not.toContain(pageId);
+      expect(pageRegistry.find((page) => page.id === pageId)?.noindex).toBe(true);
+    }
+  });
+
   it("keeps the header CTA and brand assets available for the splash navbar", () => {
     expect(siteMetadata.headerCta.label).toBe("Get the app");
     expect(siteMetadata.headerBrand.markSrc).toBe("/src/assets/logos/bolus-mark.png");

@@ -28,7 +28,12 @@ describe("canonical URL policy", () => {
     }
   });
 
-  it("configures Astro to emit trailing-slash route URLs", () => {
-    expect(astroConfigSource).toContain('trailingSlash: "always"');
+  it("does not hard-fail no-slash URLs in Astro dev and preview", () => {
+    expect(astroConfigSource).not.toContain('trailingSlash: "always"');
+  });
+
+  it("excludes only explicitly noindexed pages from the sitemap", () => {
+    expect(astroConfigSource).toContain("noindexPaths");
+    expect(astroConfigSource).toContain("return !noindexPaths.includes(path);");
   });
 });
