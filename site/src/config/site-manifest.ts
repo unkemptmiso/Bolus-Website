@@ -405,7 +405,7 @@ export const pageRegistry: SitePage[] = [
     hero: {
       eyebrow: "Product",
       title: "The cleanest way to leave paper, at the lowest price.",
-      body: "Bolus is built for clinicians who want clean, defensible anesthesia records without paying hospital-software prices. It is intentionally affordable, because better documentation should not become another burden on your practice.",
+      body: "Bolus is built for clinicians who want clean, more defensible anesthesia records without paying hospital-software prices. It is intentionally affordable, because better documentation should not become another burden on your practice.",
       primaryCta: {
         label: "Contact Us",
         href: "/contact",

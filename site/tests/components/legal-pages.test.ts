@@ -85,12 +85,21 @@ describe("legal pages", () => {
     expect(legalDocsSource).toContain('"terms-of-service"');
     expect(legalDocsSource).toContain("medical-disclaimer");
     expect(legalDocsSource).toContain('"hipaa-compliance-policy"');
-    expect(legalDocsSource).toContain('title: "Privacy Policy"');
-    expect(legalDocsSource).toContain('title: "Terms of Service"');
-    expect(legalDocsSource).toContain('title: "Medical Disclaimer"');
-    expect(legalDocsSource).toContain('title: "HIPAA Compliance Policy"');
-    expect(legalDocsSource).toContain('effectiveDate: "March 7, 2026"');
+    expect(legalDocsSource).toContain('"title": "Privacy Policy"');
+    expect(legalDocsSource).toContain('"title": "Terms of Service"');
+    expect(legalDocsSource).toContain('"title": "Bolus Medical Disclaimer"');
+    expect(legalDocsSource).toContain('"title": "HIPAA Security & Compliance Policy"');
+    expect(legalDocsSource).toContain('"effectiveDate": "May 23, 2026"');
+    expect(legalDocsSource).toContain('"title": "11. Intended Users"');
+    expect(legalDocsSource).not.toContain("11. Children and Intended Users");
+    expect(legalDocsSource).toContain('"type": "list"');
+    expect(legalDocsSource).toContain('"type": "subheading"');
     expect(legalDocsSource).toContain("Pressor Systems LLC");
+    expect(legalDocsSource).toContain('"text": "Email: contact@bolusanesthesia.com"');
+    expect(legalDocsSource).toContain('"text": "Website: bolusanesthesia.com"');
+    expect(legalDocsSource).not.toContain("Email: contact@bolusanesthesia.com Website: bolusanesthesia.com");
+    expect(legalDocsSource).not.toContain("[INSERT DATE]");
+    expect(legalDocsSource).not.toContain("[INSERT WEBSITE]");
   });
 
   it("keeps dedicated SEO metadata and simple white legal page styling for the hub and documents", () => {
@@ -118,7 +127,11 @@ describe("legal pages", () => {
     expect(globalStylesSource).toContain(".legal-page__title {");
     expect(globalStylesSource).toContain(".legal-page__section {");
     expect(globalStylesSource).toContain(".legal-page__section h2 {");
+    expect(globalStylesSource).toContain(".legal-page__section h3 {");
     expect(globalStylesSource).toContain(".legal-page__section p {");
+    expect(globalStylesSource).toContain(".legal-page__section ul {");
+    expect(globalStylesSource).toContain(".legal-page__section li {");
+    expect(globalStylesSource).toContain("list-style: disc;");
     expect(globalStylesSource).toContain("background: #ffffff;");
   });
 });
