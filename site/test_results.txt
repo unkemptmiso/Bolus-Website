@@ -1,0 +1,96 @@
+
+[1m[46m RUN [49m[22m [36mv4.1.1 [39m[90m/Users/nirmal/Desktop/AI Projects/Bolus Website/site[39m
+
+ [31m❯[39m tests/components/base-layout.test.ts [2m([22m[2m2 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 17[2mms[22m[39m
+[31m     [31m×[31m uses the rounded white-backed Bolus favicon asset as the site icon[39m[32m 16[2mms[22m[39m
+     [32m✓[39m passes through only the page noindex flag instead of a global index allowlist[32m 0[2mms[22m[39m
+ [31m❯[39m tests/components/home-faq-section.test.ts [2m([22m[2m3 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 21[2mms[22m[39m
+     [32m✓[39m mounts the seventh homepage section after the security block[32m 2[2mms[22m[39m
+[31m     [31m×[31m uses the approved faq heading and answer copy[39m[32m 18[2mms[22m[39m
+     [32m✓[39m uses a left-aligned one-at-a-time accordion that starts closed and animates open smoothly[32m 0[2mms[22m[39m
+ [31m❯[39m tests/components/waitlist-form-submit.test.ts [2m([22m[2m2 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 24[2mms[22m[39m
+[31m     [31m×[31m posts the form payload to the waitlist API before showing success[39m[32m 23[2mms[22m[39m
+     [32m✓[39m validates and appends waitlist submissions through the API route[32m 0[2mms[22m[39m
+ [31m❯[39m tests/components/header-scroll-motion.test.ts [2m([22m[2m4 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 30[2mms[22m[39m
+     [32m✓[39m uses direct logo asset URLs instead of production-brittle _image transforms[32m 2[2mms[22m[39m
+     [32m✓[39m uses hysteresis thresholds and guarded state updates for condensed mode[32m 0[2mms[22m[39m
+     [32m✓[39m keeps the menu locked to a center track while the side groups compress inward[32m 0[2mms[22m[39m
+[31m     [31m×[31m adds a phone-only dropdown header that mirrors the condensed desktop behavior[39m[32m 27[2mms[22m[39m
+ [31m❯[39m tests/components/home-splash-hero.test.ts [2m([22m[2m1 test[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 16[2mms[22m[39m
+[31m     [31m×[31m keeps the approved headline stack and a wider mobile text measure[39m[32m 16[2mms[22m[39m
+ [31m❯[39m tests/components/waitlist-page.test.ts [2m([22m[2m6 tests[22m[2m | [22m[31m2 failed[39m[2m)[22m[32m 39[2mms[22m[39m
+     [32m✓[39m defines its own seo data instead of failing on a content lookup[32m 1[2mms[22m[39m
+     [32m✓[39m includes the required waitlist fields and keeps comments optional[32m 0[2mms[22m[39m
+     [32m✓[39m uses a referral dropdown with the requested sources and conditional other field[32m 0[2mms[22m[39m
+[31m     [31m×[31m switches to a thank-you confirmation after a valid submit[39m[32m 19[2mms[22m[39m
+[31m     [31m×[31m uses the approved title metadata and direct launch copy[39m[32m 16[2mms[22m[39m
+     [32m✓[39m centers the page heading and uses a split form panel like the reference[32m 1[2mms[22m[39m
+ [31m❯[39m tests/components/home-security-section.test.ts [2m([22m[2m5 tests[22m[2m | [22m[31m2 failed[39m[2m)[22m[32m 35[2mms[22m[39m
+     [32m✓[39m mounts the sixth homepage section after the export block[32m 2[2mms[22m[39m
+[31m     [31m×[31m uses the approved security copy and proof points[39m[32m 9[2mms[22m[39m
+     [32m✓[39m uses a centered trust section with compact proof cards[32m 0[2mms[22m[39m
+[31m     [31m×[31m keeps the proof cards in a tablet-friendly grid instead of stacking them in one column[39m[32m 23[2mms[22m[39m
+     [32m✓[39m hides the proof cards entirely on iPad mini portrait and smaller to match the phone treatment[32m 0[2mms[22m[39m
+ [31m❯[39m tests/components/home-workflow-section.test.ts [2m([22m[2m6 tests[22m[2m | [22m[31m3 failed[39m[2m)[22m[32m 48[2mms[22m[39m
+     [32m✓[39m mounts the fourth homepage section after the solution block[32m 1[2mms[22m[39m
+[31m     [31m×[31m uses the approved three-phase workflow copy including the finalized post-op content[39m[32m 6[2mms[22m[39m
+     [32m✓[39m uses workflow phone video playlists that stay unloaded until the section enters view[32m 18[2mms[22m[39m
+     [32m✓[39m ships workflow clips as web video assets instead of duplicate MOV files[32m 8[2mms[22m[39m
+[31m     [31m×[31m uses a pinned workflow story layout with stacked copy and phone tracks[39m[32m 1[2mms[22m[39m
+[31m     [31m×[31m does not rely on a global portrait override block that rewrites multiple homepage sections[39m[32m 13[2mms[22m[39m
+ [31m❯[39m tests/server/waitlist.test.ts [2m([22m[2m5 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 17[2mms[22m[39m
+     [32m✓[39m accepts required fields and keeps other-source text only when needed[32m 2[2mms[22m[39m
+     [32m✓[39m rejects missing other-source text when Other is selected[32m 1[2mms[22m[39m
+     [32m✓[39m creates a stable row shape for storage[32m 0[2mms[22m[39m
+     [32m✓[39m inserts a submission into the configured D1 database[32m 5[2mms[22m[39m
+[31m     [31m×[31m marks the waitlist integration as configured when either D1 or Google Sheets is present[39m[32m 8[2mms[22m[39m
+ [31m❯[39m tests/components/home-problem-section.test.ts [2m([22m[2m3 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 12[2mms[22m[39m
+     [32m✓[39m mounts the second homepage section directly after the splash hero[32m 2[2mms[22m[39m
+     [32m✓[39m uses the approved section two headline and support copy[32m 1[2mms[22m[39m
+[31m     [31m×[31m applies a dark, text-led layout that matches the reference composition[39m[32m 8[2mms[22m[39m
+ [31m❯[39m tests/config/page-metadata-titles.test.ts [2m([22m[2m1 test[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 4[2mms[22m[39m
+[31m     [31m×[31m uses properly capitalized browser titles across public pages[39m[32m 3[2mms[22m[39m
+ [32m✓[39m tests/components/mobile-anesthesia-charting-page.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [31m❯[39m tests/server/runtime-env.test.ts [2m([22m[2m3 tests[22m[2m | [22m[31m3 failed[39m[2m)[22m[32m 5[2mms[22m[39m
+[31m     [31m×[31m marks optional integrations as mocked when credentials are absent[39m[32m 3[2mms[22m[39m
+[31m     [31m×[31m marks integrations as configured when required credentials are present[39m[32m 1[2mms[22m[39m
+[31m     [31m×[31m trims the Apps Script webhook before validating it[39m[32m 1[2mms[22m[39m
+ [31m❯[39m tests/components/pricing-page.test.ts [2m([22m[2m13 tests[22m[2m | [22m[31m2 failed[39m[2m)[22m[32m 12[2mms[22m[39m
+     [32m✓[39m defines the approved pricing ladder without the product name prefix[32m 2[2mms[22m[39m
+     [32m✓[39m uses the guidance typography scale and includes a real billing toggle[32m 0[2mms[22m[39m
+     [32m✓[39m centers the hero copy and billing toggle on a single vertical axis[32m 0[2mms[22m[39m
+[31m     [31m×[31m locks the pricing hero headline into two intentional rows[39m[32m 3[2mms[22m[39m
+     [32m✓[39m removes the redundant page pricing labels above the hero copy[32m 0[2mms[22m[39m
+     [32m✓[39m removes redundant free-plan UI and keeps cloud as the only labeled badge[32m 0[2mms[22m[39m
+     [32m✓[39m adds an individual providers eyebrow above the top pricing row using the enterprise type style[32m 0[2mms[22m[39m
+     [32m✓[39m keeps professional cloud on a single title line[32m 0[2mms[22m[39m
+     [32m✓[39m keeps professional emphasized with a stronger border and enterprise on a solid border[32m 1[2mms[22m[39m
+     [32m✓[39m keeps every pricing card on the same internal layout skeleton[32m 1[2mms[22m[39m
+     [32m✓[39m removes the top chips from the plan cards[32m 0[2mms[22m[39m
+     [32m✓[39m uses a measured sliding toggle highlight and still defaults to annual[32m 0[2mms[22m[39m
+[31m     [31m×[31m capitalizes the pricing page title metadata[39m[32m 1[2mms[22m[39m
+ [32m✓[39m tests/config/production-domain.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m tests/config/canonical-url-policy.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m tests/config/site-manifest.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m tests/components/home-download-section.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m tests/config/home-splash.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m tests/components/home-solution-section.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m tests/components/legal-pages.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m tests/components/home-export-section.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m tests/components/contact-page.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m tests/components/home-asset-budgets.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m tests/config/seo-redirects.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m tests/components/home-asset-loading.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 2[2mms[22m[39m
+ [32m✓[39m tests/components/home-footer.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 2[2mms[22m[39m
+ [32m✓[39m tests/components/pricing-seo-metadata.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 1[2mms[22m[39m
+ [32m✓[39m tests/components/about-page.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 2[2mms[22m[39m
+ [32m✓[39m tests/config/https-enforcement.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 2[2mms[22m[39m
+ [32m✓[39m tests/components/waitlist-navigation.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m tests/config/waitlist-d1-config.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 1[2mms[22m[39m
+ [32m✓[39m tests/components/company-pages-navigation.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 2[2mms[22m[39m
+
+[2m Test Files [22m [1m[31m13 failed[39m[22m[2m | [22m[1m[32m20 passed[39m[22m[90m (33)[39m
+[2m      Tests [22m [1m[31m20 failed[39m[22m[2m | [22m[1m[32m89 passed[39m[22m[90m (109)[39m
+[2m   Start at [22m 07:20:48
+[2m   Duration [22m 644ms[2m (transform 549ms, setup 0ms, import 1.03s, tests 348ms, environment 2ms)[22m
+
