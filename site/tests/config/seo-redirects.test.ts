@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
 const redirectsSource = readFileSync(new URL("../../public/_redirects", import.meta.url), "utf8");
+const middlewareSource = readFileSync(new URL("../../src/middleware.ts", import.meta.url), "utf8");
 const officialAppStoreUrl =
   "https://apps.apple.com/us/app/bolus-anesthesia-record/id6761444886";
 
@@ -36,6 +37,14 @@ describe("SEO redirects", () => {
     }
 
     expect(redirectsSource).not.toContain("/waitlist  /waitlist/  301");
+  });
+
+  it("also retires waitlist URLs in Worker middleware before Astro can 404", () => {
+    expect(middlewareSource).toContain("retiredWaitlistPaths");
+    expect(middlewareSource).toContain('"/waitlist"');
+    expect(middlewareSource).toContain('"/waitlist/"');
+    expect(middlewareSource).toContain('"/waitlist/index.html"');
+    expect(middlewareSource).toContain("Response.redirect(appStoreListingUrl, 301)");
   });
 
   it("redirects old legal aliases with and without trailing slashes", () => {
