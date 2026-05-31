@@ -62,6 +62,8 @@ export interface SitePage {
   sections: ContentSection[];
 }
 
+export const appStoreListingUrl = "https://apps.apple.com/us/app/bolus-anesthesia-record/id6761444886";
+
 export const siteMetadata = {
   name: "Bolus",
   tagline: "Modern anesthesia record app",
@@ -77,7 +79,7 @@ export const siteMetadata = {
   },
   headerCta: {
     label: "Get the app",
-    href: "/waitlist",
+    href: appStoreListingUrl,
     variant: "primary" as const,
   },
 };

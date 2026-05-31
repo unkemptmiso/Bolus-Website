@@ -8,6 +8,7 @@ interface Props {
 }
 
 const { currentPath } = Astro.props;
+const headerCtaIsExternal = siteMetadata.headerCta.href.startsWith("http");
 const resolvedNavigation = headerNavigation.reduce<Array<{ label: string; path: string }>>(
   (items, item) => {
     const page = getPageById(item.pageId);
@@ -89,7 +90,12 @@ const mobileNavigation = [
       </nav>
 
       <div class="nav-shell__edge nav-shell__edge--action">
-        <a class="header-action" href={siteMetadata.headerCta.href}>
+        <a
+          class="header-action"
+          href={siteMetadata.headerCta.href}
+          target={headerCtaIsExternal ? "_blank" : undefined}
+          rel={headerCtaIsExternal ? "noopener noreferrer" : undefined}
+        >
           <span class="header-action__label">{siteMetadata.headerCta.label}</span>
           <span class="header-action__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" role="presentation">
@@ -137,7 +143,12 @@ const mobileNavigation = [
         </div>
 
         <div class="mobile-header__actions">
-          <a class="mobile-header__cta" href={siteMetadata.headerCta.href}>
+          <a
+            class="mobile-header__cta"
+            href={siteMetadata.headerCta.href}
+            target={headerCtaIsExternal ? "_blank" : undefined}
+            rel={headerCtaIsExternal ? "noopener noreferrer" : undefined}
+          >
             {siteMetadata.headerCta.label}
           </a>
 

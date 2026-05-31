@@ -10,7 +10,11 @@
 /legal/privacy-policy  /legal/privacy-policy/  301
 /legal/terms-of-service  /legal/terms-of-service/  301
 /pricing  /pricing/  301
-/waitlist  /waitlist/  301
+
+# Retired waitlist route. Keep it as a direct 301 so crawlers and old links do not hit a 404 or a redirect chain.
+/waitlist  https://apps.apple.com/us/app/bolus-anesthesia-record/id6761444886  301
+/waitlist/  https://apps.apple.com/us/app/bolus-anesthesia-record/id6761444886  301
+/waitlist/index.html  https://apps.apple.com/us/app/bolus-anesthesia-record/id6761444886  301
 
 # Legacy legal aliases.
 /privacy  /legal/privacy-policy/  301

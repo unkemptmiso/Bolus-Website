@@ -1,10 +1,10 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 
 import { describe, expect, it } from "vitest";
 
-const waitlistPageSource = readFileSync(
+const waitlistPagePath = fileURLToPath(
   new URL("../../src/pages/waitlist.astro", import.meta.url),
-  "utf8",
 );
 const waitlistApiSource = readFileSync(
   new URL("../../src/pages/api/waitlist.ts", import.meta.url),
@@ -12,12 +12,8 @@ const waitlistApiSource = readFileSync(
 );
 
 describe("waitlist form submission", () => {
-  it("posts the form payload to the waitlist API before showing success", () => {
-    expect(waitlistPageSource).toContain('fetch("/api/waitlist"');
-    expect(waitlistPageSource).toContain("method: \"POST\"");
-    expect(waitlistPageSource).toContain("content-type");
-    expect(waitlistPageSource).toContain("await response.json()");
-    expect(waitlistPageSource).toContain("successState.hidden = false;");
+  it("does not ship the retired waitlist form page", () => {
+    expect(existsSync(waitlistPagePath)).toBe(false);
   });
 
   it("validates and appends waitlist submissions through the API route", () => {

@@ -1,6 +1,6 @@
 ---
 import { getEntry } from "astro:content";
-import { getPageById } from "../config/site-manifest";
+import { appStoreListingUrl, getPageById } from "../config/site-manifest";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const page = getPageById("mobile-anesthesia-charting");
@@ -126,7 +126,14 @@ const faqs = [
           when the procedure is done.
         </p>
         <div class="mc-actions" aria-label="Mobile anesthesia charting page actions">
-          <a class="mc-button mc-button--primary" href="/waitlist">Get the app</a>
+          <a
+            class="mc-button mc-button--primary"
+            href={appStoreListingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Get the app
+          </a>
           <a class="mc-button mc-button--secondary" href="#workflow">See the workflow</a>
         </div>
       </div>
@@ -341,7 +348,14 @@ const faqs = [
           case, protect the record, and finish with a professional PDF.
         </p>
         <div class="mc-actions">
-          <a class="mc-button mc-button--primary" href="/waitlist">Get the app</a>
+          <a
+            class="mc-button mc-button--primary"
+            href={appStoreListingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Get the app
+          </a>
           <a class="mc-button mc-button--secondary" href="/pricing">View pricing</a>
         </div>
       </div>

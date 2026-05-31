@@ -34,6 +34,11 @@ describe("canonical URL policy", () => {
 
   it("excludes only explicitly noindexed pages from the sitemap", () => {
     expect(astroConfigSource).toContain("noindexPaths");
-    expect(astroConfigSource).toContain("return !noindexPaths.includes(path);");
+    expect(astroConfigSource).toContain("return !sitemapExcludedPaths.has(path);");
+  });
+
+  it("keeps the retired waitlist page out of the sitemap without making it a 404", () => {
+    expect(astroConfigSource).toContain('const retiredPaths = ["/waitlist"];');
+    expect(astroConfigSource).toContain("sitemapExcludedPaths");
   });
 });

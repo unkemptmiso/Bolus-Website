@@ -11,6 +11,8 @@ const isDev = process.env.NODE_ENV !== 'production';
 const noindexPaths = pageRegistry
   .filter((page) => page.noindex)
   .map((page) => page.path);
+const retiredPaths = ["/waitlist"];
+const sitemapExcludedPaths = new Set([...noindexPaths, ...retiredPaths]);
 
 // https://astro.build/config
 export default defineConfig({
@@ -22,7 +24,7 @@ export default defineConfig({
       filter: (page) => {
         const url = new URL(page);
         const path = url.pathname !== '/' ? url.pathname.replace(/\/$/, '') : '/';
-        return !noindexPaths.includes(path);
+        return !sitemapExcludedPaths.has(path);
       }
     })
   ],

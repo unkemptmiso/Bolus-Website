@@ -14,7 +14,7 @@ const runtimeEnvSchema = z.object({
     .string()
     .trim()
     .url()
-    .default("https://apps.apple.com/us/app/id0000000000"),
+    .default("https://apps.apple.com/us/app/bolus-anesthesia-record/id6761444886"),
   AUTH_JWT_SECRET: optionalString(12),
   FIREBASE_PROJECT_ID: optionalString(2),
   WAITLIST_D1_BINDING: z.enum(["bound"]).optional(),

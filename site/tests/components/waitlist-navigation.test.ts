@@ -19,12 +19,22 @@ const downloadSectionSource = readFileSync(
   "utf8",
 );
 
+const officialAppStoreUrl =
+  "https://apps.apple.com/us/app/bolus-anesthesia-record/id6761444886";
+
 describe("waitlist navigation", () => {
-  it("routes only the app CTAs to the waitlist page", () => {
+  it("routes app CTAs to the official App Store listing", () => {
     expect(siteManifestSource).toContain('label: "Get the app"');
-    expect(siteManifestSource).toContain('href: "/waitlist"');
+    expect(siteManifestSource).toContain(
+      `export const appStoreListingUrl = "${officialAppStoreUrl}";`,
+    );
+    expect(siteManifestSource).toContain("href: appStoreListingUrl");
     expect(downloadSectionSource).toContain('class="download-section__button"');
-    expect(downloadSectionSource).toContain('href="/waitlist"');
+    expect(downloadSectionSource).toContain(
+      'import { appStoreListingUrl } from "../../config/site-manifest";',
+    );
+    expect(downloadSectionSource).toContain("href={appStoreListingUrl}");
+    expect(downloadSectionSource).not.toContain('href="/waitlist"');
   });
 
   it("keeps the Bolus brand links pointed at the homepage", () => {

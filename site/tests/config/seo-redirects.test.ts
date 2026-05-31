@@ -3,6 +3,8 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
 const redirectsSource = readFileSync(new URL("../../public/_redirects", import.meta.url), "utf8");
+const officialAppStoreUrl =
+  "https://apps.apple.com/us/app/bolus-anesthesia-record/id6761444886";
 
 describe("SEO redirects", () => {
   it("redirects canonical public routes without trailing slashes to the indexed URL", () => {
@@ -15,12 +17,25 @@ describe("SEO redirects", () => {
       "/legal/privacy-policy  /legal/privacy-policy/  301",
       "/legal/terms-of-service  /legal/terms-of-service/  301",
       "/pricing  /pricing/  301",
-      "/waitlist  /waitlist/  301",
     ];
 
     for (const redirect of expectedRedirects) {
       expect(redirectsSource).toContain(redirect);
     }
+  });
+
+  it("retires the waitlist route with direct permanent redirects to the App Store listing", () => {
+    const expectedRedirects = [
+      `/waitlist  ${officialAppStoreUrl}  301`,
+      `/waitlist/  ${officialAppStoreUrl}  301`,
+      `/waitlist/index.html  ${officialAppStoreUrl}  301`,
+    ];
+
+    for (const redirect of expectedRedirects) {
+      expect(redirectsSource).toContain(redirect);
+    }
+
+    expect(redirectsSource).not.toContain("/waitlist  /waitlist/  301");
   });
 
   it("redirects old legal aliases with and without trailing slashes", () => {
